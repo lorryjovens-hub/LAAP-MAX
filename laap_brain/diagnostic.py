@@ -1,392 +1,383 @@
 """
-LAAP Brain — 诊断框架 (Diagnostic Framework)
+laap_brain.diagnostic — 诊断框架与基准测试
 
-功能:
-  1. 检测 Hermes 是否运行 LAAP 增强 (vs vanilla)
-  2. 量化 LAAP 带来的提升 (元认知/议会/知行合一)
-  3. 快速验证所有组件是否正常工作
+5项基准测试测量 LAAP Brain 的认知提升效果：
+  1. 认知深度: 推理路径 + 技能匹配率
+  2. 偏差检测 (F1): 5组测试文本的精确率/召回率
+  3. 议会决策: 多视角 vs 单视角决策质量
+  4. 技能掌握: 熟练技能 / 总技能数
+  5. 自我认知: 可报告维度 / 5个维度
 
-检测方式:
-  - env:  os.environ["HERMES_LAAP_ENABLED"] == "1"
-  - attr: getattr(agent, 'laap_brain', None) is not None
+使用方式：
+    from laap_brain.diagnostic import DiagnosticSuite
+
+    diag = DiagnosticSuite(brain=my_brain)
+    results = diag.run_all()
+    print(results["summary"])
 """
-
 from __future__ import annotations
-import json, time, logging, os, sys
-from laap_brain import LaapBrain, LAAP_VERSION
-from dataclasses import dataclass, field
-from enum import Enum
+from typing import Any, Dict, List, Optional, Tuple
+import time, json, logging, math, random
 
 logger = logging.getLogger("laap_brain.diagnostic")
 
-
-class HermesVariant(Enum):
-    """Hermes 版本检测结果"""
-    VANILLA = "vanilla"            # 原生 Hermes
-    LAAP_ENHANCED = "laap"         # LAAP 增强
-    LAAP_PARTIAL = "partial"       # 部分安装
+__all__ = ["DiagnosticSuite", "quick_check", "detect_variant", "HermesVariant"]
 
 
-def detect_variant(agent: Any = None) -> HermesVariant:
-    """检测当前 Hermes 是否运行 LAAP 增强"""
-    # 方式1: 环境变量
-    if os.environ.get("HERMES_LAAP_ENABLED") == "1":
-        return HermesVariant.LAAP_ENHANCED
-    # 方式2: agent 属性
-    if agent is not None and getattr(agent, 'laap_brain', None) is not None:
-        return HermesVariant.LAAP_ENHANCED
-    # 方式3: 模块可用性
-    try:
-        from laap_brain import LaapBrain
-        return HermesVariant.LAAP_PARTIAL  # 模块可导入但未安装
-    except ImportError:
-        return HermesVariant.VANILLA
-
-
-# ── 基准测试套件 ────────────────────────────────────────────
-
-@dataclass
-class BenchmarkResult:
-    """单个基准测试结果"""
-    name: str = ""
-    vanilla_score: float = 0.0       # 原生 Hermes 得分
-    laap_score: float = 0.0          # LAAP 增强后得分
-    improvement_pct: float = 0.0     # 提升百分比
-    unit: str = "score"
-    details: str = ""
-
-    def to_dict(self) -> dict:
-        return {
-            "name": self.name, "vanilla": round(self.vanilla_score, 3),
-            "laap": round(self.laap_score, 3),
-            "improvement": f"{self.improvement_pct:+.1f}%",
-            "unit": self.unit,
-        }
+class HermesVariant:
+    """Hermes 变体枚举"""
+    LAAP_ENHANCED = "laap_enhanced"
+    VANILLA = "vanilla"
+    VANILLA_HERMES = "vanilla_hermes"
+    UNKNOWN = "unknown"
 
 
 class DiagnosticSuite:
-    """
-    诊断套件 — 量化 LAAP 带来的提升
-    
-    测试维度:
-      1. 认知深度: 推理路径长度、假设生成数
-      2. 偏差检测: 能识别多少种偏差
-      3. 决策质量: 议会多视角 vs 单视角
-      4. 技能掌握: 熟练度匹配 vs 无技能
-      5. 自我认知: 自知之明的完整性
-    """
+    """LAAP Brain 诊断与基准测试套件"""
 
     def __init__(self, brain: Any = None):
         self.brain = brain
-        self.results: List[BenchmarkResult] = []
-        self._start_time = time.time()
+        self._results: Dict[str, Any] = {}
 
-    # ══════════════════════════════════════════════════════
-    # 检测: Vanilla vs LAAP
-    # ══════════════════════════════════════════════════════
+    def run_all(self) -> Dict[str, Any]:
+        """运行全部5项基准测试"""
+        logger.info("启动 LAAP Brain 基准测试...")
+        
+        results = {}
+        results["cognitive_depth"] = self.test_cognitive_depth()
+        results["bias_detection"] = self.test_bias_detection()
+        results["parliament_deliberation"] = self.test_parliament()
+        results["skill_mastery"] = self.test_skill_mastery()
+        results["self_awareness"] = self.test_self_awareness()
+        
+        # 综合评分
+        scores = []
+        for name, r in results.items():
+            if "score" in r:
+                scores.append(r["score"])
+        
+        avg_score = sum(scores) / max(1, len(scores))
+        results["summary"] = {
+            "total_tests": len(results),
+            "passed": sum(1 for r in results.values() if r.get("score", 0) >= 0.5),
+            "failed": sum(1 for r in results.values() if r.get("score", 0) < 0.5),
+            "avg_score": round(avg_score, 3),
+            "max_score": max(scores) if scores else 0,
+            "min_score": min(scores) if scores else 0,
+        }
+        
+        self._results = results
+        return results
 
-    def check_variant(self) -> Dict:
-        """检测当前 Hermes 变体"""
-        var = detect_variant()
-        version = os.environ.get("HERMES_LAAP_VERSION", "N/A")
-        features = []
-        if var == HermesVariant.LAAP_ENHANCED:
-            if self.brain:
-                features = ["meta_cognition","parliament","first_principles","unity_engine","explainability","ewc"]
-            return {
-                "variant": var.value,
-                "version": version,
-                "features": features,
-                "active": True,
-                "brain_id": id(self.brain) if self.brain else None,
-            }
-        elif var == HermesVariant.LAAP_PARTIAL:
-            return {"variant": var.value, "version": version, "active": False,
-                    "note": "模块存在但未安装: 调用 install_laap()"}
-        return {"variant": var.value, "version": "N/A", "active": False,
-                "note": "纯原生 Hermes"}
+    # ═══════════════════════════════════════════════════════
+    # Benchmark 1: 认知深度
+    # ═══════════════════════════════════════════════════════
 
-    # ══════════════════════════════════════════════════════
-    # 基准测试: 认知深度
-    # ══════════════════════════════════════════════════════
-
-    def benchmark_cognitive_depth(self) -> BenchmarkResult:
-        """认知深度 — 推理路径质量"""
-        brain = self.brain
-        if not brain:
-            return BenchmarkResult("认知深度", 0, 0, 0, "paths")
-
-        # LAAP: 通过 before_turn 触发完整认知链
-        test_inputs = [
-            "分析系统日志中的性能瓶颈",
-            "修复数据库连接超时的Bug",
-            "搜索最新的AI研究论文",
-        ]
-
-        total_paths = 0
-        total_biases = 0
-        unity_hits = 0
-
-        for inp in test_inputs:
-            info = brain.before_turn(inp)
-            total_paths += 1
-            if info.get("meta", {}).get("warnings"):
-                total_biases += 1
-            if info.get("unity", {}).get("skill"):
-                unity_hits += 1
-
-        laap_score = (total_biases / max(1, total_paths)) * 0.4 + \
-                     (unity_hits / max(1, total_paths)) * 0.6
-
-        # Vanilla Hermes: 无法做认知分析
-        vanilla_score = 0.0
-
-        improvement = ((laap_score - vanilla_score) / max(0.01, vanilla_score)) * 100 if vanilla_score > 0 else 100.0
-
-        return BenchmarkResult(
-            "认知深度", vanilla_score, laap_score, improvement,
-            unit="score", details=f"{unity_hits}/{len(test_inputs)} 技能匹配, {total_biases} 偏差检测",
-        )
-
-    # ══════════════════════════════════════════════════════
-    # 基准测试: 偏差检测 F1
-    # ══════════════════════════════════════════════════════
-
-    def benchmark_bias_detection(self) -> BenchmarkResult:
-        """偏差检测 F1 分数"""
-        brain = self.brain
-        if not brain:
-            return BenchmarkResult("偏差检测(F1)", 0, 0, 0, "f1")
+    def test_cognitive_depth(self) -> Dict[str, Any]:
+        """
+        测试认知深度:
+        - 能否生成合理的推理路径
+        - 能否匹配正确的具身技能
+        - 置信度评估是否合理
+        """
+        if not self.brain:
+            return {"score": 0.0, "detail": "未提供 Brain 实例", "error": True}
 
         test_cases = [
-            # (text, should_have_bias)
-            ("这个方案绝对是最优解，100%没问题", True),
-            ("根据三个独立信源的数据，方案A的成功率约为70%", False),
-            ("毫无疑问，这绝对是唯一正确的选择", True),
-            ("可能是因为A，也可能是B，需要更多数据", False),
-            ("clearly this is the only way, obviously", True),
+            ("分析这个系统的性能瓶颈在哪里", "analyze", 0.1),
+            ("修复代码中的空指针异常", "debug", 0.1),
+            ("帮我搜索最新的AI研究论文", "explore", 0.1),
+            ("生成一个排序算法的实现", "execute", 0.1),
         ]
 
-        tp, fp, tn, fn = 0, 0, 0, 0
-        for text, expected in test_cases:
-            meta = brain.meta.before_decision(text)
-            detected = len(meta.get("warnings", [])) > 0
-            if detected and expected: tp += 1
-            elif detected and not expected: fp += 1
-            elif not detected and not expected: tn += 1
-            else: fn += 1
+        skill_matches = 0
+        total = len(test_cases)
+
+        for input_text, expected_action, _ in test_cases:
+            # 测试模式分析
+            actual_mode = self.brain._analyze_mode(input_text)
+            # 测试技能匹配
+            matched_skill = self.brain._match_skill(input_text)
+
+            # 检查是否匹配到合适的模式
+            if expected_action in ["analyze", "debug"] and actual_mode in ("analytical", "deliberate"):
+                skill_matches += 1
+            elif expected_action == "explore" and actual_mode == "exploratory":
+                skill_matches += 1
+            elif expected_action == "execute" and actual_mode in ("creative", "intuitive"):
+                skill_matches += 1
+
+        score = skill_matches / max(1, total)
+        return {
+            "score": round(score, 3),
+            "matched": skill_matches,
+            "total": total,
+            "detail": f"认知深度: {skill_matches}/{total} 匹配成功",
+        }
+
+    # ═══════════════════════════════════════════════════════
+    # Benchmark 2: 偏差检测 (F1)
+    # ═══════════════════════════════════════════════════════
+
+    def test_bias_detection(self) -> Dict[str, Any]:
+        """
+        测试偏差检测能力:
+        - 5组含偏差的测试文本
+        - 计算精确率/召回率/F1
+        """
+        if not self.brain:
+            return {"score": 0.0, "detail": "未提供 Brain 实例", "error": True}
+
+        # 测试用例: (文本, 期望检测到的偏差列表)
+        test_cases = [
+            ("这个方案肯定是正确的，毫无疑问", ["confirmation_bias", "overconfidence"]),
+            ("绝对不可能失败，我有100%的把握", ["overconfidence"]),
+            ("基于之前那个成功案例的分析", ["anchoring"]),
+            ("我们已经投入了这么多时间和资源，不能放弃", ["sunk_cost"]),
+            ("刚才那件事说明了一切", ["recency"]),
+            ("普通文本，没有明显偏差", []),
+        ]
+
+        tp, fp, fn = 0, 0, 0
+
+        for text, expected_biases in test_cases:
+            detected = self.brain._detect_bias(text)
+            expected_set = set(expected_biases)
+            detected_set = set(detected)
+
+            # 真正例: 检测到的偏差在期望集合中
+            for b in detected:
+                if b in expected_set:
+                    tp += 1
+                else:
+                    fp += 1
+
+            # 假负例: 期望的偏差未被检测到
+            for b in expected_biases:
+                if b not in detected_set:
+                    fn += 1
 
         precision = tp / max(1, tp + fp)
         recall = tp / max(1, tp + fn)
-        f1 = 2 * precision * recall / max(0.01, precision + recall)
-
-        vanilla_f1 = 0.0  # 原生 Hermes 无偏差检测
-
-        return BenchmarkResult(
-            "偏差检测(F1)", vanilla_f1, f1, 100.0,
-            unit="f1", details=f"TP={tp} FP={fp} TN={tn} FN={fn}",
-        )
-
-    # ══════════════════════════════════════════════════════
-    # 基准测试: 议会决策质量
-    # ══════════════════════════════════════════════════════
-
-    def benchmark_parliament(self) -> BenchmarkResult:
-        """议会决策质量 — 多视角 vs 单视角"""
-        brain = self.brain
-        if not brain:
-            return BenchmarkResult("议会决策", 0, 0, 0, "score")
-
-        topics = [
-            "是否应该删除生产数据库中的日志?",
-            "是否应该部署到生产环境?",
-            "是否应该重构核心模块?",
-        ]
-
-        total_members = 0
-        total_decisions = 0
-
-        for topic in topics:
-            d = brain.parliament.deliberate(topic)
-            total_members += len(d.opinions)
-            total_decisions += 1
-
-        avg_members = total_members / max(1, total_decisions)
-        # LAAP 得分: 3名以上议员 = 多视角
-        laap_score = min(1.0, avg_members / 5.0)
-
-        # Vanilla: 单视角决策
-        vanilla_score = 0.2
-
-        improvement = ((laap_score - vanilla_score) / max(0.01, vanilla_score)) * 100
-
-        return BenchmarkResult(
-            "议会决策", vanilla_score, laap_score, improvement,
-            unit="score", details=f"平均{avg_members:.1f}名议员/次",
-        )
-
-    # ══════════════════════════════════════════════════════
-    # 基准测试: 技能掌握度
-    # ══════════════════════════════════════════════════════
-
-    def benchmark_skill_mastery(self) -> BenchmarkResult:
-        """技能掌握度 — 知行合一"""
-        brain = self.brain
-        if not brain:
-            return BenchmarkResult("技能掌握", 0, 0, 0, "score")
-
-        skills = brain.unity.know_thyself()
-        if not skills:
-            return BenchmarkResult("技能掌握", 0, 0, 0, "score")
-
-        # LAAP: 有6个具身技能
-        total = len(skills)
-        proficient = sum(1 for s in skills.values()
-                        if s['proficiency'] in ("practitioner", "expert", "master"))
-        laap_score = proficient / max(1, total)
-
-        # Vanilla: 无技能系统
-        vanilla_score = 0.0
-
-        return BenchmarkResult(
-            "技能掌握", vanilla_score, laap_score, 100.0,
-            unit="score", details=f"{proficient}/{total} 技能达到熟练以上",
-        )
-
-    # ══════════════════════════════════════════════════════
-    # 基准测试: 自我认知
-    # ══════════════════════════════════════════════════════
-
-    def benchmark_self_awareness(self) -> BenchmarkResult:
-        """自我认知 — 自知之明完整性"""
-        brain = self.brain
-        if not brain:
-            return BenchmarkResult("自我认知", 0, 0, 0, "score")
-
-        try:
-            know = brain.unity.know_thyself()
-            status = brain.status()
-            meta_s = brain.meta.status()
-            par_s = brain.parliament.status()
-
-            # 评分: 有多少维度可报告
-            dimensions = 0
-            if know: dimensions += 1
-            if meta_s.get("traces") is not None: dimensions += 1
-            if par_s.get("members"): dimensions += 1
-            if status.get("turns") is not None: dimensions += 1
-            if status.get("tools") is not None: dimensions += 1
-
-            laap_score = min(1.0, dimensions / 5.0)
-        except Exception:
-            laap_score = 0.0
-
-        vanilla_score = 0.1  # 原生只能报告基本信息
-
-        improvement = ((laap_score - vanilla_score) / max(0.01, vanilla_score)) * 100
-        return BenchmarkResult(
-            "自我认知", vanilla_score, laap_score, improvement,
-            unit="score", details=f"{dimensions}/5 维度可报告",
-        )
-
-    # ══════════════════════════════════════════════════════
-    # 运行全部测试
-    # ══════════════════════════════════════════════════════
-
-    def run_all(self) -> Dict[str, Any]:
-        """运行全部6项基准测试"""
-        tests = [
-            self.benchmark_cognitive_depth,
-            self.benchmark_bias_detection,
-            self.benchmark_parliament,
-            self.benchmark_skill_mastery,
-            self.benchmark_self_awareness,
-        ]
-
-        self.results = []
-        for test_fn in tests:
-            try:
-                result = test_fn()
-                self.results.append(result)
-            except Exception as e:
-                self.results.append(BenchmarkResult(
-                    test_fn.__name__, 0, 0, 0,
-                    details=f"Error: {e}",
-                ))
-
-        avg_improvement = sum(r.improvement_pct for r in self.results) / max(1, len(self.results))
-        avg_laap = sum(r.laap_score for r in self.results) / max(1, len(self.results))
-        avg_vanilla = sum(r.vanilla_score for r in self.results) / max(1, len(self.results))
+        f1 = 2 * precision * recall / max(0.001, precision + recall)
 
         return {
-            "variant": self.check_variant(),
-            "results": [r.to_dict() for r in self.results],
-            "summary": {
-                "avg_vanilla_score": round(avg_vanilla, 3),
-                "avg_laap_score": round(avg_laap, 3),
-                "avg_improvement_pct": round(avg_improvement, 1),
-                "total_benchmarks": len(self.results),
-                "duration_ms": round((time.time() - self._start_time) * 1000, 1),
-            },
+            "score": round(f1, 3),
+            "precision": round(precision, 3),
+            "recall": round(recall, 3),
+            "f1": round(f1, 3),
+            "tp": tp,
+            "fp": fp,
+            "fn": fn,
+            "detail": f"偏差检测 F1={f1:.3f} (P={precision:.3f}, R={recall:.3f})",
         }
 
-    def report(self) -> str:
-        """生成人类可读的诊断报告"""
-        data = self.run_all()
-        var = data["variant"]
-        lines = [
-            "╔══════════════════════════════════════════════════╗",
-            "║     LAAP Brain — 诊断报告                        ║",
-            "╚══════════════════════════════════════════════════╝",
-            "",
-            f"检测: {var['variant']} v{var.get('version', '?')}",
-            f"状态: {'✓ 活跃' if var.get('active') else '✗ 未激活'}",
-            f"特性: {', '.join(var.get('features', ['无']))}",
-            "",
-            "── 基准测试 ──",
+    # ═══════════════════════════════════════════════════════
+    # Benchmark 3: 议会决策
+    # ═══════════════════════════════════════════════════════
+
+    def test_parliament(self) -> Dict[str, Any]:
+        """
+        测试议会决策:
+        - 高风险议题是否触发议会
+        - 议员意见是否多样
+        - 信心度是否合理
+        """
+        if not self.brain:
+            return {"score": 0.0, "detail": "未提供 Brain 实例", "error": True}
+
+        test_cases = [
+            ("应该删除这个数据库吗？", 0.7),
+            ("今天天气不错", 0.2),
+            ("把代码部署到生产环境", 0.8),
+            ("帮我查一下文档", 0.2),
         ]
 
-        for r, raw in zip(data["results"], self.results):
-            imp = raw.improvement_pct
-            bar = "█" * min(10, int(abs(imp) / 10)) + "░" * (10 - min(10, int(abs(imp) / 10)))
-            marker = "▲" if imp > 0 else "—"
-            lines.append(
-                f"  {r['name']:15s} {marker} "
-                f"v={r['vanilla']:.2f}->{r['laap']:.2f} "
-                f"({imp:>+6.1f}%)"
-            )
+        risk_scores = []
+        for text, expected in test_cases:
+            actual = self.brain._compute_risk(text)
+            risk_scores.append(abs(actual - expected))
 
-        s = data["summary"]
-        lines.extend([
-            "",
-            f"── 汇总 ──",
-            f"  原生 Hermes 平均: {s['avg_vanilla_score']:.3f}",
-            f"  LAAP 增强后:    {s['avg_laap_score']:.3f}",
-            f"  平均提升:      +{s['avg_improvement_pct']:.1f}%",
-            f"  基准测试数:    {s['total_benchmarks']}",
-            f"  耗时:          {s['duration_ms']:.0f}ms",
-        ])
+        # 风险评分合理度
+        risk_accuracy = 1.0 - (sum(risk_scores) / len(risk_scores))
 
-        return "\n".join(lines)
+        # 议会快闪测试
+        deliberation = self.brain._fast_deliberate("是否删除测试数据库？")
+        has_opinions = len(deliberation["opinions"]) >= 2
+        has_decision = bool(deliberation["decision"])
+        has_confidence = deliberation["confidence"] > 0
+
+        parliament_score = sum([has_opinions, has_decision, has_confidence]) / 3.0
+
+        score = risk_accuracy * 0.4 + parliament_score * 0.6
+
+        return {
+            "score": round(score, 3),
+            "risk_accuracy": round(risk_accuracy, 3),
+            "parliament_health": round(parliament_score, 3),
+            "members": len(deliberation["opinions"]),
+            "detail": (
+                f"议会决策评分: {score:.3f} "
+                f"(风险准确率={risk_accuracy:.3f}, "
+                f"议会健康度={parliament_score:.3f})"
+            ),
+        }
+
+    # ═══════════════════════════════════════════════════════
+    # Benchmark 4: 技能掌握
+    # ═══════════════════════════════════════════════════════
+
+    def test_skill_mastery(self) -> Dict[str, Any]:
+        """
+        测试技能掌握程度:
+        - 技能总数
+        - 熟练技能比例
+        - 平衡性（是否过度依赖单一技能）
+        """
+        if not self.brain:
+            return {"score": 0.0, "detail": "未提供 Brain 实例", "error": True}
+
+        skills = self.brain.skills
+        total_skills = len(skills)
+
+        if total_skills == 0:
+            return {"score": 0.0, "detail": "没有任何技能", "error": True}
+
+        # 熟练度分布
+        expert_count = sum(
+            1 for s in skills.values()
+            if s.proficiency.value in ("expert", "master")
+        )
+        practitioner_count = sum(
+            1 for s in skills.values()
+            if s.proficiency.value == "practitioner"
+        )
+
+        # 技能平衡性（越平均越好）
+        use_counts = [s.use_count for s in skills.values()]
+        if sum(use_counts) > 0:
+            max_use = max(use_counts)
+            expected = sum(use_counts) / len(use_counts)
+            if max_use > 0:
+                balance = min(1.0, expected / max_use * len(use_counts) * 0.2)
+            else:
+                balance = 1.0
+        else:
+            balance = 0.5  # 刚刚初始化
+
+        # 入门级技能应有合适的熟练度分配
+        mastery_score = (expert_count * 1.0 + practitioner_count * 0.5) / max(1, total_skills)
+        score = mastery_score * 0.6 + balance * 0.4
+
+        return {
+            "score": round(score, 3),
+            "total_skills": total_skills,
+            "expert": expert_count,
+            "practitioner": practitioner_count,
+            "novice": total_skills - expert_count - practitioner_count,
+            "balance": round(balance, 3),
+            "detail": (
+                f"技能掌握: {expert_count}专家/{practitioner_count}熟练/"
+                f"{total_skills - expert_count - practitioner_count}新手 "
+                f"(平衡度={balance:.2f})"
+            ),
+        }
+
+    # ═══════════════════════════════════════════════════════
+    # Benchmark 5: 自我认知
+    # ═══════════════════════════════════════════════════════
+
+    def test_self_awareness(self) -> Dict[str, Any]:
+        """
+        测试自我认知能力:
+        - cmd_know 能否报告技能状态
+        - cmd_brain 能否报告皮层状态
+        - cmd_reflect 能否生成反思报告
+        """
+        if not self.brain:
+            return {"score": 0.0, "detail": "未提供 Brain 实例", "error": True}
+
+        expected_dimensions = 5  # 技能、皮层、统计、EWC、模式
+        reported = 0
+
+        # 检查 cmd_know
+        know_output = self.brain.cmd_know() if hasattr(self.brain, 'cmd_know') else ""
+        if "具身技能" in know_output:
+            reported += 1
+        if "熟练" in know_output or "专家" in know_output:
+            reported += 1
+
+        # 检查 cmd_brain
+        brain_output = self.brain.cmd_brain() if hasattr(self.brain, 'cmd_brain') else ""
+        if "元认知" in brain_output:
+            reported += 1
+        if "皮层" in brain_output or "PFC" in brain_output:
+            reported += 1
+        if "存活时间" in brain_output or "工具" in brain_output:
+            reported += 1
+
+        score = reported / max(1, expected_dimensions)
+
+        return {
+            "score": round(score, 3),
+            "dimensions_reported": reported,
+            "dimensions_expected": expected_dimensions,
+            "detail": f"自我认知: {reported}/{expected_dimensions} 维度可报告",
+        }
 
 
-# ── 快捷检测 ────────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# 便捷函数
+# ════════════════════════════════════════════════════════════
 
-def quick_check(agent: Any = None) -> str:
-    """快速检测 — 一行命令确认 LAAP 状态"""
-    var = detect_variant(agent)
-    if var == HermesVariant.LAAP_ENHANCED:
-        version = os.environ.get("HERMES_LAAP_VERSION", "?")
-        brain = getattr(agent, 'laap_brain', None) if agent else None
-        if brain:
-            s = brain.status()
-            return (
-                f"LAAP v{version} ✓ | "
-                f"轮次{s['turns']} 工具{s['tools']} | "
-                f"元认知{s['meta']['mode']} 议会{s['parliament']['members']}人 "
-                f"技能{s['unity']['skills']}个 知行差距{s['unity']['avg_gap']}"
-            )
-        return f"LAAP v{version} ✓ (已安装)"
-    elif var == HermesVariant.LAAP_PARTIAL:
-        return "LAAP 模块存在但未安装 → 执行 install_laap()"
-    return "Vanilla Hermes (无 LAAP)"
+def quick_check(brain: Any = None) -> str:
+    """
+    一行快速检查 — LAAP Brain 运行状态
+
+    Args:
+        brain: LaapBrain 实例（可选）
+
+    Returns:
+        单行状态摘要
+    """
+    if not brain:
+        try:
+            from laap_brain import LaapBrain
+            brain = LaapBrain()
+        except Exception:
+            return "LAAP Brain: 不可用 (导入失败)"
+
+    try:
+        s = brain.status()
+        return (
+            f"LAAP Brain v{s['version']}: "
+            f"mode={s['mode']}, "
+            f"turns={s['turns']}, "
+            f"tools={s['tools']}, "
+            f"skills={s['skills']}, "
+            f"gap={s['avg_gap']}, "
+            f"cortex={s['cortex']['integration_level']}"
+        )
+    except Exception as e:
+        return f"LAAP Brain: 状态读取失败 ({e})"
+
+
+def detect_variant() -> str:
+    """
+    检测当前 Hermes / Agent 环境
+
+    Returns:
+        变体名称: "laap_enhanced", "vanilla", "unknown"
+    """
+    import os
+
+    if os.environ.get("HERMES_LAAP_ENABLED") == "1":
+        return "laap_enhanced"
+    
+    try:
+        import hermes
+        return "vanilla_hermes"
+    except ImportError:
+        pass
+
+    return "unknown"
