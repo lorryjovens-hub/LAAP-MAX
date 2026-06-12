@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>LAAP AGI</title>
+<style>
+/* ── 金牌动效 — 金色旋转徽章 ── */
+@keyframes laap-glow {
+  0%   { filter: drop-shadow(0 0 5px  #ffd700); transform: rotate(0deg); }
+  25%  { filter: drop-shadow(0 0 15px #ffaa00); transform: rotate(90deg); }
+  50%  { filter: drop-shadow(0 0 25px #ffd700); transform: rotate(180deg); }
+  75%  { filter: drop-shadow(0 0 15px #ffaa00); transform: rotate(270deg); }
+  100% { filter: drop-shadow(0 0 5px  #ffd700); transform: rotate(360deg); }
+}
+@keyframes laap-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.08); opacity: 1; }
+}
+@keyframes laap-shine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.laap-agent-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px 6px 10px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 1.5px solid #ffd700;
+  border-radius: 20px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  color: #ffd700;
+  cursor: default;
+  user-select: none;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+  transition: all 0.3s ease;
+  animation: laap-pulse 2.5s ease-in-out infinite;
+}
+.laap-agent-badge:hover {
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+  animation: none;
+  transform: scale(1.05);
+}
+.laap-agent-badge .laap-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #ffd700, #ffaa00, #ffd700, #b8860b, #ffd700);
+  animation: laap-glow 3s linear infinite;
+}
+.laap-agent-badge .laap-text {
+  background: linear-gradient(90deg, #ffd700, #ffaa00, #ffd700);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  animation: laap-shine 2s linear infinite;
+}
+.laap-agent-badge .laap-version {
+  color: rgba(255, 215, 0, 0.6);
+  font-size: 10px;
+  font-weight: 600;
+}
+/* ── 状态面板 ── */
+.laap-panel {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 1px solid #ffd70044;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px 0;
+  font-family: 'Segoe UI', monospace;
+  font-size: 12px;
+  color: #c0c0c0;
+}
+.laap-panel .title {
+  color: #ffd700; font-weight: 700; font-size: 14px;
+  border-bottom: 1px solid #ffd70033; padding-bottom: 6px; margin-bottom: 8px;
+}
+.laap-panel .stat { display: flex; justify-content: space-between; padding: 2px 0; }
+.laap-panel .stat .label { color: #888; }
+.laap-panel .stat .value { color: #ffd700; font-weight: 600; }
+</style>
+</head>
+<body>
+<!-- ═══ LAAP 金牌动效徽章 (嵌入聊天框) ═══ -->
+<div class="laap-agent-badge" id="laap-badge" title="LAAP AGI 认知增强 — 活跃">
+  <div class="laap-icon"></div>
+  <span class="laap-text">LAAP AGI</span>
+  <span class="laap-version">v3.1</span>
+</div>
+
+<!-- ═══ 状态面板 (通过 JavaScript 实时更新) ═══ -->
+<div class="laap-panel" id="laap-panel">
+  <div class="title">LAAP 认知状态</div>
+  <div class="stat"><span class="label">元认知</span><span class="value" id="s-meta">intuitive</span></div>
+  <div class="stat"><span class="label">议会</span><span class="value" id="s-parliament">5人</span></div>
+  <div class="stat"><span class="label">技能</span><span class="value" id="s-skills">6个</span></div>
+  <div class="stat"><span class="label">知行差距</span><span class="value" id="s-gap">0.00</span></div>
+  <div class="stat"><span class="label">轮次</span><span class="value" id="s-turns">0</span></div>
+  <div class="stat"><span class="label">工具</span><span class="value" id="s-tools">0</span></div>
+</div>
+
+<script>
+// 实时更新状态 (通过轮询 laap_brain 状态)
+async function updateLaapStatus() {
+  try {
+    // 从 laap_brain Python 模块获取状态 (通过 WebSocket 或 HTTP)
+    const resp = await fetch('/__laap__/status').catch(() => null);
+    if (resp && resp.ok) {
+      const data = await resp.json();
+      document.getElementById('s-meta').textContent = data.meta?.mode || '—';
+      document.getElementById('s-parliament').textContent = (data.parliament?.members || '—') + '人';
+      document.getElementById('s-skills').textContent = (data.unity?.skills || '—') + '个';
+      document.getElementById('s-gap').textContent = data.unity?.avg_gap?.toFixed(2) || '—';
+      document.getElementById('s-turns').textContent = data.turns || '0';
+      document.getElementById('s-tools').textContent = data.tools || '0';
+    }
+  } catch(e) { /* silent */ }
+}
+// 每 5 秒更新一次
+updateLaapStatus();
+setInterval(updateLaapStatus, 5000);
+</script>
+</body>
+</html>
