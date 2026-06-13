@@ -1,0 +1,24 @@
+# LAAP V5.0 — Root .gitignore
+# Ignore everything except LAAP project files
+
+/*
+!/laap_brain
+!/hermes-plugin-package
+!/scripts
+!/assets
+!/README.md
+!/PR_SUBMISSION.md
+!/BENCHMARK.md
+!/laap-agi-hermes-plugin.patch
+
+# Within LAAP: exclude noise
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.egg-info/
+dist/
+build/
+*.log
+.DS_Store
+Thumbs.db

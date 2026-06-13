@@ -1,15 +1,16 @@
 ---
 name: laap-brain
-description: "LAAP Brain — 一行代码让任何智能体获得元认知/议会/知行合一。兼容Hermes/Claude Code/OpenClaw。只需: from laap_brain import enhance; enhance()"
-version: 3.1.0
+description: "LAAP Brain v5.0 — PSI cognitive kernel + V5 upgrade engine. MetaCognition, Parliament, Unity, EWC, CausalDiscovery, ActiveLearning, KnowledgeGraph, FormalVerifier, BugClassifier, GoalCoCreator, EnhancedMCTS. Compatible with Hermes/Claude Code."
+version: 5.0.0
 author: LAAP Team
 platforms: [windows, linux, macos]
-tags: [agi, cognition, meta-cognition, parliament, unity, brain]
+tags: [agi, cognition, meta-cognition, parliament, unity, v5, psi, causal, active-learning, knowledge-graph]
 ---
 
-# LAAP Brain — 认知增强技能
+# LAAP Brain v5.0 — Advanced Cognitive Agent
 
-**一行代码让任何智能体获得类人认知能力。**
+**一行代码让你的智能体获得 V5.0 级认知能力。**  
+32 个认知类，覆盖 3 个 Phase：基础设施强化 → 认知能力升级 → 自主性突破。
 
 ## 安装
 
@@ -20,8 +21,8 @@ pip install laap-brain
 或直接从源码：
 
 ```bash
-git clone https://github.com/laap/laap-brain
-cd laap-brain && pip install -e .
+git clone https://github.com/lorryjovens-hub/laap-AGI-
+cd laap-AGI- && pip install -e .
 ```
 
 ## 用法
@@ -30,106 +31,85 @@ cd laap-brain && pip install -e .
 
 ```python
 from laap_brain import enhance
-enhance()  # ← 这就是那一行代码
+brain = enhance()  # 返回 LaapBrain 实例
+brain.before_turn("分析性能瓶颈")
 ```
 
-### Hermes Agent 专属
-
-在 `hermes` 启动入口或任意会话中：
-
-```
-/skill laap-brain     # 加载技能
-```
-
-或 Python 启动脚本中：
+### Hermes Agent 深度集成
 
 ```python
 from laap_brain.integrate import install_laap
-install_laap()
+install_laap(force_full_agi=True)
+# 之后所有 Hermes AIAgent 自动获得认知增强
 ```
 
-### Claude Code / OpenClaw 通用
+### V5.0 升级引擎
 
 ```python
-# 在任何 Python 环境中
-from laap_brain import enhance, LaapBrain
-
-brain = enhance()  # 返回 LaapBrain 实例
-
-# 元认知分析
-info = brain.before_turn("分析性能瓶颈")
-print(info["meta"]["task_type"])    # "analysis"
-print(info["unity"]["skill"])       # "文件分析"
-
-# 议会审议
-d = brain.parliament.deliberate("是否要删除日志?")
-print(d.final_decision)             # "执行" / "重新评估" / "否决"
-
-# 自知之明
-skills = brain.unity.know_thyself()
-for name, info in skills.items():
-    print(f"{name}: {info['proficiency']} ({info['use']}次)")
-
-# 诊断
-from laap_brain.diagnostic import quick_check
-print(quick_check(brain))
+from laap_brain.v5_upgrade import get_v5_engine, integrate_with_agi_bridge
+engine = get_v5_engine()
+integrate_with_agi_bridge()
 ```
 
-## 能力清单
+## 模块清单 (共 32 类)
 
-| 能力 | 说明 | 命令 |
+### Phase 1 — 基础设施 (7 模块)
+| 模块 | 类 | 功能 |
 |------|------|------|
-| **元认知** | 6种思考模式、7种偏差检测、反思 | `brain.meta.before_decision(text)` |
-| **议会** | 5位议员多视角审议决策 | `brain.parliament.deliberate(topic)` |
-| **第一性原理** | 还原论推理、假设挑战 | `brain.fp.analyze(problem)` |
-| **知行合一** | 6个具身技能、5级熟练度 | `brain.unity.decide(action, trigger)` |
-| **可解释性** | 决策链HTML可视化 | `brain.explain.to_html(...)` |
-| **EWC防遗忘** | 弹性权重巩固 | `brain.ewc.after(name, value)` |
-| **自我认知** | 自知之明报告 | `/know` 或 `brain.unity.know_thyself()` |
+| EWC | `FisherInfoTracker` | Fisher 信息矩阵弹性权重巩固 |
+| PER | `SumTree` + `PrioritizedExperienceBuffer` | 优先级经验回放 |
+| Bug | `EnhancedBugClassifier` | 9 类逻辑级错误分类 |
+| Fix | `LogicFixGenerator` | 6 种逻辑修复模式 |
+| Race | `RaceConditionDetector` | 竞态条件检测 |
+| Verify | `FormalVerifier` | 14 条代码验证规则 |
+| Security | `SecureSandboxScanner` | 7 种安全漏洞模式扫描 |
 
-## 与原生 Hermes 对比
+### Phase 2 — 认知能力 (6 模块)
+| 模块 | 类 | 功能 |
+|------|------|------|
+| Causal | `CausalDiscovery` | PC 算法因果发现 |
+| Causal | `ConditionalIndependenceTester` | 偏相关条件独立性检验 |
+| Active | `ActiveLearningEngine` | 主动探索/利用平衡 |
+| Meta | `MetaLearner` | 元学习策略选择 |
+| Curiosity | `CuriosityDriver` | 好奇心驱动内在动机 |
+| Knowledge | `KnowledgeGraph` | 123 个常识三元组，7 种关系 |
 
+### Phase 3 — 自主性 (7 模块)
+| 模块 | 类 | 功能 |
+|------|------|------|
+| Goals | `GoalCoCreator` | 目标共创+价值对齐 |
+| Values | `ValueModel` | 5 维价值体系 |
+| Risk | `RiskAssessor` | 4 类风险评估 |
+| MCTS | `EnhancedMCTSPlanner` | 蒙特卡洛树搜索 |
+| MCTS | `StatePredictor` | 历史结果状态预测 |
+| Planning | `HierarchicalPlanner` | 高/中/低三层规划 |
+| Monitor | `PlanMonitor` | 计划执行偏差检测 |
+
+### V4.x 基础内核 (5 模块)
+| 模块 | 功能 |
+|------|------|
+| MetaCognition | 6 思维模式 + 7 偏差检测 |
+| Parliament | 5 角色议会审议 |
+| UnityEngine | 6 具身技能 + 熟练度进化 |
+| FirstPrinciples | 4 第一性原理公理 |
+| SelfEvolve | 自愈 + 自动技能创建 |
+
+## 命令 (Hermes 集成后)
+
+| 命令 | 功能 |
+|------|------|
+| `/brain` | 内核状态 (元认知/议会/技能) |
+| `/reflect` | 决策质量反思 |
+| `/decide <话题>` | 议会审议 |
+| `/know` | 自知之明 |
+| `/evolve` | 自进化报告 |
+| `/laap-mode <mode>` | 运行时桥接切换 (v5/v4-bridge/hermes/agi) |
+| `/v5` | V5 升级状态报告 |
+| `/v5-status` | JSON 组件状态 |
+| `/v5-goals <话题>` | 目标提案生成 |
+
+## 基准测试
+
+```bash
+python -c "from laap_brain.v5_upgrade import BenchmarkSuite, get_v5_engine; print(BenchmarkSuite(get_v5_engine()).run_all())"
 ```
-原生 Hermes:     LLM对话 → 工具执行 → 返回
-LAAP Hermes:     元认知分析 → 议会审议 → 知行合一
-                 → LLM对话(原) → 工具执行+认知反馈
-                 → 技能学习+EWC防遗忘
-                 → /brain /reflect /decide /know
-```
-
-## 检测 LAAP 是否激活
-
-```python
-from laap_brain import is_laap_enhanced, detect_variant
-
-# 直接检测
-is_laap_enhanced(agent)  # True/False
-
-# 环境变量
-import os
-os.environ["HERMES_LAAP_ENABLED"]  # "1" = 已激活
-
-# 诊断
-from laap_brain.diagnostic import quick_check
-print(quick_check())  
-# "LAAP v3.1.0 ✓ | 轮次4 工具2 | ..."
-```
-
-## 架构
-
-```
-LaapBrain
-├── MetaCognition     元认知(6模式/7偏差/反思)
-├── Parliament        议会(5议员/加权投票/辩论摘要)
-├── FirstPrinciples   第一性原理(4原理/假设挑战)
-├── UnityEngine       知行合一(6技能5级熟练度)
-├── Explainability    可解释性(HTML可视化)
-└── EWC               弹性权重巩固(防遗忘)
-```
-
-## 注意事项
-
-- **零修改**: 通过 monkey-patch 集成，不需要修改任何框架源码
-- **线程安全**: 双重安装防护，不会重复初始化
-- **轻量**: 纯 Python，零外部依赖，1015行代码
-- **即插即用**: `pip install` 然后 `enhance()` 即可
