@@ -7,7 +7,7 @@
 
   **作者: Lorry Jovens (lorry)**
 
-  一行代码让任何智能体获得 V5.0 级认知能力  
+  一行代码让主流智能体获得 V5.0 级认知能力  hermes  claude code  openclaw
   **32 认知类 | 3 阶段增强 | 9/9 基准测试全通过**
 
   [![Version](https://img.shields.io/badge/version-5.0.0-ffd700?style=flat-square)]()
