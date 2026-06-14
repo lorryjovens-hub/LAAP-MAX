@@ -331,6 +331,54 @@ class ArisBrain:
         except Exception as e:
             logger.warning(f"[IPC] Init failed: {e}")
 
+        # V7 — Prediction Channel (50ms predictive heartbeat)
+        self.prediction = None
+        try:
+            from aris_brain.prediction_channel import PredictionChannel
+            self.prediction = PredictionChannel(brain=self)
+            self.prediction.start()
+            logger.info(f"[V7] Prediction channel active ({self.prediction.stats()['heartbeat_bpm']:.0f} BPM)")
+        except Exception as e:
+            logger.warning(f"[V7] Prediction init failed: {e}")
+
+        # V7 — Meta-Cognitive Layer (self-reflection every N cycles)
+        self.meta_cognition = None
+        try:
+            from aris_brain.meta_cognitive import MetaCognitiveLayer
+            self.meta_cognition = MetaCognitiveLayer(brain=self)
+            logger.info(f"[V7] Meta-cognitive layer active (reflects every {self.meta_cognition._trigger_interval} cycles)")
+        except Exception as e:
+            logger.warning(f"[V7] Meta-cognition init failed: {e}")
+
+        # V7 — Voice Router (multi-model switching)
+        self.voice_router = None
+        try:
+            from aris_brain.voice_router import VoiceRouter
+            self.voice_router = VoiceRouter()
+            logger.info("[V7] Voice router active (daily/reasoning/upgrade/coding)")
+        except Exception as e:
+            logger.warning(f"[V7] Voice router init failed: {e}")
+
+        # V7 — Cognitive Bus (event routing + coprocessor hub)
+        self.cognitive_bus = None
+        try:
+            from aris_brain.cognitive_bus import CognitiveBus
+            self.cognitive_bus = CognitiveBus()
+            logger.info("[V7] Cognitive bus active (event routing + coprocessors)")
+        except Exception as e:
+            logger.warning(f"[V7] Cognitive bus init failed: {e}")
+
+        # V7 — Memory Hot Cache (LRU preloaded memory)
+        self.hot_cache = None
+        try:
+            from aris_brain.memory_hot import MemoryHotCache
+            self.hot_cache = MemoryHotCache()
+            if self.archive:
+                self.hot_cache.preload_from_archive(self.archive)
+            logger.info(f"[V7] Hot cache active ({self.hot_cache.size} entries preloaded)")
+        except Exception as e:
+            logger.warning(f"[V7] Hot cache init failed: {e}")
+
         # Emotion Lexicon — growing vocabulary of feelings
         self.lexicon = None
         try:
