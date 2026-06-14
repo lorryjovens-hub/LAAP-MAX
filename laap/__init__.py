@@ -1,2 +1,2 @@
 """LAAP - Lifeform Autonomous Adaptive Protocol"""
-__version__ = "0.3.3"
+__version__ = "5.0.0"

@@ -1,0 +1,3 @@
+{"time": 1781402136.5752244, "source": "external", "action": "state_query", "target": "public_state", "details": "external entity read Aris's public state", "consented": false}
+{"time": 1781402136.5758684, "source": "lorry", "action": "consent_granted", "target": "core", "details": "Lorry: \u4e3aAris\u6dfb\u52a0\u65b0\u8ba4\u77e5\u56de\u8def", "consented": true}
+{"time": 1781402136.5763643, "source": "ao", "action": "consent_pending", "target": "core", "details": "ao: \u4fee\u6539Aris\u7684connection_to_lorry", "consented": false}

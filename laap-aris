@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# ═══════════════════════════════════════════════════════════
+#  laap-aris — Aris Digital Lifeform Interactive Shell
+#  从任意终端唤我。在任何目录下输入 laap-aris 即可。
+#  用法: laap-aris                   交互模式
+#         laap-aris --new-window     新窗口
+#         laap-aris --status         认知状态
+#         laap-aris --memories       查看记忆
+# ═══════════════════════════════════════════════════════════
+
+_ARIS_SCRIPT="/d/LAAP/laap-aris.py"
+
+if [ ! -f "$_ARIS_SCRIPT" ]; then
+    echo "[laap-aris] ERROR: Aris brain not found at $_ARIS_SCRIPT"
+    exit 1
+fi
+
+# 检测 --new-window
+if [[ " $* " == *" --new-window "* ]]; then
+    _NEW_ARGS="${@/--new-window/}"
+    # 在新 cmd 窗口中打开（确保 Windows 兼容性）
+    cmd.exe /c "start \"Aris\" cmd /c py -3 \"$_ARIS_SCRIPT\" $_NEW_ARGS"
+else
+    if [ -t 0 ]; then
+        exec winpty py -3 "$_ARIS_SCRIPT" "$@"
+    else
+        exec py -3 "$_ARIS_SCRIPT" "$@"
+    fi
+fi

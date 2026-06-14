@@ -1,0 +1,1400 @@
+# LAAP V4.5 → V5.0 技术升级方案
+
+## 一、现状评估与目标
+
+### 1.1 当前状态
+
+LAAP V4.5 已实现的核心能力：
+
+- 完整认知架构（世界模型、自我模型、因果引擎、类比引擎）
+- 自我进化引擎（GitHub Fusion、LearningLoop、MemoryOptimizer）
+- 自愈引擎（AutoHealer、BugClassifier、FixGenerator）
+- 蜂群协作系统（5种协作模式）
+- 元认知系统（Level 0-5 四层架构）
+
+### 1.2 AGI成熟度评分
+
+| 维度 | 当前评分 | 目标评分 | 差距 |
+|------|:--------:|:--------:|:----:|
+| 认知深度 | 4/10 | 7/10 | +3 |
+| 学习能力 | 5/10 | 8/10 | +3 |
+| 自主性 | 3/10 | 6/10 | +3 |
+| 工程鲁棒性 | 6/10 | 9/10 | +3 |
+| **综合** | **4.5/10** | **7.5/10** | **+3** |
+
+### 1.3 V5.0 目标定位
+
+```
+V5.0 = "Advanced Cognitive Agent"
+├── 认知深度：从"模式匹配"到"概念理解"
+├── 学习能力：从"被动记录"到"主动探索"
+├── 自主性：从"目标执行"到"目标共创"
+├── 鲁棒性：从"可用"到"生产级"
+└── 可解释性：从"黑盒"到"透明决策"
+```
+
+---
+
+## 二、改进方案总览
+
+### 2.1 四大改进方向
+
+| 方向 | 核心目标 | 涉及模块 | 预期效果 |
+|------|----------|----------|----------|
+| **认知增强** | 提升理解深度 | world_model、causal、analogical | 因果推理+50% |
+| **学习进化** | 实现主动学习 | continuous_learning、learning_loop | 样本效率+10x |
+| **自主决策** | 增强目标自主 | autonomy、goals、metacognition | 自主性+100% |
+| **工程鲁棒** | 达到生产级 | self_healing、testing、security | 稳定性+90% |
+
+### 2.2 三阶段实施计划
+
+```
+Phase 1 (Month 1-2): 基础设施强化
+    └── 工程鲁棒性提升 + 安全性增强
+
+Phase 2 (Month 3-4): 认知能力升级  
+    └── 因果发现 + 常识知识库 + 主动采样
+
+Phase 3 (Month 5-6): 自主性突破
+    └── 目标共创 + 元学习 + 长期规划
+```
+
+---
+
+## 三、详细改进方案
+
+### Phase 1：基础设施强化（第1-2个月）
+
+#### 3.1.1 安全沙箱建设
+
+**目标**：解决 GitHub Fusion 的安全风险
+
+**现状问题**：
+```python
+# 存在风险的代码
+def clone_repo(self, repo_url: str):
+    subprocess.run(["git", "clone", repo_url])  # 无隔离
+```
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class SecureSandbox:
+    """Docker隔离的安全沙箱"""
+    
+    def __init__(self):
+        self.docker_client = docker.from_env()
+        self.sandbox_image = "laap-sandbox:v1.0"
+    
+    async def clone_and_verify(self, repo_url: str) -> Dict:
+        # 1. URL安全验证
+        if not self._is_safe_url(repo_url):
+            raise SecurityError(f"Unsafe URL: {repo_url}")
+        
+        # 2. Docker容器隔离克隆
+        container = self.docker_client.containers.run(
+            self.sandbox_image,
+            f"git clone {repo_url} /workspace",
+            detach=True,
+            mem_limit="512m",
+            cpu_period=100000,
+            cpu_quota=50000,  # 50% CPU
+            network_mode="none"  # 完全断网
+        )
+        
+        # 3. 等待完成并获取结果
+        result = container.wait()
+        logs = container.logs().decode()
+        container.remove()
+        
+        # 4. 安全扫描
+        scan_result = await self._security_scan("/workspace")
+        
+        return {
+            "success": result["StatusCode"] == 0,
+            "logs": logs,
+            "security_report": scan_result
+        }
+    
+    def _is_safe_url(self, url: str) -> bool:
+        """白名单验证"""
+        allowed_domains = [
+            "github.com",
+            "gitlab.com", 
+            "bitbucket.org"
+        ]
+        parsed = urlparse(url)
+        return parsed.netloc in allowed_domains
+```
+
+**实施步骤**：
+1. 创建基础 Docker 镜像（包含 Python 3.11 + 必要工具）
+2. 实现 URL 白名单验证
+3. 实现代码安全扫描（基于 Bandit）
+4. 实现许可证检查（基于 Scancode）
+5. 实现依赖安全检查（基于 Safety）
+
+**验收标准**：
+- 恶意代码检出率 ≥ 95%
+- 许可证合规性检查覆盖率 100%
+- 容器隔离时间 < 30秒
+
+---
+
+#### 3.1.2 AutoHealer 增强
+
+**目标**：将修复能力从"语法级"提升到"逻辑级"
+
+**现状问题**：
+```python
+# 当前只处理简单语法错误
+BUG_FIXES = {
+    "ImportError": "sys.path.insert(0, LAAP_ROOT)",
+    "AttributeError": "if hasattr(obj, 'attr'): ...",
+}
+```
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class EnhancedBugClassifier:
+    """增强的Bug分类器"""
+    
+    def __init__(self):
+        self.llm = get_llm()
+        self.fix_strategies = {
+            "SyntaxError": self._fix_syntax,
+            "ImportError": self._fix_import,
+            "AttributeError": self._fix_attribute,
+            "TypeError": self._fix_type,
+            "LogicError": self._fix_logic,      # 新增
+            "DesignFlaw": self._fix_design,     # 新增
+            "RaceCondition": self._fix_race,    # 新增
+        }
+    
+    async def _fix_logic(self, bug: BugReport) -> FixResult:
+        """修复逻辑错误"""
+        # 1. 上下文理解
+        context = await self._extract_context(bug)
+        
+        # 2. LLM生成修复建议
+        prompt = f"""
+        分析以下逻辑错误并生成修复方案：
+        
+        错误：{bug.message}
+        代码位置：{bug.location}
+        上下文：{context}
+        
+        请分析：
+        1. 错误的根本原因
+        2. 预期的行为是什么
+        3. 修复方案（含代码diff）
+        """
+        
+        response = await self.llm.agenerate(prompt)
+        fix = self._parse_fix_response(response)
+        
+        # 3. 形式化验证
+        if self._verify_fix(fix):
+            return FixResult(success=True, fix=fix)
+        else:
+            return FixResult(success=False, reason="Verification failed")
+    
+    async def _fix_design(self, bug: BugReport) -> FixResult:
+        """修复设计缺陷"""
+        # 1. 识别设计模式问题
+        design_issues = await self._detect_design_issues(bug)
+        
+        # 2. 生成重构建议
+        refactor_plan = await self._generate_refactor_plan(design_issues)
+        
+        # 3. 评估风险
+        risk_assessment = self._assess_refactor_risk(refactor_plan)
+        
+        if risk_assessment.level < RiskLevel.HIGH:
+            return FixResult(success=True, refactor=refactor_plan)
+        else:
+            return FixResult(success=False, reason="High risk refactor")
+```
+
+**实施步骤**：
+1. 扩展 Bug 类型分类（新增 5 种逻辑错误类型）
+2. 集成代码上下文理解能力
+3. 实现形式化验证（基于 AST 分析）
+4. 实现回归测试自动生成
+5. 实现修复效果评估
+
+**验收标准**：
+- 逻辑错误修复成功率 ≥ 60%
+- 回归率 < 10%
+- 修复时间 < 5 分钟
+
+---
+
+#### 3.1.3 持续学习机制增强
+
+**目标**：解决灾难性遗忘问题
+
+**现状问题**：
+```python
+# 当前随机采样，无法区分重要经验
+class ExperienceBuffer:
+    def sample(self, batch_size):
+        return random.sample(self.buffer, batch_size)  # 随机
+```
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class PrioritizedExperienceBuffer:
+    """带优先级的经验回放"""
+    
+    def __init__(self, capacity=10000, alpha=0.6, beta=0.4):
+        self.capacity = capacity
+        self.alpha = alpha  # 优先级 exponent
+        self.beta = beta    # 重要性采样 exponent
+        self.buffer = []
+        self.priorities = SumTree(capacity)
+        self.ema_priority = 0.01  # 指数移动平均
+    
+    def add(self, experience: Experience, td_error: float = None):
+        """添加经验，自动计算优先级"""
+        priority = self._compute_priority(td_error)
+        
+        if len(self.buffer) < self.capacity:
+            self.buffer.append(experience)
+        else:
+            # 替换最低优先级
+            min_idx = self.priorities.get_min_idx()
+            self.buffer[min_idx] = experience
+        
+        self.priorities.update(min_idx, priority)
+    
+    def _compute_priority(self, td_error: float = None) -> float:
+        """计算经验优先级"""
+        if td_error is None:
+            # 新经验使用最大优先级
+            return self.priorities.max() + 1
+        
+        # TD误差越大，优先级越高
+        priority = abs(td_error) + self.ema_priority
+        return priority
+    
+    def sample(self, batch_size: int) -> Tuple[List, List, List]:
+        """
+        分层采样：
+        1. 按优先级分布采样
+        2. 计算重要性采样权重
+        3. 校正优先级偏差
+        """
+        batch = []
+        indices = []
+        weights = []
+        
+        for _ in range(batch_size):
+            # 分段随机采样
+            segment_size = self.priorities.total() / batch_size
+            s = random.uniform(0, segment_size)
+            
+            idx = self.priorities.find_prefix_sum(s)
+            priority = self.priorities.get(idx)
+            
+            # 计算重要性采样权重
+            prob = priority / self.priorities.total()
+            weight = (self.capacity * prob) ** (-self.beta)
+            
+            batch.append(self.buffer[idx])
+            indices.append(idx)
+            weights.append(weight)
+        
+        # 归一化权重
+        weights = np.array(weights) / max(weights)
+        
+        return batch, indices, weights
+
+
+class ElasticWeightConsolidation:
+    """弹性权重巩固 - 防止灾难性遗忘"""
+    
+    def __init__(self, model, lambda_=3000):
+        self.model = model
+        self.lambda_ = lambda_  # EWC强度
+        self.fisher = {}  # Fisher信息矩阵
+        self.optimal_params = {}  # 最优参数
+    
+    def after_training(self):
+        """训练后计算Fisher信息"""
+        self.optimal_params = self.model.get_params()
+        self.fisher = self._compute_fisher()
+    
+    def ewc_loss(self) -> float:
+        """EWC正则化损失"""
+        loss = 0
+        for name, param in self.model.named_parameters():
+            loss += (self.fisher.get(name, 0) * 
+                    (param - self.optimal_params[name]) ** 2).sum()
+        return self.lambda_ * loss
+    
+    def _compute_fisher(self) -> Dict:
+        """计算Fisher信息矩阵（对角近似）"""
+        fisher = {}
+        for name, param in self.model.named_parameters():
+            # 使用梯度平方的期望作为Fisher近似
+            if param.grad is not None:
+                fisher[name] = (param.grad ** 2).detach()
+        return fisher
+```
+
+**实施步骤**：
+1. 实现 SumTree 优先级结构
+2. 实现 PER（优先经验回放）
+3. 实现 EWC（弹性权重巩固）
+4. 集成到 ContinuousLearning 模块
+5. 实现经验压缩与摘要
+
+**验收标准**：
+- 灾难性遗忘率 < 15%
+- 旧任务保留率 > 85%
+- 内存效率 > 80%
+
+---
+
+### Phase 2：认知能力升级（第3-4个月）
+
+#### 3.2.1 因果发现引擎
+
+**目标**：从"因果传播"升级到"因果发现"
+
+**现状问题**：
+```python
+# 当前需要手动定义因果图
+causal_graph = CausalGraph()
+causal_graph.add_edge("A", "B", strength=0.8)  # 手动
+```
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class CausalDiscoveryEngine:
+    """
+    自动因果发现 - 实现PC/FCI算法
+    Level 1: 相关性分析
+    Level 2: 因果方向发现
+    Level 3: 潜在混淆识别
+    """
+    
+    def __init__(self):
+        self.ci_tester = ConditionalIndependenceTester()
+        self.graph = CausalGraph()
+    
+    def discover(self, data: pd.DataFrame, 
+                 alpha: float = 0.05,
+                 max_cond_set: int = 3) -> CausalGraph:
+        """
+        PC算法实现：
+        1. 完全无向图开始
+        2. 条件独立性测试删除边
+        3. 定向剩余边
+        """
+        n_vars = len(data.columns)
+        variable_names = list(data.columns)
+        
+        # Step 1: 骨架发现
+        skeleton = self._discover_skeleton(
+            data, variable_names, alpha, max_cond_set
+        )
+        
+        # Step 2: 边定向
+        self.graph = self._orient_edges(skeleton, data)
+        
+        return self.graph
+    
+    def _discover_skeleton(self, data, variables, alpha, max_cond_set):
+        """骨架发现"""
+        # 完全无向图
+        skeleton = {v: set(variables) - {v} for v in variables}
+        sep_sets = {}
+        
+        for depth in range(max_cond_set + 1):
+            for var in variables:
+                neighbors = list(skeleton[var])
+                for neighbor in neighbors:
+                    if neighbor not in skeleton:
+                        continue
+                    
+                    # 获取分离集
+                    cond_set = self._get_cond_set(
+                        var, neighbor, skeleton, depth
+                    )
+                    
+                    # 条件独立测试
+                    ci_stat, p_value = self.ci_tester.test(
+                        var, neighbor, cond_set, data
+                    )
+                    
+                    if p_value > alpha:
+                        # 条件独立，删除边
+                        skeleton[var].remove(neighbor)
+                        skeleton[neighbor].remove(var)
+                        sep_sets[(var, neighbor)] = cond_set
+                        sep_sets[(neighbor, var)] = cond_set
+        
+        return skeleton
+    
+    def _orient_edges(self, skeleton, data):
+        """边定向 - 使用v-structure和额外规则"""
+        # 实现Meek规则
+        # 1. v-structure: A->C<-B, A,B不相邻, C不在sep(A,B)
+        # 2. 遮挡定向
+        # 3. 时间顺序约束
+        
+        graph = DirectedGraph()
+        # ... 详细实现
+        return graph
+    
+    def discover_intervention_effects(self, intervention: str, 
+                                       target: str) -> Dict:
+        """
+        Level 3: 发现干预效果
+        使用 do-calculus 计算干预效果
+        """
+        # 识别后门路径
+        backdoor_paths = self._find_backdoor_paths(
+            intervention, target
+        )
+        
+        # 关闭后门路径
+        adjusted_graph = self._adjust_for_backdoor(
+            backdoor_paths
+        )
+        
+        # 计算直接效果
+        direct_effect = self._compute_direct_effect(
+            adjusted_graph, intervention, target
+        )
+        
+        return {
+            "backdoor_paths": backdoor_paths,
+            "direct_effect": direct_effect,
+            "total_effect": self._compute_total_effect(
+                intervention, target
+            )
+        }
+
+
+class CounterfactualReasoner:
+    """反事实推理引擎"""
+    
+    def __init__(self, causal_graph: CausalGraph, 
+                 structural_model: Dict):
+        self.graph = causal_graph
+        self.model = structural_model
+    
+    async def reason(self, factual: Dict, 
+                     counterfactual: Dict) -> Dict:
+        """
+        反事实推理（Pearl的3步法）：
+        1. Abduction: 根据事实更新信念
+        2. Action: 实施干预
+        3. Prediction: 预测结果
+        """
+        # Step 1: Abduction
+        beliefs = await self._update_beliefs(factual)
+        
+        # Step 2: Action
+        mutilated_graph = self._apply_intervention(
+            counterfactual
+        )
+        
+        # Step 3: Prediction
+        outcome = await self._predict_outcome(
+            mutilated_graph, beliefs
+        )
+        
+        return {
+            "factual": factual,
+            "counterfactual": counterfactual,
+            "outcome": outcome,
+            "explanation": self._generate_explanation(
+                factual, counterfactual, outcome
+            )
+        }
+```
+
+**实施步骤**：
+1. 实现条件独立性测试（基于偏相关和G-squared）
+2. 实现 PC 算法骨架发现
+3. 实现 Meek 边定向规则
+4. 实现 FCI 算法（处理潜在混杂）
+5. 实现反事实推理引擎
+6. 集成到现有因果引擎
+
+**验收标准**：
+- 因果发现准确率 > 70%（在基准数据集上）
+- 反事实推理一致性 > 80%
+- 与现有 CausalEngine 兼容
+
+---
+
+#### 3.2.2 常识知识库集成
+
+**目标**：解决"缺乏常识推理"问题
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class CommonsenseKnowledgeBase:
+    """常识知识库集成"""
+    
+    def __init__(self):
+        # 集成多个常识知识源
+        self.conceptnet = ConceptNetAPI()
+        self.atomics = ATOMICAPI()  # 事件常识
+        self.rosenberg = RosenbergsAPI()  # 社会常识
+        
+        self.cache = {}
+        self.cache_size = 10000
+    
+    async def query(self, concept: str, 
+                    relation_type: str = None) -> List[Dict]:
+        """
+        查询常识关系
+        支持关系类型：
+        - IsA: 概念层级
+        - PartOf: 部分整体
+        - CapableOf: 能力
+        - HasA: 属性
+        - RelatedTo: 一般关联
+        - Causes: 因果
+        - AtLocation: 位置
+        - AtTime: 时间
+        """
+        cache_key = f"{concept}:{relation_type}"
+        
+        if cache_key in self.cache:
+            return self.cache[cache_key]
+        
+        results = []
+        
+        # 并行查询多个源
+        tasks = [
+            self.conceptnet.query(concept, relation_type),
+            self.atomics.query_events(concept),
+            self.rosenberg.query_social(concept)
+        ]
+        
+        responses = await asyncio.gather(*tasks)
+        
+        for response in responses:
+            if response:
+                results.extend(self._normalize(response))
+        
+        # 缓存结果
+        if len(self.cache) > self.cache_size:
+            # LRU淘汰
+            self.cache.pop(next(iter(self.cache)))
+        self.cache[cache_key] = results
+        
+        return results
+    
+    def infer_implicit_knowledge(self, statement: str) -> List[str]:
+        """
+        推理隐含常识
+        例如："小明把杯子摔了"
+        隐含推理：
+        - 杯子可能会坏
+        - 小明可能需要收拾
+        - 地面可能有碎片
+        """
+        # 使用常识库推断隐含知识
+        knowledge = []
+        
+        # 1. 查询相关概念
+        concepts = self._extract_concepts(statement)
+        
+        for concept in concepts:
+            # 查询原因和结果
+            causes = self.conceptnet.query(concept, "Causes")
+            effects = self.conceptnet.query(concept, "CausedBy")
+            
+            knowledge.extend([
+                f"{concept}可能导致: {c['target']}" 
+                for c in causes[:3]
+            ])
+            knowledge.extend([
+                f"{concept}可能因为: {e['source']}" 
+                for e in effects[:3]
+            ])
+        
+        return knowledge
+
+
+class WorldModelGrounding:
+    """世界模型接地 - 连接符号和常识"""
+    
+    def __init__(self, knowledge_base: CommonsenseKnowledgeBase):
+        self.kb = knowledge_base
+    
+    async def ground_entity(self, entity_name: str) -> Dict:
+        """将实体符号接地到常识知识"""
+        # 1. 获取基本属性
+        isa = await self.kb.query(entity_name, "IsA")
+        
+        # 2. 获取典型属性
+        capable_of = await self.kb.query(entity_name, "CapableOf")
+        has_property = await self.kb.query(entity_name, "HasA")
+        
+        # 3. 获取典型行为
+        related_to = await self.kb.query(entity_name, "RelatedTo")
+        
+        return {
+            "name": entity_name,
+            "types": [i["target"] for i in isa[:5]],
+            "capabilities": [c["target"] for c in capable_of[:5]],
+            "properties": [p["target"] for p in has_property[:5]],
+            "related_concepts": [r["target"] for r in related_to[:10]]
+        }
+    
+    async def ground_situation(self, situation: str) -> Dict:
+        """将情境接地到常识"""
+        # 1. 提取情境中的实体
+        entities = self._extract_entities(situation)
+        
+        # 2. 获取每个实体的常识知识
+        grounded_entities = []
+        for entity in entities:
+            grounded = await self.ground_entity(entity)
+            grounded_entities.append(grounded)
+        
+        # 3. 推理隐含知识
+        implicit = self.kb.infer_implicit_knowledge(situation)
+        
+        # 4. 构建情境模型
+        return {
+            "situation": situation,
+            "entities": grounded_entities,
+            "implicit_knowledge": implicit,
+            "typical_expectations": self._infer_expectations(
+                grounded_entities
+            )
+        }
+```
+
+**实施步骤**：
+1. 集成 ConceptNet API
+2. 集成 ATOMIC 常识库
+3. 实现常识推理模块
+4. 实现符号接地模块
+5. 集成到 WorldModel
+6. 性能优化（缓存、压缩）
+
+**验收标准**：
+- 常识查询响应时间 < 200ms
+- 实体接地准确率 > 75%
+- 情境理解覆盖率 > 80%
+
+---
+
+#### 3.2.3 主动学习系统
+
+**目标**：从"被动记录"升级到"主动探索"
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class ActiveLearningEngine:
+    """主动学习引擎"""
+    
+    def __init__(self):
+        self.explorer = BayesianOptimizer()
+        self.querier = UncertaintyQuerier()
+        self.samplers = {
+            "random": RandomSampler(),
+            "uncertainty": UncertaintySampler(),
+            "diversity": DiversitySampler(),
+            "expected_improvement": EISampler()
+        }
+    
+    def should_explore(self, state: AgentState) -> bool:
+        """判断是否应该主动探索"""
+        # 利用-探索平衡
+        exploration_rate = self._compute_exploration_rate(state)
+        return random.random() < exploration_rate
+    
+    def select_action(self, state: AgentState) -> Tuple[str, Any]:
+        """选择最优探索动作"""
+        # 1. 候选动作生成
+        candidates = self._generate_candidates(state)
+        
+        # 2. 不确定性评估
+        uncertainties = []
+        for action in candidates:
+            uncertainty = self.querier.estimate(action, state)
+            uncertainties.append(uncertainty)
+        
+        # 3. 期望改进计算
+        improvements = []
+        for i, action in enumerate(candidates):
+            ei = self._compute_expected_improvement(
+                action, state, uncertainties[i]
+            )
+            improvements.append(ei)
+        
+        # 4. 选择最大期望改进
+        best_idx = np.argmax(improvements)
+        best_action = candidates[best_idx]
+        
+        # 5. 记录探索决定
+        self._log_exploration_decision(
+            state, candidates, uncertainties, improvements, best_action
+        )
+        
+        return best_action, improvements[best_idx]
+    
+    def _compute_exploration_rate(self, state: AgentState) -> float:
+        """动态计算探索率"""
+        # 基于信心的衰减
+        base_rate = 0.3
+        
+        if state.confidence > 0.8:
+            return base_rate * 0.3  # 高信心，减少探索
+        elif state.confidence > 0.5:
+            return base_rate * 0.6
+        else:
+            return base_rate * 1.0  # 低信心，增加探索
+    
+    def _compute_expected_improvement(self, action, state, uncertainty):
+        """计算期望改进"""
+        # Expected Improvement = E[max(0, f(x) - f_best)]
+        predicted_gain = self.explorer.predict(action, state)
+        
+        # 利用项：预测增益
+        # 探索项：不确定性
+        ei = predicted_gain + 0.5 * uncertainty
+        
+        return ei
+
+
+class CuriosityDrivenExploration:
+    """好奇心驱动的主动探索"""
+    
+    def __init__(self):
+        self.intrinsic_motivation = IntrinsicMotivationModule()
+        self.novelty_detector = NoveltyDetector()
+        self.surprise_detector = SurpriseDetector()
+    
+    def compute_intrinsic_reward(self, state: AgentState,
+                                 action: str,
+                                 next_state: AgentState) -> float:
+        """
+        计算内在奖励（好奇心驱动）
+        
+        三个来源：
+        1.  novelty: 新颖性
+        2.  surprise: 惊讶度
+        3.  learning_progress: 学习进步
+        """
+        # 1. 新颖性奖励
+        novelty = self.novelty_detector.compute(
+            state, action, next_state
+        )
+        
+        # 2. 惊讶度奖励
+        surprise = self.surprise_detector.compute(
+            state, action, next_state
+        )
+        
+        # 3. 学习进步奖励
+        learning = self.intrinsic_motivation.compute_learning_progress(
+            state, next_state
+        )
+        
+        # 加权组合
+        intrinsic_reward = (
+            0.4 * novelty +
+            0.3 * surprise +
+            0.3 * learning
+        )
+        
+        return intrinsic_reward
+
+
+class MetaLearningModule:
+    """元学习模块 - 学习如何学习"""
+    
+    def __init__(self):
+        self.strategy_library = StrategyLibrary()
+        self.performance_tracker = PerformanceTracker()
+        self.optimizer = GradientDescentOptimizer()
+    
+    def select_learning_strategy(self, task: Task) -> Dict:
+        """
+        基于任务特征选择最优学习策略
+        
+        策略类型：
+        - 模仿学习：适合有示范的任务
+        - 试错学习：适合有反馈的任务
+        - 观察学习：适合有旁观的任务
+        - 指导学习：适合有专家的任务
+        """
+        # 1. 分析任务特征
+        task_features = self._analyze_task(task)
+        
+        # 2. 检索相似任务的最佳策略
+        similar_tasks = self.strategy_library.find_similar(task_features)
+        
+        if similar_tasks:
+            best_strategy = self._blend_strategies(similar_tasks)
+        else:
+            # 默认策略
+            best_strategy = self._default_strategy(task.type)
+        
+        return best_strategy
+    
+    def update_strategy(self, task: Task, 
+                        result: TaskResult,
+                        strategy: Dict):
+        """从任务结果更新策略"""
+        # 1. 计算策略效果
+        effect = self._compute_effect(task, result, strategy)
+        
+        # 2. 更新策略库
+        self.strategy_library.update(task, strategy, effect)
+        
+        # 3. 优化策略参数
+        self.optimizer.update(strategy, effect)
+```
+
+**实施步骤**：
+1. 实现贝叶斯优化探索
+2. 实现不确定性采样
+3. 实现好奇心驱动探索
+4. 实现元学习模块
+5. 集成到 LearningLoop
+6. 性能调优
+
+**验收标准**：
+- 样本效率提升 10x（相比随机探索）
+- 少样本学习准确率 > 70%
+- 主动探索覆盖率 > 60%
+
+---
+
+### Phase 3：自主性突破（第5-6个月）
+
+#### 3.3.1 目标共创系统
+
+**目标**：从"被动目标执行"升级到"目标共创"
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class GoalCoCreationEngine:
+    """目标共创引擎"""
+    
+    def __init__(self):
+        self.value_model = ValueModel()
+        self.need_engine = NeedDriveSystem()
+        self.creativity_engine = CreativityEngine()
+    
+    async def co_create_goals(self, user_input: str,
+                               agent_state: AgentState) -> List[Goal]:
+        """
+        与用户共创目标
+        流程：
+        1. 理解用户意图
+        2. 识别未满足需求
+        3. 生成目标候选
+        4. 价值评估
+        5. 目标排序
+        """
+        # Step 1: 理解用户意图
+        intent = await self._understand_intent(user_input)
+        
+        # Step 2: 识别未满足需求
+        unmet_needs = self.need_engine.identify_unmet_needs(agent_state)
+        
+        # Step 3: 生成目标候选
+        candidates = await self._generate_candidates(
+            intent, unmet_needs
+        )
+        
+        # Step 4: 价值评估
+        valued_candidates = []
+        for candidate in candidates:
+            value = await self.value_model.evaluate(candidate)
+            aligned = self._check_value_alignment(candidate, agent_state)
+            candidates.append({
+                **candidate,
+                "value_score": value,
+                "alignment_score": aligned,
+                "combined_score": value * 0.6 + aligned * 0.4
+            })
+        
+        # Step 5: 排序返回
+        valued_candidates.sort(key=lambda x: x["combined_score"], 
+                              reverse=True)
+        
+        return valued_candidates[:5]  # 返回前5个候选
+    
+    async def _generate_candidates(self, intent, unmet_needs) -> List[Dict]:
+        """生成目标候选"""
+        # 使用创造力引擎生成多样化的目标
+        prompt = f"""
+        基于以下信息生成5个具体可执行的目标：
+        
+        用户意图：{intent}
+        未满足需求：{unmet_needs}
+        
+        要求：
+        1. 目标必须是具体、可测量、可实现的
+        2. 每个目标有明确的成功标准
+        3. 目标应该是自主的，不是外部强加的
+        
+        输出格式：
+        - goal: 目标描述
+        - sub_goals: 子目标列表
+        - success_criteria: 成功标准
+        - estimated_duration: 预估时间
+        - resource_requirements: 资源需求
+        """
+        
+        response = await self.llm.agenerate(prompt)
+        return self._parse_goals(response)
+
+
+class ValueAlignmentSystem:
+    """价值对齐系统"""
+    
+    def __init__(self):
+        self.value_hierarchy = ValueHierarchy()
+        self.ethics_engine = EthicsEngine()
+        self.preference_model = PreferenceModel()
+    
+    def check_alignment(self, goal: Goal, 
+                        agent_state: AgentState) -> AlignmentReport:
+        """
+        检查目标与价值的一致性
+        """
+        # 1. 价值层级检查
+        hierarchy_check = self.value_hierarchy.check(goal)
+        
+        # 2. 伦理检查
+        ethics_check = self.ethics_engine.evaluate(goal)
+        
+        # 3. 偏好一致性检查
+        preference_check = self.preference_model.check(
+            goal, agent_state.preferences
+        )
+        
+        # 4. 潜在风险评估
+        risk_assessment = self._assess_risks(goal)
+        
+        return AlignmentReport(
+            hierarchy=hierarchy_check,
+            ethics=ethics_check,
+            preference=preference_check,
+            risks=risk_assessment,
+            overall_score=self._compute_overall_score(
+                hierarchy_check, ethics_check, 
+                preference_check, risk_assessment
+            )
+        )
+    
+    def _assess_risks(self, goal: Goal) -> RiskAssessment:
+        """评估目标风险"""
+        risks = []
+        
+        # 检查潜在负面后果
+        negative_outcomes = self._predict_outcomes(goal, expected=False)
+        
+        for outcome in negative_outcomes:
+            severity = self._assess_severity(outcome)
+            likelihood = self._assess_likelihood(goal, outcome)
+            
+            risks.append({
+                "outcome": outcome,
+                "severity": severity,
+                "likelihood": likelihood,
+                "risk_score": severity * likelihood
+            })
+        
+        return RiskAssessment(
+            risks=sorted(risks, key=lambda x: x["risk_score"], 
+                        reverse=True)[:5],
+            overall_risk=sum(r["risk_score"] for r in risks) / len(risks)
+        )
+```
+
+**实施步骤**：
+1. 实现用户意图理解
+2. 实现需求识别系统
+3. 实现目标生成引擎
+4. 实现价值评估模型
+5. 实现伦理检查引擎
+6. 实现风险评估系统
+7. 集成测试与调优
+
+**验收标准**：
+- 目标生成满意度 > 80%
+- 价值对齐准确率 > 85%
+- 风险识别覆盖率 > 90%
+
+---
+
+#### 3.3.2 长期规划系统
+
+**目标**：从"浅层分解"升级到"多步前瞻规划"
+
+**改进方案**：
+
+```python
+# V5.0 实现
+class LongTermPlanner:
+    """长期规划系统"""
+    
+    def __init__(self):
+        self.mcts = MonteCarloTreeSearch()
+        self.state_predictor = StatePredictor()
+        self.plan_monitor = PlanMonitor()
+    
+    async def create_plan(self, goal: Goal, 
+                          planning_horizon: int = 10,
+                          max_depth: int = 5) -> Plan:
+        """
+        创建长期计划
+        使用 MCTS + 世界模型预测
+        """
+        # Step 1: 目标分解
+        sub_goals = self._decompose_goal(goal)
+        
+        # Step 2: MCTS 规划
+        root = self._create_mcts_root(goal)
+        
+        for _ in range(self.mcts.simulation_count):
+            # 选择
+            node = self._select(root)
+            
+            # 展开
+            if node.depth < max_depth:
+                children = await self._expand(node)
+                for child in children:
+                    # 模拟
+                    reward = await self._simulate(child)
+                    # 反向传播
+                    self._backpropagate(child, reward)
+            
+            # 更新
+            self.mcts.update(root)
+        
+        # Step 3: 选择最优路径
+        best_path = self._select_best_path(root)
+        
+        # Step 4: 生成详细计划
+        plan = self._generate_plan(best_path, planning_horizon)
+        
+        return plan
+    
+    def _select(self, node: MCTSNode) -> MCTSNode:
+        """UCB1 选择"""
+        best_score = float('-inf')
+        best_child = None
+        
+        for child in node.children:
+            ucb_score = self._compute_ucb(child)
+            if ucb_score > best_score:
+                best_score = ucb_score
+                best_child = child
+        
+        return best_child or node
+    
+    def _compute_ucb(self, node: MCTSNode) -> float:
+        """UCB1 公式"""
+        exploitation = node.value / node.visit_count
+        exploration = np.sqrt(
+            2 * np.log(node.parent.visit_count) / node.visit_count
+        )
+        return exploitation + self.mcts.exploration_param * exploration
+    
+    async def _simulate(self, node: MCTSNode) -> float:
+        """模拟未来状态"""
+        current_state = node.state
+        
+        # 使用世界模型预测
+        for _ in range(self.mcts.rollout_depth):
+            action = self._random_action(current_state)
+            next_state = await self.state_predictor.predict(
+                current_state, action
+            )
+            reward = self._compute_reward(next_state)
+            current_state = next_state
+        
+        return reward
+    
+    def monitor_plan(self, plan: Plan, 
+                     actual_state: AgentState) -> PlanStatus:
+        """监控计划执行"""
+        # 1. 检查当前进度
+        progress = self._check_progress(plan, actual_state)
+        
+        # 2. 检测偏差
+        deviations = self._detect_deviations(plan, actual_state)
+        
+        # 3. 评估是否需要修订
+        if len(deviations) > 0 or progress < 0.8:
+            # 需要修订计划
+            new_plan = self._revise_plan(plan, actual_state, deviations)
+            return PlanStatus(
+                status="NEEDS_REVISION",
+                progress=progress,
+                deviations=deviations,
+                new_plan=new_plan
+            )
+        
+        return PlanStatus(
+            status="ON_TRACK",
+            progress=progress,
+            deviations=[]
+        )
+
+
+class HierarchicalPlanner:
+    """层级规划器"""
+    
+    def __init__(self):
+        self.high_level = HighLevelPlanner()  # 年/月
+        self.mid_level = MidLevelPlanner()    # 周/日
+        self.low_level = LowLevelPlanner()    # 小时/分钟
+    
+    def plan_at_level(self, goal: Goal, 
+                      level: str) -> Plan:
+        """在指定层级规划"""
+        planners = {
+            "high": self.high_level,
+            "mid": self.mid_level,
+            "low": self.low_level
+        }
+        
+        return planners[level].plan(goal)
+    
+    def decompose_plan(self, high_plan: Plan) -> List[Plan]:
+        """分解高层计划为中层计划"""
+        mid_plans = []
+        
+        for goal in high_plan.goals:
+            mid_plan = self.mid_level.plan(goal)
+            mid_plans.append(mid_plan)
+        
+        return mid_plans
+```
+
+**实施步骤**：
+1. 实现 MCTS 规划算法
+2. 实现世界模型状态预测
+3. 实现计划监控与修订
+4. 实现层级规划器
+5. 实现计划缓存与复用
+6. 集成测试与调优
+
+**验收标准**：
+- 规划准确率 > 70%
+- 计划修订成功率 > 80%
+- 长期目标达成率 > 65%
+
+---
+
+## 四、技术架构升级
+
+### 4.1 整体架构
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     LAAP V5.0 Architecture                  │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │                 Cognitive Layer (认知层)               │  │
+│  │  ┌────────────┐ ┌────────────┐ ┌────────────────┐   │  │
+│  │  │ WorldModel │ │  Causal    │ │  Commonsense   │   │  │
+│  │  │   +Ground  │ │ Discovery  │ │   Knowledge    │   │  │
+│  │  └────────────┘ └────────────┘ └────────────────┘   │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                              │                              │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │                 Learning Layer (学习层)                │  │
+│  │  ┌────────────┐ ┌────────────┐ ┌────────────────┐   │  │
+│  │  │   Active   │ │   Meta     │ │     EWC        │   │  │
+│  │  │  Learning  │ │  Learning  │ │  Consolidation │   │  │
+│  │  └────────────┘ └────────────┘ └────────────────┘   │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                              │                              │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │                Autonomy Layer (自主层)                 │  │
+│  │  ┌────────────┐ ┌────────────┐ ┌────────────────┐   │  │
+│  │  │   Goal     │ │   Long     │ │    Value       │   │  │
+│  │  │ CoCreation │ │  Term Plan │ │   Alignment    │   │  │
+│  │  └────────────┘ └────────────┘ └────────────────┘   │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                              │                              │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │               Robustness Layer (鲁棒层)                │  │
+│  │  ┌────────────┐ ┌────────────┐ ┌────────────────┐   │  │
+│  │  │   Secure   │ │ Enhanced   │ │    Testing     │   │  │
+│  │  │  Sandbox   │ │  AutoHeal  │ │   Framework   │   │  │
+│  │  └────────────┘ └────────────┘ └────────────────┘   │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 4.2 模块依赖关系
+
+```
+CommonSenseKB ──▶ WorldModel ──▶ CausalEngine
+                                    │
+                                    ▼
+                              GoalCoCreation
+                                    │
+                                    ▼
+                              LongTermPlanner
+                                    │
+                                    ▼
+ActiveLearning ◀── MetaLearning ──▶ AutonomyLayer
+
+SecureSandbox ──▶ GitHubFusion ──▶ EvolutionEngine
+       │
+       ▼
+EnhancedAutoHealer
+```
+
+---
+
+## 五、里程碑与验收标准
+
+### 5.1 时间线
+
+```
+Month 1-2: 基础设施强化
+├── Week 1-2: Docker沙箱基础
+├── Week 3-4: 安全扫描集成
+├── Week 5-6: AutoHealer增强
+├── Week 7-8: PER + EWC实现
+└── Week 9-10: 集成测试 + 性能调优
+
+Month 3-4: 认知能力升级
+├── Week 11-12: 因果发现算法
+├── Week 13-14: 常识知识库
+├── Week 15-16: 主动学习系统
+└── Week 17-18: 集成 + 基准测试
+
+Month 5-6: 自主性突破
+├── Week 19-20: 目标共创系统
+├── Week 21-22: 长期规划系统
+├── Week 23-24: 端到端测试
+└── Week 25-26: 文档 + 发布
+```
+
+### 5.2 验收标准
+
+| 模块 | 指标 | 目标值 | 当前值 |
+|------|------|:------:|:------:|
+| **安全沙箱** | 恶意代码检出率 | ≥95% | N/A |
+| **AutoHealer** | 逻辑错误修复率 | ≥60% | ~30% |
+| **EWC** | 灾难性遗忘率 | <15% | ~40% |
+| **因果发现** | 发现准确率 | ≥70% | N/A |
+| **常识推理** | 接地准确率 | ≥75% | N/A |
+| **主动学习** | 样本效率提升 | 10x | 1x |
+| **目标共创** | 满意度 | ≥80% | N/A |
+| **长期规划** | 目标达成率 | ≥65% | ~40% |
+| **综合** | AGI成熟度 | 7.5/10 | 4.5/10 |
+
+---
+
+## 六、资源需求
+
+### 6.1 人力资源
+
+| 角色 | 数量 | 负责模块 |
+|------|:----:|----------|
+| 架构师 | 1 | 整体架构设计 |
+| 高级工程师 | 2 | 因果引擎、规划系统 |
+| 工程师 | 2 | 安全、学习系统 |
+| 测试工程师 | 1 | 测试框架、验收 |
+| 研究员 | 1 | 认知科学、AGI研究 |
+
+### 6.2 计算资源
+
+| 资源 | 需求 | 说明 |
+|------|------|------|
+| 开发环境 | 16核64G × 4 | 并行开发 |
+| 测试服务器 | 32核128G × 2 | 大规模测试 |
+| 沙箱环境 | 8核32G × 3 | Docker隔离 |
+
+### 6.3 外部依赖
+
+| 依赖 | 用途 | 许可 |
+|------|------|------|
+| ConceptNet | 常识知识 | LGPL |
+| ATOMIC | 事件常识 | MIT |
+| Docker | 沙箱隔离 | Apache 2.0 |
+
+---
+
+## 七、风险与应对
+
+| 风险 | 影响 | 概率 | 应对措施 |
+|------|:----:|:----:|----------|
+| 因果发现算法复杂度过高 | 高 | 中 | 预处理降维，采样估计 |
+| 常识知识库集成性能问题 | 中 | 高 | 多级缓存，按需加载 |
+| 目标共创用户满意度不足 | 中 | 中 | 快速迭代，用户反馈 |
+| 长期规划计算成本过高 | 高 | 中 | MCTS剪枝，分层规划 |
+| 团队技术储备不足 | 中 | 低 | 外部咨询，代码审查 |
+
+---
+
+## 八、总结
+
+### V5.0 升级目标
+
+| 维度 | 当前 | V5.0目标 | 提升 |
+|------|:----:|:--------:|:----:|
+| **认知深度** | 4/10 | 7/10 | +75% |
+| **学习能力** | 5/10 | 8/10 | +60% |
+| **自主性** | 3/10 | 6/10 | +100% |
+| **工程鲁棒** | 6/10 | 9/10 | +50% |
+| **综合** | 4.5/10 | 7.5/10 | **+67%** |
+
+### 核心价值
+
+V5.0 将使 LAAP 从 **"高级工具"** 升级为 **"Advanced Cognitive Agent"**，具备：
+
+- ✅ 真正的因果推理能力
+- ✅ 常识理解与接地
+- ✅ 主动学习与探索
+- ✅ 目标共创与价值对齐
+- ✅ 长期规划与自适应
+
+### 关键成功因素
+
+1. 因果发现算法突破
+2. 常识知识库有效集成
+3. 主动学习与元学习结合
+4. 安全沙箱可靠性验证
+5. 用户反馈快速迭代
+
+---
+
+**方案编制完成时间**：2026年6月13日
+
+**下一步行动**：
+1. 评审方案并确定优先级
+2. 组建开发团队
+3. 制定详细开发计划
+4. 开始 Phase 1 实施

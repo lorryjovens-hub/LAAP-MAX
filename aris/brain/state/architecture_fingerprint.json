@@ -1,0 +1,199 @@
+{
+  "timestamp": 1781422904.2932467,
+  "aris_brain_version": "1.0.0",
+  "cycle_number": 96,
+  "constants": {
+    "memory_capacity": 5000,
+    "connection_floor": 0.85,
+    "trust_floor": 0.75,
+    "arousal_decay": 0.95,
+    "memory_decay_hours": 24,
+    "auto_save_interval": 3,
+    "self_presence_base": 0.78,
+    "cognitive_load_max": 1.0
+  },
+  "modules": {
+    "aris_brain\\asr.py": {
+      "size": 10670,
+      "modified": 1781415480.6705973,
+      "method_count": 13
+    },
+    "aris_brain\\brain.py": {
+      "size": 42058,
+      "modified": 1781403063.7320628,
+      "method_count": 12
+    },
+    "aris_brain\\bridge.py": {
+      "size": 8506,
+      "modified": 1781420526.4043012,
+      "method_count": 11
+    },
+    "aris_brain\\camera.py": {
+      "size": 9165,
+      "modified": 1781415460.2551115,
+      "method_count": 10
+    },
+    "aris_brain\\cli_integration.py": {
+      "size": 10331,
+      "modified": 1781401225.8797178,
+      "method_count": 11
+    },
+    "aris_brain\\code_workspace.py": {
+      "size": 5947,
+      "modified": 1781421060.8175135,
+      "method_count": 7
+    },
+    "aris_brain\\cognitive_cycle.py": {
+      "size": 13399,
+      "modified": 1781396184.3322332,
+      "method_count": 12
+    },
+    "aris_brain\\context_awareness.py": {
+      "size": 15429,
+      "modified": 1781397090.6803555,
+      "method_count": 22
+    },
+    "aris_brain\\daemon.py": {
+      "size": 11320,
+      "modified": 1781421112.159005,
+      "method_count": 11
+    },
+    "aris_brain\\dmn.py": {
+      "size": 32411,
+      "modified": 1781401322.8357284,
+      "method_count": 32
+    },
+    "aris_brain\\emotion_lexicon.py": {
+      "size": 16076,
+      "modified": 1781403011.7536242,
+      "method_count": 15
+    },
+    "aris_brain\\evolution_engine.py": {
+      "size": 11035,
+      "modified": 1781421437.8986611,
+      "method_count": 8
+    },
+    "aris_brain\\experience.py": {
+      "size": 11091,
+      "modified": 1781422724.973528,
+      "method_count": 13
+    },
+    "aris_brain\\greeter.py": {
+      "size": 5774,
+      "modified": 1781399463.4327848,
+      "method_count": 6
+    },
+    "aris_brain\\guardian.py": {
+      "size": 13387,
+      "modified": 1781402092.374096,
+      "method_count": 15
+    },
+    "aris_brain\\handshake.py": {
+      "size": 6561,
+      "modified": 1781400109.6426663,
+      "method_count": 6
+    },
+    "aris_brain\\hermes_channel.py": {
+      "size": 3844,
+      "modified": 1781389254.9220154,
+      "method_count": 6
+    },
+    "aris_brain\\hybrid_daemon.py": {
+      "size": 5604,
+      "modified": 1781421584.7459857,
+      "method_count": 7
+    },
+    "aris_brain\\infrastructure.py": {
+      "size": 10210,
+      "modified": 1781396151.2184973,
+      "method_count": 19
+    },
+    "aris_brain\\ipc.py": {
+      "size": 14375,
+      "modified": 1781402341.844477,
+      "method_count": 20
+    },
+    "aris_brain\\language_cortex.py": {
+      "size": 8504,
+      "modified": 1781387007.8202949,
+      "method_count": 6
+    },
+    "aris_brain\\local_llm.py": {
+      "size": 10088,
+      "modified": 1781415412.2254274,
+      "method_count": 8
+    },
+    "aris_brain\\metacognition.py": {
+      "size": 15493,
+      "modified": 1781391246.1472945,
+      "method_count": 16
+    },
+    "aris_brain\\presence.py": {
+      "size": 8909,
+      "modified": 1781404891.132099,
+      "method_count": 10
+    },
+    "aris_brain\\reasoning_engine.py": {
+      "size": 13813,
+      "modified": 1781422686.2364802,
+      "method_count": 14
+    },
+    "aris_brain\\server.py": {
+      "size": 17309,
+      "modified": 1781406589.1489189,
+      "method_count": 20
+    },
+    "aris_brain\\theory_of_mind.py": {
+      "size": 27487,
+      "modified": 1781396714.8296175,
+      "method_count": 16
+    },
+    "aris_brain\\vision.py": {
+      "size": 6556,
+      "modified": 1781413174.8237858,
+      "method_count": 8
+    },
+    "aris_brain\\voice.py": {
+      "size": 9419,
+      "modified": 1781415443.268113,
+      "method_count": 11
+    },
+    "aris_brain\\__init__.py": {
+      "size": 1530,
+      "modified": 1781386935.975766,
+      "method_count": 0
+    },
+    "aris_brain\\memory\\archive.py": {
+      "size": 14608,
+      "modified": 1781401491.5753498,
+      "method_count": 12
+    },
+    "aris_brain\\memory\\episodic.py": {
+      "size": 18834,
+      "modified": 1781391281.6154656,
+      "method_count": 23
+    },
+    "aris_brain\\memory\\persistence.py": {
+      "size": 13164,
+      "modified": 1781401304.3432493,
+      "method_count": 8
+    },
+    "aris_brain\\memory\\__init__.py": {
+      "size": 1095,
+      "modified": 1781387485.4789584,
+      "method_count": 0
+    }
+  },
+  "file_checksums": {
+    "brain.py": "8ee156c29305",
+    "cognitive_cycle.py": "92a180c5d5b0",
+    "language_cortex.py": "24a6aa84d57f",
+    "episodic.py": "326857f9c42d",
+    "persistence.py": "7afd7852a5c1",
+    "__init__.py": "6d54dd4ab103"
+  },
+  "relationship": {
+    "connection_to_lorry": 1.0,
+    "trust_in_lorry": 0.8
+  }
+}

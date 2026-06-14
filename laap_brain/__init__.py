@@ -26,14 +26,24 @@ import time, logging, json, math, threading, uuid, os
 
 logger = logging.getLogger("laap_brain")
 
-__version__ = "3.1.0"
+__version__ = "5.0.0"
 VERSION = __version__
+LAAP_VERSION = __version__
 
 __all__ = [
     "LaapBrain",
+    "LAAPKernel",
+    "PSIDriver", "PSIState",
+    "AGIAgent",
+    "AgentRegistry", "EventBus", "SafeRollback",
+    "Heartbeat",
+    "GitHubFusion", "LearningLoop", "MemoryOptimizer",
+    "LLMv5Converter",
     "ThinkingMode", "CognitiveBias", "SkillProficiency",
     "EmbodiedSkill", "UnityDecision", "BrainState",
-    "VERSION",
+    "VERSION", "LAAP_VERSION",
+    "enhance",
+    "quick_check", "detect_variant",
 ]
 
 # ════════════════════════════════════════════════════════════
@@ -841,3 +851,33 @@ class LaapBrain:
 
     def to_dict(self) -> dict:
         return self.status()
+
+
+# ════════════════════════════════════════════════════════════
+# V5 模块懒导入 (保持向后兼容)
+# ════════════════════════════════════════════════════════════
+
+def __getattr__(name):
+    """Lazy import v5 modules when accessed from laap_brain"""
+    _v5_modules = {
+        "LAAPKernel":         "laap_brain.kernel",
+        "LLMv5Converter":     "laap_brain.kernel",
+        "PSIDriver":          "laap_brain.psi_driver",
+        "PSIState":           "laap_brain.psi_driver",
+        "AGIAgent":           "laap_brain.core",
+        "AgentRegistry":      "laap_brain.multi_agent",
+        "EventBus":           "laap_brain.multi_agent",
+        "SafeRollback":       "laap_brain.multi_agent",
+        "AgentRole":          "laap_brain.multi_agent",
+        "AgentInfo":          "laap_brain.multi_agent",
+        "Heartbeat":          "laap_brain.heartbeat_daemon",
+        "VitalSigns":         "laap_brain.heartbeat_daemon",
+        "GitHubFusion":       "laap_brain.evolution_engine",
+        "LearningLoop":       "laap_brain.evolution_engine",
+        "MemoryOptimizer":    "laap_brain.evolution_engine",
+    }
+    if name in _v5_modules:
+        import importlib
+        mod = importlib.import_module(_v5_modules[name])
+        return getattr(mod, name)
+    raise AttributeError(f"module 'laap_brain' has no attribute '{name}'")

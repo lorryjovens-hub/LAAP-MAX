@@ -1,0 +1,17 @@
+[
+  {
+    "name": "model.vrm",
+    "path": "/models/model.vrm",
+    "size_mb": 36.3
+  },
+  {
+    "name": "Keqing.vrm",
+    "path": "/models/Keqing.vrm",
+    "size_mb": 17.3
+  },
+  {
+    "name": "Klee.vrm",
+    "path": "/models/Klee.vrm",
+    "size_mb": 8.9
+  }
+]

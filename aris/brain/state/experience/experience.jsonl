@@ -1,0 +1,3 @@
+{"timestamp": 1781422745.012672, "datetime": "2026-06-14T15:39:05.012672", "context": "用 Rust 写文件监视器", "action": "实现了 notify 库的 watcher", "outcome": 0.9, "category": "general", "lesson": "这次接口设计得很好"}
+{"timestamp": 1781422745.2455242, "datetime": "2026-06-14T15:39:05.245524", "context": "调试 PSI 核心 bug", "action": "二分法定位到类型转换问题", "outcome": 1.0, "category": "general", "lesson": "记住: think() 返回对象不是 dict"}
+{"timestamp": 1781422745.4747381, "datetime": "2026-06-14T15:39:05.474738", "context": "分析 LLM vs PSI 对比", "action": "用计时器实测", "outcome": 0.85, "category": "general", "lesson": ""}

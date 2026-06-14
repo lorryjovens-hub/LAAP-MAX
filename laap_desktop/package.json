@@ -1,0 +1,28 @@
+{
+  "name": "laap-desktop",
+  "version": "0.1.0",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^3.0.2",
+    "@electron-toolkit/utils": "^4.0.0",
+    "highlight.js": "^11.11.1",
+    "marked": "^18.0.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.1",
+    "electron": "^33.0.0",
+    "electron-vite": "^2.3.0",
+    "typescript": "^5.6.2"
+  }
+}

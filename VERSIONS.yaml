@@ -1,0 +1,88 @@
+meta:
+  available_profiles:
+  - default (Gen1)
+  - laap-avatar (Gen2)
+  - laap-full (Gen3)
+  current_codename: Ao Genesis
+  current_version: gen2
+  last_switch: null
+versions:
+  gen1:
+    codename: Foundation
+    deprecated: false
+    description: 原生Hermes Agent，无LAAP认知增强。标准LLM+工具调用。
+    features:
+    - 20+ LLM Provider
+    - 48+ Tools
+    - 16 Platform Gateway
+    - Skill System
+    - Session DB (SQLite+FTS5)
+    - Cron Scheduler
+    laap: false
+    modules: 0
+    name: Hermes Native
+    profile: default
+    startup: hermes
+    version: hermes-2.x
+  gen2:
+    codename: Ao Genesis
+    current: true
+    deprecated: false
+    description: Hermes + LAAP AGI，12模块认知引擎通过运行时桥接注入。
+    features:
+    - PSI需求驱动内在动机
+    - 涌现自我模型+置信度校准
+    - Pearl三层次因果推理
+    - Gentner结构映射类比迁移
+    - 5层层次化记忆
+    - Baars全局工作空间意识流
+    - 代码级自我进化(5重安全门)
+    - 生物免疫安全系统
+    - Rust原生加速(20-100x)
+    - Hermes双向桥接
+    - 12 AGI模块全激活
+    laap: true
+    laap_mode: bridge
+    modules: 12
+    name: Ao Genesis
+    profile: laap-avatar
+    slash_commands:
+    - /agi
+    - /world
+    - /know
+    - /reflect
+    - /memory
+    - /evolve
+    - /scan
+    - /code
+    - /hermes
+    startup: python laap-hermes
+    version: 2.2.0
+  gen3:
+    codename: Singularity
+    current: false
+    deprecated: false
+    description: 全量集成。LAAP认知内核编译进Hermes，不再通过monkey-patch桥接。
+    features:
+    - Gen2全部12模块
+    - LAAP内核编译进Hermes (无monkey-patch)
+    - PSI需求系统直连LLM推理管道
+    - 5层记忆替代Hermes SessionDB
+    - RSI进化直接修改Hermes技能系统
+    - 意识流融入系统提示词生成
+    - 代码进化可修改Hermes核心
+    - 量子记忆模块激活
+    - 联邦学习跨Agent知识共享
+    - VRM 3D化身全集成
+    - 直接修改Hermes源码(非monkey-patch)
+    - LAAP作为AIAgent原生方法
+    laap: true
+    laap_mode: kernel
+    modules: 18
+    name: Ao Complete
+    profile: laap-full
+    slash_commands:
+    - Gen2全部 + /evolve-code /quantum /federate
+    startup: python kernel_patch.py apply && python laap-hermes
+    status: available
+    version: 3.0.0

@@ -32,7 +32,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "laap=laap.__main__:main",
+            "laap=laap.cli.laap_main:main",
         ],
     },
     python_requires=">=3.10",

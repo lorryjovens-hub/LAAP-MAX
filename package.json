@@ -1,0 +1,28 @@
+{
+  "name": "laap",
+  "version": "0.3.0",
+  "description": "LAAP - Lifeform Autonomous Adaptive Protocol (数字生命体)",
+  "bin": {
+    "laap": "laap.py"
+  },
+  "scripts": {
+    "start": "python laap.py",
+    "install": "pip install -e . || python -m pip install -e .",
+    "test": "python -m pytest tests/ -q"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laap-agi/laap.git"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "cognitive",
+    "lifeform",
+    "digital-life"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

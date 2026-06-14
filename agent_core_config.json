@@ -1,0 +1,17 @@
+{
+  "llm": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "api_key": "sk-bb164bea88a04eeaafd993b41a4a2370",
+    "api_base": "https://api.deepseek.com/v1",
+    "temperature": 0.7,
+    "max_tokens": 4096
+  },
+  "agent": {
+    "name": "LAAP-Digital-Lifeform",
+    "max_iterations": 20,
+    "enable_memory": true,
+    "enable_tools": true,
+    "enable_planning": true
+  }
+}

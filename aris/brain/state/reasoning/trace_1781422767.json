@@ -1,0 +1,23 @@
+{
+  "problem": "优化数据库查询性能",
+  "type": "question",
+  "nodes": [
+    {
+      "id": "understand",
+      "desc": "理解问题的关键维度",
+      "status": "done",
+      "llm": false,
+      "deps": []
+    },
+    {
+      "id": "answer",
+      "desc": "形成回答",
+      "status": "done",
+      "llm": true,
+      "deps": []
+    }
+  ],
+  "llm_calls": 1,
+  "duration": 0.0,
+  "final_answer": "[确定计算] 理解问题的关键维度 — 已完成\n[LLM NEEDED] 形成回答 — 需要 LLM 完成"
+}

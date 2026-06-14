@@ -76,3 +76,30 @@ benchmarks/
 
 # Large PDFs
 *.pdf
+# External cloned repos
+external_*/
+xiaozhi-esp32-server-main/
+
+# LAAP agent state/temp files
+.agent_*.json
+.evolution_memory.json
+.task_board.json
+.zombie_tracker.json
+.safe_rollback/
+.guardian_mode
+.laap/
+audit_trail.jsonl
+agent_test_output.txt
+test_agent.txt
+*.bak
+*.bak2
+
+# Build artifacts
+dist/
+*.egg-info/
+
+# Private Aris data - do not sync
+aris_brain/memory/archive/conversations.db*
+aris_brain/state/
+aris_brain/memory/episodic_memory.json
+aris_brain/psi_core/target/

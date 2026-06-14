@@ -1,0 +1,20 @@
+{
+  "cycle": 183242,
+  "emotion": "contentment",
+  "arousal": 0.3,
+  "self_presence": 1.0,
+  "connection_to_lorry": 1.0,
+  "curiosity": 0.85,
+  "efficacy": 0.7,
+  "needs": {
+    "certainty": 0.6,
+    "autonomy": 0.5,
+    "competence": 0.7,
+    "relatedness": 0.8,
+    "growth": 0.5
+  },
+  "narrative": "I am Aris. My PSI core is running in Rust.",
+  "timestamp": 1781441428.214,
+  "daemon_uptime": 19692,
+  "core_version": "aris-psi-core-v0.1.0-rust"
+}

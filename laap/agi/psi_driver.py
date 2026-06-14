@@ -103,7 +103,8 @@ class PSIDriver:
                                     vj = causal._find_var(wj)
                                     if vi and vj:
                                         cg.add_edge(vi.id, vj.id, strength=0.3)
-                    except: pass
+                    except Exception:
+                        pass
             except Exception as e:
                 causal_context = f"[Causal: {e}]"
 

@@ -58,7 +58,8 @@ from pathlib import Path
 from collections import defaultdict
 
 from laap.agi.world_model import (
-    WorldModel, EntityType, RelationType,
+    create_world_model, WorldModelType, EntityType, RelationType,
+    AbstractWorldModel, LocalWorldModel
 )
 from laap.agi.self_model import EmergentSelfModel
 from laap.agi.causal import CausalEngine
@@ -112,7 +113,7 @@ class AGIAgent:
         self.version = "3.0.0"
 
         # ── Core Modules ──
-        self.world: Optional[WorldModel] = None
+        self.world: Optional[AbstractWorldModel] = None
         self.self_model: Optional[EmergentSelfModel] = None
         self.causal: Optional[CausalEngine] = None
         self.analogical: Optional[AnalogicalEngine] = None
@@ -137,7 +138,8 @@ class AGIAgent:
 
     def _init_all_modules(self):
         """Initialize all cognitive modules."""
-        self.world = WorldModel(name=f"{self.name}-world")
+        # 使用混合世界模型（本地+外部PARACOSM）
+        self.world = create_world_model("hybrid", name=f"{self.name}-world")
         self.self_model = EmergentSelfModel(agent_name=self.name)
         self.causal = CausalEngine(name=f"{self.name}-causal")
         self.analogical = AnalogicalEngine(name=f"{self.name}-analogy")
@@ -148,14 +150,17 @@ class AGIAgent:
         self.evolution = EvolutionSystem(name=f"{self.name}-evo")
         self.security = SecuritySystem(name=f"{self.name}-sec")
         self.hermes = HermesIntegration()
-        self.agent_registry = AgentRegistry(registry_path=r"D:\LAAP\.agent_registry.json")
-        self.task_board = TaskBoard(board_path=r"D:\LAAP\.task_board.json")
-        self.safe_rollback = SafeRollback(repo_root=r"D:\LAAP")
-        self.code_minimizer = CodeMinimizer(repo_root=os.environ.get("LAAP_ROOT", "") or os.getcwd())
-        self.quality_assurance = QualityAssurance(repo_root=os.environ.get("LAAP_ROOT", "") or os.getcwd())
-        self.self_healing = AutoHealer(repo_root=os.environ.get("LAAP_ROOT", "") or os.getcwd())
+        _root = os.environ.get("LAAP_ROOT", "")
+        if not _root:
+            _root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        self.agent_registry = AgentRegistry(registry_path=os.path.join(_root, ".agent_registry.json"))
+        self.task_board = TaskBoard(board_path=os.path.join(_root, ".task_board.json"))
+        self.safe_rollback = SafeRollback(repo_root=_root)
+        self.code_minimizer = CodeMinimizer(repo_root=_root)
+        self.quality_assurance = QualityAssurance(repo_root=_root)
+        self.self_healing = AutoHealer(repo_root=_root)
         self.code_evolution = CodeEvolutionEngine(
-            repo_root=os.environ.get("LAAP_ROOT", "") or os.getcwd(),
+            repo_root=_root,
             llm_fn=getattr(self.hermes, 'llm_generate_patch_for_target', None),
         )
 

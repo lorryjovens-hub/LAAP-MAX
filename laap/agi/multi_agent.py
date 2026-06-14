@@ -90,18 +90,20 @@ class AgentRegistry:
     def _load(self):
         if os.path.exists(self.registry_path):
             try:
-                data = json.load(open(self.registry_path))
+                with open(self.registry_path) as f:
+                    data = json.load(f)
                 for a in data.get("agents", []):
                     self.agents[a["agent_id"]] = AgentInfo(**a)
-            except: pass
-
+            except Exception:
+                pass
     def _save(self):
         try:
             os.makedirs(os.path.dirname(self.registry_path), exist_ok=True)
             data = {"agents": [a.__dict__ for a in self.agents.values()]}
-            json.dump(data, open(self.registry_path, 'w'), indent=2)
-        except: pass
-
+            with open(self.registry_path, 'w') as f:
+                json.dump(data, f, indent=2)
+        except Exception:
+            pass
     def stats(self) -> Dict:
         return {"total": len(self.agents), "online": len(self.get_online_agents())}
 
@@ -190,19 +192,21 @@ class TaskBoard:
     def _load(self):
         if os.path.exists(self.board_path):
             try:
-                data = json.load(open(self.board_path))
+                with open(self.board_path) as f:
+                    data = json.load(f)
                 for t in data.get("tasks", []):
                     self.tasks[t["task_id"]] = TaskItem(**t)
                 self._file_locks = data.get("locks", {})
-            except: pass
-
+            except Exception:
+                pass
     def _save(self):
         try:
             os.makedirs(os.path.dirname(self.board_path), exist_ok=True)
             data = {"tasks": [t.__dict__ for t in self.tasks.values()], "locks": self._file_locks}
-            json.dump(data, open(self.board_path, 'w'), indent=2)
-        except: pass
-
+            with open(self.board_path, 'w') as f:
+                json.dump(data, f, indent=2)
+        except Exception:
+            pass
     def stats(self) -> Dict:
         return {
             "total": len(self.tasks),
@@ -261,8 +265,8 @@ class SafeRollback:
             r = subprocess.run(["git", "hash-object", "-w", abs_path],
                              cwd=self.repo_root, capture_output=True, text=True, timeout=10)
             git_hash = r.stdout.strip()[:12] if r.returncode == 0 else ""
-        except: pass
-
+        except Exception:
+            pass
         return {
             "snapshot_id": snapshot_id,
             "path": abs_path,
@@ -312,8 +316,8 @@ class SafeRollback:
             if os.path.exists(abs_path):
                 self.successful_restores += 1
                 return {"layer": "git", "success": True, "path": abs_path}
-        except: pass
-
+        except Exception:
+            pass
         return {"layer": "none", "success": False, "error": "All rollback layers failed"}
 
     def cleanup_old_backups(self, max_age_seconds: int = 86400):
