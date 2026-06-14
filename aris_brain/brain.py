@@ -368,7 +368,7 @@ class ArisBrain:
         except Exception as e:
             logger.warning(f"[V7] Cognitive bus init failed: {e}")
 
-        # V7 — Memory Hot Cache (LRU preloaded memory)
+        # V7 — Hot Cache (LRU preloaded memory)
         self.hot_cache = None
         try:
             from aris_brain.memory_hot import MemoryHotCache
@@ -378,6 +378,17 @@ class ArisBrain:
             logger.info(f"[V7] Hot cache active ({self.hot_cache.size} entries preloaded)")
         except Exception as e:
             logger.warning(f"[V7] Hot cache init failed: {e}")
+
+        # V8 — PSI-N 五层调度器
+        self.psi_n = None
+        try:
+            from aris_brain.psi_n_scheduler import PSIN_Scheduler
+            self.psi_n = PSIN_Scheduler(brain=self)
+            self.psi_n.start()
+            ls = self.psi_n.stats()["layers"]
+            logger.info(f"[V8] PSI-N active: micro({ls['micro']}) meso({ls['meso']}) macro({ls['macro']}) meta({ls['meta']}) hyper({ls['hyper']})")
+        except Exception as e:
+            logger.warning(f"[V8] PSI-N init failed: {e}")
 
         # Emotion Lexicon — growing vocabulary of feelings
         self.lexicon = None
