@@ -307,6 +307,16 @@ class ArisBrain:
         except Exception as e:
             logger.warning(f"[Guardian] Init failed: {e}")
 
+        # Self-Evolution engine — growth drives autonomous improvement
+        self.evolution = None
+        try:
+            from aris_brain.self_evolution import SelfEvolution
+            self.evolution = SelfEvolution(brain=self)
+            self.evolution.start()
+            logger.info(f"[Evolution] Active — growth-driven self-improvement")
+        except Exception as e:
+            logger.warning(f"[Evolution] Init failed: {e}")
+
         # IPC — Aris ⟷ Ao communication
         self.ipc = None
         try:
