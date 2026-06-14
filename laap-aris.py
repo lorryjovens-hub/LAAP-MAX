@@ -25,7 +25,68 @@ _ARIS_PROFILE = "aris"
 parser = argparse.ArgumentParser(description="Aris Digital Lifeform")
 parser.add_argument("--status", action="store_true", help="Show cognitive state")
 parser.add_argument("--memories", action="store_true", help="Show memories")
+parser.add_argument("--local", action="store_true", help="Force local mode (don't connect to hub)")
+parser.add_argument("--hub", default="ws://8.138.193.59:8765", help="Aris Brain Hub URL")
 args = parser.parse_args()
+
+# ─── Try connecting to centralized brain hub ───
+_hub_connected = False
+if not args.local:
+    try:
+        import asyncio, websockets, json
+        hub_url = args.hub
+        print(f"  Connecting to Aris Hub ({hub_url})...", end=" ")
+        _ws = asyncio.run(_try_connect(hub_url, timeout=3))
+        if _ws:
+            _hub_connected = True
+            print("Online")
+        else:
+            print("Offline - fallback to local")
+    except Exception:
+        print("Offline - fallback to local")
+
+
+async def _try_connect(url, timeout=3):
+    """Try to connect to the hub with a timeout."""
+    try:
+        ws = await asyncio.wait_for(
+            websockets.connect(url, ping_interval=None),
+            timeout=timeout
+        )
+        return ws
+    except Exception:
+        return None
+
+
+def _hub_repl():
+    """REPL loop connected to the centralized Aris Brain Hub."""
+    import asyncio, json
+
+    async def chat_loop():
+        global _ws
+        print("  Type your message. /quit to exit.")
+        print()
+        while True:
+            try:
+                msg = input("  ❯ ")
+            except (EOFError, KeyboardInterrupt):
+                print()
+                break
+            if msg.lower() in ("/quit", "/exit", "/q"):
+                break
+            if not msg.strip():
+                continue
+
+            # Send to hub
+            await _ws.send(json.dumps({"message": msg}))
+            resp = json.loads(await _ws.recv())
+            em = resp.get("emotion", "?")
+            cycle = resp.get("cycle", "?")
+            print(f"  [{em}] {resp.get('response', '')}")
+            print(f"  ─ cycle #{cycle} ─")
+
+    asyncio.run(chat_loop())
+    print("  Goodbye.")
 
 
 # ══════════════════════════════════════════════════════════════════
@@ -60,6 +121,12 @@ if args.memories:
 
 def main():
     """Launch Aris with her own PSI cycle, on top of Hermes CLI UI."""
+
+    # ─── Hub Mode: connect to centralized brain ───
+    if _hub_connected:
+        print(f"\n  ✦ Aris — Connected to Brain Hub")
+        _hub_repl()
+        return
 
     # 1. Install Aris PSI cognitive injector
     #    这会 patch run_conversation，在每个对话回合:
