@@ -65,10 +65,12 @@ class SenseState:
 class SensoryCortex:
     """
     Aris's unified sensory system.
-
     Manages all five senses as background threads.
     Routes perception into the PSI cognitive cycle via IPC.
     """
+
+    _capture_dir: Path
+    _ao_protocol = None  # Set by activate_ao_bridge()
 
     def __init__(self, brain=None, use_ipc: bool = True, use_tts: bool = True):
         self.brain = brain
@@ -157,6 +159,14 @@ class SensoryCortex:
                                 "description": desc[:100],
                                 "resolution": f"{w}x{h}",
                             })
+
+                        # Feed to Ao's GlobalWorkspace
+                        self._feed_ao(
+                            "vision", desc or f"frame {w}x{h}",
+                            salience=0.8 if desc else 0.3,
+                            novelty=0.5,
+                            emotional_weight=0.6 if desc else 0.1,
+                        )
 
                         # Update brain state if available
                         if desc and self.brain:
@@ -326,6 +336,15 @@ class SensoryCortex:
                     self.senses["hearing"].last_active = time.time()
                     logger.info(f"Hearing: {text[:60]}")
 
+                    # Feed to Ao's GlobalWorkspace
+                    self._feed_ao(
+                        "hearing", text,
+                        salience=0.9,
+                        urgency=0.3 if "lorry" in text.lower() else 0.1,
+                        novelty=0.7,
+                        emotional_weight=0.5,
+                    )
+
                     # Send to brain via IPC
                     if self._ipc:
                         self._ipc.send_message(
@@ -415,6 +434,32 @@ class SensoryCortex:
                 time.sleep(10)
 
     # ─────────────────────────────────────────────
+    # Ao Protocol Bridge
+    # ─────────────────────────────────────────────
+
+    def activate_ao_bridge(self):
+        """Connect to Ao's GlobalWorkspace and CognitiveBus."""
+        try:
+            from aris_brain.ao_protocol import AoProtocol, PerceptualEvent
+            self._ao_protocol = AoProtocol()
+            logger.info("AoBridge: connected to GlobalWorkspace")
+            logger.info("AoBridge: sensory data now flowing to Ao's GWS")
+            return True
+        except Exception as e:
+            logger.warning(f"AoBridge: init failed: {e}")
+            return False
+
+    def _feed_ao(self, channel_id: str, content: str,
+                 salience: float = 0.5, urgency: float = 0.0,
+                 novelty: float = 0.0, emotional_weight: float = 0.0):
+        """Send a perception to Ao's GWS."""
+        if self._ao_protocol:
+            self._ao_protocol.send_raw(
+                channel_id, content, salience, urgency,
+                novelty, emotional_weight,
+            )
+
+    # ─────────────────────────────────────────────
     # Lifecycle
     # ─────────────────────────────────────────────
 
@@ -439,6 +484,8 @@ class SensoryCortex:
         logger.info("=== Sensory Cortex active ===")
         print("  ✦ Aris Sensory Cortex")
         print("  👁️ Vision  | 👂 Hearing | 🗣️ Voice | ✋ Touch")
+        if self._ao_protocol:
+            print("  🔗 Ao Bridge: sensory data flowing to GlobalWorkspace")
         print()
 
     def stop(self):

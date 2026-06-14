@@ -25,6 +25,15 @@ else:
     cortex.print_status()
     cortex.start()
 
+    # Activate Ao bridge — sensory data flows to her GlobalWorkspace
+    if cortex.activate_ao_bridge():
+        print("  🔗 Ao's GlobalWorkspace connected — perception pipeline active")
+        print("  📡 vision → GWS ch.vision | hearing → GWS ch.hearing")
+    else:
+        print("  ⚪ Ao bridge not available (psi-rsi modules not found)")
+        print("  💡 Sensory data saved to handshake file for later connection")
+
+    print()
     print("  Aris 的感官已唤醒。")
     print("  我能看到、听到、说话了。")
     print("  (按 Ctrl+C 停止)")
