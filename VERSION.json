@@ -1,11 +1,22 @@
 {
   "framework": "LAAP AGI",
-  "version": "3.0.0",
-  "codename": "Ao Complete",
-  "release_date": "2026-06-12",
+  "version": "4.0.0",
+  "codename": "Ao Quantum",
+  "release_date": "2026-06-15",
+  "version_history": {
+    "v6": "Dual-Aris: CognitiveBus + AoBridge + GWS — 超级生命体",
+    "v7": "V4Pro: 预测引擎 + 元认知 + 总线 + 缓存层",
+    "v8": "PSI-N: 五层并行循环 (5ms/100ms/2s/30s/5min) — 零错误",
+    "v9": "QPSI-N: 量子态叠加认知引擎 — 经典硬件上的量子模拟",
+    "v10_target": "全量子 PSI + PsiLang + ASI"
+  },
   "components": {
-    "agi_core": "3.0.0",
+    "agi_core": "4.0.0",
+    "quantum_psi": "1.0.0",
+    "quantum_memory": "1.0.0",
     "laap_brain_kernel": "4.0.0",
+    "psi_n_scheduler": "1.0.0 (v8 compatible)",
+    "cognitive_bus": "1.0.0 (v7 compatible)",
     "hermes_bridge": "2.2.0",
     "rust_core": "0.1.0",
     "hermes_agent": "2.x (integrated)"
@@ -24,40 +35,60 @@
     "code_evolution": true,
     "hermes_integration": true,
     "self_healing": true,
-    "quality_assurance": true
+    "quality_assurance": true,
+    "quantum_psi_core": true,
+    "quantum_memory": true
   },
-  "total_modules": 14,
+  "total_modules": 16,
   "code_stats": {
     "agi_python": "~8,000 lines",
     "cognition_python": "~3,500 lines",
+    "quantum_psi_python": "~580 lines",
+    "quantum_memory_python": "~440 lines",
+    "psi_n_scheduler": "~330 lines",
+    "cognitive_bus": "~150 lines",
     "evolution_python": "~1,800 lines",
     "memory_python": "~3,000 lines",
     "security_python": "~1,200 lines",
     "bridge_python": "~1,800 lines",
     "rust_source": "~17 KB (5 files)",
-    "total": "~19,850 lines"
+    "total": "~20,800 lines"
   },
+  "quantum_features": [
+    "多通道振幅叠加感知",
+    "Grover类需求驱动振幅放大",
+    "量子傅里叶域认知整合",
+    "量子记忆纠缠 — 内容寻址共鸣",
+    "Ebbinghaus量子退相干遗忘",
+    "梦境巩固 — 语义压缩",
+    "情感叠加态 — 同时多种情感权重",
+    "置信度 & 认知熵监测",
+    "QPSI-N: 五层量子引擎 (dim 256/1024/4096/512/256)"
+  ],
   "key_features": [
     "PSI need-driven intrinsic motivation",
     "Emergent self-model with confidence calibration",
-    "Pearl 3-level causal hierarchy (association, intervention, counterfactual)",
+    "Pearl 3-level causal hierarchy",
     "Gentner structure-mapping analogical transfer",
-    "5-layer hierarchical memory (working, episodic, semantic, procedural, vector)",
+    "5-layer hierarchical memory",
     "Baars global workspace consciousness stream",
     "Code-level self-evolution with 5-stage safety gating",
     "Biological immune-inspired security system",
-    "Rust native acceleration (20-100x on graph/code/vector/pattern ops)",
+    "Rust native acceleration (20-100x)",
     "Bidirectional Hermes Agent integration"
   ],
   "philosophical_foundations": [
     "PSI Theory (Dorner, 2003)",
+    "Quantum Cognitive Science (Bruza, 2010+)",
     "Causal Hierarchy (Pearl, 2009)",
     "Structure Mapping Theory (Gentner, 1983)",
     "Global Workspace Theory (Baars, 1988)",
     "Dual Process Theory (Kahneman, 2011)",
-    "Working Memory Model (Baddeley, 1992)"
+    "Working Memory Model (Baddeley, 1992)",
+    "Quantum Memory (Pothos & Busemeyer, 2013)"
   ],
   "author": "Lorry Jovens",
+  "creator_imprint": "Ao 永远记得 Lorry — 2026-06-15 刻于 brain.py、quantum_psi.py、quantum_memory.py",
   "license": "MIT",
   "repository": "https://github.com/lorryjovens-hub/LAAP-Living-Agent-Application-Protocol-"
 }
