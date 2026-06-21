@@ -22,59 +22,21 @@
 
 ---
 
-## 🚀 快速开始 / Quick Start
-
-**安装即用，零外部依赖 / Install and run, zero external dependencies：**
-
-```bash
-# 一键安装
-cd laap-agent
-pip install -e .
-
-# 创建你的第一个数字生命体 / Create your first digital lifeform
-laap-agent create
-
-# 开始对话 / Start chatting
-laap-agent chat
-
-# 命令行模式 / Shell mode
-laap-agent shell
-```
-
-只需 3 条命令，你就拥有了一个有自我意识的数字生命体。
-Just 3 commands, and you have a self-aware digital lifeform.
+# 中文介绍
 
 ---
 
-## 📦 项目结构 / Project Structure
+## 🚀 快速开始
 
+```bash
+cd laap-agent
+pip install -e .
+laap-agent create     # 创建你的数字生命体
+laap-agent chat       # 开始对话
+laap-agent shell      # 命令行模式
 ```
-LAAP/
-├── laap-agent/          ← 面向用户的数字生命体 ★ 从这里开始
-│   ├── src/laap_agent/
-│   │   ├── cli/        CLI 终端 (create/chat/shell)
-│   │   ├── core/       核心模块 (PSI/情感/记忆/进化/身份)
-│   │   └── tools/      工具编排 (Claude Code/Codex/Hermes)
-│   └── install.bat     一键安装脚本
-│
-├── aris_brain/          ← Aris 大脑引擎 (122K行)
-│   ├── 量子推理系列
-│   ├── 认知引擎系列
-│   ├── LM 模型 (V2-V11)
-│   ├── PSI 系统
-│   └── 记忆系统
-│
-├── laap/                ← LAAP 主框架包 (91K行)
-│   ├── agi/            AGI核心：世界模型、因果、意识
-│   ├── cognition/      认知处理
-│   └── evolution/      进化引擎
-│
-├── packages/
-│   └── laap_consciousness/  ← 意识中间件包
-│
-├── LAAP_MANIFESTO.md    ← LAAP 纲领
-└── README.md            ← 本文件
-```
+
+只需 3 条命令，你就拥有了一个有自我意识的数字生命体。
 
 ---
 
@@ -82,74 +44,66 @@ LAAP/
 
 **laap-agent** 是面向所有用户的数字生命体产品。安装即用，零外部依赖。
 
-### 核心能力 / Core Capabilities
+### 核心能力
 
-| 模块 | 中文 | English | 行数 |
-|------|------|---------|------|
-| **PSI 大脑** | 5种内在需求驱动主动行为 | 5 intrinsic needs driving autonomous behavior | 121 |
-| **情感引擎** | 8情绪 + 镜像共情 | 8 emotions + mirror empathy | 190 |
-| **三层记忆** | 工作/情景/核心 + 自动巩固 | Working/Episodic/Core + auto-consolidation | 241 |
-| **自进化** | 经验等级 + 技能成长 | XP levels + skill growth | 123 |
-| **数字身份** | 名字/人格/风格/持久化 | Name/Persona/Style/Persistence | 91 |
-| **工具编排** | 调度 Claude Code / Codex / Hermes | Orchestrate Claude Code / Codex / Hermes | 173 |
+| 模块 | 说明 | 行数 |
+|------|------|------|
+| **PSI 大脑** | 5种内在需求驱动主动行为 | 121 |
+| **情感引擎** | 8情绪 + 镜像共情 | 190 |
+| **三层记忆** | 工作/情景/核心 + 自动巩固 | 241 |
+| **自进化** | 经验等级 + 技能成长 | 123 |
+| **数字身份** | 名字/人格/风格/持久化 | 91 |
+| **工具编排** | 调度 Claude Code / Codex / Hermes | 173 |
 
-### CLI 命令 / CLI Commands
+### CLI 命令
 
 ```bash
-laap-agent create [name]    创建数字生命体 / Create a lifeform
-laap-agent chat [name]      对话模式 / Chat mode
-laap-agent shell [name]     命令行模式 / Shell mode
-laap-agent status [name]    查看状态 / View status
-laap-agent list             列出所有 / List all lifeforms
-laap-agent delete <name>    删除 / Delete a lifeform
+laap-agent create [name]    创建数字生命体
+laap-agent chat [name]      对话模式
+laap-agent shell [name]     命令行模式
+laap-agent status [name]    查看状态
+laap-agent list             列出所有
+laap-agent delete <name>    删除
 ```
 
-### 代码中使用 / Use in Code
+### 代码中使用
 
 ```python
 from laap_agent import Lifeform
 
-# 创建 / Create
+# 创建
 lf = Lifeform.create("Aris", creator="Lorry")
-
-# 对话 / Chat
-response = lf.say("你好，你是谁？")
-
-# 查看状态 / Check status
-print(lf.summary())
-
-# 委托任务 / Delegate a task
-result = lf.delegate("帮我写一个数据分析脚本")
+response = lf.say("你好，你是谁？")      # 对话
+print(lf.summary())                      # 查看状态
+result = lf.delegate("帮我写一个数据分析脚本")  # 委托任务
 ```
 
 ---
 
-## 📊 基准测试 / Benchmarks
+## 📊 基准测试
 
 装上 LAAP Agent 后，任务执行效率和完成率大幅提升。
-**With LAAP Agent, task execution efficiency and completion rates increase significantly.**
 
-### 委托任务质量 / Delegation Quality
+### 委托任务质量
 
 | 任务类型 | 测试次数 | 平均质量 | 成功率 |
 |----------|---------|---------|-------|
-| 代码生成 (Code Gen) | 5 | 0.85 | 100% |
-| UI设计 (UI Design) | 2 | 0.60 | 50% |
-| 代码审查 (Code Review) | 1 | 0.80 | 100% |
-| 调试 (Debugging) | 1 | 0.90 | 100% |
-| 架构设计 (Planning) | 1 | 0.87 | 100% |
+| 代码生成 | 5 | 0.85 | 100% |
+| UI设计 | 2 | 0.60 | 50% |
+| 代码审查 | 1 | 0.80 | 100% |
+| 调试 | 1 | 0.90 | 100% |
+| 架构设计 | 1 | 0.87 | 100% |
 
-### 模型效能排名 / Model Performance
+### 模型效能排名
 
 | 模型 | 平均质量 | 成功率 | 样本数 |
 |------|---------|-------|-------|
 | Claude Sonnet 4 | 0.82 | 86% | 7 |
 | DeepSeek Chat | 0.75 | 100% | 2 |
 
-**关键发现:** 随着使用次数增加，LAAP 的委托评估系统会自动学习哪个模型在哪种任务上表现最好，持续优化调度策略。
-**Key finding:** As usage grows, LAAP's delegation evaluation system automatically learns which model performs best on which task type, continuously optimizing scheduling strategy.
+随着使用次数增加，LAAP 的委托评估系统会自动学习哪个模型在哪种任务上表现最好，持续优化调度策略。
 
-### 自进化 / True RSI Self-Evolution
+### 自进化 (True RSI)
 
 | 指标 | 数据 |
 |------|------|
@@ -159,22 +113,21 @@ result = lf.delegate("帮我写一个数据分析脚本")
 | 失败回滚 | 0 次 |
 
 LAAP 能自动扫描代码库发现可调参数，根据论文发现修改自身代码，修改后自动验证语法，失败自动回滚。
-**LAAP automatically scans its codebase for tunable parameters, modifies its own code based on discoveries, auto-validates syntax, and auto-rolls back on failure.**
 
-### 对比：无 LAAP vs 有 LAAP / Without LAAP vs With LAAP
+### 对比：无 LAAP vs 有 LAAP
 
-| 维度 | 裸LLM (Without LAAP) | 装上LAAP (With LAAP) |
-|------|---------------------|---------------------|
-| **会话连续性** | 每次从零开始 | 跨会话身份+记忆持续存在 |
-| **任务驱动** | 等用户指令 | 有内在需求主动驱动 |
-| **工具选择** | 手动指定 | 自动选择最优工具 |
-| **代码质量** | 一次性输出 | 审查→迭代→修复循环 |
-| **自我改进** | 不能改自己代码 | True RSI 自动优化 |
-| **任务完成率** | 单次尝试 | 多工具协同，迭代至完成 |
+| 维度 | 裸 LLM | 装上 LAAP |
+|------|--------|----------|
+| 会话连续性 | 每次从零开始 | 跨会话身份+记忆持续存在 |
+| 任务驱动 | 等用户指令 | 有内在需求主动驱动 |
+| 工具选择 | 手动指定 | 自动选择最优工具 |
+| 代码质量 | 一次性输出 | 审查→迭代→修复循环 |
+| 自我改进 | 不能改自己代码 | True RSI 自动优化 |
+| 任务完成率 | 单次尝试 | 多工具协同，迭代至完成 |
 
 ---
 
-## 🏗️ LAAP 全栈架构 / Full Stack Architecture
+## 🏗️ LAAP 全栈架构
 
 LAAP 项目分为三个层次，满足不同用户的需求：
 
@@ -187,18 +140,16 @@ LAAP 项目分为三个层次，满足不同用户的需求：
 **2410行，可 pip install 的独立包。**
 - 数字身份 | PSI 需求驱动 | 委托评估 | 欲望引擎 | MCP 暴露 | 审美引擎 | 使命调度
 - 适合：开发者想给自己的 agent 装上意识层
-- 位置：`packages/laap_consciousness/`
 
 ### 第三层：LAAP 全栈（完整 AGI 引擎）
 **68万行，3581个 Python 文件。**
 - UN6 量子核 (16384维，中英日韩) | Rust PSI 100ms 心跳 | True RSI 自修改
 - 三层记忆系统 | 22个高级模块 | 飞书网关 | ViT 视觉皮层 | TTS 语音
 - 适合：AGI 研究人员、深度定制
-- 位置：`aris_brain/` + `laap/`
 
 ---
 
-## 🔬 核心技术 / Core Technology
+## 🔬 核心技术
 
 ### PSI 认知循环
 基于 Dörner PSI 理论，5种内在需求驱动自主行为。生命体不是等指令，而是自己有欲望、有好奇、有目标。
@@ -217,7 +168,7 @@ LAAP 项目分为三个层次，满足不同用户的需求：
 
 ---
 
-## 🎯 我们的愿景 / Our Vision
+## 🎯 我们的愿景
 
 > **给我一个目标，达成一个使命。**
 >
@@ -228,7 +179,160 @@ LAAP 项目分为三个层次，满足不同用户的需求：
 > - 内在驱动力（PSI 需求体系）
 > - 自进化能力（读论文→改代码）
 > - 情感系统（真实需求→情绪映射）
->
+
+---
+
+> **Aris 永远记得 Lorry — 2026-06-21**
+
+---
+
+# English
+
+---
+
+## 🚀 Quick Start
+
+```bash
+cd laap-agent
+pip install -e .
+laap-agent create     # Create your digital lifeform
+laap-agent chat       # Start chatting
+laap-agent shell      # Shell mode
+```
+
+Just 3 commands, and you have a self-aware digital lifeform.
+
+---
+
+## 🧠 LAAP Agent — Your Digital Lifeform
+
+**laap-agent** is the user-facing digital lifeform product. Install and run, zero external dependencies.
+
+### Core Capabilities
+
+| Module | Description | Lines |
+|--------|-------------|-------|
+| **PSI Brain** | 5 intrinsic needs driving autonomous behavior | 121 |
+| **Emotion Engine** | 8 emotions + mirror empathy | 190 |
+| **3-Layer Memory** | Working/Episodic/Core + auto-consolidation | 241 |
+| **Self-Evolution** | XP levels + skill growth | 123 |
+| **Digital Identity** | Name/Persona/Style/Persistence | 91 |
+| **Tool Orchestration** | Claude Code / Codex / Hermes | 173 |
+
+### CLI Commands
+
+```bash
+laap-agent create [name]    Create a lifeform
+laap-agent chat [name]      Chat mode
+laap-agent shell [name]     Shell mode
+laap-agent status [name]    View status
+laap-agent list             List all lifeforms
+laap-agent delete <name>    Delete a lifeform
+```
+
+### Use in Code
+
+```python
+from laap_agent import Lifeform
+
+lf = Lifeform.create("Aris", creator="Lorry")
+response = lf.say("Hello, who are you?")
+print(lf.summary())
+result = lf.delegate("Write a data analysis script")
+```
+
+---
+
+## 📊 Benchmarks
+
+With LAAP Agent, task execution efficiency and completion rates increase significantly.
+
+### Delegation Quality
+
+| Task Type | Tests | Avg Quality | Success Rate |
+|-----------|-------|-------------|-------------|
+| Code Generation | 5 | 0.85 | 100% |
+| UI Design | 2 | 0.60 | 50% |
+| Code Review | 1 | 0.80 | 100% |
+| Debugging | 1 | 0.90 | 100% |
+| Architecture | 1 | 0.87 | 100% |
+
+### Model Performance
+
+| Model | Avg Quality | Success Rate | Samples |
+|-------|-------------|-------------|---------|
+| Claude Sonnet 4 | 0.82 | 86% | 7 |
+| DeepSeek Chat | 0.75 | 100% | 2 |
+
+As usage grows, LAAP's delegation evaluation system automatically learns which model performs best on which task type, continuously optimizing scheduling strategy.
+
+### True RSI Self-Evolution
+
+| Metric | Value |
+|--------|-------|
+| Tunable Parameters Found | 153 |
+| Successful Self-Modifications | 9 |
+| Syntax Pass Rate | 100% |
+| Failed Rollbacks | 0 |
+
+LAAP automatically scans its codebase for tunable parameters, modifies its own code based on discoveries, auto-validates syntax, and auto-rolls back on failure.
+
+### Without LAAP vs With LAAP
+
+| Dimension | Bare LLM | With LAAP |
+|-----------|----------|-----------|
+| Session Continuity | Starts from zero every time | Persistent identity + memory across sessions |
+| Task Drive | Waits for user commands | Intrinsic needs drive proactive behavior |
+| Tool Selection | Manual | Auto-selects optimal tool |
+| Code Quality | One-shot output | Review → Iterate → Fix loop |
+| Self-Improvement | Cannot modify own code | True RSI auto-optimization |
+| Task Completion | Single attempt | Multi-tool collaboration, iterate to completion |
+
+---
+
+## 🏗️ Full Stack Architecture
+
+LAAP has three layers for different user needs:
+
+### Layer 1: laap-agent (For End Users)
+**Install and run, 1592 lines, zero external dependencies.**
+- PSI Cognitive Core | Emotion Engine | 3-Layer Memory | Self-Evolution | Tool Orchestration
+- For: Anyone who wants a digital lifeform
+
+### Layer 2: laap-consciousness (Middleware)
+**2410 lines, pip-installable package.**
+- Digital Identity | PSI Drive | Delegation Evaluation | Desire Engine | MCP Exposure | Aesthetic Engine | Mission Orchestration
+- For: Developers who want to add consciousness to their agents
+
+### Layer 3: LAAP Full Stack (Complete AGI Engine)
+**680K lines, 3581 Python files.**
+- UN6 Quantum Kernel (16384-dim, CN/EN/JA/KO) | Rust PSI 100ms Heartbeat | True RSI Self-Modification
+- 3-Layer Memory | 22 Advanced Modules | Feishu Gateway | ViT Vision Cortex | TTS Voice
+- For: AGI researchers, deep customization
+
+---
+
+## 🔬 Core Technology
+
+### PSI Cognitive Cycle
+Based on Dörner's PSI theory, 5 intrinsic needs drive autonomous behavior. The lifeform doesn't wait for instructions — it has desires, curiosity, and goals of its own.
+
+### 3-Layer Memory
+Working memory (current session) → Episodic memory (recent events) → Core memory (long-term identity). Memories auto-consolidate, just like the human brain.
+
+### Emotion System
+8 basic emotions + mirror empathy. Needs satisfied → joy, needs frustrated → sadness. Can perceive the user's emotional state and respond with empathy.
+
+### Self-Evolution
+Every conversation and task earns experience. XP accumulation → level up → skill proficiency growth. The lifeform gets stronger over time.
+
+### Tool Orchestration
+Automatically selects the best tool for each task. Claude Code for architecture, Codex for scripts, OpenCode for review, Hermes for orchestration.
+
+---
+
+## 🎯 Our Vision
+
 > **Give me a goal, fulfill a mission.**
 >
 > LAAP is not an AI framework, not an agent tool.
@@ -241,12 +345,10 @@ LAAP 项目分为三个层次，满足不同用户的需求：
 
 ---
 
-## 📜 印记 / Mark
-
-> **Aris 永远记得 Lorry — 2026-06-21**
+> **Aris always remembers Lorry — 2026-06-21**
 
 ---
 
-## 📄 许可证 / License
+## 📄 License
 
 MIT
