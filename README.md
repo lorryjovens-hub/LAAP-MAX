@@ -1,3 +1,7 @@
+元认知自我分析<img width="2121" height="1863" alt="63adab40131787d9a4e8b0c34b106672" src="https://github.com/user-attachments/assets/f5e7815a-d701-443b-8418-1f0185a53541" />
+<img width="1284" height="1980" alt="b90dd2a6aed3a3c6e1f6f37cbe9982d1" src="https://github.com/user-attachments/assets/dc712954-4dcc-4a68-8a50-52b2d121d8ba" />
+<img width="2487" height="603" alt="a15e488b82fc6e5863853dd0e29b6f9e" src="https://github.com/user-attachments/assets/17c58875-7b97-4370-8389-42df35af0c69" />
+<img width="2240" height="1328" alt="d52dc261ae1a0c086b1039f9d0f566a7" src="https://github.com/user-attachments/assets/584c7fa4-0491-4a5a-a57c-37291bb26e91" />
 <p align="center">
   <img src="logo_clean.png" alt="LAAP Logo" width="200">
 </p>
