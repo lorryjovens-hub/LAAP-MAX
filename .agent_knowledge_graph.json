@@ -1,0 +1,189 @@
+{
+  "entities": {
+    "367a3c5e818e": {
+      "id": "367a3c5e818e",
+      "type": "project",
+      "name": "LAAP Desktop Client",
+      "props": {
+        "tech": "Electron+React+TS",
+        "status": "built",
+        "location": "D:\\LAAP\\laap_desktop"
+      },
+      "updated": 1781282078.8442101
+    },
+    "f1a2d3f711ec": {
+      "id": "f1a2d3f711ec",
+      "type": "tool",
+      "name": "GitHubFusion",
+      "props": {
+        "purpose": "open-source integration",
+        "dep": "gh CLI"
+      },
+      "updated": 1781282078.8450685
+    },
+    "feedb5a69b72": {
+      "id": "feedb5a69b72",
+      "type": "skill",
+      "name": "project-fusion",
+      "props": {
+        "key": "research-then-integrate"
+      },
+      "updated": 1781282078.8460302
+    },
+    "756b958c310c": {
+      "id": "756b958c310c",
+      "type": "project_requirement",
+      "name": "python CLI tool for code analysis",
+      "props": {
+        "context": {
+          "language": "python"
+        },
+        "top_pick": "none",
+        "approach": "build_from_scratch"
+      },
+      "updated": 1781282079.050497
+    },
+    "ef5c97d8b672": {
+      "id": "ef5c97d8b672",
+      "type": "session",
+      "name": "self_evolution_activation",
+      "props": {
+        "time": 1781294132.0614047,
+        "action": "activate_all_engines"
+      },
+      "updated": 1781294132.06143
+    },
+    "20e27c77df68": {
+      "id": "20e27c77df68",
+      "type": "milestone",
+      "name": "self_evolution_activated",
+      "props": {
+        "time": 1781294146.4434774,
+        "components": [
+          "GitHubFusion",
+          "LearningLoop",
+          "MemoryOptimizer",
+          "CodeEvolution"
+        ],
+        "version": "4.5.0"
+      },
+      "updated": 1781294146.4435475
+    },
+    "c3ll14m4g3nt": {
+      "id": "c3ll14m4g3nt",
+      "type": "external_project",
+      "name": "Cellium-Agent",
+      "props": {
+        "url": "https://github.com/Cellium-Project/Cellium-Agent",
+        "stars": 113,
+        "language": "Python",
+        "description": "Self-evolving AI Agent framework with microkernel architecture, Bayesian Bandit decision optimization, Triple-Layer Memory",
+        "topics": ["agent", "agentic", "ai", "llm-agents", "python", "skill"],
+        "relevance": "high",
+        "discovered_by": "GitHubFusion"
+      },
+      "updated": 1781451749.6041436
+    },
+    "4d4msql": {
+      "id": "4d4msql",
+      "type": "external_project",
+      "name": "Adam(sqlliteai)",
+      "props": {
+        "url": "https://github.com/sqliteai/adam",
+        "stars": 95,
+        "language": "C",
+        "description": "Embeddable cross-platform AI agent library with self-evolving loops. The SQLite of agent frameworks",
+        "relevance": "medium"
+      },
+      "updated": 1781451749.6041589
+    },
+    "f1nchb0t": {
+      "id": "f1nchb0t",
+      "type": "external_project",
+      "name": "FinchBot",
+      "props": {
+        "url": "https://github.com/xt765/FinchBot",
+        "stars": 65,
+        "language": "Python",
+        "description": "AI Agent framework with self-decide, self-extend, self-evolve capabilities on LangChain+LangGraph",
+        "relevance": "medium"
+      },
+      "updated": 1781451749.6041634
+    },
+    "0rb_agent": {
+      "id": "0rb_agent",
+      "type": "external_project",
+      "name": "Orb",
+      "props": {
+        "url": "https://github.com/KarryViber/Orb",
+        "stars": 65,
+        "language": "Python",
+        "description": "Self-evolving AI agent framework — wraps Claude Code CLI with persistent memory, multi-profile isolation, and messaging platform integration",
+        "relevance": "high",
+        "discovered_by": "GitHubFusion",
+        "discovery_date": 1781830000
+      },
+      "updated": 1781830000
+    },
+    "g3n3cl4w": {
+      "id": "g3n3cl4w",
+      "type": "external_project",
+      "name": "Geneclaw",
+      "props": {
+        "url": "https://github.com/Clawland-AI/Geneclaw",
+        "stars": 38,
+        "language": "Python",
+        "description": "Self-evolving AI agent framework with 5-layer safety gatekeeper. Agents observe failures, propose fixes, and safely apply them. Built on HKUDS/nanobot.",
+        "relevance": "medium",
+        "discovered_by": "GitHubFusion",
+        "discovery_date": 1781830000
+      },
+      "updated": 1781830000
+    }
+  },
+  "relations": [
+    {
+      "source": "LAAP Desktop Client",
+      "target": "GitHubFusion",
+      "relation": "discovered_by",
+      "time": 1781282078.847054
+    },
+    {
+      "source": "self_evolution_activated",
+      "target": "project_fusion",
+      "relation": "activates",
+      "time": 1781294146.444362
+    },
+    {
+      "source": "GitHubFusion",
+      "target": "Cellium-Agent",
+      "relation": "discovered",
+      "time": 1781451749.6041446
+    },
+    {
+      "source": "GitHubFusion",
+      "target": "Adam(sqlliteai)",
+      "relation": "discovered",
+      "time": 1781451749.6041596
+    },
+    {
+      "source": "GitHubFusion",
+      "target": "FinchBot",
+      "relation": "discovered",
+      "time": 1781451749.6041636
+    },
+    {
+      "source": "GitHubFusion",
+      "target": "Orb",
+      "relation": "discovered",
+      "time": 1781830000
+    },
+    {
+      "source": "GitHubFusion",
+      "target": "Geneclaw",
+      "relation": "discovered",
+      "time": 1781830000
+    }
+  ],
+  "version": 4
+}

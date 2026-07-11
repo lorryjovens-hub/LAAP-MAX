@@ -1,0 +1,327 @@
+这是您要求的精美3D扫雷游戏HTML代码。它使用Three.js构建了立体感十足的方块，并实现了完整的游戏逻辑与交互。
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>3D 扫雷 · 立体视界</title>
+    <!-- 引入 Three.js 核心库和辅助库 -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.126.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.126.0/examples/jsm/"
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            user-select: none;
+        }
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .panel-box {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            pointer-events: auto;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .panel-box span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .panel-box i {
+            font-style: normal;
+            font-size: 1.2em;
+        }
+        #mine-counter {
+            color: #ff6b6b;
+        }
+        #timer {
+            color: #4ecdc4;
+        }
+        #restart-btn {
+            background: #f7b731;
+            border: none;
+            color: #1a1a2e;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(247, 183, 49, 0.3);
+            letter-spacing: 1px;
+            pointer-events: auto;
+            font-size: 1rem;
+        }
+        #restart-btn:hover {
+            transform: scale(1.05);
+            background: #ffd43b;
+            box-shadow: 0 6px 14px rgba(247, 183, 49, 0.5);
+        }
+        #restart-btn:active {
+            transform: scale(0.95);
+        }
+        #status-message {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            z-index: 20;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        #status-message.win {
+            border-color: #4ecdc4;
+            color: #4ecdc4;
+        }
+        #status-message.lose {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        @media (max-width: 600px) {
+            .panel-box {
+                padding: 6px 14px;
+                gap: 12px;
+                font-size: 0.8rem;
+            }
+            #restart-btn {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+            #status-message {
+                font-size: 1rem;
+                padding: 8px 20px;
+                bottom: 20px;
+            }
+        }
+        /* 提示操作 */
+        #hint {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.3);
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.3);
+            padding: 6px 18px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            z-index: 5;
+            white-space: nowrap;
+        }
+        @media (max-width: 600px) {
+            #hint { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="info-panel">
+        <div class="panel-box">
+            <span id="mine-counter">💣 <span id="mine-count">10</span></span>
+            <span id="timer">⏱️ <span id="time-display">000</span></span>
+        </div>
+        <button id="restart-btn">🔄 新游戏</button>
+    </div>
+    <div id="status-message"></div>
+    <div id="hint">左键挖开 · 右键标记</div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+        // --- 游戏配置 ---
+        const GRID_SIZE = 9;          // 9x9 经典
+        const MINE_COUNT = 10;
+        let board = [];               // 二维: 每个格子 { mine, revealed, flagged, adjacentMines, mesh, label }
+        let gameOver = false;
+        let firstClick = true;
+        let flagCount = 0;
+        let revealedCount = 0;
+        let timerInterval = null;
+        let seconds = 0;
+        let gameStarted = false;
+
+        // DOM 元素
+        const mineCountSpan = document.getElementById('mine-count');
+        const timeDisplay = document.getElementById('time-display');
+        const statusMsg = document.getElementById('status-message');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // --- Three.js 场景 ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a2e);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(12, 10, 14);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.body.appendChild(renderer.domElement);
+
+        // CSS2渲染器 (用于数字标签)
+        const labelRenderer = new CSS2DRenderer();
+        labelRenderer.setSize(window.innerWidth, window.innerHeight);
+        labelRenderer.domElement.style.position = 'absolute';
+        labelRenderer.domElement.style.top = '0px';
+        labelRenderer.domElement.style.left = '0px';
+        labelRenderer.domElement.style.pointerEvents = 'none'; // 让点击穿透
+        document.body.appendChild(labelRenderer.domElement);
+
+        // 控制器 (允许玩家旋转视角)
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.08;
+        controls.autoRotate = false;
+        controls.enableZoom = true;
+        controls.target.set(0, 0, 0);
+        controls.maxPolarAngle = Math.PI / 2.2;
+        controls.minDistance = 8;
+        controls.maxDistance = 25;
+
+        // --- 灯光 ---
+        // 环境光
+        const ambientLight = new THREE.AmbientLight(0x404060);
+        scene.add(ambientLight);
+
+        // 主光源 - 产生立体阴影
+        const mainLight = new THREE.DirectionalLight(0xffeedd, 1.2);
+        mainLight.position.set(8, 15, 10);
+        mainLight.castShadow = true;
+        mainLight.shadow.mapSize.width = 1024;
+        mainLight.shadow.mapSize.height = 1024;
+        const d = 12;
+        mainLight.shadow.camera.left = -d;
+        mainLight.shadow.camera.right = d;
+        mainLight.shadow.camera.top = d;
+        mainLight.shadow.camera.bottom = -d;
+        mainLight.shadow.camera.near = 1;
+        mainLight.shadow.camera.far = 25;
+        scene.add(mainLight);
+
+        const fillLight = new THREE.DirectionalLight(0x4488ff, 0.5);
+        fillLight.position.set(-6, 4, -8);
+        scene.add(fillLight);
+
+        const backLight = new THREE.DirectionalLight(0xffaa88, 0.3);
+        backLight.position.set(-4, 2, 10);
+        scene.add(backLight);
+
+        // 地面装饰 (半透明)
+        const groundGeometry = new THREE.CircleGeometry(8, 32);
+        const groundMaterial = new THREE.MeshStandardMaterial({
+            color: 0x2d2d5e,
+            transparent: true,
+            opacity: 0.2,
+            side: THREE.DoubleSide,
+            roughness: 0.8,
+            metalness: 0.1
+        });
+        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -0.55;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        // 网格辅助线 (科技感)
+        const gridHelper = new THREE.GridHelper(12, 12, 0x4ecdc4, 0x3a3a7a);
+        gridHelper.position.y = -0.5;
+        scene.add(gridHelper);
+
+        // --- 核心函数 ---
+        function initBoard() {
+            // 重置数据结构
+            board = [];
+            for (let r = 0; r < GRID_SIZE; r++) {
+                board[r] = [];
+                for (let c = 0; c < GRID_SIZE; c++) {
+                    board[r][c] = {
+                        mine: false,
+                        revealed: false,
+                        flagged: false,
+                        adjacentMines: 0,
+                        mesh: null,
+                        label: null
+                    };
+                }
+            }
+
+            // 随机布雷 (保证首点安全, 在第一次点击时布雷)
+            // 但为了重置，先清除所有雷
+            // 布雷将在第一次点击时进行
+        }
+
+        function placeMines(safeRow, safeCol) {
+            // 避开安全区域 (3x3)
+            let placed = 0;
+            while (placed < MINE_COUNT) {
+                const r = Math.floor(Math.random() * GRID_SIZE);
+                const c = Math.floor(Math.random() * GRID_SIZE);
+                if (board[r][c].mine) continue;
+                // 安全区域
+                if (Math.abs(r - safeRow) <= 1 && Math.abs(c - safeCol) <= 1) continue;
+                board[r][c].mine = true;
+                placed++;
+            }
+            // 计算数字
+            for (let r = 0; r < GRID_SIZE; r++) {
+                for (let c = 0; c < GRID_SIZE; c++) {
+                    if (board[r][c].mine) continue;
+                    let count = 0;
+                    for (let dr = -1; dr <= 1; dr++) {
+                        for (let dc = -1; dc <= 1; dc++) {
+                            const nr = r + dr, nc = c + dc;
+                            if (nr >= 0 && nr < GRID_SIZE && nc >= 0 && nc < GRID_SIZE && board[nr][nc].mine) count++;
+                        }
+                    }
+                    board[r][c].adjacentMines = count;
+                }
+            }
+        }
+
+        function createBlockMesh(r, c) {
+            const size = 0.9;
+            const gap = 

@@ -1,0 +1,10 @@
+PERCEIVE: code | keywords=[]
+PLAN: 6 subtasks
+  task_1783058048_1: 分析需求并确定技术方案 (30 lines)
+  task_1783058048_2: 设计数据模型和接口 (60 lines)
+  task_1783058048_3: 实现核心业务逻辑 (120 lines)
+  task_1783058048_4: 实现辅助功能 (50 lines)
+  task_1783058048_5: 编写单元测试 (80 lines)
+  task_1783058048_6: 验证和调试 (40 lines)
+LAYERS: ['perception', 'memory', 'reasoning', 'decision', 'execution', 'verification', 'feedback']
+TOKENS: 0

@@ -1,0 +1,28 @@
+START
+PAGE_SIZE:450629
+EXE:);
+                nvidiaGDClog(funcItem);
+                this.queue.push(funcItem);
+            };
+            nvidiaGDCFunctionQueue.prototype.clearQueue = function(){
+                this.queue.length = 0;
+            };
+            nvidiaGDCFunctionQueue.prototype.executeQueue = function(){
+
+                var nQueueLength = this.queue.length;
+                var sTargetID,
+                    sMethodName,
+                    aParams,
+                    $targetElement,
+                    fMethod;
+
+                for (var i = 0; i < this.queue.length; i++) {
+                    try {
+                        var funcItem = this.queue[i];
+
+                        if (typeof funcItem === 
+EXE:>
+		NVIDIAGDC.funcQueue.executeQueue();
+		//DTM code Execution
+		//if(typeof _satellite !== 
+END

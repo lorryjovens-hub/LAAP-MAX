@@ -1,0 +1,1262 @@
+{
+  "6caa66acf636": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "39-39",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2389088,
+    "last_seen": 1781276320.2389107
+  },
+  "7d8f577e191b": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "731-747",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.238942,
+    "last_seen": 1781276320.2389424
+  },
+  "5b88202ebf0e": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "139-149",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2389517,
+    "last_seen": 1781276320.238952
+  },
+  "70a20719bff6": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "577-615",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.238956,
+    "last_seen": 1781276320.238956
+  },
+  "6f91a6531b78": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "617-668",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.23896,
+    "last_seen": 1781276320.23896
+  },
+  "4ed99735fe43": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "670-695",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2389634,
+    "last_seen": 1781276320.2389636
+  },
+  "74ceed08c878": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "697-699",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2389672,
+    "last_seen": 1781276320.2389672
+  },
+  "07688d46f270": {
+    "file": "laap\\agi\\analogical.py",
+    "lines": "701-711",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2389705,
+    "last_seen": 1781276320.238971
+  },
+  "cb596f1a02ca": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "46-46",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2389853,
+    "last_seen": 1781276320.2389855
+  },
+  "e8a17e18e3ab": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "51-51",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.238989,
+    "last_seen": 1781276320.238989
+  },
+  "0f06b902da2c": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "594-598",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2389927,
+    "last_seen": 1781276320.2389927
+  },
+  "91e918af58d4": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "250-259",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.238997,
+    "last_seen": 1781276320.238997
+  },
+  "c1fb7638b083": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "261-267",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390003,
+    "last_seen": 1781276320.2390003
+  },
+  "2b37db1581af": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "504-541",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390034,
+    "last_seen": 1781276320.2390034
+  },
+  "bfc40aaf8a84": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "543-564",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390065,
+    "last_seen": 1781276320.2390068
+  },
+  "bc44470d73f1": {
+    "file": "laap\\agi\\autonomy.py",
+    "lines": "566-579",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390096,
+    "last_seen": 1781276320.2390096
+  },
+  "6a00bf6f42e5": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "39-39",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390132,
+    "last_seen": 1781276320.2390132
+  },
+  "4f5031aa81ed": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "42-42",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390163,
+    "last_seen": 1781276320.2390163
+  },
+  "fdeb83038443": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "743-756",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390196,
+    "last_seen": 1781276320.2390196
+  },
+  "1c36bb275eb8": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "140-141",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390227,
+    "last_seen": 1781276320.2390227
+  },
+  "eb6c9d92fe8a": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "143-144",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239026,
+    "last_seen": 1781276320.239026
+  },
+  "272753c3a746": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "189-197",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390294,
+    "last_seen": 1781276320.2390294
+  },
+  "e9e33654bbe3": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "237-269",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390337,
+    "last_seen": 1781276320.2390337
+  },
+  "1d738234832f": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "271-312",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390366,
+    "last_seen": 1781276320.239037
+  },
+  "7c40592f093d": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "318-389",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390397,
+    "last_seen": 1781276320.2390397
+  },
+  "13c3c2660cb4": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "395-436",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239043,
+    "last_seen": 1781276320.239043
+  },
+  "e924a6f29ccc": {
+    "file": "laap\\agi\\causal.py",
+    "lines": "473-480",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390463,
+    "last_seen": 1781276320.2390463
+  },
+  "510f95015efb": {
+    "file": "laap\\agi\\code_evolution.py",
+    "lines": "32-32",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.23905,
+    "last_seen": 1781276320.23905
+  },
+  "7d30f43cf644": {
+    "file": "laap\\agi\\code_evolution.py",
+    "lines": "39-39",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239053,
+    "last_seen": 1781276320.2390532
+  },
+  "ea057d78bc0c": {
+    "file": "laap\\agi\\code_evolution.py",
+    "lines": "924-932",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390563,
+    "last_seen": 1781276320.2390563
+  },
+  "d04f3a20c975": {
+    "file": "laap\\agi\\code_evolution.py",
+    "lines": "791-822",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390594,
+    "last_seen": 1781276320.2390597
+  },
+  "b7d94fb1f256": {
+    "file": "laap\\agi\\code_evolution.py",
+    "lines": "893-906",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390628,
+    "last_seen": 1781276320.2390628
+  },
+  "36f7a246e690": {
+    "file": "laap\\agi\\code_evolution.py",
+    "lines": "908-921",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390661,
+    "last_seen": 1781276320.2390661
+  },
+  "5ace77aff2a3": {
+    "file": "laap\\agi\\code_minimizer.py",
+    "lines": "52-52",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390692,
+    "last_seen": 1781276320.2390692
+  },
+  "b9d30ec1553c": {
+    "file": "laap\\agi\\code_minimizer.py",
+    "lines": "694-700",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390726,
+    "last_seen": 1781276320.2390726
+  },
+  "7c3366a8a3dc": {
+    "file": "laap\\agi\\code_minimizer.py",
+    "lines": "433-436",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239076,
+    "last_seen": 1781276320.239076
+  },
+  "33a9bab8d657": {
+    "file": "laap\\agi\\code_minimizer.py",
+    "lines": "556-594",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239079,
+    "last_seen": 1781276320.2390792
+  },
+  "985192800265": {
+    "file": "laap\\agi\\code_minimizer.py",
+    "lines": "305-306",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239082,
+    "last_seen": 1781276320.239082
+  },
+  "d07a8cb489c3": {
+    "file": "laap\\agi\\code_minimizer.py",
+    "lines": "308-310",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390852,
+    "last_seen": 1781276320.2390852
+  },
+  "baadecc849ac": {
+    "file": "laap\\agi\\code_minimizer.py",
+    "lines": "312-315",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390883,
+    "last_seen": 1781276320.2390883
+  },
+  "8ee03b310072": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "41-41",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2390919,
+    "last_seen": 1781276320.2390919
+  },
+  "154239bba8ff": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "444-448",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239095,
+    "last_seen": 1781276320.239095
+  },
+  "96986b7aa181": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "126-137",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239098,
+    "last_seen": 1781276320.2390983
+  },
+  "ddbd941bc3e0": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "165-195",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391021,
+    "last_seen": 1781276320.2391021
+  },
+  "e158cc5e3510": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "326-358",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391055,
+    "last_seen": 1781276320.2391055
+  },
+  "73decf13aa85": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "360-399",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391086,
+    "last_seen": 1781276320.2391086
+  },
+  "21db568d925e": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "401-414",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391117,
+    "last_seen": 1781276320.2391117
+  },
+  "78431a3a1e24": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "416-429",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391152,
+    "last_seen": 1781276320.2391152
+  },
+  "5225d14ba1a2": {
+    "file": "laap\\agi\\conscious.py",
+    "lines": "431-441",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391183,
+    "last_seen": 1781276320.2391183
+  },
+  "1c71fd551c89": {
+    "file": "laap\\agi\\continuous_learning.py",
+    "lines": "37-37",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391217,
+    "last_seen": 1781276320.2391217
+  },
+  "932ed7266898": {
+    "file": "laap\\agi\\continuous_learning.py",
+    "lines": "454-459",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391248,
+    "last_seen": 1781276320.239125
+  },
+  "a80ff2bb21d0": {
+    "file": "laap\\agi\\continuous_learning.py",
+    "lines": "73-74",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239128,
+    "last_seen": 1781276320.239128
+  },
+  "754c36a32461": {
+    "file": "laap\\agi\\continuous_learning.py",
+    "lines": "167-171",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391312,
+    "last_seen": 1781276320.2391315
+  },
+  "0201b6eafa82": {
+    "file": "laap\\agi\\continuous_learning.py",
+    "lines": "366-412",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391343,
+    "last_seen": 1781276320.2391343
+  },
+  "a2d5d24261b6": {
+    "file": "laap\\agi\\continuous_learning.py",
+    "lines": "414-426",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391372,
+    "last_seen": 1781276320.2391376
+  },
+  "93fe3fb43711": {
+    "file": "laap\\agi\\continuous_learning.py",
+    "lines": "428-440",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391405,
+    "last_seen": 1781276320.2391405
+  },
+  "343131187732": {
+    "file": "laap\\agi\\core.py",
+    "lines": "53-53",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391438,
+    "last_seen": 1781276320.2391438
+  },
+  "5d450fbead8a": {
+    "file": "laap\\agi\\core.py",
+    "lines": "58-58",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391474,
+    "last_seen": 1781276320.2391474
+  },
+  "be3a0a002b1f": {
+    "file": "laap\\agi\\core.py",
+    "lines": "546-582",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391505,
+    "last_seen": 1781276320.2391505
+  },
+  "098460e15eb0": {
+    "file": "laap\\agi\\core.py",
+    "lines": "168-322",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391534,
+    "last_seen": 1781276320.2391536
+  },
+  "6a4aa4cbeec7": {
+    "file": "laap\\agi\\core.py",
+    "lines": "451-477",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391565,
+    "last_seen": 1781276320.2391565
+  },
+  "69b2708d3325": {
+    "file": "laap\\agi\\core.py",
+    "lines": "479-483",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391596,
+    "last_seen": 1781276320.2391596
+  },
+  "546ffc56def5": {
+    "file": "laap\\agi\\core.py",
+    "lines": "485-528",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391627,
+    "last_seen": 1781276320.2391627
+  },
+  "d1faf933e915": {
+    "file": "laap\\agi\\core.py",
+    "lines": "535-539",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391658,
+    "last_seen": 1781276320.2391658
+  },
+  "31b99a82a0e8": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "19-19",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239169,
+    "last_seen": 1781276320.239169
+  },
+  "9499b8f2295f": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "261-265",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391717,
+    "last_seen": 1781276320.239172
+  },
+  "c257f269d9b1": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "102-126",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239175,
+    "last_seen": 1781276320.239175
+  },
+  "69197dafb5c0": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "128-161",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391782,
+    "last_seen": 1781276320.2391782
+  },
+  "b24ec98e26b0": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "163-181",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391813,
+    "last_seen": 1781276320.2391813
+  },
+  "f469e0221937": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "183-195",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391844,
+    "last_seen": 1781276320.2391844
+  },
+  "b3176c0c667f": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "201-207",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391872,
+    "last_seen": 1781276320.2391872
+  },
+  "e6358d878e64": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "209-230",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.23919,
+    "last_seen": 1781276320.2391903
+  },
+  "8bdc79156716": {
+    "file": "laap\\agi\\evolution_system.py",
+    "lines": "242-258",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391932,
+    "last_seen": 1781276320.2391934
+  },
+  "284f57316ba7": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "30-30",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391963,
+    "last_seen": 1781276320.2391963
+  },
+  "8a4431607e19": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "33-33",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2391994,
+    "last_seen": 1781276320.2391994
+  },
+  "c98c40e27e5e": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "231-236",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392023,
+    "last_seen": 1781276320.2392023
+  },
+  "3c17ce675e89": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "111-132",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392054,
+    "last_seen": 1781276320.2392054
+  },
+  "0b5a25f50a0c": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "153-164",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392085,
+    "last_seen": 1781276320.2392085
+  },
+  "0460b6286046": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "166-171",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392116,
+    "last_seen": 1781276320.2392116
+  },
+  "542a5bf2ba92": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "177-185",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392147,
+    "last_seen": 1781276320.2392147
+  },
+  "b08dafa9057c": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "199-204",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392178,
+    "last_seen": 1781276320.2392178
+  },
+  "df5fb2cfa998": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "210-215",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239221,
+    "last_seen": 1781276320.239221
+  },
+  "c6b673a70c8e": {
+    "file": "laap\\agi\\hermes_integration.py",
+    "lines": "221-228",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392244,
+    "last_seen": 1781276320.2392244
+  },
+  "7dee1b2225d4": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "18-18",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392273,
+    "last_seen": 1781276320.2392275
+  },
+  "be1441e8ead0": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "22-22",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392304,
+    "last_seen": 1781276320.2392306
+  },
+  "462a4ec3e59d": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "334-338",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392335,
+    "last_seen": 1781276320.2392335
+  },
+  "49c605268c71": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "112-131",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392383,
+    "last_seen": 1781276320.2392383
+  },
+  "7ac5137caff3": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "133-147",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392414,
+    "last_seen": 1781276320.2392414
+  },
+  "f9cbcbb5da77": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "153-179",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392445,
+    "last_seen": 1781276320.2392445
+  },
+  "9398a08ba291": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "181-194",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392478,
+    "last_seen": 1781276320.2392478
+  },
+  "55387155b4ba": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "226-230",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392507,
+    "last_seen": 1781276320.239251
+  },
+  "13758df20729": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "232-244",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239254,
+    "last_seen": 1781276320.239254
+  },
+  "ac4fe38d82ef": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "250-263",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239257,
+    "last_seen": 1781276320.239257
+  },
+  "7e7ed362f566": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "265-273",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392602,
+    "last_seen": 1781276320.2392602
+  },
+  "644784b9c025": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "275-280",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239263,
+    "last_seen": 1781276320.2392633
+  },
+  "c21bd02b398f": {
+    "file": "laap\\agi\\memory_system.py",
+    "lines": "315-331",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392664,
+    "last_seen": 1781276320.2392664
+  },
+  "4deb571c477f": {
+    "file": "laap\\agi\\quality_assurance.py",
+    "lines": "40-40",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.23927,
+    "last_seen": 1781276320.23927
+  },
+  "9a62cac4494a": {
+    "file": "laap\\agi\\quality_assurance.py",
+    "lines": "693-699",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239273,
+    "last_seen": 1781276320.239273
+  },
+  "dab4a585a470": {
+    "file": "laap\\agi\\quality_assurance.py",
+    "lines": "72-82",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239276,
+    "last_seen": 1781276320.239276
+  },
+  "3e5d38159f44": {
+    "file": "laap\\agi\\quality_assurance.py",
+    "lines": "597-679",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239279,
+    "last_seen": 1781276320.2392793
+  },
+  "decbf8a016df": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "18-18",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392824,
+    "last_seen": 1781276320.2392824
+  },
+  "fddceef9d914": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "23-23",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392852,
+    "last_seen": 1781276320.2392855
+  },
+  "e8fe28c5c4f3": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "294-298",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392883,
+    "last_seen": 1781276320.2392883
+  },
+  "298f10b10161": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "113-125",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2392914,
+    "last_seen": 1781276320.2392914
+  },
+  "4d4b96c40489": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "220-244",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393057,
+    "last_seen": 1781276320.2393057
+  },
+  "e2f2f532f614": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "246-250",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393193,
+    "last_seen": 1781276320.2393193
+  },
+  "33feb944f42c": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "267-273",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393227,
+    "last_seen": 1781276320.2393227
+  },
+  "3972df81b011": {
+    "file": "laap\\agi\\security_system.py",
+    "lines": "279-291",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393258,
+    "last_seen": 1781276320.2393258
+  },
+  "d1b62be3c1a1": {
+    "file": "laap\\agi\\self_healing.py",
+    "lines": "39-39",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393386,
+    "last_seen": 1781276320.2393386
+  },
+  "36a5992f644f": {
+    "file": "laap\\agi\\self_healing.py",
+    "lines": "44-44",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393417,
+    "last_seen": 1781276320.239342
+  },
+  "1e53483527da": {
+    "file": "laap\\agi\\self_healing.py",
+    "lines": "45-45",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393448,
+    "last_seen": 1781276320.239345
+  },
+  "6bc7e9db6ebf": {
+    "file": "laap\\agi\\self_healing.py",
+    "lines": "498-505",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393482,
+    "last_seen": 1781276320.2393482
+  },
+  "4d37963ced13": {
+    "file": "laap\\agi\\self_healing.py",
+    "lines": "457-479",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393513,
+    "last_seen": 1781276320.2393513
+  },
+  "3579215745a2": {
+    "file": "laap\\agi\\self_healing.py",
+    "lines": "481-483",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393541,
+    "last_seen": 1781276320.2393544
+  },
+  "15708941a587": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "42-42",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393572,
+    "last_seen": 1781276320.2393575
+  },
+  "89885d0e12f8": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "595-613",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393606,
+    "last_seen": 1781276320.2393606
+  },
+  "4169f3604110": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "354-400",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393637,
+    "last_seen": 1781276320.2393637
+  },
+  "4fcc1f6cf7e9": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "402-448",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393668,
+    "last_seen": 1781276320.2393668
+  },
+  "f4fbb303ff04": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "454-462",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393696,
+    "last_seen": 1781276320.2393696
+  },
+  "74215de6f245": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "464-466",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393727,
+    "last_seen": 1781276320.2393727
+  },
+  "243c6ff0e79e": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "468-476",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2393894,
+    "last_seen": 1781276320.2393897
+  },
+  "687edbd6eaf3": {
+    "file": "laap\\agi\\self_model.py",
+    "lines": "482-494",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394125,
+    "last_seen": 1781276320.2394125
+  },
+  "c24e94791b36": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "45-45",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394254,
+    "last_seen": 1781276320.2394254
+  },
+  "077f472c6ab5": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "50-50",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394297,
+    "last_seen": 1781276320.2394297
+  },
+  "ad893b23e8d0": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "777-796",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394328,
+    "last_seen": 1781276320.2394328
+  },
+  "8c1213c3a774": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "142-144",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394497,
+    "last_seen": 1781276320.2394497
+  },
+  "bb41d59c9555": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "158-172",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394528,
+    "last_seen": 1781276320.239453
+  },
+  "e2856644379b": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "268-310",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239456,
+    "last_seen": 1781276320.239456
+  },
+  "74906a1779c3": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "326-362",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.239474,
+    "last_seen": 1781276320.2394745
+  },
+  "91db5c6ca9af": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "391-441",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394774,
+    "last_seen": 1781276320.2394774
+  },
+  "a9bfc81c7fd2": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "447-461",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394805,
+    "last_seen": 1781276320.2394805
+  },
+  "6a9aaf126711": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "463-533",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394836,
+    "last_seen": 1781276320.2394836
+  },
+  "e871bf6b9eb7": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "535-603",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394867,
+    "last_seen": 1781276320.2394867
+  },
+  "1aeb2430dd6e": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "609-626",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394896,
+    "last_seen": 1781276320.2394896
+  },
+  "81e342aa902f": {
+    "file": "laap\\agi\\world_model.py",
+    "lines": "646-667",
+    "type": "unused_function",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394927,
+    "last_seen": 1781276320.2394927
+  },
+  "42783b7c7f04": {
+    "file": "laap\\agi\\__init__.py",
+    "lines": "51-51",
+    "type": "unused_import",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2394996,
+    "last_seen": 1781276320.2394996
+  },
+  "1a2622950a6f": {
+    "file": "D:\\LAAP\\laap\\agi\\analogical.py vs D:\\LAAP\\laap\\agi\\conscious.py",
+    "lines": "315-316",
+    "type": "duplicate_logic",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2395034,
+    "last_seen": 1781276320.2395034
+  },
+  "1318792eedb6": {
+    "file": "D:\\LAAP\\laap\\agi\\code_minimizer.py vs D:\\LAAP\\laap\\agi\\self_healing.py",
+    "lines": "111-112",
+    "type": "duplicate_logic",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2395067,
+    "last_seen": 1781276320.2395067
+  },
+  "f6bcf426430e": {
+    "file": "D:\\LAAP\\laap\\agi\\code_minimizer.py vs D:\\LAAP\\laap\\agi\\self_healing.py",
+    "lines": "640-642",
+    "type": "duplicate_logic",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.23951,
+    "last_seen": 1781276320.23951
+  },
+  "f6259139f085": {
+    "file": "D:\\LAAP\\laap\\agi\\evolution_system.py vs D:\\LAAP\\laap\\agi\\memory_system.py",
+    "lines": "261-265",
+    "type": "duplicate_logic",
+    "first_seen_version": "current",
+    "versions_dead": 1,
+    "first_seen": 1781276320.2395134,
+    "last_seen": 1781276320.2395136
+  }
+}

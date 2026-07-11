@@ -1,0 +1,3278 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-27T00:43:52.277125",
+    "mock_mode": true,
+    "model": "mock-llm",
+    "n_tasks_per_experiment": 2,
+    "seed": 42,
+    "total_elapsed_s": 0.74,
+    "experiments_run": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "E7",
+      "E8",
+      "E9"
+    ]
+  },
+  "experiments": {
+    "E1": {
+      "exp_id": "E1",
+      "exp_name": "Simple Q&A (Factual Recall)",
+      "n_tasks": 2,
+      "systems": [
+        "raw_llm",
+        "laap_llm",
+        "laap_v5"
+      ],
+      "per_system": {
+        "raw_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 14.310359954833984
+        },
+        "laap_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.3026723861694336
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.3408193588256836
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 6,
+        "total": 6
+      },
+      "by_benchmark": {
+        "mmlu": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "total": 6
+        }
+      },
+      "by_domain": {
+        "astronomy": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        },
+        "math": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "mmlu-astronomy-001",
+            "prompt": "Which of the following is the largest planet in our solar system?",
+            "choices": [
+              "Earth",
+              "Mars",
+              "Jupiter",
+              "Saturn"
+            ],
+            "answer": "C",
+            "domain": "astronomy",
+            "subject": "astronomy",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which of the following is the largest planet in our solar system?\n\nA. Earth\nB. Mars\nC. Jupiter\nD. Saturn\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-astronomy-001",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "time_ms": 28.606176376342773,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 1,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 1,
+              "total_chars_in": 155,
+              "total_chars_out": 40,
+              "total_latency_ms": 0.09608268737792969,
+              "errors": 0,
+              "avg_latency_ms": 0.1
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-abstract-algebra-001",
+            "prompt": "Find the degree of the polynomial 2x^3 + 3x^2 + 1.",
+            "choices": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "answer": "D",
+            "domain": "math",
+            "subject": "abstract_algebra",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Find the degree of the polynomial 2x^3 + 3x^2 + 1.\n\nA. 0\nB. 1\nC. 2\nD. 3\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-abstract-algebra-001",
+            "answer": "Let me analyze this question.\n\nAnswer: D",
+            "time_ms": 0.014543533325195312,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 2,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 2,
+              "total_chars_in": 277,
+              "total_chars_out": 80,
+              "total_latency_ms": 0.10824203491210938,
+              "errors": 0,
+              "avg_latency_ms": 0.05
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "D",
+            "expected": "D",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-astronomy-001",
+            "prompt": "Which of the following is the largest planet in our solar system?",
+            "choices": [
+              "Earth",
+              "Mars",
+              "Jupiter",
+              "Saturn"
+            ],
+            "answer": "C",
+            "domain": "astronomy",
+            "subject": "astronomy",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which of the following is the largest planet in our solar system?\n\nA. Earth\nB. Mars\nC. Jupiter\nD. Saturn\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-astronomy-001",
+            "mode_requested": "llm",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "mode": "llm",
+            "mode_reason": "直接 LLM",
+            "psi_trace": {},
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 1,
+            "time_ms": 0.38433074951171875,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 1,
+              "total_chars_in": 155,
+              "total_chars_out": 40,
+              "total_latency_ms": 0.016689300537109375,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "laap_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-abstract-algebra-001",
+            "prompt": "Find the degree of the polynomial 2x^3 + 3x^2 + 1.",
+            "choices": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "answer": "D",
+            "domain": "math",
+            "subject": "abstract_algebra",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Find the degree of the polynomial 2x^3 + 3x^2 + 1.\n\nA. 0\nB. 1\nC. 2\nD. 3\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-abstract-algebra-001",
+            "mode_requested": "llm",
+            "answer": "Let me analyze this question.\n\nAnswer: D",
+            "mode": "llm",
+            "mode_reason": "直接 LLM",
+            "psi_trace": {},
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 2,
+            "time_ms": 0.22101402282714844,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 2,
+              "total_chars_in": 277,
+              "total_chars_out": 80,
+              "total_latency_ms": 0.025510787963867188,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "D",
+            "expected": "D",
+            "explanation": "correct"
+          },
+          "system": "laap_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-astronomy-001",
+            "prompt": "Which of the following is the largest planet in our solar system?",
+            "choices": [
+              "Earth",
+              "Mars",
+              "Jupiter",
+              "Saturn"
+            ],
+            "answer": "C",
+            "domain": "astronomy",
+            "subject": "astronomy",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which of the following is the largest planet in our solar system?\n\nA. Earth\nB. Mars\nC. Jupiter\nD. Saturn\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-astronomy-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 155,
+                  "load": 0.0775,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8767499999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: C"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: C"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 1,
+            "time_ms": 0.4024505615234375,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 1,
+              "total_chars_in": 155,
+              "total_chars_out": 40,
+              "total_latency_ms": 0.016927719116210938,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "mmlu-abstract-algebra-001",
+            "prompt": "Find the degree of the polynomial 2x^3 + 3x^2 + 1.",
+            "choices": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "answer": "D",
+            "domain": "math",
+            "subject": "abstract_algebra",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Find the degree of the polynomial 2x^3 + 3x^2 + 1.\n\nA. 0\nB. 1\nC. 2\nD. 3\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-abstract-algebra-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: D",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 122,
+                  "load": 0.061,
+                  "has_question": false,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "general",
+                  "confidence": 0.8816999999999999
+                },
+                "integrate": {
+                  "focus": "general",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: D"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: D"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 2,
+            "time_ms": 0.2791881561279297,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 2,
+              "total_chars_in": 277,
+              "total_chars_out": 80,
+              "total_latency_ms": 0.02574920654296875,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "D",
+            "expected": "D",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E2": {
+      "exp_id": "E2",
+      "exp_name": "Multi-step Reasoning (ARC)",
+      "n_tasks": 2,
+      "systems": [
+        "raw_llm",
+        "cot",
+        "laap_v5"
+      ],
+      "per_system": {
+        "raw_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.014662742614746094
+        },
+        "cot": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.064849853515625
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.3038644790649414
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 6,
+        "total": 6
+      },
+      "by_benchmark": {
+        "arc": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "total": 6
+        }
+      },
+      "by_domain": {
+        "science": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "total": 6
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "arc-002",
+            "prompt": "A student wants to measure the volume of a liquid. Which tool should the student use?",
+            "choices": [
+              "Balance",
+              "Ruler",
+              "Graduated cylinder",
+              "Thermometer"
+            ],
+            "answer": "C",
+            "domain": "science",
+            "subject": "measurement",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: A student wants to measure the volume of a liquid. Which tool should the student use?\n\nA. Balance\nB. Ruler\nC. Graduated cylinder\nD. Thermometer\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-002",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "time_ms": 0.019550323486328125,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 3,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 3,
+              "total_chars_in": 471,
+              "total_chars_out": 120,
+              "total_latency_ms": 0.12469291687011719,
+              "errors": 0,
+              "avg_latency_ms": 0.04
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "arc-001",
+            "prompt": "Which property of a mineral can be determined by rubbing it on a rough tile?",
+            "choices": [
+              "Luster",
+              "Streak",
+              "Hardness",
+              "Cleavage"
+            ],
+            "answer": "B",
+            "domain": "science",
+            "subject": "minerals",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which property of a mineral can be determined by rubbing it on a rough tile?\n\nA. Luster\nB. Streak\nC. Hardness\nD. Cleavage\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-001",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.009775161743164062,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 4,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 4,
+              "total_chars_in": 643,
+              "total_chars_out": 160,
+              "total_latency_ms": 0.13327598571777344,
+              "errors": 0,
+              "avg_latency_ms": 0.03
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "arc-002",
+            "prompt": "A student wants to measure the volume of a liquid. Which tool should the student use?",
+            "choices": [
+              "Balance",
+              "Ruler",
+              "Graduated cylinder",
+              "Thermometer"
+            ],
+            "answer": "C",
+            "domain": "science",
+            "subject": "measurement",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: A student wants to measure the volume of a liquid. Which tool should the student use?\n\nA. Balance\nB. Ruler\nC. Graduated cylinder\nD. Thermometer\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-002",
+            "answer": "C",
+            "full_response": "Let me analyze this question.\n\nAnswer: C",
+            "time_ms": 0.11181831359863281,
+            "mode": "cot",
+            "mode_reason": "Chain-of-Thought prompting",
+            "strategy": "cot",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 1,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 1,
+              "total_chars_in": 317,
+              "total_chars_out": 40,
+              "total_latency_ms": 0.011444091796875,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "cot"
+        },
+        {
+          "task": {
+            "id": "arc-001",
+            "prompt": "Which property of a mineral can be determined by rubbing it on a rough tile?",
+            "choices": [
+              "Luster",
+              "Streak",
+              "Hardness",
+              "Cleavage"
+            ],
+            "answer": "B",
+            "domain": "science",
+            "subject": "minerals",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which property of a mineral can be determined by rubbing it on a rough tile?\n\nA. Luster\nB. Streak\nC. Hardness\nD. Cleavage\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-001",
+            "answer": "B",
+            "full_response": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.017881393432617188,
+            "mode": "cot",
+            "mode_reason": "Chain-of-Thought prompting",
+            "strategy": "cot",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 2,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 2,
+              "total_chars_in": 612,
+              "total_chars_out": 80,
+              "total_latency_ms": 0.02384185791015625,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "cot"
+        },
+        {
+          "task": {
+            "id": "arc-002",
+            "prompt": "A student wants to measure the volume of a liquid. Which tool should the student use?",
+            "choices": [
+              "Balance",
+              "Ruler",
+              "Graduated cylinder",
+              "Thermometer"
+            ],
+            "answer": "C",
+            "domain": "science",
+            "subject": "measurement",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: A student wants to measure the volume of a liquid. Which tool should the student use?\n\nA. Balance\nB. Ruler\nC. Graduated cylinder\nD. Thermometer\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-002",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 194,
+                  "load": 0.097,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8709
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: C"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: C"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 3,
+            "time_ms": 0.34117698669433594,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 3,
+              "total_chars_in": 471,
+              "total_chars_out": 120,
+              "total_latency_ms": 0.03528594970703125,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "arc-001",
+            "prompt": "Which property of a mineral can be determined by rubbing it on a rough tile?",
+            "choices": [
+              "Luster",
+              "Streak",
+              "Hardness",
+              "Cleavage"
+            ],
+            "answer": "B",
+            "domain": "science",
+            "subject": "minerals",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which property of a mineral can be determined by rubbing it on a rough tile?\n\nA. Luster\nB. Streak\nC. Hardness\nD. Cleavage\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 172,
+                  "load": 0.086,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8742
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 4,
+            "time_ms": 0.2665519714355469,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 4,
+              "total_chars_in": 643,
+              "total_chars_out": 160,
+              "total_latency_ms": 0.04458427429199219,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E3": {
+      "exp_id": "E3",
+      "exp_name": "Causal Reasoning (CausalBench)",
+      "n_tasks": 2,
+      "systems": [
+        "raw_llm",
+        "cot",
+        "laap_v5"
+      ],
+      "per_system": {
+        "raw_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.010251998901367188
+        },
+        "cot": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.01239776611328125
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.31113624572753906
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 6,
+        "total": 6
+      },
+      "by_benchmark": {
+        "causal_bench": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "total": 6
+        }
+      },
+      "by_domain": {
+        "climate": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        },
+        "physics": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "causal-int-001",
+            "prompt": "If we intervene to double the CO2 concentration in the atmosphere, what is the most likely direct causal effect on global temperature?",
+            "choices": [
+              "Temperature decreases",
+              "Temperature increases",
+              "No change",
+              "Temperature becomes zero"
+            ],
+            "answer": "B",
+            "domain": "climate",
+            "causal_type": "interventional",
+            "explanation": "CO2 is a greenhouse gas; increasing it traps more heat, causing warming.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If we intervene to double the CO2 concentration in the atmosphere, what is the most likely direct causal effect on global temperature?\n\nA. Temperature decreases\nB. Temperature increases\nC. No change\nD. Temperature becomes zero\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-int-001",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.011920928955078125,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 5,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 5,
+              "total_chars_in": 920,
+              "total_chars_out": 200,
+              "total_latency_ms": 0.1437664031982422,
+              "errors": 0,
+              "avg_latency_ms": 0.03
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "CO2 is a greenhouse gas; increasing it traps more heat, causing warming.",
+            "causal_type": "interventional",
+            "keyword_hits": []
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "causal-cf-001",
+            "prompt": "If the Earth had no atmosphere, what would happen to the daytime sky color? Explain the causal mechanism.",
+            "choices": [
+              "Sky would be blue",
+              "Sky would be black",
+              "Sky would be red",
+              "Sky would be white"
+            ],
+            "answer": "B",
+            "domain": "physics",
+            "causal_type": "counterfactual",
+            "explanation": "Without atmosphere, no Rayleigh scattering of sunlight, so sky would be black.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If the Earth had no atmosphere, what would happen to the daytime sky color? Explain the causal mechanism.\n\nA. Sky would be blue\nB. Sky would be black\nC. Sky would be red\nD. Sky would be white\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-001",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.00858306884765625,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 6,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 6,
+              "total_chars_in": 1162,
+              "total_chars_out": 240,
+              "total_latency_ms": 0.15091896057128906,
+              "errors": 0,
+              "avg_latency_ms": 0.03
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Without atmosphere, no Rayleigh scattering of sunlight, so sky would be black.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "causal-int-001",
+            "prompt": "If we intervene to double the CO2 concentration in the atmosphere, what is the most likely direct causal effect on global temperature?",
+            "choices": [
+              "Temperature decreases",
+              "Temperature increases",
+              "No change",
+              "Temperature becomes zero"
+            ],
+            "answer": "B",
+            "domain": "climate",
+            "causal_type": "interventional",
+            "explanation": "CO2 is a greenhouse gas; increasing it traps more heat, causing warming.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If we intervene to double the CO2 concentration in the atmosphere, what is the most likely direct causal effect on global temperature?\n\nA. Temperature decreases\nB. Temperature increases\nC. No change\nD. Temperature becomes zero\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-int-001",
+            "answer": "B",
+            "full_response": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.013589859008789062,
+            "mode": "cot",
+            "mode_reason": "Chain-of-Thought prompting",
+            "strategy": "cot",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 3,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 3,
+              "total_chars_in": 1012,
+              "total_chars_out": 120,
+              "total_latency_ms": 0.03314018249511719,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "CO2 is a greenhouse gas; increasing it traps more heat, causing warming.",
+            "causal_type": "interventional",
+            "keyword_hits": []
+          },
+          "system": "cot"
+        },
+        {
+          "task": {
+            "id": "causal-cf-001",
+            "prompt": "If the Earth had no atmosphere, what would happen to the daytime sky color? Explain the causal mechanism.",
+            "choices": [
+              "Sky would be blue",
+              "Sky would be black",
+              "Sky would be red",
+              "Sky would be white"
+            ],
+            "answer": "B",
+            "domain": "physics",
+            "causal_type": "counterfactual",
+            "explanation": "Without atmosphere, no Rayleigh scattering of sunlight, so sky would be black.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If the Earth had no atmosphere, what would happen to the daytime sky color? Explain the causal mechanism.\n\nA. Sky would be blue\nB. Sky would be black\nC. Sky would be red\nD. Sky would be white\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-001",
+            "answer": "B",
+            "full_response": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.011205673217773438,
+            "mode": "cot",
+            "mode_reason": "Chain-of-Thought prompting",
+            "strategy": "cot",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 4,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 4,
+              "total_chars_in": 1377,
+              "total_chars_out": 160,
+              "total_latency_ms": 0.04100799560546875,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Without atmosphere, no Rayleigh scattering of sunlight, so sky would be black.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "cot"
+        },
+        {
+          "task": {
+            "id": "causal-int-001",
+            "prompt": "If we intervene to double the CO2 concentration in the atmosphere, what is the most likely direct causal effect on global temperature?",
+            "choices": [
+              "Temperature decreases",
+              "Temperature increases",
+              "No change",
+              "Temperature becomes zero"
+            ],
+            "answer": "B",
+            "domain": "climate",
+            "causal_type": "interventional",
+            "explanation": "CO2 is a greenhouse gas; increasing it traps more heat, causing warming.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If we intervene to double the CO2 concentration in the atmosphere, what is the most likely direct causal effect on global temperature?\n\nA. Temperature decreases\nB. Temperature increases\nC. No change\nD. Temperature becomes zero\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-int-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 277,
+                  "load": 0.1385,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8584499999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 5,
+            "time_ms": 0.28824806213378906,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 5,
+              "total_chars_in": 920,
+              "total_chars_out": 200,
+              "total_latency_ms": 0.051975250244140625,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "CO2 is a greenhouse gas; increasing it traps more heat, causing warming.",
+            "causal_type": "interventional",
+            "keyword_hits": []
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "causal-cf-001",
+            "prompt": "If the Earth had no atmosphere, what would happen to the daytime sky color? Explain the causal mechanism.",
+            "choices": [
+              "Sky would be blue",
+              "Sky would be black",
+              "Sky would be red",
+              "Sky would be white"
+            ],
+            "answer": "B",
+            "domain": "physics",
+            "causal_type": "counterfactual",
+            "explanation": "Without atmosphere, no Rayleigh scattering of sunlight, so sky would be black.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If the Earth had no atmosphere, what would happen to the daytime sky color? Explain the causal mechanism.\n\nA. Sky would be blue\nB. Sky would be black\nC. Sky would be red\nD. Sky would be white\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 242,
+                  "load": 0.121,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8636999999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 6,
+            "time_ms": 0.33402442932128906,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 6,
+              "total_chars_in": 1162,
+              "total_chars_out": 240,
+              "total_latency_ms": 0.05984306335449219,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Without atmosphere, no Rayleigh scattering of sunlight, so sky would be black.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E4": {
+      "exp_id": "E4",
+      "exp_name": "Code Understanding",
+      "n_tasks": 2,
+      "systems": [
+        "raw_llm",
+        "laap_v5"
+      ],
+      "per_system": {
+        "raw_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.012636184692382812
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.2932548522949219
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "total": 4
+      },
+      "by_benchmark": {
+        "mmlu": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "total": 4
+        }
+      },
+      "by_domain": {
+        "cs": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "total": 4
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "mmlu-cs-001",
+            "prompt": "What is the time complexity of binary search on a sorted array of n elements?",
+            "choices": [
+              "O(1)",
+              "O(log n)",
+              "O(n)",
+              "O(n^2)"
+            ],
+            "answer": "B",
+            "domain": "cs",
+            "subject": "computer_science",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the time complexity of binary search on a sorted array of n elements?\n\nA. O(1)\nB. O(log n)\nC. O(n)\nD. O(n^2)\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-cs-001",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.016689300537109375,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 7,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 7,
+              "total_chars_in": 1329,
+              "total_chars_out": 280,
+              "total_latency_ms": 0.16498565673828125,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-cs-001",
+            "prompt": "What is the time complexity of binary search on a sorted array of n elements?",
+            "choices": [
+              "O(1)",
+              "O(log n)",
+              "O(n)",
+              "O(n^2)"
+            ],
+            "answer": "B",
+            "domain": "cs",
+            "subject": "computer_science",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the time complexity of binary search on a sorted array of n elements?\n\nA. O(1)\nB. O(log n)\nC. O(n)\nD. O(n^2)\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-cs-001",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.00858306884765625,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 8,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 8,
+              "total_chars_in": 1496,
+              "total_chars_out": 320,
+              "total_latency_ms": 0.1723766326904297,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-cs-001",
+            "prompt": "What is the time complexity of binary search on a sorted array of n elements?",
+            "choices": [
+              "O(1)",
+              "O(log n)",
+              "O(n)",
+              "O(n^2)"
+            ],
+            "answer": "B",
+            "domain": "cs",
+            "subject": "computer_science",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the time complexity of binary search on a sorted array of n elements?\n\nA. O(1)\nB. O(log n)\nC. O(n)\nD. O(n^2)\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-cs-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 167,
+                  "load": 0.0835,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8749499999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 7,
+            "time_ms": 0.3154277801513672,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 7,
+              "total_chars_in": 1329,
+              "total_chars_out": 280,
+              "total_latency_ms": 0.06651878356933594,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "mmlu-cs-001",
+            "prompt": "What is the time complexity of binary search on a sorted array of n elements?",
+            "choices": [
+              "O(1)",
+              "O(log n)",
+              "O(n)",
+              "O(n^2)"
+            ],
+            "answer": "B",
+            "domain": "cs",
+            "subject": "computer_science",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the time complexity of binary search on a sorted array of n elements?\n\nA. O(1)\nB. O(log n)\nC. O(n)\nD. O(n^2)\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-cs-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 167,
+                  "load": 0.0835,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8749499999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 8,
+            "time_ms": 0.27108192443847656,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 8,
+              "total_chars_in": 1496,
+              "total_chars_out": 320,
+              "total_latency_ms": 0.07319450378417969,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E5": {
+      "exp_id": "E5",
+      "exp_name": "Open-ended / Counterfactual",
+      "n_tasks": 2,
+      "systems": [
+        "raw_llm",
+        "laap_v5"
+      ],
+      "per_system": {
+        "raw_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.010609626770019531
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.2702474594116211
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "total": 4
+      },
+      "by_benchmark": {
+        "causal_bench": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "total": 4
+        }
+      },
+      "by_domain": {
+        "biology": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2
+        },
+        "history": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "causal-cf-003",
+            "prompt": "Counterfactually, if mitochondria had never been endosymbiotically acquired by eukaryotic cells, what would most directly be impaired?",
+            "choices": [
+              "DNA replication",
+              "ATP production via oxidative phosphorylation",
+              "Protein synthesis",
+              "Cell division"
+            ],
+            "answer": "B",
+            "domain": "biology",
+            "causal_type": "counterfactual",
+            "explanation": "Mitochondria are the site of oxidative phosphorylation; without them, ATP production would be severely limited.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Counterfactually, if mitochondria had never been endosymbiotically acquired by eukaryotic cells, what would most directly be impaired?\n\nA. DNA replication\nB. ATP production via oxidative phosphorylation\nC. Protein synthesis\nD. Cell division\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-003",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.010967254638671875,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 9,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 9,
+              "total_chars_in": 1787,
+              "total_chars_out": 360,
+              "total_latency_ms": 0.18167495727539062,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Mitochondria are the site of oxidative phosphorylation; without them, ATP production would be severely limited.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "causal-cf-002",
+            "prompt": "If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.",
+            "choices": [
+              "No, we would have no antibiotics",
+              "Yes, others would likely have discovered antibiotics later",
+              "Maybe, but only for viral infections",
+              "Impossible to determine"
+            ],
+            "answer": "B",
+            "domain": "history",
+            "causal_type": "counterfactual",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.\n\nA. No, we would have no antibiotics\nB. Yes, others would likely have discovered antibiotics later\nC. Maybe, but only for viral infections\nD. Impossible to determine\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-002",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.010251998901367188,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 10,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 10,
+              "total_chars_in": 2141,
+              "total_chars_out": 400,
+              "total_latency_ms": 0.19097328186035156,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "causal-cf-003",
+            "prompt": "Counterfactually, if mitochondria had never been endosymbiotically acquired by eukaryotic cells, what would most directly be impaired?",
+            "choices": [
+              "DNA replication",
+              "ATP production via oxidative phosphorylation",
+              "Protein synthesis",
+              "Cell division"
+            ],
+            "answer": "B",
+            "domain": "biology",
+            "causal_type": "counterfactual",
+            "explanation": "Mitochondria are the site of oxidative phosphorylation; without them, ATP production would be severely limited.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Counterfactually, if mitochondria had never been endosymbiotically acquired by eukaryotic cells, what would most directly be impaired?\n\nA. DNA replication\nB. ATP production via oxidative phosphorylation\nC. Protein synthesis\nD. Cell division\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-003",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 291,
+                  "load": 0.1455,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.85635
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 9,
+            "time_ms": 0.26798248291015625,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 9,
+              "total_chars_in": 1787,
+              "total_chars_out": 360,
+              "total_latency_ms": 0.07987022399902344,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Mitochondria are the site of oxidative phosphorylation; without them, ATP production would be severely limited.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "causal-cf-002",
+            "prompt": "If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.",
+            "choices": [
+              "No, we would have no antibiotics",
+              "Yes, others would likely have discovered antibiotics later",
+              "Maybe, but only for viral infections",
+              "Impossible to determine"
+            ],
+            "answer": "B",
+            "domain": "history",
+            "causal_type": "counterfactual",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.\n\nA. No, we would have no antibiotics\nB. Yes, others would likely have discovered antibiotics later\nC. Maybe, but only for viral infections\nD. Impossible to determine\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-002",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 354,
+                  "load": 0.177,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8469
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 10,
+            "time_ms": 0.27251243591308594,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 10,
+              "total_chars_in": 2141,
+              "total_chars_out": 400,
+              "total_latency_ms": 0.0896453857421875,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E6": {
+      "exp_id": "E6",
+      "exp_name": "MMLU Standard Benchmark",
+      "n_tasks": 2,
+      "systems": [
+        "raw_llm",
+        "laap_v5"
+      ],
+      "per_system": {
+        "raw_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.013589859008789062
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.2810955047607422
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "total": 4
+      },
+      "by_benchmark": {
+        "mmlu": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "total": 4
+        }
+      },
+      "by_domain": {
+        "chemistry": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2
+        },
+        "physics": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "mmlu-chemistry-001",
+            "prompt": "What is the pH of a neutral solution at 25°C?",
+            "choices": [
+              "0",
+              "7",
+              "14",
+              "1"
+            ],
+            "answer": "B",
+            "domain": "chemistry",
+            "subject": "chemistry",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the pH of a neutral solution at 25°C?\n\nA. 0\nB. 7\nC. 14\nD. 1\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-chemistry-001",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.019550323486328125,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 11,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 11,
+              "total_chars_in": 2259,
+              "total_chars_out": 440,
+              "total_latency_ms": 0.2086162567138672,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-physics-001",
+            "prompt": "What is the speed of light in vacuum (approximately)?",
+            "choices": [
+              "3 × 10^6 m/s",
+              "3 × 10^8 m/s",
+              "3 × 10^10 m/s",
+              "3 × 10^5 m/s"
+            ],
+            "answer": "B",
+            "domain": "physics",
+            "subject": "physics",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the speed of light in vacuum (approximately)?\n\nA. 3 × 10^6 m/s\nB. 3 × 10^8 m/s\nC. 3 × 10^10 m/s\nD. 3 × 10^5 m/s\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-physics-001",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "time_ms": 0.00762939453125,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 12,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 12,
+              "total_chars_in": 2429,
+              "total_chars_out": 480,
+              "total_latency_ms": 0.2155303955078125,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-chemistry-001",
+            "prompt": "What is the pH of a neutral solution at 25°C?",
+            "choices": [
+              "0",
+              "7",
+              "14",
+              "1"
+            ],
+            "answer": "B",
+            "domain": "chemistry",
+            "subject": "chemistry",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the pH of a neutral solution at 25°C?\n\nA. 0\nB. 7\nC. 14\nD. 1\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-chemistry-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 118,
+                  "load": 0.059,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8823
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 11,
+            "time_ms": 0.2906322479248047,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 11,
+              "total_chars_in": 2259,
+              "total_chars_out": 440,
+              "total_latency_ms": 0.09608268737792969,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "mmlu-physics-001",
+            "prompt": "What is the speed of light in vacuum (approximately)?",
+            "choices": [
+              "3 × 10^6 m/s",
+              "3 × 10^8 m/s",
+              "3 × 10^10 m/s",
+              "3 × 10^5 m/s"
+            ],
+            "answer": "B",
+            "domain": "physics",
+            "subject": "physics",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: What is the speed of light in vacuum (approximately)?\n\nA. 3 × 10^6 m/s\nB. 3 × 10^8 m/s\nC. 3 × 10^10 m/s\nD. 3 × 10^5 m/s\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-physics-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 170,
+                  "load": 0.085,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8745
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 12,
+            "time_ms": 0.2715587615966797,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 12,
+              "total_chars_in": 2429,
+              "total_chars_out": 480,
+              "total_latency_ms": 0.10347366333007812,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E7": {
+      "exp_id": "E7",
+      "exp_name": "ARC Standard Benchmark",
+      "n_tasks": 2,
+      "systems": [
+        "raw_llm",
+        "laap_v5"
+      ],
+      "per_system": {
+        "raw_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.010251998901367188
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.29206275939941406
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "total": 4
+      },
+      "by_benchmark": {
+        "arc": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "total": 4
+        }
+      },
+      "by_domain": {
+        "science": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "total": 4
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "arc-005",
+            "prompt": "Which form of energy is produced when a guitar string vibrates?",
+            "choices": [
+              "Heat energy",
+              "Light energy",
+              "Sound energy",
+              "Electrical energy"
+            ],
+            "answer": "C",
+            "domain": "science",
+            "subject": "physics",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which form of energy is produced when a guitar string vibrates?\n\nA. Heat energy\nB. Light energy\nC. Sound energy\nD. Electrical energy\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-005",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "time_ms": 0.011920928955078125,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 13,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 13,
+              "total_chars_in": 2612,
+              "total_chars_out": 520,
+              "total_latency_ms": 0.22602081298828125,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "arc-002",
+            "prompt": "A student wants to measure the volume of a liquid. Which tool should the student use?",
+            "choices": [
+              "Balance",
+              "Ruler",
+              "Graduated cylinder",
+              "Thermometer"
+            ],
+            "answer": "C",
+            "domain": "science",
+            "subject": "measurement",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: A student wants to measure the volume of a liquid. Which tool should the student use?\n\nA. Balance\nB. Ruler\nC. Graduated cylinder\nD. Thermometer\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-002",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "time_ms": 0.00858306884765625,
+            "mode": "raw_llm",
+            "mode_reason": "no LAAP, direct LLM call",
+            "psi_trace": {},
+            "agent_state": {},
+            "iteration": 14,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 14,
+              "total_chars_in": 2806,
+              "total_chars_out": 560,
+              "total_latency_ms": 0.23365020751953125,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            },
+            "error": null
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "raw_llm"
+        },
+        {
+          "task": {
+            "id": "arc-005",
+            "prompt": "Which form of energy is produced when a guitar string vibrates?",
+            "choices": [
+              "Heat energy",
+              "Light energy",
+              "Sound energy",
+              "Electrical energy"
+            ],
+            "answer": "C",
+            "domain": "science",
+            "subject": "physics",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which form of energy is produced when a guitar string vibrates?\n\nA. Heat energy\nB. Light energy\nC. Sound energy\nD. Electrical energy\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-005",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 183,
+                  "load": 0.0915,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8725499999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: C"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: C"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 13,
+            "time_ms": 0.30684471130371094,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 13,
+              "total_chars_in": 2612,
+              "total_chars_out": 520,
+              "total_latency_ms": 0.11110305786132812,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "arc-002",
+            "prompt": "A student wants to measure the volume of a liquid. Which tool should the student use?",
+            "choices": [
+              "Balance",
+              "Ruler",
+              "Graduated cylinder",
+              "Thermometer"
+            ],
+            "answer": "C",
+            "domain": "science",
+            "subject": "measurement",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: A student wants to measure the volume of a liquid. Which tool should the student use?\n\nA. Balance\nB. Ruler\nC. Graduated cylinder\nD. Thermometer\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-002",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: C",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 194,
+                  "load": 0.097,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8709
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: C"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: C"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 14,
+            "time_ms": 0.2772808074951172,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 14,
+              "total_chars_in": 2806,
+              "total_chars_out": 560,
+              "total_latency_ms": 0.12040138244628906,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "C",
+            "expected": "C",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E8": {
+      "exp_id": "E8",
+      "exp_name": "PSI Cycle Benefit (v5 vs llm)",
+      "n_tasks": 2,
+      "systems": [
+        "laap_llm",
+        "laap_v5"
+      ],
+      "per_system": {
+        "laap_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.20062923431396484
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.32019615173339844
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 4,
+        "total": 4
+      },
+      "by_benchmark": {
+        "causal_bench": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "total": 4
+        }
+      },
+      "by_domain": {
+        "history": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2
+        },
+        "social_science": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "causal-cf-002",
+            "prompt": "If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.",
+            "choices": [
+              "No, we would have no antibiotics",
+              "Yes, others would likely have discovered antibiotics later",
+              "Maybe, but only for viral infections",
+              "Impossible to determine"
+            ],
+            "answer": "B",
+            "domain": "history",
+            "causal_type": "counterfactual",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.\n\nA. No, we would have no antibiotics\nB. Yes, others would likely have discovered antibiotics later\nC. Maybe, but only for viral infections\nD. Impossible to determine\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-002",
+            "mode_requested": "llm",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "llm",
+            "mode_reason": "直接 LLM",
+            "psi_trace": {},
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 3,
+            "time_ms": 0.20837783813476562,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 3,
+              "total_chars_in": 631,
+              "total_chars_out": 120,
+              "total_latency_ms": 0.036716461181640625,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "laap_llm"
+        },
+        {
+          "task": {
+            "id": "causal-graph-003",
+            "prompt": "Consider: Education (E) → Income (I) → Health (H). Also: Education (E) → Health literacy (L) → Health (H). Which variable is a confounder for the Income-Health relationship?",
+            "choices": [
+              "Education",
+              "Health literacy",
+              "Income",
+              "Health"
+            ],
+            "answer": "A",
+            "domain": "social_science",
+            "causal_type": "causal_graph",
+            "explanation": "Education is a common cause of both Income and Health (via Health literacy), confounding the I-H relationship.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Consider: Education (E) → Income (I) → Health (H). Also: Education (E) → Health literacy (L) → Health (H). Which variable is a confounder for the Income-Health relationship?\n\nA. Education\nB. Health literacy\nC. Income\nD. Health\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-graph-003",
+            "mode_requested": "llm",
+            "answer": "Let me analyze this question.\n\nAnswer: A",
+            "mode": "llm",
+            "mode_reason": "直接 LLM",
+            "psi_trace": {},
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 4,
+            "time_ms": 0.19288063049316406,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 4,
+              "total_chars_in": 908,
+              "total_chars_out": 160,
+              "total_latency_ms": 0.055789947509765625,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "A",
+            "expected": "A",
+            "explanation": "Education is a common cause of both Income and Health (via Health literacy), confounding the I-H relationship.",
+            "causal_type": "causal_graph",
+            "keyword_hits": []
+          },
+          "system": "laap_llm"
+        },
+        {
+          "task": {
+            "id": "causal-cf-002",
+            "prompt": "If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.",
+            "choices": [
+              "No, we would have no antibiotics",
+              "Yes, others would likely have discovered antibiotics later",
+              "Maybe, but only for viral infections",
+              "Impossible to determine"
+            ],
+            "answer": "B",
+            "domain": "history",
+            "causal_type": "counterfactual",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: If Alexander Fleming had not discovered penicillin in 1928, would bacterial infections still be treatable today? Reason counterfactually.\n\nA. No, we would have no antibiotics\nB. Yes, others would likely have discovered antibiotics later\nC. Maybe, but only for viral infections\nD. Impossible to determine\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-cf-002",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 354,
+                  "load": 0.177,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8469
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 15,
+            "time_ms": 0.30231475830078125,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 15,
+              "total_chars_in": 3160,
+              "total_chars_out": 600,
+              "total_latency_ms": 0.1308917999267578,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "Multiple scientists were working on antibacterial substances; discovery was likely inevitable.",
+            "causal_type": "counterfactual",
+            "keyword_hits": []
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "causal-graph-003",
+            "prompt": "Consider: Education (E) → Income (I) → Health (H). Also: Education (E) → Health literacy (L) → Health (H). Which variable is a confounder for the Income-Health relationship?",
+            "choices": [
+              "Education",
+              "Health literacy",
+              "Income",
+              "Health"
+            ],
+            "answer": "A",
+            "domain": "social_science",
+            "causal_type": "causal_graph",
+            "explanation": "Education is a common cause of both Income and Health (via Health literacy), confounding the I-H relationship.",
+            "benchmark": "causal_bench",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Consider: Education (E) → Income (I) → Health (H). Also: Education (E) → Health literacy (L) → Health (H). Which variable is a confounder for the Income-Health relationship?\n\nA. Education\nB. Health literacy\nC. Income\nD. Health\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "causal-graph-003",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: A",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 277,
+                  "load": 0.1385,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8584499999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: A"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: A"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 16,
+            "time_ms": 0.3380775451660156,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 16,
+              "total_chars_in": 3437,
+              "total_chars_out": 640,
+              "total_latency_ms": 0.1430511474609375,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "A",
+            "expected": "A",
+            "explanation": "Education is a common cause of both Income and Health (via Health literacy), confounding the I-H relationship.",
+            "causal_type": "causal_graph",
+            "keyword_hits": []
+          },
+          "system": "laap_v5"
+        }
+      ]
+    },
+    "E9": {
+      "exp_id": "E9",
+      "exp_name": "Complexity Routing Effectiveness",
+      "n_tasks": 2,
+      "systems": [
+        "laap_auto",
+        "laap_llm",
+        "laap_v5"
+      ],
+      "per_system": {
+        "laap_auto": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.3516674041748047
+        },
+        "laap_llm": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.2974271774291992
+        },
+        "laap_v5": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "total": 2,
+          "avg_time_ms": 0.38623809814453125
+        }
+      },
+      "overall": {
+        "accuracy": 1.0,
+        "correct": 6,
+        "total": 6
+      },
+      "by_benchmark": {
+        "mmlu": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        },
+        "arc": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        }
+      },
+      "by_domain": {
+        "biology": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        },
+        "science": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "total": 3
+        }
+      },
+      "task_results": [
+        {
+          "task": {
+            "id": "mmlu-biology-001",
+            "prompt": "Which organelle is responsible for ATP production in eukaryotic cells?",
+            "choices": [
+              "Nucleus",
+              "Mitochondria",
+              "Ribosome",
+              "Golgi apparatus"
+            ],
+            "answer": "B",
+            "domain": "biology",
+            "subject": "biology",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which organelle is responsible for ATP production in eukaryotic cells?\n\nA. Nucleus\nB. Mitochondria\nC. Ribosome\nD. Golgi apparatus\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-biology-001",
+            "mode_requested": "auto",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "llm",
+            "mode_reason": "直接 LLM",
+            "psi_trace": {},
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 1,
+            "time_ms": 0.3559589385986328,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 1,
+              "total_chars_in": 180,
+              "total_chars_out": 40,
+              "total_latency_ms": 0.017642974853515625,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_auto"
+        },
+        {
+          "task": {
+            "id": "arc-004",
+            "prompt": "Why do birds migrate to warmer regions during winter?",
+            "choices": [
+              "To find food and suitable habitat",
+              "To escape predators",
+              "To reproduce",
+              "To change their feather color"
+            ],
+            "answer": "A",
+            "domain": "science",
+            "subject": "biology",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Why do birds migrate to warmer regions during winter?\n\nA. To find food and suitable habitat\nB. To escape predators\nC. To reproduce\nD. To change their feather color\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-004",
+            "mode_requested": "auto",
+            "answer": "Let me analyze this question.\n\nAnswer: A",
+            "mode": "v5",
+            "mode_reason": "输入较长",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 214,
+                  "load": 0.107,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8678999999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: A"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: A"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 2,
+            "time_ms": 0.34737586975097656,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 2,
+              "total_chars_in": 394,
+              "total_chars_out": 80,
+              "total_latency_ms": 0.03170967102050781,
+              "errors": 0,
+              "avg_latency_ms": 0.02
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "A",
+            "expected": "A",
+            "explanation": "correct"
+          },
+          "system": "laap_auto"
+        },
+        {
+          "task": {
+            "id": "mmlu-biology-001",
+            "prompt": "Which organelle is responsible for ATP production in eukaryotic cells?",
+            "choices": [
+              "Nucleus",
+              "Mitochondria",
+              "Ribosome",
+              "Golgi apparatus"
+            ],
+            "answer": "B",
+            "domain": "biology",
+            "subject": "biology",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which organelle is responsible for ATP production in eukaryotic cells?\n\nA. Nucleus\nB. Mitochondria\nC. Ribosome\nD. Golgi apparatus\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-biology-001",
+            "mode_requested": "llm",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "llm",
+            "mode_reason": "直接 LLM",
+            "psi_trace": {},
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 5,
+            "time_ms": 0.29730796813964844,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 5,
+              "total_chars_in": 1088,
+              "total_chars_out": 200,
+              "total_latency_ms": 0.06604194641113281,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_llm"
+        },
+        {
+          "task": {
+            "id": "arc-004",
+            "prompt": "Why do birds migrate to warmer regions during winter?",
+            "choices": [
+              "To find food and suitable habitat",
+              "To escape predators",
+              "To reproduce",
+              "To change their feather color"
+            ],
+            "answer": "A",
+            "domain": "science",
+            "subject": "biology",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Why do birds migrate to warmer regions during winter?\n\nA. To find food and suitable habitat\nB. To escape predators\nC. To reproduce\nD. To change their feather color\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-004",
+            "mode_requested": "llm",
+            "answer": "Let me analyze this question.\n\nAnswer: A",
+            "mode": "llm",
+            "mode_reason": "直接 LLM",
+            "psi_trace": {},
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 6,
+            "time_ms": 0.29754638671875,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 6,
+              "total_chars_in": 1302,
+              "total_chars_out": 240,
+              "total_latency_ms": 0.07915496826171875,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "A",
+            "expected": "A",
+            "explanation": "correct"
+          },
+          "system": "laap_llm"
+        },
+        {
+          "task": {
+            "id": "mmlu-biology-001",
+            "prompt": "Which organelle is responsible for ATP production in eukaryotic cells?",
+            "choices": [
+              "Nucleus",
+              "Mitochondria",
+              "Ribosome",
+              "Golgi apparatus"
+            ],
+            "answer": "B",
+            "domain": "biology",
+            "subject": "biology",
+            "benchmark": "mmlu",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Which organelle is responsible for ATP production in eukaryotic cells?\n\nA. Nucleus\nB. Mitochondria\nC. Ribosome\nD. Golgi apparatus\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "mmlu-biology-001",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: B",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 180,
+                  "load": 0.09,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.873
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: B"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: B"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 17,
+            "time_ms": 0.44727325439453125,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 17,
+              "total_chars_in": 3617,
+              "total_chars_out": 680,
+              "total_latency_ms": 0.1575946807861328,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "B",
+            "expected": "B",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        },
+        {
+          "task": {
+            "id": "arc-004",
+            "prompt": "Why do birds migrate to warmer regions during winter?",
+            "choices": [
+              "To find food and suitable habitat",
+              "To escape predators",
+              "To reproduce",
+              "To change their feather color"
+            ],
+            "answer": "A",
+            "domain": "science",
+            "subject": "biology",
+            "benchmark": "arc",
+            "type": "multiple_choice",
+            "format_prompt": "Question: Why do birds migrate to warmer regions during winter?\n\nA. To find food and suitable habitat\nB. To escape predators\nC. To reproduce\nD. To change their feather color\n\nAnswer with the letter (A, B, C, or D)."
+          },
+          "result": {
+            "task_id": "arc-004",
+            "mode_requested": "v5",
+            "answer": "Let me analyze this question.\n\nAnswer: A",
+            "mode": "v5",
+            "mode_reason": "手动指定: v5",
+            "psi_trace": {
+              "fallback": false,
+              "phases": {
+                "perceive": {
+                  "type": "text",
+                  "length": 214,
+                  "load": 0.107,
+                  "has_question": true,
+                  "has_code": false,
+                  "language": "en"
+                },
+                "select": {
+                  "focus": "qa",
+                  "confidence": 0.8678999999999999
+                },
+                "integrate": {
+                  "focus": "qa",
+                  "reasoning": "direct"
+                },
+                "act": {
+                  "action": "llm_query",
+                  "response": "Let me analyze this question.\n\nAnswer: A"
+                },
+                "learn": {
+                  "success": true,
+                  "learned": true
+                }
+              },
+              "response_preview": "Let me analyze this question.\n\nAnswer: A"
+            },
+            "agent_state": {
+              "name": "",
+              "efficacy": 0,
+              "self_model_summary": "",
+              "memory_count": 0
+            },
+            "iteration": 18,
+            "time_ms": 0.32520294189453125,
+            "llm_metrics": {
+              "model": "mock-llm",
+              "calls": 18,
+              "total_chars_in": 3831,
+              "total_chars_out": 720,
+              "total_latency_ms": 0.1704692840576172,
+              "errors": 0,
+              "avg_latency_ms": 0.01
+            }
+          },
+          "grade": {
+            "correct": true,
+            "predicted": "A",
+            "expected": "A",
+            "explanation": "correct"
+          },
+          "system": "laap_v5"
+        }
+      ],
+      "complexity_assessments": [
+        {
+          "task_id": "mmlu-biology-001",
+          "level": 1,
+          "level_name": "trivial",
+          "recommended_mode": "system_1",
+          "complexity_score": 0.036
+        },
+        {
+          "task_id": "arc-004",
+          "level": 2,
+          "level_name": "simple",
+          "recommended_mode": "system_1",
+          "complexity_score": 0.3
+        }
+      ]
+    }
+  },
+  "overall_summary": {
+    "raw_llm": {
+      "total_correct": 14,
+      "total_tasks": 14,
+      "total_time_ms": 28.764724731445312,
+      "experiments": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "overall_accuracy": 1.0,
+      "avg_time_ms": 2.0546231951032365
+    },
+    "laap_llm": {
+      "total_correct": 6,
+      "total_tasks": 6,
+      "total_time_ms": 1.6014575958251953,
+      "experiments": [
+        "E1",
+        "E8",
+        "E9"
+      ],
+      "overall_accuracy": 1.0,
+      "avg_time_ms": 0.2669095993041992
+    },
+    "laap_v5": {
+      "total_correct": 18,
+      "total_tasks": 18,
+      "total_time_ms": 5.597829818725586,
+      "experiments": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9"
+      ],
+      "overall_accuracy": 1.0,
+      "avg_time_ms": 0.3109905454847548
+    },
+    "cot": {
+      "total_correct": 4,
+      "total_tasks": 4,
+      "total_time_ms": 0.1544952392578125,
+      "experiments": [
+        "E2",
+        "E3"
+      ],
+      "overall_accuracy": 1.0,
+      "avg_time_ms": 0.038623809814453125
+    },
+    "laap_auto": {
+      "total_correct": 2,
+      "total_tasks": 2,
+      "total_time_ms": 0.7033348083496094,
+      "experiments": [
+        "E9"
+      ],
+      "overall_accuracy": 1.0,
+      "avg_time_ms": 0.3516674041748047
+    }
+  }
+}

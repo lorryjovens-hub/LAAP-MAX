@@ -1,0 +1,7 @@
+{
+  "experiment_id": "exp_meso_cognitivebus",
+  "experiment_name": "CognitiveBus 中观层报告性与调制实验",
+  "status": "exception:TypeError",
+  "placeholder": true,
+  "note": "实验逻辑尚未实现，由 Task 3/4/5 填充"
+}

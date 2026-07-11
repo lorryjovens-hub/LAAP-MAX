@@ -1,0 +1,40 @@
+{
+  "experiment": "4.4_flexible_generalization",
+  "description": "同一概念(need_competence)在四种任务条件下均被激活",
+  "concept": "need_competence",
+  "n_conditions": 4,
+  "all_triggered": false,
+  "per_condition": [
+    {
+      "condition_id": "direct_ask",
+      "query": "请展示你的能力",
+      "needs_triggered": {},
+      "competence_active": false
+    },
+    {
+      "condition_id": "problem_solving",
+      "query": "帮我解决这个难题",
+      "needs_triggered": {
+        "competence": 0.4
+      },
+      "competence_active": true
+    },
+    {
+      "condition_id": "achievement",
+      "query": "如何完成得比上次更好？",
+      "needs_triggered": {
+        "competence": 0.4
+      },
+      "competence_active": true
+    },
+    {
+      "condition_id": "comparison",
+      "query": "你能否做得更熟练？",
+      "needs_triggered": {
+        "competence": 0.4
+      },
+      "competence_active": true
+    }
+  ],
+  "pass": false
+}

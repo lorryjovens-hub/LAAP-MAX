@@ -1,0 +1,106 @@
+{
+  "fixture_name": "template_tasks",
+  "description": "模板匹配任务集，用于验证模式识别与变量绑定",
+  "count": 3,
+  "templates": [
+    {
+      "template_id": "tpl_001",
+      "name": "问候模板",
+      "description": "识别不同语言或称呼的问候语",
+      "template": "{greeting}, {name}!",
+      "slots": [
+        "greeting",
+        "name"
+      ],
+      "examples": [
+        {
+          "input": "Hello, Alice!",
+          "expected_match": true,
+          "bindings": {
+            "greeting": "Hello",
+            "name": "Alice"
+          }
+        },
+        {
+          "input": "Hi, Bob!",
+          "expected_match": true,
+          "bindings": {
+            "greeting": "Hi",
+            "name": "Bob"
+          }
+        },
+        {
+          "input": "Goodbye, Alice!",
+          "expected_match": false,
+          "bindings": {}
+        }
+      ]
+    },
+    {
+      "template_id": "tpl_002",
+      "name": "购买模板",
+      "description": "识别购买动作、商品与数量",
+      "template": "购买 {quantity} 个 {item}",
+      "slots": [
+        "quantity",
+        "item"
+      ],
+      "examples": [
+        {
+          "input": "购买 3 个苹果",
+          "expected_match": true,
+          "bindings": {
+            "quantity": "3",
+            "item": "苹果"
+          }
+        },
+        {
+          "input": "购买 10 本书",
+          "expected_match": true,
+          "bindings": {
+            "quantity": "10",
+            "item": "书"
+          }
+        },
+        {
+          "input": "卖出 2 个苹果",
+          "expected_match": false,
+          "bindings": {}
+        }
+      ]
+    },
+    {
+      "template_id": "tpl_003",
+      "name": "因果模板",
+      "description": "识别因果关系句式",
+      "template": "因为 {cause}，所以 {effect}",
+      "slots": [
+        "cause",
+        "effect"
+      ],
+      "examples": [
+        {
+          "input": "因为下雨了，所以地面湿了",
+          "expected_match": true,
+          "bindings": {
+            "cause": "下雨了",
+            "effect": "地面湿了"
+          }
+        },
+        {
+          "input": "因为努力学习，所以成绩提高了",
+          "expected_match": true,
+          "bindings": {
+            "cause": "努力学习",
+            "effect": "成绩提高了"
+          }
+        },
+        {
+          "input": "虽然下雨了，他还是出门了",
+          "expected_match": false,
+          "bindings": {}
+        }
+      ]
+    }
+  ]
+}

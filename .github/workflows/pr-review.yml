@@ -1,0 +1,27 @@
+name: LAAP Colony PR Review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+  pull-requests: write
+env:
+  GH_TOKEN: ${{ github.token }}
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Get PR diff
+        run: gh pr diff ${{ github.event.pull_request.number }} > /tmp/pr.diff
+      - name: Set up LAAP review script
+        run: cp laap/colony/pr_review_action.py /tmp/review.py
+      - name: Run LAAP PR Review
+        run: python3 /tmp/review.py /tmp/pr.diff > /tmp/review.md
+      - name: Post PR Review Comment
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file /tmp/review.md

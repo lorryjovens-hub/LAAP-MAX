@@ -1,0 +1,37 @@
+{
+  "experiment_id": "exp_meso_cognitivebus",
+  "experiment_name": "CognitiveBus 中观层报告性与调制实验",
+  "description": "验证 CognitiveBus 的 reportability、modulation 与跨模块信息整合指标。",
+  "backend": "MockCognitiveBus",
+  "sub_experiments": {
+    "4.1_reportability": {
+      "pass": false,
+      "overall_accuracy": 0.5,
+      "n_samples": 120
+    },
+    "4.2_modulation": {
+      "pass": true,
+      "shift_latency_ticks": 1,
+      "local_continued": true
+    },
+    "4.3_reasoning_mediation": {
+      "pass": false,
+      "all_answers_changed_after_ablation": false,
+      "n_tasks": 3
+    },
+    "4.4_flexible_generalization": {
+      "pass": false,
+      "all_triggered": false,
+      "n_conditions": 4
+    },
+    "4.5_selective_necessity": {
+      "pass": false,
+      "multi_step_p_value": 1.0,
+      "template_p_value": 1.0,
+      "multi_step_significant_drop": false,
+      "template_no_significant_change": true
+    }
+  },
+  "all_passed": false,
+  "status": "failed"
+}

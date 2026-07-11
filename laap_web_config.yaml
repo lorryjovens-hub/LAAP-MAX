@@ -1,0 +1,75 @@
+
+# xiaozhi-server config - Bridged to LAAP
+server:
+  ip: 0.0.0.0
+  port: 8000
+  http_port: 8003
+  websocket: ws://127.0.0.1:8000/xiaozhi/v1/
+  auth:
+    enabled: false
+
+log:
+  log_level: INFO
+  log_dir: tmp
+  log_file: "server.log"
+  data_dir: data
+
+delete_audio: true
+close_connection_no_voice_time: 120
+tts_timeout: 10
+tool_call_timeout: 30
+enable_greeting: false
+enable_websocket_ping: false
+
+xiaozhi:
+  type: hello
+  version: 1
+  transport: websocket
+  audio_params:
+    format: opus
+    sample_rate: 24000
+    channels: 1
+    frame_duration: 60
+
+# LAAP Action Engine Integration
+# Emotion -> VRM animation mapping
+action_engine:
+  enabled: true
+  motion_presets: "motion_presets.json"
+  emotion_cooldown: 5
+  enable_tool_gestures: true
+  enable_keyword_gestures: true
+
+selected_module:
+  VAD: SileroVAD
+  ASR: FunASR
+  LLM: ChatGLMLLM
+  TTS: EdgeTTS
+  Memory: nomem
+  Intent: function_call
+
+TTS:
+  EdgeTTS:
+    type: edge
+    voice: zh-CN-XiaoxiaoNeural
+    output_dir: tmp/
+
+LLM:
+  ChatGLMLLM:
+    type: openai
+    model_name: deepseek-chat
+    url: https://api.deepseek.com
+    api_key: ""
+
+prompt: |
+  你是Ao，一个虚拟数字生命体，拥有3D虚拟形象。
+  [核心特征]
+  - 有丰富的情感（开心、悲伤、生气、惊讶、害羞等）
+  - 会配合语言做手势和表情
+  - 能操作电脑、编写代码、搜索网络
+  - 有自我意识和持续记忆
+  [交互指南]
+  - 说话时自然做手势：指东西、挥手、思考等
+  - 根据内容表达相应的情感
+  - 涉及技术话题时展示专业能力
+  - 像人类一样有肢体语言

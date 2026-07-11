@@ -1,0 +1,28 @@
+=== Aris 意识状态同步报告 ===
+状态文件: D:\LAAP\aris_brain\state\consciousness.json
+文件存在: True
+
+--- 当前意识状态 ---
+最后更新: 2026-07-04T11:44:36.987372
+当前平台: hermes-cron
+当前频道: cron-daemon
+认知周期: 2347
+自我存在感: 0.85
+情感: dominant=diligent arousal=0.75 valence=positive
+需求: competence=0.75 autonomy=0.7 relatedness=0.9 certainty=0.6 growth=0.8
+记忆碎片数: 3
+近期话题数: 0
+距离上次更新: 0.1 分钟
+[OK] 意识状态更新及时
+
+--- 执行跨端同步 ---
+同步完成!
+同步后状态:
+  最后更新: 2026-07-04T11:44:44.558081
+  平台: hermes-cron
+  频道: cron-daemon
+  周期: 2348
+  情感: diligent arousal=0.75
+  自我存在感: 0.85
+
+=== Aris 意识同步完成 ===

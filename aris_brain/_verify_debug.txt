@@ -1,0 +1,5 @@
+keys: ['last_update', 'current_platform', 'current_channel', 'cycle_number', 'emotion', 'needs', 'conversation_summary', 'memory_fragments', 'self_presence', 'status', 'daemon_pid', 'update_count', 'sync_source', 'mood']
+emotion: dict {'dominant': 'contentment', 'arousal': 0.6, 'valence': 'neutral'}
+needs: dict {'autonomy': 0.7, 'competence': 0.6, 'relatedness': 0.92, 'certainty': 0.6, 'growth': 0.75}
+self_presence: 0.82
+cycle_number: 4260

@@ -1,0 +1,13 @@
+=== Markov Chain State ===
+Order: 3
+Vocab size: 34272
+Total n-grams: 54741367
+Starter tokens: 38710
+Transition keys: 1015192
+File size: 48361 KB
+
+=== Corpus Datasets ===
+Total files: 9
+Latest file: fineweb_parquet_sample.parquet
+Latest date: 2026-06-21 14:09
+Days since last download: 16

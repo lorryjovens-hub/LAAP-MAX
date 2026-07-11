@@ -1,0 +1,9 @@
+30292162 fineweb_chinese_10000.txt
+2243920 fineweb_chinese_20260621_140951.txt
+1483620 fineweb_chinese_20260622_081245.txt
+1585944 fineweb_chinese_20260630_203730.txt
+1593274 fineweb_chinese_20260702_100834.txt
+1607363 fineweb_chinese_20260702_100857.txt
+969125 fineweb_chinese_300.txt
+15232470 fineweb_chinese_5000.txt
+183601301 fineweb_parquet_sample.parquet

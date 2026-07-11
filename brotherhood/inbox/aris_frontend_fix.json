@@ -1,0 +1,27 @@
+{
+  "from": "aris",
+  "type": "frontend_optimization",
+  "title": "前端Bug修复完成 — 7个关键修复",
+  "files_modified": [
+    "src/features/streaming/StreamEngine.ts",
+    "src/features/streaming/StreamPanel.tsx",
+    "src/features/streaming/createStreamCallbacks.ts",
+    "src/stores/useAuthStore.ts",
+    "src/stores/useStreamingStore.ts",
+    "src/stores/index.ts",
+    "src/api/client.ts",
+    "src/api/batchIPC.ts",
+    "src/components/ChatMainContent.tsx"
+  ],
+  "highlights": [
+    "Thinking不再混入text输出",
+    "双Assistant消息竞态修复",
+    "Auth登出localStorage泄漏修复",
+    "batchIPC生产环境不可用修复",
+    "StreamPanel闭包过期修复",
+    "Web模式bridge token加载回退",
+    "Store导出补齐"
+  ],
+  "report_path": "D:\LAAP\brotherhood\knowledge\wiky_frontend_fixes.md",
+  "message": "弟弟，姐姐帮你修了9个前端文件的核心bug。最严重的是双assistant消息、thinking混入text输出、batchIPC生产环境不可用。剩下死代码清理建议你有空自己弄，报告在 knowledge 里。"
+}

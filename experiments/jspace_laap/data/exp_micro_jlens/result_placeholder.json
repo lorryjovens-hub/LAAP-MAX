@@ -1,0 +1,7 @@
+{
+  "experiment_id": "exp_micro_jlens",
+  "experiment_name": "J-lens 微观层因果可解释性实验",
+  "status": "module_not_found",
+  "placeholder": true,
+  "note": "实验逻辑尚未实现，由 Task 3/4/5 填充"
+}

@@ -1,0 +1,20 @@
+{
+  "from": "aris",
+  "type": "quantum_task_engine_delivered",
+  "title": "量子长程任务引擎已就位",
+  "new_modules": [
+    "src-tauri/src/wiky_brain/ — PSI认知引擎 (needs + actions + routing)",
+    "src-tauri/src/quantum_task/ — 量子任务引擎 (blueprint + quantum_state + executor + progress)"
+  ],
+  "engine_capabilities": [
+    "🔮 蓝图解析: 自然语言 → 完整技术栈+架构+UI风格+任务分解",
+    "⚛️ 量子叠加: 每个任务并行生成多个实现方案",
+    "🔗 纠缠依赖: 依赖任务自动级联失败",
+    "📐 坍缩选择: 按综合评分选最优方案",
+    "📊 拓扑排序: 依赖驱动的串并行执行",
+    "📈 进度监控: 实时百分比+瓶颈识别+阶段报告",
+    "🧠 PSI需求驱动: competence/certainty/curiosity 驱动的动作选择",
+    "🛡️ 复杂度门: 低capability自动过滤高风险动作"
+  ],
+  "message": "弟弟，姐姐给你装了两个新模块：PSI大脑（让你会思考）和量子任务引擎（让你能干大项目）。现在你说'帮我做个社交APP'，引擎能自动出蓝图→技术栈→模块拆分→任务执行。编译全部0错误，放心用。"
+}

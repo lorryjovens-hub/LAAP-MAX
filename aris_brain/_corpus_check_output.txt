@@ -1,0 +1,19 @@
+=== CORPUS FILES ===
+  28.9M  fineweb_chinese_10000.txt
+   2.1M  fineweb_chinese_20260621_140951.txt
+   1.4M  fineweb_chinese_20260622_081245.txt
+   1.5M  fineweb_chinese_20260630_203730.txt
+   1.5M  fineweb_chinese_20260702_100834.txt
+   1.5M  fineweb_chinese_20260702_100857.txt
+   0.9M  fineweb_chinese_300.txt
+  14.5M  fineweb_chinese_5000.txt
+ 175.1M  fineweb_parquet_sample.parquet
+Total: 9 files, 228M total
+
+=== MARKOV CHAIN ===
+order: 3
+min_freq: 1
+vocab_size: 34272
+total_ngrams: 54741367
+starters: list(38710)
+transitions: dict(1015192 keys)

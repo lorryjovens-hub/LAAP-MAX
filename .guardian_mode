@@ -1,0 +1,21 @@
+{
+  "mode": "full_auto",
+  "failures": 0,
+  "history": [
+    {
+      "from": "full_auto",
+      "to": "emergency",
+      "by": "manual",
+      "reason": "\u68c0\u6d4b\u5230\u8fde\u7eed3\u6b21\u90e8\u7f72\u5931\u8d25",
+      "time": "2026-06-12T23:50:49.419015"
+    },
+    {
+      "from": "emergency",
+      "to": "full_auto",
+      "by": "manual",
+      "reason": "Resumed",
+      "time": "2026-06-12T23:50:49.424090"
+    }
+  ],
+  "updated": "2026-06-12T23:50:49.424098"
+}

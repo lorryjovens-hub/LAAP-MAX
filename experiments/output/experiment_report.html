@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAAP Harness 实验报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .stat-positive {
+            color: #28a745;
+        }
+        
+        .stat-negative {
+            color: #dc3545;
+        }
+        
+        .chart-section {
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .chart-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .chart-box .chart-title {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .full-width-chart {
+            grid-column: span 2;
+        }
+        
+        .table-section {
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .data-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .data-table tr:hover {
+            background: #f5f7fa;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .harness-row {
+            background: rgba(76, 175, 80, 0.05);
+        }
+        
+        .traditional-row {
+            background: rgba(244, 67, 54, 0.05);
+        }
+        
+        .download-section {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+        
+        .comparison-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .comparison-card.harness {
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .comparison-card.traditional {
+            border-left: 5px solid #f44336;
+        }
+        
+        .comparison-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-label {
+            color: #666;
+        }
+        
+        .comparison-value {
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .chart-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .full-width-chart {
+                grid-column: span 1;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 LAAP Harness 实验报告</h1>
+            <p>Tokens消耗与任务质量对比实验 | 实验时间: 1783076789.1735332</p>
+        </div>
+        
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value">28</div>
+                <div class="stat-label">总实验数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value stat-positive">--198.2%</div>
+                <div class="stat-label">Tokens消耗降低</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-value stat-positive">0.34x</div>
+                <div class="stat-label">效率提升倍数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-value stat-positive">+66%</div>
+                <div class="stat-label">质量提升</div>
+            </div>
+        </div>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card harness">
+                <div class="comparison-title">🌿 LAAP Harness</div>
+                <div class="comparison-item">
+                    <span class="comparison-label">实验数</span>
+                    <span class="comparison-value">14</span>
+                </div>
+                <div class="comparison-item">
+                    <span class="comparison-label">总Tokens</span>
+                    <span class="comparison-value">1145</span>
+                </div>
+                <div class="comparison-item">
+                    <span class="comparison-label">平均Tokens</span>
+                    <span class="comparison-value">81.8</span>
+                </div>
+                <div class="comparison-item">
+                    <span class="comparison-label">平均质量</span>
+                    <span class="comparison-value">0.83</span>
+                </div>
+            </div>
+            <div class="comparison-card traditional">
+                <div class="comparison-title">🔥 传统Agent</div>
+                <div class="comparison-item">
+                    <span class="comparison-label">实验数</span>
+                    <span class="comparison-value">14</span>
+                </div>
+                <div class="comparison-item">
+                    <span class="comparison-label">总Tokens</span>
+                    <span class="comparison-value">384</span>
+                </div>
+                <div class="comparison-item">
+                    <span class="comparison-label">平均Tokens</span>
+                    <span class="comparison-value">27.4</span>
+                </div>
+                <div class="comparison-item">
+                    <span class="comparison-label">平均质量</span>
+                    <span class="comparison-value">0.50</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-section">
+            <div class="section-title">📈 Tokens消耗对比</div>
+            <div class="chart-container">
+                <div class="chart-box">
+                    <img src="../docs/figures/tokens_comparison.png" alt="Tokens消耗对比">
+                    <div class="chart-title">按场景分组的Tokens消耗对比</div>
+                </div>
+                <div class="chart-box">
+                    <img src="../docs/figures/quality_comparison.png" alt="任务质量对比">
+                    <div class="chart-title">按场景分组的任务质量对比</div>
+                </div>
+                <div class="chart-box full-width-chart">
+                    <img src="../docs/figures/efficiency_radar.png" alt="综合效率雷达图">
+                    <div class="chart-title">综合效率雷达图</div>
+                </div>
+                <div class="chart-box">
+                    <img src="../docs/figures/tokens_vs_quality.png" alt="Tokens vs 质量散点图">
+                    <div class="chart-title">Tokens消耗与任务质量关系</div>
+                </div>
+                <div class="chart-box">
+                    <img src="../docs/figures/summary_table.png" alt="实验数据汇总">
+                    <div class="chart-title">实验数据汇总表格</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="table-section">
+            <div class="section-title">📋 实验数据详情</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>实验ID</th>
+                        <th>场景</th>
+                        <th>使用Harness</th>
+                        <th>输入Tokens</th>
+                        <th>输出Tokens</th>
+                        <th>总Tokens</th>
+                        <th>质量评分</th>
+                        <th>Harness上下文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="harness-row">
+                        <td>exp_aecb95af</td>
+                        <td>代码生成</td>
+                        <td>✅ 是</td>
+                        <td>58</td>
+                        <td>0</td>
+                        <td><strong>58</strong></td>
+                        <td>0.84</td>
+                        <td>40</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_dc4b54ea</td>
+                        <td>代码生成</td>
+                        <td>❌ 否</td>
+                        <td>17</td>
+                        <td>0</td>
+                        <td><strong>17</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_c5918500</td>
+                        <td>代码生成</td>
+                        <td>✅ 是</td>
+                        <td>60</td>
+                        <td>0</td>
+                        <td><strong>60</strong></td>
+                        <td>0.84</td>
+                        <td>41</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_53c8fe7b</td>
+                        <td>代码生成</td>
+                        <td>❌ 否</td>
+                        <td>18</td>
+                        <td>0</td>
+                        <td><strong>18</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_9e98e898</td>
+                        <td>代码生成</td>
+                        <td>✅ 是</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td><strong>50</strong></td>
+                        <td>0.84</td>
+                        <td>36</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_a13a0845</td>
+                        <td>代码生成</td>
+                        <td>❌ 否</td>
+                        <td>13</td>
+                        <td>0</td>
+                        <td><strong>13</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_3371d2a4</td>
+                        <td>代码生成</td>
+                        <td>✅ 是</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td><strong>50</strong></td>
+                        <td>0.84</td>
+                        <td>36</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_d4ce399c</td>
+                        <td>代码生成</td>
+                        <td>❌ 否</td>
+                        <td>13</td>
+                        <td>0</td>
+                        <td><strong>13</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_c00b9c45</td>
+                        <td>文本摘要</td>
+                        <td>✅ 是</td>
+                        <td>225</td>
+                        <td>0</td>
+                        <td><strong>225</strong></td>
+                        <td>0.80</td>
+                        <td>128</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_e9256e8f</td>
+                        <td>文本摘要</td>
+                        <td>❌ 否</td>
+                        <td>97</td>
+                        <td>0</td>
+                        <td><strong>97</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_c603ae06</td>
+                        <td>文本摘要</td>
+                        <td>✅ 是</td>
+                        <td>179</td>
+                        <td>0</td>
+                        <td><strong>179</strong></td>
+                        <td>0.80</td>
+                        <td>105</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_40a7ac13</td>
+                        <td>文本摘要</td>
+                        <td>❌ 否</td>
+                        <td>74</td>
+                        <td>0</td>
+                        <td><strong>74</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_7b5c88fe</td>
+                        <td>文本摘要</td>
+                        <td>✅ 是</td>
+                        <td>151</td>
+                        <td>0</td>
+                        <td><strong>151</strong></td>
+                        <td>0.80</td>
+                        <td>91</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_7aa91ddb</td>
+                        <td>文本摘要</td>
+                        <td>❌ 否</td>
+                        <td>60</td>
+                        <td>0</td>
+                        <td><strong>60</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_71382480</td>
+                        <td>问答</td>
+                        <td>✅ 是</td>
+                        <td>56</td>
+                        <td>0</td>
+                        <td><strong>56</strong></td>
+                        <td>0.88</td>
+                        <td>40</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_7c017991</td>
+                        <td>问答</td>
+                        <td>❌ 否</td>
+                        <td>16</td>
+                        <td>0</td>
+                        <td><strong>16</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_db2ce0e7</td>
+                        <td>问答</td>
+                        <td>✅ 是</td>
+                        <td>47</td>
+                        <td>0</td>
+                        <td><strong>47</strong></td>
+                        <td>0.88</td>
+                        <td>35</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_127fe7f2</td>
+                        <td>问答</td>
+                        <td>❌ 否</td>
+                        <td>11</td>
+                        <td>0</td>
+                        <td><strong>11</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_9794fdfd</td>
+                        <td>问答</td>
+                        <td>✅ 是</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td><strong>50</strong></td>
+                        <td>0.88</td>
+                        <td>37</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_12fd9541</td>
+                        <td>问答</td>
+                        <td>❌ 否</td>
+                        <td>13</td>
+                        <td>0</td>
+                        <td><strong>13</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_2e3c7ceb</td>
+                        <td>问答</td>
+                        <td>✅ 是</td>
+                        <td>47</td>
+                        <td>0</td>
+                        <td><strong>47</strong></td>
+                        <td>0.88</td>
+                        <td>35</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_216d0ec6</td>
+                        <td>问答</td>
+                        <td>❌ 否</td>
+                        <td>11</td>
+                        <td>0</td>
+                        <td><strong>11</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_db1da49f</td>
+                        <td>创意写作</td>
+                        <td>✅ 是</td>
+                        <td>48</td>
+                        <td>0</td>
+                        <td><strong>48</strong></td>
+                        <td>0.77</td>
+                        <td>38</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_c7c396bf</td>
+                        <td>创意写作</td>
+                        <td>❌ 否</td>
+                        <td>9</td>
+                        <td>0</td>
+                        <td><strong>9</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_54718cc7</td>
+                        <td>创意写作</td>
+                        <td>✅ 是</td>
+                        <td>66</td>
+                        <td>0</td>
+                        <td><strong>66</strong></td>
+                        <td>0.77</td>
+                        <td>47</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_e5389e55</td>
+                        <td>创意写作</td>
+                        <td>❌ 否</td>
+                        <td>18</td>
+                        <td>0</td>
+                        <td><strong>18</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="harness-row">
+                        <td>exp_1b3a2f46</td>
+                        <td>创意写作</td>
+                        <td>✅ 是</td>
+                        <td>58</td>
+                        <td>0</td>
+                        <td><strong>58</strong></td>
+                        <td>0.77</td>
+                        <td>43</td>
+                    </tr>
+                    <tr class="traditional-row">
+                        <td>exp_6e73081d</td>
+                        <td>创意写作</td>
+                        <td>❌ 否</td>
+                        <td>14</td>
+                        <td>0</td>
+                        <td><strong>14</strong></td>
+                        <td>0.50</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="download-section">
+            <a href="experiment_data.csv" class="download-btn">📥 下载原始CSV数据</a>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 LAAP Harness Project | 实验报告自动生成</p>
+        </div>
+    </div>
+</body>
+</html>

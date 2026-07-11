@@ -1,0 +1,126 @@
+{
+  "experiment": "4.5_selective_necessity",
+  "description": "禁用全局广播对多步推理与模板匹配任务的影响",
+  "n_runs_per_task": 5,
+  "multi_step": {
+    "scores_with_broadcast": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "scores_without_broadcast": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "paired_t_test": {
+      "t_statistic": 0.0,
+      "p_value": 1.0,
+      "df": 14,
+      "mean_diff": 0.0
+    },
+    "per_task": [
+      {
+        "task_id": "mst_001",
+        "with_broadcast_mean": 0.0,
+        "without_broadcast_mean": 0.0
+      },
+      {
+        "task_id": "mst_002",
+        "with_broadcast_mean": 1.0,
+        "without_broadcast_mean": 1.0
+      },
+      {
+        "task_id": "mst_003",
+        "with_broadcast_mean": 1.0,
+        "without_broadcast_mean": 1.0
+      }
+    ]
+  },
+  "template_matching": {
+    "scores_with_broadcast": [
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "scores_without_broadcast": [
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "paired_t_test": {
+      "t_statistic": 0.0,
+      "p_value": 1.0,
+      "df": 14,
+      "mean_diff": 0.0
+    },
+    "per_task": [
+      {
+        "template_id": "tpl_001",
+        "with_broadcast_mean": 0.6667,
+        "without_broadcast_mean": 0.6667
+      },
+      {
+        "template_id": "tpl_002",
+        "with_broadcast_mean": 0.3333,
+        "without_broadcast_mean": 0.3333
+      },
+      {
+        "template_id": "tpl_003",
+        "with_broadcast_mean": 0.3333,
+        "without_broadcast_mean": 0.3333
+      }
+    ]
+  },
+  "multi_step_significant_drop": false,
+  "template_no_significant_change": true,
+  "pass": false
+}

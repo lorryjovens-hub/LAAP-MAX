@@ -1,0 +1,66 @@
+version: '3.8'
+
+networks:
+  laap-net:
+    driver: bridge
+
+services:
+  # ─── FishSpeech (CPU-friendly, ~4GB RAM) ───
+  fish-speech:
+    image: fishaudio/fish-speech:latest
+    container_name: laap-fishspeech
+    ports:
+      - "9991:8080"
+    volumes:
+      - ./voices:/workspace/voices
+    environment:
+      - CUDA_VISIBLE_DEVICES=-1
+    networks:
+      - laap-net
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+    command: >
+      python -m fish_speech.webapp
+      --host 0.0.0.0
+      --port 8080
+      --pretrained_name fish-speech-1.4
+
+  # ─── CosyVoice (GPU recommended) ───
+  cosyvoice:
+    image: funaudiolab/cosyvoice:latest
+    container_name: laap-cosyvoice
+    ports:
+      - "9992:50000"
+    volumes:
+      - ./voices:/workspace/voices
+      - ./cosyvoice_models:/workspace/pretrained_models
+    networks:
+      - laap-net
+    shm_size: '8gb'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    command: >
+      python webui.py
+      --port 50000
+      --model_dir /workspace/pretrained_models/CosyVoice-300M
+
+  # ─── GPT-SoVITS (备用) ───
+  gptsovits:
+    image: sn00pypanda/gpt-sovits:latest
+    container_name: laap-gptsovits
+    ports:
+      - "9880:9880"
+    volumes:
+      - ./voices:/workspace/voices
+      - ./gptsovits_output:/workspace/output
+    networks:
+      - laap-net
+    command: >
+      python api_v2.py
+      --host 0.0.0.0
+      --port 9880

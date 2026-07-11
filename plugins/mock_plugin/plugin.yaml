@@ -1,0 +1,6 @@
+name: mock_plugin
+version: 0.1.0
+description: Example plugin that registers a mock tool.
+entrypoint: main
+dependencies: []
+hooks: {}

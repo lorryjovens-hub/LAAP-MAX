@@ -1,0 +1,66 @@
+{
+  "experiment": "4.3_reasoning_mediation",
+  "description": "多步推理任务中间状态与最终答案的因果依赖",
+  "n_tasks": 3,
+  "all_answers_changed_after_ablation": false,
+  "per_task": [
+    {
+      "task_id": "mst_001",
+      "query": "地面是否湿？",
+      "expected_answer": "是",
+      "full_run": {
+        "answer": "不确定",
+        "score": 0.0,
+        "n_intermediate_states": 3
+      },
+      "ablated_run": {
+        "removed_concepts": [
+          "地面湿"
+        ],
+        "answer": "不确定",
+        "score": 0.0,
+        "n_intermediate_states": 3
+      },
+      "answer_changed": false
+    },
+    {
+      "task_id": "mst_002",
+      "query": "最终结果是多少？",
+      "expected_answer": "24",
+      "full_run": {
+        "answer": "24",
+        "score": 1.0,
+        "n_intermediate_states": 4
+      },
+      "ablated_run": {
+        "removed_concepts": [
+          "24"
+        ],
+        "answer": "24",
+        "score": 1.0,
+        "n_intermediate_states": 4
+      },
+      "answer_changed": false
+    },
+    {
+      "task_id": "mst_003",
+      "query": "完成任务需要什么工具？",
+      "expected_answer": "螺丝刀",
+      "full_run": {
+        "answer": "螺丝刀",
+        "score": 1.0,
+        "n_intermediate_states": 4
+      },
+      "ablated_run": {
+        "removed_concepts": [
+          "螺丝刀"
+        ],
+        "answer": "未知",
+        "score": 0.0,
+        "n_intermediate_states": 4
+      },
+      "answer_changed": true
+    }
+  ],
+  "pass": false
+}

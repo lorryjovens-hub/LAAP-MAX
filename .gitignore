@@ -1,0 +1,138 @@
+# ========== 环境文件 ==========
+.env
+.env.local
+.env.production
+xiaozhi_mcp_token.txt
+
+# ========== 运行时状态 ==========
+state/
+state/*.json
+state/**/*.json
+!state/.gitkeep
+snapshots/
+logs/
+*.log
+*.log.gz
+
+# ========== Python 缓存 ==========
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# ========== 模型数据 ==========
+corpus/
+**/corpus/
+rsi_backups/
+**/rsi_backups/
+models/
+**/models/
+*.safetensors
+*.bin
+*.gguf
+*.onnx
+*.parquet
+*.pkl
+*.pt
+*.pth
+
+# ========== 构建产物 ==========
+target/
+**/target/
+*.exe
+*.dll
+*.so
+*.dylib
+build/
+dist/
+dist_native/
+build_native/
+*.pkg
+*.tpz
+aris_brain/psi_core/
+aris_brain/captures/
+
+# ========== 编辑器 ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ========== 临时文件 ==========
+_gen_*.py
+_build_*.py
+_tmp*.txt
+_tmp*.py
+
+# ========== Node ==========
+node_modules/
+psi_state.json
+audit_log.jsonl
+
+# ========== 隐私/认证（全路径排除） ==========
+**/.env
+**/.env.*
+**/xiaozhi_mcp_token.txt
+**/.deepseek_key
+**/.ao_key
+**/.aris_key
+**/.auth_marker
+**/.master_key
+**/.pypirc
+**/.pypirc.example
+**/*.key
+**/*.pem
+**/credentials.json
+**/service_account*.json
+
+# ========== 嵌套仓库/外部项目（独立维护） ==========
+Agent-Reach/
+claw-in-chrome/
+laap-open/
+harness/shadcn-ui-mcp-server/
+external/
+laap-agi/
+laap-AGI-repo/
+laap-github/
+
+# ========== 第三方依赖/源码（可从外部获取） ==========
+harness/godot-master/
+harness/three.js-master/
+harness/MediaPipeUnityPlugin-master/
+harness/ui-main/
+harness/tools/
+_archive/
+
+# ========== 运行时数据库/状态 ==========
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/.codegraph/
+**/.codeatlas/
+**/.trae/
+**/.laap/
+**/state/
+**/snapshots/
+
+# ========== 备份/临时输出 ==========
+nul
+**/nul
+*.bak
+*.bak2
+*_test_log.txt
+final_verify.txt
+test_*.txt
+subset_results.xml
+
+# ========== 压缩包/大文件 ==========
+*.zip
+*.tar.gz
+*.rar
+*.7z

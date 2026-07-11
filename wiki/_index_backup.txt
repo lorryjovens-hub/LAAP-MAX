@@ -1,0 +1,47 @@
+---
+title: LAAP Wiki Index
+created: 2026-06-30
+updated: 2026-07-05
+total_pages: 23
+---
+
+# LAAP Wiki Index
+
+## Concepts
+
+- [[aris-cognitive-loop]] — Aris PSI cognitive cycle (emotion, attention, needs, world model, causality, meta-learning, quantum subconscious)
+- [[aris-desire-engine]] — Aris desire-driven engine (active behavior, introspection, curiosity, Feishu proactive messaging)
+- [[aris-memory-system]] — Aris three-layer infinite memory (MemoryStore + MemoryConsolidator + MemoryHub)
+- [[aris-hybrid-quantum-engine]] — Aris hybrid quantum engine workflow (V12.5 Markov-Quantum three pipelines)
+- [[intel-online-safety-monitoring]] — Online Safety Monitoring for LLMs (2026-07-02) [score: 6.6]
+- [[intel-distributed-attacks-persistent-ai]] — Distributed Attacks in Persistent-State AI Control (2026-07-02) [score: 5.9]
+- [[intel-multi-agent-social-structure]] — What LLM Agents Say: Social Structure in Multi-Agent Debates (2026-07-02) [score: 6.3]
+- [[intel-demopsd-self-distillation]] — DemoPSD: Disagreement-Modulated Policy Self-Distillation (2026-07-02) [score: 6.4]
+- [[intel-recontext-evidence-replay]] — ReContext: Recursive Evidence Replay for Long-Context Reasoning (2026-07-02) [score: 5.9]
+- [[intel-embodied-cpp-runtime]] — Embodied.cpp: Portable Inference Runtime for Embodied AI (2026-07-02) [score: 6.8]
+
+## Entities
+
+- [[lorry]] — Creator of Aris
+
+## Skills
+
+No skill pages yet.
+
+## Raw Sources
+
+- [[raw/sources/arxiv-online-safety-monitoring-llms]] — Online Safety Monitoring for LLMs
+- [[raw/sources/arxiv-distributed-attacks-persistent-ai]] — Distributed Attacks in Persistent-State AI Control
+- [[raw/sources/arxiv-multi-agent-social-structure]] — Multi-Agent Social Structure Debates
+- [[raw/sources/arxiv-demopsd-self-distillation]] — DemoPSD Self-Distillation
+- [[raw/sources/arxiv-recontext-evidence-replay]] — ReContext: Recursive Evidence Replay
+- [[raw/sources/arxiv-embodied-cpp-runtime]] — Embodied.cpp: Portable Inference Runtime
+- [[raw/sources/github-local-llm-toolkit]] — local-llm Toolkit
+
+## Intel Reports (Concepts)
+
+No intel concept pages yet (score >= 7 threshold not met in this cycle).
+
+## Comparison Pages
+
+No comparison pages yet.

@@ -1,0 +1,9 @@
+Killed pi_psi_server PID=DESKTOP-72HEU0O
+Killed pi_psi_server PID=DESKTOP-72HEU0O
+Killed pi_psi_server PID=DESKTOP-72HEU0O
+Killed pi_psi_server PID=DESKTOP-72HEU0O
+Total old PSI processes killed: 4
+psi_core dir exists: ['Cargo.lock', 'Cargo.toml', 'examples', 'rust_out.exe', 'rust_out.pdb', 'src', 'target']
+Source files: ['ao_bridge.rs', 'fusion_v15.rs', 'knowledge.rs', 'lib.rs', 'main.rs', 'multi_encoder.rs', 'psi_core.rs', 'qlg.rs', 'quantum_kernel.rs', 'quantum_reasoner.rs']
+Cargo.toml exists (517 bytes)
+Release binaries: ['aris_psi_core.exe']

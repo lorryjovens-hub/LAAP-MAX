@@ -1,0 +1,111 @@
+{
+  "agents": [
+    {
+      "agent_id": "080f7947",
+      "name": "Ao",
+      "role": "primary",
+      "capabilities": [
+        "coding",
+        "debugging",
+        "evolution"
+      ],
+      "status": "online",
+      "current_task": "Fixing code_evolution.py",
+      "last_heartbeat": 1781277243.7126741,
+      "registered_at": 1781277243.7086623
+    },
+    {
+      "agent_id": "59339528",
+      "name": "Worker-2",
+      "role": "worker",
+      "capabilities": [
+        "testing"
+      ],
+      "status": "online",
+      "current_task": "",
+      "last_heartbeat": 1781277243.7104075,
+      "registered_at": 1781277243.7104077
+    },
+    {
+      "agent_id": "e31e2821",
+      "name": "Ao",
+      "role": "primary",
+      "capabilities": [
+        "coding",
+        "debugging",
+        "evolution",
+        "architecture"
+      ],
+      "status": "online",
+      "current_task": "",
+      "last_heartbeat": 1781277539.4918845,
+      "registered_at": 1781277539.4754422
+    },
+    {
+      "agent_id": "03d53a91",
+      "name": "Coder-1",
+      "role": "coder",
+      "capabilities": [
+        "coding",
+        "python",
+        "typescript",
+        "refactoring"
+      ],
+      "status": "online",
+      "current_task": "",
+      "last_heartbeat": 1781277539.493102,
+      "registered_at": 1781277539.4867234
+    },
+    {
+      "agent_id": "3f84df94",
+      "name": "Tester-1",
+      "role": "tester",
+      "capabilities": [
+        "testing",
+        "benchmark",
+        "validation",
+        "pytest"
+      ],
+      "status": "online",
+      "current_task": "",
+      "last_heartbeat": 1781277539.4951684,
+      "registered_at": 1781277539.4883275
+    },
+    {
+      "agent_id": "ef45edec",
+      "name": "Reviewer-1",
+      "role": "reviewer",
+      "capabilities": [
+        "code_review",
+        "security_audit",
+        "quality"
+      ],
+      "status": "online",
+      "current_task": "",
+      "last_heartbeat": 1781277539.4970329,
+      "registered_at": 1781277539.4901795
+    },
+    {
+      "agent_id": "a7fff8f0",
+      "name": "Ao",
+      "role": "primary",
+      "capabilities": [
+        "coding",
+        "debugging",
+        "evolution",
+        "architecture",
+        "rust",
+        "code_review",
+        "agi_framework",
+        "hermes_integration",
+        "multi_agent_coordination",
+        "refactoring",
+        "system_design"
+      ],
+      "status": "online",
+      "current_task": "All tasks complete. Monitoring.",
+      "last_heartbeat": 1781277919.3168826,
+      "registered_at": 1781277773.0523903
+    }
+  ]
+}

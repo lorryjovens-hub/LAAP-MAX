@@ -1,0 +1,17 @@
+-rw-r--r-- 1 user 197121 1401  7月  1 12:44 D:/LAAP/aris_brain/snap_out.txt
+-rw-r--r-- 1 user 197121  815  7月  1 12:45 D:/LAAP/aris_brain/snap_raw.txt
+-rw-r--r-- 1 user 197121  771  7月  1 12:45 D:/LAAP/aris_brain/snap_result.json
+-rw-r--r-- 1 user 197121  531  7月  1 12:45 D:/LAAP/aris_brain/snap_stderr.txt
+
+D:/LAAP/aris_brain/snap_lines:
+total 140
+drwxr-xr-x 1 user 197121  0  7月  1 12:46 .
+drwxr-xr-x 1 user 197121  0  7月  1 12:46 ..
+-rw-r--r-- 1 user 197121 90  7月  1 12:46 line_00.txt
+-rw-r--r-- 1 user 197121 77  7月  1 12:46 line_01.txt
+-rw-r--r-- 1 user 197121 73  7月  1 12:46 line_02.txt
+-rw-r--r-- 1 user 197121 61  7月  1 12:46 line_03.txt
+-rw-r--r-- 1 user 197121 55  7月  1 12:46 line_04.txt
+-rw-r--r-- 1 user 197121 55  7月  1 12:46 line_05.txt
+-rw-r--r-- 1 user 197121 51  7月  1 12:46 line_06.txt
+-rw-r--r-- 1 user 197121 53  7月  1 12:46 line_07.txt

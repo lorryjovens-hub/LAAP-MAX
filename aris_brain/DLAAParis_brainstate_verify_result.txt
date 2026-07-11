@@ -1,0 +1,18 @@
+[OrchBridge] code_workspace not available
+[OrchBridge] desire_engine not available
+[OrchBridge] goal_engine not available
+[OrchBridge] copilot_bridge not available
+[OrchBridge] literary engines not available
+[PSI Core] Rust 2000Hz heartbeat: True
+[Runtime]  ArisRuntime (Aether engine): True
+[Hermes]   Communication shell: True
+[Cleanup]  Old pi_psi_server instances: 0
+[Startup]  VBS in Startup folder: True
+[Bridge]   Aether bridge: ONLINE (rule=check_status, 185ms)
+
+=== 架构状态 ===
+PSI Core:    ONLINE 2000Hz
+Cognitive:   ONLINE (Aether 5 Actors)
+Shell:       ONLINE (Hermes)
+Cleanup:     DONE
+Boot:        CONFIGURED

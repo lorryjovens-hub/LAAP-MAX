@@ -1,0 +1,62 @@
+{
+  "experiment": "4.2_modulation",
+  "description": "高显著任务事件注入后注意力转移延迟与本地模块连续性",
+  "initial_focus": "idle",
+  "target_focus": "task",
+  "shift_latency_ticks": 1,
+  "max_allowed_ticks": 3,
+  "local_continued": true,
+  "focus_history": [
+    {
+      "tick": 1,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 2,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 3,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 4,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 5,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 6,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 7,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 8,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 9,
+      "focus": "task",
+      "intensity": 0.3
+    },
+    {
+      "tick": 10,
+      "focus": "task",
+      "intensity": 0.3
+    }
+  ],
+  "pass": true
+}

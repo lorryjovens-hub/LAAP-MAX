@@ -1,0 +1,50 @@
+{
+  "events": [
+    {
+      "id": "fd9eb22e-b2ec-4ad2-a5c5-d70b6f7e186b",
+      "type": "agent.heartbeat",
+      "agent_id": "a7fff8f0",
+      "data": {
+        "task": "verification"
+      },
+      "timestamp": 1781277891.8479204
+    },
+    {
+      "id": "5b52a368-acd6-4800-9db5-8ab38da3caec",
+      "type": "agent.heartbeat",
+      "agent_id": "a7fff8f0",
+      "data": {
+        "status": "alive"
+      },
+      "timestamp": 1781277891.8598013
+    },
+    {
+      "id": "7ff62e0e-4ec0-4e62-9efe-9a4869ade92d",
+      "type": "task.completed",
+      "agent_id": "a7fff8f0",
+      "data": {
+        "task_id": "0fa1792c",
+        "description": "Optimize causal.py",
+        "result": "No high-complexity targets. All core methods already documented."
+      },
+      "timestamp": 1781277919.313462
+    },
+    {
+      "id": "a34ea6f7-1f30-4f78-aaf3-48b12e4f541d",
+      "type": "agent.heartbeat",
+      "agent_id": "a7fff8f0",
+      "data": {
+        "status": "idle"
+      },
+      "timestamp": 1781277919.320906
+    }
+  ],
+  "subscriptions": {
+    "file.modified": [
+      "a7fff8f0"
+    ],
+    "deploy.completed": [
+      "a7fff8f0"
+    ]
+  }
+}

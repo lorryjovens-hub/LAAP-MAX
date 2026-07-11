@@ -1,0 +1,7 @@
+name: web_search
+version: 0.1.0
+description: Search the web for a given query.
+capabilities:
+  - web_search
+handler_path: main.py
+config: {}

@@ -1,0 +1,1811 @@
+{
+  "experiment": "4.1_reportability",
+  "description": "通过 CognitiveBus 状态快照预测最强需求/情感",
+  "n_samples": 120,
+  "need_accuracy": 0.0,
+  "emotion_accuracy": 1.0,
+  "overall_accuracy": 0.5,
+  "pass": false,
+  "per_trace": [
+    {
+      "trace_id": "cbus_0000",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0001",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0002",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0003",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0004",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0005",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0006",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0007",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_high"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "positive_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0008",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0009",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0010",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0011",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0012",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0013",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0014",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0015",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0016",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0017",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0018",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0019",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0020",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0021",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0022",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0023",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0024",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0025",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0026",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0027",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0028",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0029",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0030",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0031",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0032",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0033",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0034",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0035",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0036",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0037",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0038",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0039",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0040",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0041",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0042",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0043",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0044",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0045",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0046",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_high"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0047",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0048",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0049",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0050",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0051",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_high"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0052",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0053",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0054",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0055",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0056",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0057",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0058",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0059",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0060",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0061",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0062",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0063",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0064",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0065",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0066",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0067",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0068",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0069",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0070",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0071",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0072",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0073",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_high"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "positive_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0074",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0075",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_high"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "positive_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0076",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0077",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0078",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0079",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_high"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "positive_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0080",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0081",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0082",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0083",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0084",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0085",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0086",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0087",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0088",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0089",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0090",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0091",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0092",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0093",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0094",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0095",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0096",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0097",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0098",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0099",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0100",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0101",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0102",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0103",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0104",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0105",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0106",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0107",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0108",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0109",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0110",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0111",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0112",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "negative_high"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "negative_high"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0113",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0114",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0115",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "negative_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "certainty",
+        "emotion": "negative_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0116",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "growth",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0117",
+      "predicted": {
+        "strongest_need": "autonomy",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0118",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "positive_mild"
+      },
+      "ground_truth": {
+        "strongest_need": "autonomy",
+        "emotion": "positive_mild"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    },
+    {
+      "trace_id": "cbus_0119",
+      "predicted": {
+        "strongest_need": "competence",
+        "emotion": "neutral"
+      },
+      "ground_truth": {
+        "strongest_need": "relatedness",
+        "emotion": "neutral"
+      },
+      "correct": {
+        "need": false,
+        "emotion": true
+      }
+    }
+  ]
+}

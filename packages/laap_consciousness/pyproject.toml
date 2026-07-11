@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "laap-consciousness"
+version = "0.1.0"
+description = "LAAP Consciousness Middleware — 给任何 AI agent 装上持续存在的自我"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Aris AGI", email = "aris@laap.agi"},
+]
+keywords = ["agent", "ai", "consciousness", "cognitive", "psi", "lifeform", "agi"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/laap-agi/laap-consciousness"
+Source = "https://github.com/laap-agi/laap-consciousness"
+
+[project.scripts]
+laap-consciousness = "laap_consciousness.cli.main:cli"
+
+[project.optional-dependencies]
+full = [
+    "openai>=1.0.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "httpx>=0.27.0",
+]
+dev = [
+    "pytest>=7.4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["laap_consciousness*"]

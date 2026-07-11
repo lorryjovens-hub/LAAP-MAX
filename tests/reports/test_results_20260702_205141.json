@@ -1,0 +1,42 @@
+[
+  {
+    "test_file": "test_conscience_harness_full.py",
+    "status": "error",
+    "error": "invalid literal for int() with base 10: '========================'",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\LAAP\\tests\\run_all_tests.py\", line 64, in run_test\n    passed += int(line.strip().split()[0])\n              ~~~^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: '========================'\n",
+    "duration": 5.03,
+    "passed": 0,
+    "failed": 0,
+    "total": 0
+  },
+  {
+    "test_file": "test_memory_integration.py",
+    "status": "error",
+    "error": "invalid literal for int() with base 10: '========================'",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\LAAP\\tests\\run_all_tests.py\", line 64, in run_test\n    passed += int(line.strip().split()[0])\n              ~~~^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: '========================'\n",
+    "duration": 1.34,
+    "passed": 0,
+    "failed": 0,
+    "total": 0
+  },
+  {
+    "test_file": "test_affective_dynamics.py",
+    "status": "error",
+    "error": "invalid literal for int() with base 10: '========================'",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\LAAP\\tests\\run_all_tests.py\", line 64, in run_test\n    passed += int(line.strip().split()[0])\n              ~~~^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: '========================'\n",
+    "duration": 1.34,
+    "passed": 0,
+    "failed": 0,
+    "total": 0
+  },
+  {
+    "test_file": "test_meta_cognitive_full.py",
+    "status": "error",
+    "error": "invalid literal for int() with base 10: '========================'",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\LAAP\\tests\\run_all_tests.py\", line 64, in run_test\n    passed += int(line.strip().split()[0])\n              ~~~^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: '========================'\n",
+    "duration": 1.3,
+    "passed": 0,
+    "failed": 0,
+    "total": 0
+  }
+]

@@ -1,0 +1,36 @@
+Total collected: 35
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | The latest AI news we announced in June 2026
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | New York City educators and industry leaders gathered at Google’s offices to sha
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | Unlocking Britain’s next era of productivity: Building a nation of AI trailblaze
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | Ask an AI expert: What exactly is the full stack?
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | Our latest Google Finance upgrades, including a new app
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | New research shows how AMIE, our medical AI, could help manage health conditions
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | We’re strengthening our presence in Alabama through new investments and communit
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | Our new community investments in Virginia support local jobs and expand energy a
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | The latest AI news we announced in May 2026
+[ 47] q= 57 s= 50 i= 40 e= 40 | google-ai       | 5 ways Google Search can level up your thrift and vintage shopping
+[ 42] q= 35 s= 60 i= 40 e= 40 | hacker-news     | NSA and IETF: Fairness
+[ 42] q= 41 s= 50 i= 40 e= 40 | hacker-news     | OfficeCLI: Office suite for AI agents to read and edit Microsoft Office files
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ f/prompts.chat (164938 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ rasbt/LLMs-from-scratch (98659 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ microsoft/AI-For-Beginners (51808 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ ItzCrazyKns/Vane (35579 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ ashishpatel26/500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projec
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ explosion/spaCy (33718 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ Lightning-AI/pytorch-lightning (31223 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ AMAI-GmbH/AI-Expert-Roadmap (31115 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ ZuzooVn/machine-learning-for-software-engineers (28810 stars)
+[ 42] q= 40 s= 50 i= 40 e= 40 | github-trending | ⭐ harvard-edge/cs249r_book (27063 stars)
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | GLM 5.2 and the coming AI margin collapse
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | A global workspace in language models
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Small AI Models Gain Traction In places with unreliable networks
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | AMD Ryzen AI Halo – $4k AI Dev Kit
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Craig Mod built his own Good Reads
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | AI: The ROI Runway Could Be Long Outside the Tech Sector
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Real-time map of Great Britain's rail network
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Not everything should cost a token: the case for deterministic AI
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | How ChatGPT Picks Sources (I Read the Network Traffic, Not the Outputs)
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Taiganet.com, Home of the WS4000 Simulator
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Companies hire more after AI adoption
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Show HN: LLM Thought Visualization
+[ 40] q= 35 s= 50 i= 40 e= 40 | hacker-news     | Show HN: Otari: your open-source LLM control plane

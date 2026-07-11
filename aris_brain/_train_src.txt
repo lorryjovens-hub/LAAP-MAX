@@ -1,0 +1,39 @@
+    def train(self, texts: List[str]):
+        """Train Markov chain from a list of text strings."""
+        t0 = time.time()
+        
+        for text in texts:
+            tokens = self._tokenize(text)
+            if len(tokens) < self.order:
+                continue
+            
+            # Track sentence starters (first (order-1) tokens after punctuation)
+            self._starters.append(tuple(tokens[:self.order - 1]))
+            
+            ngrams = self._get_ngrams(tokens)
+            for context, target in ngrams:
+                self._transitions[context][target] += 1
+                self._vocab.add(target)
+                for t in context:
+                    self._vocab.add(t)
+                self._total_ngrams += 1
+        
+        # Filter low-frequency transitions
+        if self.min_freq > 1:
+            old_count = sum(len(c) for c in self._transitions.values())
+            to_delete = []
+            for context, counter in self._transitions.items():
+                for word, count in list(counter.items()):
+                    if count < self.min_freq:
+                        del counter[word]
+                if not counter:
+                    to_delete.append(context)
+            for ctx in to_delete:
+                del self._transitions[ctx]
+            new_count = sum(len(c) for c in self._transitions.values())
+        
+        self._trained = True
+        elapsed = (time.time() - t0) * 1000
+        print(f"[Markov] Trained: {len(self._vocab)} words, "
+              f"{len(self._transitions)} contexts, "
+              f"{self._total_ngrams} n-grams ({elapsed:.0f}ms)")

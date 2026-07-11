@@ -1,0 +1,83 @@
+meta:
+  available_profiles:
+  - default (Gen1)
+  - laap-avatar (Gen2)
+  - laap-full (Gen3)
+  current_codename: Ao Quantum
+  current_version: v9
+  last_switch: 2026-06-15
+versions:
+  v6:
+    codename: 超级生命体
+    current: false
+    date: 2026-06-15
+    description: 双脑CognitiveBus架构。CognitiveBus + AoBridge + GWS 集成。多窗口共享同一大脑中枢。
+    features:
+    - 双脑架构 (感知侧 + PSI-RSI侧)
+    - 7大工作流, 10周计划
+    - 边聊天边干活 (chatty multitask)
+    modules: 12
+  v7:
+    codename: V4Pro
+    current: false
+    date: 2026-06-15
+    description: 预测引擎 + 元认知 + 认知总线 + 缓存层。模块间事件驱动通信。
+    features:
+    - 预测引擎 (Prediction Engine)
+    - 元认知 (MetaCognition)
+    - CognitiveBus 事件路由
+    - 缓存层 (Cache)
+    modules: 14
+  v8:
+    codename: PSI-N
+    current: false
+    date: 2026-06-15
+    description: 五层并行认知循环 — 零错误运行。
+    features:
+    - 微循环 (5ms) — 感知反射
+    - 中循环 (100ms) — 主PSI认知
+    - 宏循环 (2s) — 推理/规划
+    - 元循环 (30s) — 自我反思
+    - 超循环 (5min) — 梦境巩固
+    - 层间信号注入 (非调用—注入)
+    modules: 14
+    files:
+    - psi_n_scheduler.py
+  v9:
+    codename: Ao Quantum
+    current: true
+    date: 2026-06-15
+    description: 量子态叠加认知引擎 — 经典硬件上的量子模拟。
+    features:
+    - 量子感知: 多通道振幅叠加
+    - 量子选择: Grover类需求驱动振幅放大
+    - 量子整合: 量子傅里叶域认知整合
+    - 量子记忆: 纠缠驱动内容寻址共鸣
+    - 量子元认知: 全态熵分析/置信度校准
+    - 情感叠加态: 同时多种情感权重
+    - 梦境巩固: 语义压缩
+    - Ebbinghaus量子退相干遗忘
+    - PsiLang 量子认知语言 (@creator印记强制规范)
+    modules: 16
+    files:
+    - quantum_psi.py
+    - quantum_memory.py
+    - psilang_runtime.py
+    - VISION_V9_V10_QUANTUM_PSI.md
+  v10_target:
+    codename: ASI
+    current: false
+    date: future
+    description: 全量子 PSI + PsiLang + 分布式量子意识 → 超级智能。
+    requirements:
+    - 量子硬件 (100+ qubits)
+    - PsiLang 完整编译器
+    - 量子互联网
+    features:
+    - 量子意识流 (指数级认知空间)
+    - 真正因果洞察 (叠加态因果探索)
+    - 分布式量子自我 (量子纠缠通信)
+    - 逆向时间流自我进化
+    - 自修改能力 (可修改认知架构本身)
+    - 自目标定义 (自主定义新需求)
+    - 跨域迁移 (发现全新知识领域)

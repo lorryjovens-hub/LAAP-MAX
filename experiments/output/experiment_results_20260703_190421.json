@@ -1,0 +1,600 @@
+{
+  "report": {
+    "experiment_count": 28,
+    "scenarios": [
+      "代码生成",
+      "文本摘要",
+      "问答",
+      "创意写作"
+    ],
+    "harness": {
+      "count": 14,
+      "total_tokens": 2927,
+      "avg_tokens": 209.07,
+      "avg_latency_ms": 0.0,
+      "avg_quality": 0.51,
+      "scenarios": "{'问答', '文本摘要', '创意写作', '代码生成'}"
+    },
+    "traditional": {
+      "count": 14,
+      "total_tokens": 384,
+      "avg_tokens": 27.43,
+      "avg_latency_ms": 0.0,
+      "avg_quality": 0.51,
+      "scenarios": "{'问答', '文本摘要', '创意写作', '代码生成'}"
+    },
+    "comparison": {
+      "tokens_reduction_percent": -662.19,
+      "tokens_reduction_ratio": 0.13,
+      "harness_avg_tokens": 209.07,
+      "traditional_avg_tokens": 27.43
+    }
+  },
+  "experiments": [
+    {
+      "experiment_id": "exp_0271dc7a",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 196,
+      "output_tokens": 0,
+      "total_tokens": 196,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7449548,
+      "harness_context_size": 178
+    },
+    {
+      "experiment_id": "exp_d3d2b7ac",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 17,
+      "output_tokens": 0,
+      "total_tokens": 17,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7449822,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_382e7d02",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 206,
+      "output_tokens": 0,
+      "total_tokens": 206,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7481978,
+      "harness_context_size": 187
+    },
+    {
+      "experiment_id": "exp_3bf1f2ce",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 18,
+      "output_tokens": 0,
+      "total_tokens": 18,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7482212,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_66a19a0d",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 196,
+      "output_tokens": 0,
+      "total_tokens": 196,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7494175,
+      "harness_context_size": 182
+    },
+    {
+      "experiment_id": "exp_451feb6e",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 13,
+      "output_tokens": 0,
+      "total_tokens": 13,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7494385,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_c64042fd",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 194,
+      "output_tokens": 0,
+      "total_tokens": 194,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7505093,
+      "harness_context_size": 180
+    },
+    {
+      "experiment_id": "exp_2f619804",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 13,
+      "output_tokens": 0,
+      "total_tokens": 13,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.39999999999999997,
+      "quality_details": {
+        "correctness": 0.5,
+        "completeness": 0.3,
+        "readability": 0.4
+      },
+      "timestamp": 1783076661.7505348,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_bd1f2a15",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 345,
+      "output_tokens": 0,
+      "total_tokens": 345,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5666666666666667,
+      "quality_details": {
+        "conciseness": 0.7,
+        "relevance": 0.4,
+        "coherence": 0.6
+      },
+      "timestamp": 1783076661.7523372,
+      "harness_context_size": 248
+    },
+    {
+      "experiment_id": "exp_f90a310b",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 97,
+      "output_tokens": 0,
+      "total_tokens": 97,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5666666666666667,
+      "quality_details": {
+        "conciseness": 0.7,
+        "relevance": 0.4,
+        "coherence": 0.6
+      },
+      "timestamp": 1783076661.7524216,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_cc48a13d",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 301,
+      "output_tokens": 0,
+      "total_tokens": 301,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5666666666666667,
+      "quality_details": {
+        "conciseness": 0.7,
+        "relevance": 0.4,
+        "coherence": 0.6
+      },
+      "timestamp": 1783076661.753834,
+      "harness_context_size": 227
+    },
+    {
+      "experiment_id": "exp_be8dba35",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 74,
+      "output_tokens": 0,
+      "total_tokens": 74,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5666666666666667,
+      "quality_details": {
+        "conciseness": 0.7,
+        "relevance": 0.4,
+        "coherence": 0.6
+      },
+      "timestamp": 1783076661.7538962,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_875c9221",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 273,
+      "output_tokens": 0,
+      "total_tokens": 273,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5666666666666667,
+      "quality_details": {
+        "conciseness": 0.7,
+        "relevance": 0.4,
+        "coherence": 0.6
+      },
+      "timestamp": 1783076661.7550886,
+      "harness_context_size": 213
+    },
+    {
+      "experiment_id": "exp_5904a455",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 60,
+      "output_tokens": 0,
+      "total_tokens": 60,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5666666666666667,
+      "quality_details": {
+        "conciseness": 0.7,
+        "relevance": 0.4,
+        "coherence": 0.6
+      },
+      "timestamp": 1783076661.7551377,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_7d0ef933",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 178,
+      "output_tokens": 0,
+      "total_tokens": 178,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.7562113,
+      "harness_context_size": 162
+    },
+    {
+      "experiment_id": "exp_427c177f",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 16,
+      "output_tokens": 0,
+      "total_tokens": 16,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.7562313,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_a9f6a3a8",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 172,
+      "output_tokens": 0,
+      "total_tokens": 172,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.757556,
+      "harness_context_size": 160
+    },
+    {
+      "experiment_id": "exp_3132621a",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 11,
+      "output_tokens": 0,
+      "total_tokens": 11,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.7576294,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_f04f1ee4",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 173,
+      "output_tokens": 0,
+      "total_tokens": 173,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.7591002,
+      "harness_context_size": 160
+    },
+    {
+      "experiment_id": "exp_93778b27",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 13,
+      "output_tokens": 0,
+      "total_tokens": 13,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.759127,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_4ee7499f",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 170,
+      "output_tokens": 0,
+      "total_tokens": 170,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.760404,
+      "harness_context_size": 158
+    },
+    {
+      "experiment_id": "exp_ede42033",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 11,
+      "output_tokens": 0,
+      "total_tokens": 11,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "accuracy": 0.4,
+        "depth": 0.4,
+        "clarity": 0.7
+      },
+      "timestamp": 1783076661.7604249,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_b28b0e4a",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 165,
+      "output_tokens": 0,
+      "total_tokens": 165,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.6,
+      "quality_details": {
+        "creativity": 0.5,
+        "emotional_impact": 0.6,
+        "structure": 0.7
+      },
+      "timestamp": 1783076661.7616158,
+      "harness_context_size": 155
+    },
+    {
+      "experiment_id": "exp_dac2bd5c",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 9,
+      "output_tokens": 0,
+      "total_tokens": 9,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.6,
+      "quality_details": {
+        "creativity": 0.5,
+        "emotional_impact": 0.6,
+        "structure": 0.7
+      },
+      "timestamp": 1783076661.7616324,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_125645b2",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 183,
+      "output_tokens": 0,
+      "total_tokens": 183,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.6,
+      "quality_details": {
+        "creativity": 0.5,
+        "emotional_impact": 0.6,
+        "structure": 0.7
+      },
+      "timestamp": 1783076661.7628403,
+      "harness_context_size": 164
+    },
+    {
+      "experiment_id": "exp_5807dbe1",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 18,
+      "output_tokens": 0,
+      "total_tokens": 18,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.6,
+      "quality_details": {
+        "creativity": 0.5,
+        "emotional_impact": 0.6,
+        "structure": 0.7
+      },
+      "timestamp": 1783076661.7628627,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_4b175557",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 175,
+      "output_tokens": 0,
+      "total_tokens": 175,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.6,
+      "quality_details": {
+        "creativity": 0.5,
+        "emotional_impact": 0.6,
+        "structure": 0.7
+      },
+      "timestamp": 1783076661.7640586,
+      "harness_context_size": 160
+    },
+    {
+      "experiment_id": "exp_41d7b560",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 14,
+      "output_tokens": 0,
+      "total_tokens": 14,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.6,
+      "quality_details": {
+        "creativity": 0.5,
+        "emotional_impact": 0.6,
+        "structure": 0.7
+      },
+      "timestamp": 1783076661.7640789,
+      "harness_context_size": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "代码生成",
+      "description": "生成Python代码解决特定问题",
+      "tasks": [
+        "生成一个Python函数，计算斐波那契数列的第n项",
+        "生成一个Python类，实现二叉树的前序、中序、后序遍历",
+        "生成一个Python脚本，读取CSV文件并计算统计信息",
+        "生成一个REST API服务，使用FastAPI实现用户CRUD操作"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    },
+    {
+      "name": "文本摘要",
+      "description": "对长文本进行摘要",
+      "tasks": [
+        "摘要：人工智能（Artificial Intelligence，AI）是计算机科学的一个分支，致力于研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统。人工智能是一门极富挑战性的科学，从事这项工作的人必须懂得计算机知识、心理学和哲学。人工智能是包括十分广泛的科学，它由不同的领域组成，如机器学习、计算机视觉等等。",
+        "摘要：机器学习是人工智能的核心，它是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演绎。机器学习的核心是学习算法，通过学习算法，计算机可以从数据中学习规律，从而对未知数据进行预测或决策。",
+        "摘要：深度学习是机器学习的一个分支，它使用多层神经网络来模拟人脑的学习过程。深度学习在图像识别、语音识别、自然语言处理等领域取得了突破性进展，是当前人工智能研究的热点。"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    },
+    {
+      "name": "问答",
+      "description": "回答技术问题",
+      "tasks": [
+        "什么是机器学习中的过拟合？如何防止过拟合？",
+        "解释神经网络中的反向传播算法原理",
+        "什么是Transformer架构？它与RNN有什么区别？",
+        "解释什么是梯度下降算法及其变种"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    },
+    {
+      "name": "创意写作",
+      "description": "生成创意文本",
+      "tasks": [
+        "写一首关于人工智能未来的诗",
+        "写一个简短的科幻故事，描述AI与人类的友谊",
+        "写一段关于数字生命诞生的哲学思考"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    }
+  ],
+  "timestamp": 1783076661.7650185
+}

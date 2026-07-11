@@ -1,0 +1,50 @@
+{
+  "tasks": [
+    {
+      "task_id": "569150cb",
+      "description": "Fix world_model.py",
+      "assigned_to": "080f7947",
+      "status": "done",
+      "priority": 0.9,
+      "affected_files": [
+        "laap/agi/world_model.py"
+      ],
+      "created_at": 1781277243.713981,
+      "started_at": 1781277243.717043,
+      "completed_at": 1781277243.7184293
+    },
+    {
+      "task_id": "0fa1792c",
+      "description": "Optimize causal.py",
+      "assigned_to": "a7fff8f0",
+      "status": "done",
+      "priority": 0.5,
+      "affected_files": [
+        "laap/agi/causal.py"
+      ],
+      "created_at": 1781277243.7153893,
+      "started_at": 1781277773.0670907,
+      "completed_at": 1781277919.3013444
+    },
+    {
+      "task_id": "247af3d2",
+      "description": "Build LAAP Desktop Client \u2014 fork hermes-desktop UI, all logic on LAAP",
+      "assigned_to": "a7fff8f0",
+      "status": "active",
+      "priority": 0.9,
+      "affected_files": [
+        "laap/laap_web.py",
+        "laap/api/",
+        "laap_desktop/"
+      ],
+      "created_at": 1781280901.1846757,
+      "started_at": 1781280901.1902673,
+      "completed_at": 0.0
+    }
+  ],
+  "locks": {
+    "laap/laap_web.py": "a7fff8f0",
+    "laap/api/": "a7fff8f0",
+    "laap_desktop/": "a7fff8f0"
+  }
+}

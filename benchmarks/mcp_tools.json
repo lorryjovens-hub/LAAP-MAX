@@ -1,0 +1,9 @@
+{
+	"jsonrpc": "2.0",
+	"id": 2,
+	"error":
+	{
+		"code": -32600,
+		"message": "Unknown session id '9c3d8aa9-42c4-46e4-9eb7-74df4b5d02f9' for 'tools/list'; client should reinitialize"
+	}
+}

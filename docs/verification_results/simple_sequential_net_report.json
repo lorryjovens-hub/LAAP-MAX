@@ -1,0 +1,26 @@
+{
+  "net_id": "simple_sequential_net",
+  "boundedness": {
+    "is_bounded": true,
+    "max_bound": 1
+  },
+  "liveness": {
+    "deadlocks": [],
+    "sink_places": [
+      "p2"
+    ],
+    "dead_transitions": []
+  },
+  "reachability": [
+    {
+      "description": "end place p2 is reachable",
+      "target": {
+        "p2": 1
+      },
+      "reachable": true,
+      "path": [
+        "t1"
+      ]
+    }
+  ]
+}

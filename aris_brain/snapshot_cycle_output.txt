@@ -1,0 +1,15 @@
+2026-07-10 01:59:33,285 [SNAPSHOT] [ChromaDB] sentence_transformers 不可用，使用 ChromaDB 默认 ONNX embedding
+2026-07-10 01:59:33,287 [SNAPSHOT] [ChromaDB] 初始化失败，fallback 到纯 JSON 模式: No module named 'chromadb'
+2026-07-10 01:59:33,289 [SNAPSHOT] [ChromaDB] sentence_transformers 不可用，使用 ChromaDB 默认 ONNX embedding
+2026-07-10 01:59:33,290 [SNAPSHOT] [ChromaDB] 初始化失败，fallback 到纯 JSON 模式: No module named 'chromadb'
+2026-07-10 01:59:33,292 [SNAPSHOT] [ChromaDB] sentence_transformers 不可用，使用 ChromaDB 默认 ONNX embedding
+2026-07-10 01:59:33,294 [SNAPSHOT] [ChromaDB] 初始化失败，fallback 到纯 JSON 模式: No module named 'chromadb'
+2026-07-10 01:59:33,295 [SNAPSHOT] [MemoryStore] 纯 JSON 模式（ChromaDB 不可用）
+2026-07-10 01:59:35,429 [SNAPSHOT] 📸 快照 'snap_20260710_015934': 健康=88.0 6文件
+2026-07-10 01:59:35,434 [SNAPSHOT] 🗑 删除旧快照: snap_20260709_113912
+2026-07-10 01:59:35,434 [SNAPSHOT] 📊 当前健康: 88.0 (最佳: 88.0)
+2026-07-10 01:59:35,445 [SNAPSHOT] 快照循环完成 (2.29s)
+2026-07-10 01:59:35,445 [SNAPSHOT]   当前健康: 88.0
+2026-07-10 01:59:35,445 [SNAPSHOT]   最佳健康: 88.0
+2026-07-10 01:59:35,445 [SNAPSHOT]   新最佳: 否
+2026-07-10 01:59:35,445 [SNAPSHOT]   快照数量: 14

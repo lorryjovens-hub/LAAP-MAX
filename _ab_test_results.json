@@ -1,0 +1,110 @@
+[
+  {
+    "id": "quicksort",
+    "intent": "implement",
+    "control": {
+      "success": true,
+      "prompt_tokens": 35,
+      "completion_tokens": 2000,
+      "total_tokens": 2035,
+      "latency_ms": 16102
+    },
+    "harness": {
+      "success": true,
+      "prompt_tokens": 80,
+      "completion_tokens": 2001,
+      "total_tokens": 2081,
+      "latency_ms": 15744
+    }
+  },
+  {
+    "id": "rest_api",
+    "intent": "implement",
+    "control": {
+      "success": true,
+      "prompt_tokens": 39,
+      "completion_tokens": 2000,
+      "total_tokens": 2039,
+      "latency_ms": 13862
+    },
+    "harness": {
+      "success": true,
+      "prompt_tokens": 86,
+      "completion_tokens": 2000,
+      "total_tokens": 2086,
+      "latency_ms": 12727
+    }
+  },
+  {
+    "id": "quantum",
+    "intent": "implement",
+    "control": {
+      "success": true,
+      "prompt_tokens": 35,
+      "completion_tokens": 731,
+      "total_tokens": 766,
+      "latency_ms": 12282
+    },
+    "harness": {
+      "success": true,
+      "prompt_tokens": 82,
+      "completion_tokens": 926,
+      "total_tokens": 1008,
+      "latency_ms": 13820
+    }
+  },
+  {
+    "id": "architecture",
+    "intent": "implement",
+    "control": {
+      "success": true,
+      "prompt_tokens": 39,
+      "completion_tokens": 2000,
+      "total_tokens": 2039,
+      "latency_ms": 21744
+    },
+    "harness": {
+      "success": true,
+      "prompt_tokens": 86,
+      "completion_tokens": 1857,
+      "total_tokens": 1943,
+      "latency_ms": 19565
+    }
+  },
+  {
+    "id": "react_form",
+    "intent": "code",
+    "control": {
+      "success": true,
+      "prompt_tokens": 35,
+      "completion_tokens": 2000,
+      "total_tokens": 2035,
+      "latency_ms": 12076
+    },
+    "harness": {
+      "success": true,
+      "prompt_tokens": 90,
+      "completion_tokens": 2000,
+      "total_tokens": 2090,
+      "latency_ms": 12287
+    }
+  },
+  {
+    "id": "docker",
+    "intent": "implement",
+    "control": {
+      "success": true,
+      "prompt_tokens": 34,
+      "completion_tokens": 1202,
+      "total_tokens": 1236,
+      "latency_ms": 12150
+    },
+    "harness": {
+      "success": true,
+      "prompt_tokens": 81,
+      "completion_tokens": 1369,
+      "total_tokens": 1450,
+      "latency_ms": 15284
+    }
+  }
+]

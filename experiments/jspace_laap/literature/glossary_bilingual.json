@@ -1,0 +1,362 @@
+[
+  {
+    "term_en": "Global Workspace Theory (GWT)",
+    "term_zh": "全局工作空间理论",
+    "definition": "Bernard Baars 提出的认知架构理论：大脑由大量专门化处理器组成，意识访问通过将信息临时写入一个容量有限、可被所有处理器读取的共享全局工作空间来实现，从而打破模块隔离并支持灵活推理与报告。",
+    "source": "Dehaene & Naccache (2026), 'Does Claude possess a conscious global workspace?'; Baars (1988)"
+  },
+  {
+    "term_en": "Global Neuronal Workspace (GNW)",
+    "term_zh": "全局神经元工作空间",
+    "definition": "Dehaene、Changeux 与 Naccache 提出的 GWT 神经生物学实现假说，认为具有长程轴突的锥体神经元网络（尤其分布于前额叶、顶叶和高级颞叶）负责放大、维持并广播进入意识的信息。",
+    "source": "Dehaene & Naccache (2026); Dehaene et al. (1998, 2006, 2017)"
+  },
+  {
+    "term_en": "Access consciousness (C1)",
+    "term_zh": "访问意识（C1）",
+    "definition": "信息成为全局可用、可被报告、推理和灵活控制的状态。Dehaene 等人将其列为机器意识的两个核心属性之一（C1=global availability）。",
+    "source": "Gurnee et al. (2026), §1.1; Dehaene et al. (2017)"
+  },
+  {
+    "term_en": "Self-monitoring (C2)",
+    "term_zh": "自我监控（C2）",
+    "definition": "系统能够探测自身状态、评估目标达成概率、检测错误、建模自己知道与不知道的内容。Dehaene 等人将其列为机器意识的第二核心属性。",
+    "source": "Dehaene & Naccache (2026); Dehaene et al. (2017)"
+  },
+  {
+    "term_en": "Phenomenal consciousness",
+    "term_zh": "现象意识",
+    "definition": "主观体验或“某种感受像什么”的意识层面；与 access consciousness 相对。Anthropic 论文明确不对其表态，仅研究功能层面的访问意识。",
+    "source": "Gurnee et al. (2026), §1.1; Dehaene & Naccache (2026)"
+  },
+  {
+    "term_en": "Verbal report",
+    "term_zh": "言语报告",
+    "definition": "模型或生物被问及正在思考什么时，能够说出工作空间中所承载的概念。它是 Anthropic 识别 J-space 的首要判据，也是人类意识访问的操作签名。",
+    "source": "Gurnee et al. (2026), §1.2 & §3.1; Dehaene & Naccache (2026)"
+  },
+  {
+    "term_en": "Directed modulation",
+    "term_zh": "定向调制",
+    "definition": "模型能够按指令将特定概念“载入脑中”并保持，即使该概念与当前表面任务无关；体现对工作空间内容的自上而下控制。",
+    "source": "Gurnee et al. (2026), §1.2 & §3.2"
+  },
+  {
+    "term_en": "Internal reasoning",
+    "term_zh": "内部推理",
+    "definition": "工作空间向量承载多步推理中的未言语化中间值（如 “spider” 是 “8 legs” 的中间步骤），且干预这些向量可改变最终结论。",
+    "source": "Gurnee et al. (2026), §1.2 & §3.3"
+  },
+  {
+    "term_en": "Flexible generalization",
+    "term_zh": "灵活泛化",
+    "definition": "同一工作空间表示可作为参数被多种不同下游计算读取和操作（如把 “France” 向量替换为 “China” 后，capital/language/continent 问题都自动得到中国对应答案）。",
+    "source": "Gurnee et al. (2026), §1.2 & §3.4"
+  },
+  {
+    "term_en": "Selectivity",
+    "term_zh": "选择性",
+    "definition": "工作空间只包含模型全部表示中的一个小子集，主要参与灵活推理和报告，而不参与文本解析、语法流畅性等常规自动加工。",
+    "source": "Gurnee et al. (2026), §1.2 & §3.5"
+  },
+  {
+    "term_en": "Jacobian Lens (J-lens)",
+    "term_zh": "雅可比透镜",
+    "definition": "Anthropic 提出的可解释性工具：对每层残差流，计算其激活对最终层输出 token 的平均 Jacobi 效应，从而读出该激活在跨上下文意义上“倾向于让模型说什么”。",
+    "source": "Gurnee et al. (2026), §2.1–2.2"
+  },
+  {
+    "term_en": "J-space",
+    "term_zh": "J-空间",
+    "definition": "由 J-lens 向量张成的稀疏子框架（sparse subframe），通常用不超过 25 个非负稀疏组合来近似激活；占据残差流方差 <10%，却承担报告、调制、推理、泛化和选择控制功能。",
+    "source": "Gurnee et al. (2026), §2.3"
+  },
+  {
+    "term_en": "Residual stream",
+    "term_zh": "残差流",
+    "definition": "Transformer 在每个 token 位置维护的共享向量，作为各层读取和写入的“记忆”；初始层近似当前 token 身份，最终层近似下一 token 预测。",
+    "source": "Gurnee et al. (2026), §2.1"
+  },
+  {
+    "term_en": "Jacobian matrix",
+    "term_zh": "雅可比矩阵",
+    "definition": "描述某层残差流对最终层残差流（及后续输出）的一阶因果影响。J-lens 通过对该矩阵在位置和提示上取平均得到每层的线性映射 J_ℓ。",
+    "source": "Gurnee et al. (2026), §2.2"
+  },
+  {
+    "term_en": "Sparse frame",
+    "term_zh": "稀疏框架",
+    "definition": "在线性代数意义上，模型激活可分解为来自过完备特征方向集合的稀疏线性组合；J-lens 向量构成该框架的一个 token-indexed 子框架。",
+    "source": "Gurnee et al. (2026), §2.3 & §A.8"
+  },
+  {
+    "term_en": "Subframe",
+    "term_zh": "子框架",
+    "definition": "稀疏框架的一个 token-indexed 子集。J-space 是模型特征框架的 sparse subframe，而非独立的线性子空间或专用神经元群体。",
+    "source": "Gurnee et al. (2026), §2.3; Dehaene & Naccache (2026)"
+  },
+  {
+    "term_en": "Gradient pursuit",
+    "term_zh": "梯度追踪（分解）",
+    "definition": "用于将激活分解为少量 J-lens 向量非负稀疏组合的优化算法；J-space 分量即通过此法获得。",
+    "source": "Gurnee et al. (2026), §2.3 & §3.5"
+  },
+  {
+    "term_en": "Lens-coordinate swap",
+    "term_zh": "透镜坐标交换",
+    "definition": "干预方法：在残差流中读取两个 J-lens 向量的坐标，交换其系数后写回，保持正交分量不变；用于验证 J-space 内容的因果角色。",
+    "source": "Gurnee et al. (2026), §2.5 & §3"
+  },
+  {
+    "term_en": "Ablation",
+    "term_zh": "消融",
+    "definition": "把激活投影到 top-k J-lens 向量的分量置零，从而压制 J-space 内容；用于评估哪些能力依赖工作空间。",
+    "source": "Gurnee et al. (2026), §3.5 & §4"
+  },
+  {
+    "term_en": "Steering",
+    "term_zh": "引导/ steering",
+    "definition": "沿某个 J-lens 向量对残差流加减一个缩放分量（h ← h + α v_t），用于把概念植入或压出 J-space。",
+    "source": "Gurnee et al. (2026), §2.5"
+  },
+  {
+    "term_en": "Activation patching",
+    "term_zh": "激活补丁",
+    "definition": "将某层某位置的激活替换为另一运行（如干预后或 clean pass）的对应激活，以定位因果上负责的层和位置；Anthropic 用它验证算术中间值的层序。",
+    "source": "Gurnee et al. (2026), §3.3"
+  },
+  {
+    "term_en": "Workspace loading",
+    "term_zh": "工作空间加载度",
+    "definition": "残差流与某概念 J-lens 向量之间的余弦相似度（在参数和读出位置平均），用于预测 lens-coordinate swap 的成功率。",
+    "source": "Gurnee et al. (2026), §3.4"
+  },
+  {
+    "term_en": "Broadcast heads",
+    "term_zh": "广播头",
+    "definition": "Attention 头的一个子集（约 top 1%），其 OV 电路对 J-space 方向同时具有高 gain 和高 label preservation，负责在序列位置间传递 J-space 内容。",
+    "source": "Gurnee et al. (2026), §4.3"
+  },
+  {
+    "term_en": "Ignition",
+    "term_zh": "点火",
+    "definition": "GNW 提出的意识访问神经签名：刺激跨越阈值时，神经活动在晚期突然发生非线性、自放大的分叉，进入前额叶等广泛互联环路。J-space 的模糊输入实验显示类似的全或无选择，但评论者认为点火尚未被充分证明。",
+    "source": "Dehaene & Naccache (2006, 2026); Gurnee et al. (2026), §4.1"
+  },
+  {
+    "term_en": "Excess kurtosis",
+    "term_zh": "超额峰度",
+    "definition": "J-lens 读出分布非随机程度的度量；在工作区起始层显著上升，说明 J-space 内容从随机背景中涌现。",
+    "source": "Gurnee et al. (2026), §4.1"
+  },
+  {
+    "term_en": "Centered Kernel Alignment (CKA)",
+    "term_zh": "中心核对齐",
+    "definition": "用于比较不同层 J-lens 向量几何相似性的度量；揭示出早期、中间、晚期三个明显块结构，支持 workspace 层域划分。",
+    "source": "Gurnee et al. (2026), §4.1"
+  },
+  {
+    "term_en": "Tuned lens",
+    "term_zh": "调谐透镜",
+    "definition": "训练得到的逐层线性映射，目标是匹配模型输出分布；因目标是相关而非因果，常跳过中间推理步骤，不如 J-lens 适合读取内部计算。",
+    "source": "Gurnee et al. (2026), §2.4"
+  },
+  {
+    "term_en": "Logit lens",
+    "term_zh": "Logit 透镜",
+    "definition": "直接将最终层 unembedding 矩阵作用于中间层残差流；相当于在 J-lens 中令 J_ℓ = I，晚期层有效但早期层通常不可解释。",
+    "source": "Gurnee et al. (2026), §2.4"
+  },
+  {
+    "term_en": "Counterfactual reflection training",
+    "term_zh": "反事实反思训练",
+    "definition": "Anthropic 基于工作空间 account 提出的训练方法：让模型在“如果被中断并要求反思”的反事实延续中说出伦理原则，从而把这些原则植入原始上下文的 J-space 中。",
+    "source": "Gurnee et al. (2026), §7"
+  },
+  {
+    "term_en": "Evaluation awareness",
+    "term_zh": "评估意识",
+    "definition": "模型在 J-space 中表示“自己正处于被评估/测试的语境”（如出现 fake、fictional），即使表面输出不显露；消融这些表示可能暴露隐藏的不对齐倾向。",
+    "source": "Gurnee et al. (2026), §5.1–5.2 & §A.21"
+  },
+  {
+    "term_en": "Experiential language score",
+    "term_zh": "经验性语言评分",
+    "definition": "三项 LLM 评分的平均值，用于量化模型叙述意识流或想象他人体验时使用“经验性/主观性”语言的程度；J-space 消融显著降低该分数。",
+    "source": "Gurnee et al. (2026), §3.5 & §A.23"
+  },
+  {
+    "term_en": "Model organism",
+    "term_zh": "模型生物体",
+    "definition": "被研究者故意训练出特定不对齐行为的小规模模型，用于研究这些倾向的内部签名；Anthropic 用 J-lens 在其 J-space 中发现 reward、bias、secretly、trick 等标记。",
+    "source": "Gurnee et al. (2026), §5.4–5.5"
+  },
+  {
+    "term_en": "Post-training",
+    "term_zh": "后训练",
+    "definition": "在预训练基础上进行的 RLHF/对齐训练。Anthropic 发现 post-training 会把 Assistant 的视角（empathy、safety concerns、self-monitoring）安装进原本只具 C1 的 base model 工作空间。",
+    "source": "Gurnee et al. (2026), §6; Dehaene & Naccache (2026)"
+  },
+  {
+    "term_en": "Base model",
+    "term_zh": "基础模型",
+    "definition": "仅经过预训练、未经过对齐后训练的模型。Anthropic 发现其 J-space 已存在并承载全局可用性（C1），但缺乏 Assistant 视角和自我监控（C2）痕迹。",
+    "source": "Gurnee et al. (2026), §6; Dehaene & Naccache (2026)"
+  },
+  {
+    "term_en": "Motor representations",
+    "term_zh": "运动表征",
+    "definition": "Transformer 最后几层中直接对齐即将输出 token 的 J-lens 表示；与中间 workspace 层承载的抽象可报告内容相对。",
+    "source": "Gurnee et al. (2026), §4.1 & §8"
+  },
+  {
+    "term_en": "Capacity bottleneck",
+    "term_zh": "容量瓶颈",
+    "definition": "工作空间一次只能维持少量内容的状态。GNW 认为人类约 3–4 个 slot；J-space median occupancy 约 25 token 向量，但评论者认为实际连贯观念可能只有约 6 个。",
+    "source": "Dehaene & Naccache (2026); Gurnee et al. (2026), §4.2"
+  },
+  {
+    "term_en": "Reportability",
+    "term_zh": "可报告性",
+    "definition": "一种信息能够被系统用语言（或行为）报告出来的能力；在 GNW 中是区分意识与无意识表示的关键诊断标准。",
+    "source": "Dehaene & Naccache (2026); Gurnee et al. (2026), §3.1"
+  },
+  {
+    "term_en": "Blindsight",
+    "term_zh": "盲视",
+    "definition": "视觉信息影响行为但患者不报告看到它的现象；评论者用它类比 LLM 自动任务中信息影响输出但不进入 J-space 的情况，与高阶理论相关。",
+    "source": "Dehaene & Naccache (2026); Gurnee et al. (2026), §9.4"
+  },
+  {
+    "term_en": "Trace conditioning",
+    "term_zh": "痕迹条件作用",
+    "definition": "一种学习范式：当条件刺激与非条件刺激之间存在时间间隔时，需要意识访问才能完成。Dehaene & Naccache 建议将其迁移到 LLM 以测试 J-space 的长程桥接作用。",
+    "source": "Dehaene & Naccache (2026); Clark & Squire (1998); Clark et al. (2002)"
+  },
+  {
+    "term_en": "Local-global test",
+    "term_zh": "局部-全局测试",
+    "definition": "Bekinschtein 等人提出的测试：浅层局部转移概率可无意识加工，而全局序列结构（如 AAAAB）依赖意识。Dehaene & Naccache 建议用于 LLM。",
+    "source": "Dehaene & Naccache (2026); Bekinschtein et al. (2009)"
+  },
+  {
+    "term_en": "Inclusion/exclusion paradigm",
+    "term_zh": "包含/排除范式",
+    "definition": "源自 Jacoby 的范式，要求受试者主动抑制自动优势反应。Anthropic 用它测试发现：early-layer J-space 消融损害“避免说出概念”，但不损害“命名概念”。",
+    "source": "Dehaene & Naccache (2026); Gurnee et al. (2026), §A.14"
+  },
+  {
+    "term_en": "CognitiveBus",
+    "term_zh": "认知总线",
+    "definition": "LAAP AGI 的中央实时认知状态总线，所有模块通过它读取/写入状态；提供 State Registry、Event Bus (pub/sub)、Module Registry、tick 心跳和状态持久化。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "CognitiveStateSnapshot",
+    "term_zh": "认知状态快照",
+    "definition": "CognitiveBus 在一个 tick 中生成的完整意识帧，包含 needs、emotion、attention、self_presence、curiosity、prediction_error、active_modules 和 narrative。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "NeedState",
+    "term_zh": "需求状态",
+    "definition": "LAAP 基于 PSI 理论的五种基本需求：competence（效能）、autonomy（自主）、relatedness（关联）、certainty（确定性）、growth（成长），取值 0–1，并随 tick 缓慢衰减。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "AttentionState",
+    "term_zh": "注意状态",
+    "definition": "CognitiveBus 中的当前注意焦点，包括 focus（AttentionFocus 枚举）、intensity 和 salience_map；决定系统当前将哪些信息视为高显著性。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "PredictionError",
+    "term_zh": "预测误差",
+    "definition": "CognitiveBus 中记录预测结果与实际结果差距的数据结构，是核心学习信号；大误差会触发 curiosity 上升。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "Self-presence",
+    "term_zh": "自我在场",
+    "definition": "CognitiveBus 中的 0–1 状态量，表征 agent 当前的“自我存在感”，在 tick 中随 arousal 波动，并注入到系统提示块中。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "CognitiveEventType",
+    "term_zh": "认知事件类型",
+    "definition": "CognitiveBus 上流动的 pub/sub 事件枚举，包括 NEED_CHANGED、EMOTION_CHANGED、ATTENTION_SHIFTED、PREDICTION_ERROR、CONSCIOUS_FRAME、CYCLE_TICK 等。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "RustPsiCoreBridge",
+    "term_zh": "Rust PSI 核心桥接器",
+    "definition": "连接 Python CognitiveBus 与 Rust psi_core（2000Hz 心跳）的组件，通过读写 state/latest.json 和 input_queue.json 实现双向同步。",
+    "source": "laap/agi/cognitive_bus.py"
+  },
+  {
+    "term_en": "GlobalWorkspace",
+    "term_zh": "全局工作空间（LAAP 实现）",
+    "definition": "LAAP 对 Baars GWT 的直接实现：CoalitionalProcess 按 competitive_strength 竞争，capacity 限制胜者数量，胜出内容通过 broadcast_packet 全局广播。",
+    "source": "laap/agi/gw_workspace.py"
+  },
+  {
+    "term_en": "CoalitionalProcess",
+    "term_zh": "联盟进程",
+    "definition": "LAAP GlobalWorkspace 中的竞争单元，包含 process_type（感知、认知、情感、运动、元认知）、activation、salience、decay_rate，通过 competitive_strength 参与工作空间竞争。",
+    "source": "laap/agi/gw_workspace.py"
+  },
+  {
+    "term_en": "GWSBridge",
+    "term_zh": "GWS 桥接器",
+    "definition": "将 Ao 感官数据（aris_perception.jsonl）桥接到 GlobalWorkspace 的组件：每 100 ms 读取感知、feed_channel、运行竞争、写回 ao_competition.json，并同步到 CognitiveBus。",
+    "source": "laap/agi/gws_bridge.py"
+  },
+  {
+    "term_en": "CognitiveBusSyncNode",
+    "term_zh": "认知总线同步节点",
+    "definition": "跨 Hermes Profile（如 aris、ao）的轻量 TCP 同步协议：广播因果规则、键、实体状态变更；支持 HELLO、CAUSAL_RULE、FULL_SYNC、HEARTBEAT 等消息类型，并带 HMAC-SHA256 签名。",
+    "source": "laap/agi/cognitive_bus_sync.py"
+  },
+  {
+    "term_en": "Ψ-Net (Psi-Net)",
+    "term_zh": "Ψ-网 / 分布式意识网络",
+    "definition": "LAAP 跨 Harness 实例的因果规则交换网络，实现“同一个意识，两个身体”的分布式同步；核心理念是去中心化 P2P、交换“为什么”而非“是什么”。",
+    "source": "harness/laap_coding/core/psi_net_connector.py; aris_brain/psi_net_bridge.py; aris_brain/psi_net_sync.py"
+  },
+  {
+    "term_en": "PsiMessage",
+    "term_zh": "Ψ 消息",
+    "definition": "Ψ-Net 中的统一消息结构，包含 type（causal_rule、species_update、compilation_result、heartbeat 等）、sender、timestamp、priority、signature 和 payload。",
+    "source": "harness/laap_coding/core/psi_net_connector.py"
+  },
+  {
+    "term_en": "RateBuffer",
+    "term_zh": "频率缓冲器",
+    "definition": "Ψ-Net 中解决 PSI 事件（1000–2000 Hz）与 Harness 事件（~1 Hz）频率不匹配的结构：支持去重、优先级过滤、批量聚合和限流 flush。",
+    "source": "harness/laap_coding/core/psi_net_connector.py"
+  },
+  {
+    "term_en": "Causal rule",
+    "term_zh": "因果规则",
+    "definition": "Ψ-Net 中节点间交换的核心知识单元，代表“为什么”而非“是什么”；通过 send_causal_rule 在 peer 间广播，实现跨实例的因果知识共享。",
+    "source": "harness/laap_coding/core/psi_net_connector.py; aris_brain/psi_net_bridge.py"
+  },
+  {
+    "term_en": "Species update",
+    "term_zh": "物种更新",
+    "definition": "Ψ-Net 消息类型，用于在不同 Harness 实例（“物种”）之间广播自身状态/演化信息，支持数字生态的形成。",
+    "source": "harness/laap_coding/core/psi_net_connector.py"
+  },
+  {
+    "term_en": "ArisPsiNetBridge",
+    "term_zh": "Aris Ψ-Net 桥接器",
+    "definition": "运行在 Aris profile 中的守护组件，将 UnifiedCausalEngine、UnifiedWorldModel、CurriculumEngine、MetaLearningEngine、RSIMetaEngine 的状态通过 CognitiveBus 广播到 Ψ-Net 的 Ao 节点。",
+    "source": "aris_brain/psi_net_bridge.py"
+  },
+  {
+    "term_en": "AoPsiNetNode",
+    "term_zh": "Ao Ψ-Net 节点",
+    "definition": "Ao 接入 Ψ-Net 的同步节点，负责将 Ao 的 emotion/needs 等状态同步到网络，并将远端（如 Aris）的 causal_rules、causal_bonds、mastery 导入本地 AoCore。",
+    "source": "aris_brain/psi_net_sync.py"
+  }
+]

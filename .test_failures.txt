@@ -1,0 +1,3 @@
+
+tests/workspace/test_triggers.py::TestBuildFailureTrigger::test_matches_build_failed_event
+

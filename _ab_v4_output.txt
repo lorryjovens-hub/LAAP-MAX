@@ -1,0 +1,51 @@
+STDOUT:
+
+=== quicksort ===
+  实际任务类型: 代码
+  Harness分类意图: implement
+  Harness提取关键词: ['python']
+  匹配架构模式: []
+  Control:   in=35 out=1795 tot=1830
+  Harness:   in=80 out=2043 tot=2123
+  Delta:     in=+45 out=+248 tot=+293
+
+=== quantum ===
+  实际任务类型: 解释/概念
+  Harness分类意图: implement
+  Harness提取关键词: []
+  匹配架构模式: []
+
+
+STDERR:
+CognitiveBus模块不可用，将使用模拟实现
+CognitiveBus模块不可用，将使用模拟实现
+[Harness] Failed to initialize CognitiveIntegration: CognitiveBus模块不可用
+Traceback (most recent call last):
+  File "D:\LAAP\_ab_v4.py", line 64, in <module>
+    c = call_llm([
+        {"role": "system", "content": "你是一个专业的AI助手。请根据用户的问题给出准确、全面的回答。"},
+        {"role": "user", "content": task["desc"]}
+    ], max_tokens=4096)
+  File "D:\LAAP\_ab_v4.py", line 20, in call_llm
+    resp = client.chat.completions.create(
+        model="deepseek-chat", messages=messages,
+        max_tokens=max_tokens, temperature=0.7,
+    )
+  File "D:\hermes-agent-main (1)\hermes-agent-main\.venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "D:\hermes-agent-main (1)\hermes-agent-main\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\hermes-agent-main (1)\hermes-agent-main\.venv\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\hermes-agent-main (1)\hermes-agent-main\.venv\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}

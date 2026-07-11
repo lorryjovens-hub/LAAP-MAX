@@ -1,0 +1,43 @@
+{
+  "net_id": "psi_harness_closed_loop",
+  "boundedness": {
+    "is_bounded": true,
+    "max_bound": 1
+  },
+  "liveness": {
+    "deadlocks": [
+      {
+        "cond": 0,
+        "loop": 1,
+        "sink": 0,
+        "start": 0
+      }
+    ],
+    "sink_places": [
+      "sink"
+    ],
+    "dead_transitions": [
+      "drain"
+    ]
+  },
+  "reachability": [
+    {
+      "description": "sink place is reachable (requires external cond)",
+      "target": {
+        "sink": 1
+      },
+      "reachable": false,
+      "path": null
+    },
+    {
+      "description": "loop is reachable after enter",
+      "target": {
+        "loop": 1
+      },
+      "reachable": true,
+      "path": [
+        "enter"
+      ]
+    }
+  ]
+}

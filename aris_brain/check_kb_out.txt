@@ -1,0 +1,22 @@
+Total papers: 23187
+Target category counts:
+  cs.AI: 895
+  cs.CL: 599
+  cs.LG: 1120
+  cs.NE: 320
+  stat.ML: 485
+Recent years:
+  2026: 3957
+  2025: 3240
+  2024: 2590
+  2023: 1945
+  2022: 1460
+  2021: 1367
+  2020: 1137
+  2019: 891
+  2018: 671
+  2017: 545
+NPZ size: 2.5 MB
+Matrix shape: (1287, 1024)
+Texts: 1287
+Sources: 1287

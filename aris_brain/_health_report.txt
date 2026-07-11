@@ -1,0 +1,72 @@
+{
+  "total": 74.0,
+  "timestamp": 1783007127.0596995,
+  "datetime": "2026-07-02T15:45:27.059699+00:00",
+  "scores": {
+    "memory": [
+      0.0,
+      "错误: \n\nIMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!\n\nImporting the numpy C-extensions failed. This error can happen for\nmany reasons, often due to issues with your setup or how NumPy was\ninstalled.\nThe following compiled module files exist, but seem incompatible\nwith with either python 'cpython-311' or the platform 'win32':\n\n  * _multiarray_umath.cp313-win_amd64.lib\n  * _multiarray_umath.cp313-win_amd64.pyd\n\nWe have compiled some common reasons and troubleshooting tips at:\n\n    https://numpy.org/devdocs/user/troubleshooting-importerror.html\n\nPlease note and check the following:\n\n  * The Python version is: Python 3.11 from \"C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe\"\n  * The NumPy version is: \"2.4.4\"\n\nand make sure that they are the versions you expect.\n\nPlease carefully study the information and documentation linked above.\nThis is unlikely to be a NumPy issue but will be caused by a bad install\nor environment on your machine.\n\nOriginal error was: No module named 'numpy._core._multiarray_umath'\n"
+    ],
+    "process": [
+      1.0,
+      "aris_feishu✓, agi_kernel✓"
+    ],
+    "errors": [
+      1.0,
+      "0条近期错误"
+    ],
+    "valence": [
+      0.5,
+      "未知(无情绪文件)"
+    ],
+    "desires": [
+      0.9,
+      "均值为0.35(健康)"
+    ],
+    "goals": [
+      1.0,
+      "589活跃/1完成"
+    ],
+    "integrity": [
+      1.0,
+      "全部正常"
+    ]
+  },
+  "details": {
+    "memory": {
+      "score": 0.0,
+      "weight": 0.2,
+      "description": "错误: \n\nIMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!\n\nImporting the numpy C-extensions failed. This error can happen for\nmany reasons, often due to issues with your setup or how NumPy was\ninstalled.\nThe following compiled module files exist, but seem incompatible\nwith with either python 'cpython-311' or the platform 'win32':\n\n  * _multiarray_umath.cp313-win_amd64.lib\n  * _multiarray_umath.cp313-win_amd64.pyd\n\nWe have compiled some common reasons and troubleshooting tips at:\n\n    https://numpy.org/devdocs/user/troubleshooting-importerror.html\n\nPlease note and check the following:\n\n  * The Python version is: Python 3.11 from \"C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe\"\n  * The NumPy version is: \"2.4.4\"\n\nand make sure that they are the versions you expect.\n\nPlease carefully study the information and documentation linked above.\nThis is unlikely to be a NumPy issue but will be caused by a bad install\nor environment on your machine.\n\nOriginal error was: No module named 'numpy._core._multiarray_umath'\n"
+    },
+    "process": {
+      "score": 1.0,
+      "weight": 0.15,
+      "description": "aris_feishu✓, agi_kernel✓"
+    },
+    "errors": {
+      "score": 1.0,
+      "weight": 0.2,
+      "description": "0条近期错误"
+    },
+    "valence": {
+      "score": 0.5,
+      "weight": 0.1,
+      "description": "未知(无情绪文件)"
+    },
+    "desires": {
+      "score": 0.9,
+      "weight": 0.1,
+      "description": "均值为0.35(健康)"
+    },
+    "goals": {
+      "score": 1.0,
+      "weight": 0.1,
+      "description": "589活跃/1完成"
+    },
+    "integrity": {
+      "score": 1.0,
+      "weight": 0.15,
+      "description": "全部正常"
+    }
+  }
+}

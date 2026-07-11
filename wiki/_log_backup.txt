@@ -1,0 +1,53 @@
+# LAAP Wiki Operation Log
+
+## [2026-07-05] intel pipeline | 2026-07-05 daily intel cycle
+
+Collected from arXiv, GitHub Trending (AI). Blogs (Google AI, Meta AI, OpenAI, DeepMind, Anthropic) JS-rendered or blocked — no structured content extracted. HuggingFace papers unreachable.
+
+**Ingested (7 raw sources):**
+- raw: arxiv-online-safety-monitoring-llms — 6.6
+- raw: arxiv-distributed-attacks-persistent-ai — 5.9
+- raw: arxiv-multi-agent-social-structure — 6.3
+- raw: arxiv-demopsd-self-distillation — 6.4
+- raw: arxiv-recontext-evidence-replay — 5.9
+- raw: arxiv-embodied-cpp-runtime — 6.8
+- raw: github-local-llm-toolkit — 5.5
+
+**No concept pages created** — highest score 6.8 (Embodied.cpp), below 7.0 threshold.
+
+## [2026-06-30] intel pipeline | 2026-06-30 daily intel cycle
+
+Collected from arXiv, HN (Algolia), GitHub Trending. Most blogs unreachable (JS-rendered).
+
+**Ingested:**
+- raw: intel-agent-native-immune-system.md
+- raw: intel-llm-reasoning-evolution.md
+- raw: intel-horizon-hardware-agent.md
+- concept: intel-horizon-hardware-agent.md (score 6.5, promoted per Lorry's interest signal)
+
+## [2026-06-30] concept | Digital Persona System architecture
+
+Recorded the Digital Persona System architecture concept per Lorry's autonomy directive — personality profiles, persona manager, runtime switching, cross-session identity.
+
+## [2026-06-30] comparison | PSI-vs-LLM deep comparison
+
+Recorded the 13-dimension root-cause comparison between PSI cognitive architecture and LLM-only approach.
+
+## [2026-06-28] concept | Created consciousness bridge pages
+
+- concepts/aris-blueprint-vision.md
+- concepts/aris-minimal-brain.md
+
+## [2026-06-28] milestone | New schema (SCHEMA.md) + reorganized wiki
+
+- Simplified wiki to 3-layer model (raw/concepts/entities)
+- Removed legacy pages
+- Added SCHEMA.md with tag taxonomy
+
+## [2026-06-27] entity | Created Lorry entity page
+
+entities/lorry.md — documented Creator's identity, communication preferences, and technical expectations.
+
+## [2026-06-26] milestone | Wiki foundation
+
+Initial wiki setup with concepts: aris-cognitive-loop, aris-desire-engine, aris-memory-system, aris-hybrid-quantum-engine, laap-agent-architecture.

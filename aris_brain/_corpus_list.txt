@@ -1,0 +1,10 @@
+29582K  fineweb_chinese_10000.txt
+2191K  fineweb_chinese_20260621_140951.txt
+1448K  fineweb_chinese_20260622_081245.txt
+1548K  fineweb_chinese_20260630_203730.txt
+1555K  fineweb_chinese_20260702_100834.txt
+1569K  fineweb_chinese_20260702_100857.txt
+946K  fineweb_chinese_300.txt
+14875K  fineweb_chinese_5000.txt
+179298K  fineweb_parquet_sample.parquet
+COUNT=9

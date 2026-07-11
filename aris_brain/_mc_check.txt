@@ -1,0 +1,12 @@
+[Markov] Loaded: 34272 words, 1015192 contexts, 54741367 n-grams
+Loaded: True
+vocab: NOT FOUND
+n_grams: NOT FOUND
+starters: NOT FOUND
+order: 3
+min_freq: 1
+total_tokens: NOT FOUND
+transitions: NOT FOUND
+vocab_size: NOT FOUND
+total_ngrams: NOT FOUND
+state: NOT FOUND
