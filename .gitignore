@@ -131,6 +131,37 @@ final_verify.txt
 test_*.txt
 subset_results.xml
 
+# ========== aris_brain 运行时产物（保留源码，排除状态/输出） ==========
+aris_brain/.aris_queue/
+aris_brain/memory/
+aris_brain/outputs/
+aris_brain/output/
+aris_brain/_snap_*.txt
+aris_brain/_line_*.txt
+aris_brain/_rpt*.txt
+aris_brain/snap_*.txt
+aris_brain/snapshot*.txt
+aris_brain/*_output.txt
+aris_brain/*_result.txt
+aris_brain/*_result.json
+aris_brain/*.csv
+aris_brain/paper_kb/
+aris_brain/prod_*.html
+aris_brain/ui_*.html
+aris_brain/test_*.html
+aris_brain/test_*.png
+aris_brain/outputs/
+aris_brain/*.log
+
+# ========== Electron/Node 构建产物 ==========
+laap-client/release-build-temp/
+laap-client/dist/
+laap-client/out/
+
+# ========== Godot 缓存 ==========
+*.godot/
+*.tmp
+
 # ========== 压缩包/大文件 ==========
 *.zip
 *.tar.gz

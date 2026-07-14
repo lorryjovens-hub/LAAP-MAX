@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:transparent}
+#canvas{width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script src="live2d_core/pixi.min.js"></script>
+<script src="live2d_core/live2d.min.js"></script>
+<script src="live2d_core/live2dcubismcore.min.js"></script>
+<script>
+let app, model, coreModel;
+let mouthOpen = 0;
+let targetMouth = 0;
+let blinkL = 0, blinkR = 0;
+let targetBlinkL = 0, targetBlinkR = 0;
+let breathPhase = 0;
+let expression = '';
+
+// 初始化
+async function init() {
+  try {
+    app = new PIXI.Application({
+      view: document.getElementById('canvas'),
+      width: window.innerWidth,
+      height: window.innerHeight,
+      transparent: true,
+      antialias: true,
+      resolution: window.devicePixelRatio || 1,
+    });
+
+    const modelDir = 'models/lafei/';
+    const modelFile = 'Laffey Ⅱ.model3.json';
+
+    // 加载模型
+    const modelJson = await loadJSON(modelDir + modelFile);
+    const mocPath = modelDir + modelJson.FileReferences.Moc;
+    const texPaths = (modelJson.FileReferences.Textures || []).map(t => modelDir + t);
+    const physicsPath = modelJson.FileReferences.Physics ? modelDir + modelJson.FileReferences.Physics : null;
+
+    const mocBytes = await loadBytes(mocPath);
+    coreModel = Live2DCubismCore.Model.fromArrayBuffer(mocBytes.buffer);
+
+    const textures = await Promise.all(texPaths.map(loadTexture));
+    
+    // PIXI 渲染
+    model = new PIXI.live2d.Live2DModel(coreModel, { autoInteract: false });
+    
+    // 设置贴图
+    textures.forEach((tex, i) => {
+      if (model.internalModel.textures[i]) {
+        model.internalModel.textures[i] = PIXI.Texture.from(tex);
+      }
+    });
+
+    // 加载物理
+    if (physicsPath) {
+      const physicsBytes = await loadBytes(physicsPath);
+      model.internalModel.physics = JSON.parse(new TextDecoder().decode(physicsBytes));
+    }
+
+    // 参数映射
+    model.internalModel.parameterIds.forEach((id, i) => {
+      if (id === 'ParamMouthOpenY') model.mouthParam = i;
+      if (id === 'ParamEyeLOpen') model.eyeLParam = i;
+      if (id === 'ParamEyeROpen') model.eyeRParam = i;
+      if (id === 'ParamBodyAngleX') model.bodyXParam = i;
+      if (id === 'ParamBodyAngleY') model.bodyYParam = i;
+      if (id === 'ParamBreath') model.breathParam = i;
+    });
+
+    // 缩放适配
+    const scale = Math.min(window.innerWidth / 600, window.innerHeight / 800);
+    model.scale.set(scale);
+    model.position.set(window.innerWidth / 2, window.innerHeight * 0.85);
+    app.stage.addChild(model);
+
+    // 动画循环
+    app.ticker.add(() => animate());
+    
+    // 通知 Flutter 加载完成
+    if (window.Live2DLoaded) window.Live2DLoaded();
+    
+  } catch(e) {
+    console.error('Live2D init error:', e);
+    if (window.Live2DError) window.Live2DError(e.message);
+  }
+}
+
+function animate() {
+  if (!model || !model.internalModel) return;
+  
+  const p = model.internalModel.parameterValues;
+  const ids = model.internalModel.parameterIds;
+  
+  // 口型平滑
+  mouthOpen += (targetMouth - mouthOpen) * 0.15;
+  
+  // 眨眼
+  blinkL += (targetBlinkL - blinkL) * 0.2;
+  blinkR += (targetBlinkR - blinkR) * 0.2;
+  
+  // 呼吸
+  breathPhase += 0.033;
+  const breath = Math.sin(breathPhase * 2 * Math.PI) * 0.03;
+  
+  // 赋值参数
+  ids.forEach((id, i) => {
+    if (id === 'ParamMouthOpenY') p[i] = mouthOpen * 0.8;
+    else if (id === 'ParamEyeLOpen') p[i] = 1 - blinkL * 0.85;
+    else if (id === 'ParamEyeROpen') p[i] = 1 - blinkR * 0.85;
+    else if (id === 'ParamBreath') p[i] = breath;
+  });
+}
+
+// ===== 音频分析 =====
+let audioCtx, analyser, dataArray;
+
+function startAudio() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+  dataArray = new Uint8Array(analyser.frequencyBinCount);
+  
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+      const src = audioCtx.createMediaStreamSource(stream);
+      src.connect(analyser);
+      analyzeAudio();
+    })
+    .catch(() => {});
+}
+
+function analyzeAudio() {
+  if (!analyser) return;
+  analyser.getByteFrequencyData(dataArray);
+  const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+  targetMouth = Math.min(1, avg / 80);
+  requestAnimationFrame(analyzeAudio);
+}
+
+// ===== 工具函数 =====
+async function loadJSON(path) {
+  const r = await fetch(path);
+  return await r.json();
+}
+
+async function loadBytes(path) {
+  const r = await fetch(path);
+  return await r.arrayBuffer();
+}
+
+async function loadTexture(path) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = path;
+  });
+}
+
+// ===== Flutter 通信接口 =====
+// 说话
+window.speak = function(intensity) {
+  targetMouth = Math.min(1, intensity);
+};
+
+// 停止说话
+window.stopSpeak = function() {
+  targetMouth = 0;
+};
+
+// 眨眼的随机触发
+setInterval(() => {
+  if (Math.random() < 0.03) {
+    targetBlinkL = targetBlinkR = 1;
+    setTimeout(() => { targetBlinkL = targetBlinkR = 0; }, 150);
+  }
+}, 100);
+
+// 启动
+init();
+</script>
+</body>
+</html>

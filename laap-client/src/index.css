@@ -1,0 +1,247 @@
+@import "./styles/tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--laap-bg-primary);
+    color: var(--laap-text-primary);
+    font-family: var(--laap-font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--laap-bg-primary);
+    color: var(--laap-text-primary);
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* 深色滚动条 */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  ::selection {
+    background: rgba(124, 124, 255, 0.35);
+    color: var(--laap-text-primary);
+  }
+}
+
+@layer utilities {
+  /* 允许拖拽移动无边框窗口 */
+  .app-drag {
+    -webkit-app-region: drag;
+  }
+
+  /* 禁止拖拽，使按钮可点击 */
+  .no-drag {
+    -webkit-app-region: no-drag;
+  }
+
+  /* 状态标签文本样式 */
+  .laap-status-ok {
+    color: var(--laap-status-ok);
+  }
+
+  .laap-status-error {
+    color: var(--laap-status-error);
+  }
+
+  .laap-status-warn {
+    color: var(--laap-status-warn);
+  }
+
+  .laap-status-info {
+    color: var(--laap-status-info);
+  }
+
+  /* Markdown 内容基础样式 */
+  .laap-markdown h1,
+  .laap-markdown h2,
+  .laap-markdown h3 {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--laap-text-primary);
+  }
+
+  .laap-markdown h1 {
+    font-size: 1.125rem;
+  }
+
+  .laap-markdown h2 {
+    font-size: 1rem;
+  }
+
+  .laap-markdown h3 {
+    font-size: 0.9375rem;
+  }
+
+  .laap-markdown p {
+    margin-bottom: 0.5rem;
+  }
+
+  .laap-markdown ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .laap-markdown ol {
+    list-style-type: decimal;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .laap-markdown li {
+    margin-bottom: 0.25rem;
+  }
+
+  .laap-markdown a {
+    color: var(--laap-accent-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .laap-markdown blockquote {
+    border-left: 2px solid var(--laap-accent);
+    padding-left: 0.75rem;
+    margin: 0.5rem 0;
+    color: var(--laap-text-secondary);
+  }
+
+  .laap-markdown table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .laap-markdown th,
+  .laap-markdown td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.375rem 0.5rem;
+    text-align: left;
+  }
+
+  .laap-markdown th {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--laap-text-primary);
+  }
+
+  /* Colony 协作图流动边动画 */
+  @keyframes colony-flow {
+    from {
+      stroke-dashoffset: 100;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .colony-edge-flow {
+    animation: colony-flow 2s linear infinite;
+  }
+
+  /* VoiceOrb 脉冲扩散 */
+  @keyframes voice-pulse {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .voice-orb-pulse {
+    animation: voice-pulse 1.6s ease-out infinite;
+  }
+
+  /* VoiceOrb 旋转光环 */
+  @keyframes voice-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .voice-orb-spin {
+    animation: voice-spin 3s linear infinite;
+  }
+
+  /* VoiceOrb 呼吸 */
+  @keyframes voice-breathe {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.08);
+    }
+  }
+
+  .voice-orb-breathe {
+    animation: voice-breathe 3s ease-in-out infinite;
+  }
+
+  /* VoiceOrb 波形条 */
+  @keyframes voice-bar {
+    0%, 100% {
+      transform: scaleY(0.4);
+    }
+    50% {
+      transform: scaleY(1.2);
+    }
+  }
+
+  .voice-orb-bar {
+    animation: voice-bar 0.6s ease-in-out infinite;
+  }
+
+  /* WaveformVisualizer 波形条 */
+  @keyframes waveform-jump {
+    0%, 100% {
+      transform: scaleY(0.5);
+    }
+    50% {
+      transform: scaleY(1.1);
+    }
+  }
+
+  .waveform-bar {
+    animation: waveform-jump 0.7s ease-in-out infinite;
+  }
+}

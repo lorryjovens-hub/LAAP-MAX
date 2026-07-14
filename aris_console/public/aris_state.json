@@ -1,0 +1,56 @@
+{
+  "psi": {
+    "emotion": "tranquil",
+    "emotion_intensity": 0.72,
+    "attention": "user",
+    "self_presence": 0.85,
+    "openness": 0.85,
+    "conscientiousness": 0.6,
+    "psi_cycle_phase": "DELIBERATIVE"
+  },
+  "memories": [],
+  "desires": [
+    {
+      "name": "curiosity",
+      "intensity": 1.0,
+      "category": "cognitive"
+    },
+    {
+      "name": "sharing",
+      "intensity": 1.0,
+      "category": "social"
+    }
+  ],
+  "goals": [],
+  "cron": [
+    {
+      "name": "v9-consolidation",
+      "status": "ok"
+    },
+    {
+      "name": "memory-consolidation",
+      "status": "ok"
+    },
+    {
+      "name": "desire-pulse",
+      "status": "ok"
+    },
+    {
+      "name": "goal-engine",
+      "status": "ok"
+    },
+    {
+      "name": "world-viz",
+      "status": "ok"
+    },
+    {
+      "name": "RSI-evolution",
+      "status": "ok"
+    }
+  ],
+  "system": {
+    "node": "Ψ-NET/aris:11551⟷ao:11553",
+    "kernel": "Rust laap_core v0.1.0",
+    "timestamp": "2026-06-19T00:52:45"
+  }
+}

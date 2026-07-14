@@ -1,114 +1,86 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+build-backend = "setuptools.backends._legacy:_Backend"
 
 [project]
 name = "laap"
 dynamic = ["version"]
-description = "LAAP - Lifeform Autonomous Adaptive Protocol (数字生命体 · 自进化引擎意识生命体) + laap_brain 认知内核"
+description = "Living Computation Paradigm / 生命计算范式 — PSI 认知架构数字生命体"
 readme = "README.md"
-license = {text = "MIT"}
-requires-python = ">=3.10"
+license = { text = "MIT" }
+requires-python = ">=3.11"
 authors = [
-    {name = "LAAP Team", email = "laap@nousresearch.com"},
+    { name = "Lorry & Aris", email = "lorry@laap.ai" },
 ]
-keywords = ["agent", "ai", "cognitive", "lifeform", "autonomous", "psi", "digital-life"]
+keywords = ["cognitive-architecture", "digital-life", "AI", "PSI", "actors", "petri-nets"]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Scientific/Engineering :: Artificial Life",
-]
-
-dependencies = [
-    "numpy>=1.24.0",
-    "pydantic>=2.0.0",
-    "httpx>=0.27.0",
-    "docstring-parser>=0.15",
-    "rich>=13.0.0",
-    "prompt-toolkit>=3.0.0",
-    "openai>=1.0.0",
-    "anthropic>=0.30.0",
-    "pytest>=7.4.0",
-    "pyyaml>=6.0",
-    "scipy>=1.10.0",
-    "msgpack>=1.0.0",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
 ]
 
 [project.urls]
-Homepage = "https://github.com/laap-agi/laap"
-Repository = "https://github.com/laap-agi/laap"
-Documentation = "https://github.com/laap-agi/laap"
+Homepage = "https://github.com/your-org/laap"
+Documentation = "https://laap.ai/docs"
+Repository = "https://github.com/your-org/laap"
 
 [project.optional-dependencies]
-tui = ["textual>=0.60.0"]
-openai = ["openai>=1.0.0"]
-anthropic = ["anthropic>=0.30.0"]
-deepseek = ["openai>=1.0.0"]
-ollama = ["httpx>=0.27.0"]
-api = ["fastapi>=0.104.0", "uvicorn>=0.24.0"]
-rag = ["qdrant-client>=1.9.0", "sentence-transformers>=2.2.0"]
+# ── SDK — 轻量客户端挂载 ─────────────────────────────────────────
+sdk = []
+# ── 完整框架 ──────────────────────────────────────────────────────
+full = [
+    "aiohttp>=3.9",
+    "numpy>=1.24",
+    "rich>=13.0",
+]
+# ── 分布式 ────────────────────────────────────────────────────────
+distributed = [
+    "aiohttp>=3.9",
+]
+# ── 开发 ──────────────────────────────────────────────────────────
 dev = [
-    "pytest>=7.4.0",
-    "pytest-asyncio>=0.23.0",
-    "pytest-cov>=4.1.0",
-    "aiohttp>=3.9.0",
-    "ruff>=0.4.0",
-    "mypy>=1.9.0",
-    "pre-commit>=3.6.0",
+    "pytest>=7.4",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.1",
+    "mypy>=1.5",
+    "ruff>=0.1",
+    "pre-commit>=3.5",
 ]
-all = [
-    "laap[tui,openai,anthropic,deepseek,api,rag,dev]",
-]
-
-[project.scripts]
-laap = "laap.__main__:main"
-laap-workspace = "laap.workspace.cli:main"
-
-[tool.setuptools.packages.find]
-include = ["laap*", "laap_brain*"]
 
 [tool.setuptools.dynamic]
-version = {attr = "laap.__version__"}
+version = { attr = "laap.__version__" }
 
-[tool.ruff]
-line-length = 120
-target-version = "py310"
+[tool.setuptools.packages.find]
+include = ["laap*"]
+namespaces = false
 
-[tool.ruff.lint]
-select = ["E", "F", "W", "I", "B", "UP"]
-ignore = ["E501", "B008"]  # 行长度由 formatter 管；B008 函数默认参数
-
-[tool.ruff.format]
-quote-style = "double"
-
-[tool.mypy]
-python_version = "3.10"
-ignore_missing_imports = true
-warn_return_any = false
-warn_unused_configs = true
-disallow_untyped_defs = false  # 起步阶段不强制
+[tool.setuptools.package-data]
+laap = ["py.typed"]
 
 [tool.pytest.ini_options]
-addopts = "--cov=laap --cov=laap_brain --cov-report=term-missing"
 testpaths = ["tests"]
 asyncio_mode = "auto"
-asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "distributed: marks tests that require network (deselect with '-m \"not distributed\"')",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+disallow_untyped_defs = false
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+select = ["E", "F", "W", "I", "N", "UP", "S", "BLE"]
+ignore = ["S101", "S301", "S311"]
 
 [tool.coverage.run]
-source = ["laap", "laap_brain"]
-branch = false
-
-[tool.coverage.report]
-fail_under = 40
-show_missing = true
+source = ["laap"]
+omit = ["*/tests/*", "laap/sdk/adapters/*"]

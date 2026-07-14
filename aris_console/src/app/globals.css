@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--bg-darkest);
+  --color-foreground: var(--text-primary);
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-sans: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* ─── Hacker Theme Variables ─── */
+:root {
+  --matrix-green: #00ff41;
+  --matrix-green-dim: #008f11;
+  --matrix-cyan: #00ffff;
+  --matrix-magenta: #ff00ff;
+  --bg-darkest: #050505;
+  --bg-dark: #0a0a0a;
+  --bg-card: #0d1117;
+  --border-glow: #1a3a1a;
+  --text-primary: #00ff41;
+  --text-secondary: #008f11;
+  --text-muted: #005a0a;
+  --danger: #ff3333;
+  --warning: #ffaa00;
+  --accent: #00ffff;
+}
+
+/* ─── Base ─── */
+body {
+  background: #050505;
+  color: #00ff41;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  overflow-x: hidden;
+}
+
+/* Scan-line overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 65, 0.02) 0px,
+    rgba(0, 255, 65, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Terminal Card ─── */
+.terminal-card {
+  background: #0d1117;
+  border: 1px solid #1a3a1a;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.terminal-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #008f11, transparent);
+  opacity: 0.5;
+}
+.terminal-card:hover {
+  border-color: #008f11;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.05), inset 0 0 10px rgba(0, 255, 65, 0.02);
+}
+
+.terminal-header {
+  background: rgba(0, 255, 65, 0.03);
+  border-bottom: 1px solid #1a3a1a;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #008f11;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.terminal-body {
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ─── Dots ─── */
+.dot-red { 
+  width: 8px; height: 8px; border-radius: 50%; 
+  background: #ff3333; box-shadow: 0 0 4px #ff3333; display: inline-block;
+}
+.dot-yellow { 
+  width: 8px; height: 8px; border-radius: 50%; 
+  background: #ffaa00; box-shadow: 0 0 4px #ffaa00; display: inline-block;
+}
+.dot-green { 
+  width: 8px; height: 8px; border-radius: 50%; 
+  background: #00ff41; box-shadow: 0 0 6px #00ff41; display: inline-block;
+}
+
+/* ─── Glow ─── */
+.glow-green { text-shadow: 0 0 8px rgba(0,255,65,0.4), 0 0 2px rgba(0,255,65,0.8); }
+.glow-cyan { text-shadow: 0 0 8px rgba(0,255,255,0.4); }
+.glow-magenta { text-shadow: 0 0 8px rgba(255,0,255,0.4); }
+
+/* ─── Gauge ─── */
+.gauge-bar {
+  height: 4px;
+  background: rgba(0, 255, 65, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.gauge-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* ─── Cursor Blink ─── */
+.cursor-blink::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: #00ff41;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ─── Log ─── */
+.data-stream {
+  font-size: 11px; color: #005a0a; line-height: 1.4;
+  overflow: hidden; max-height: 120px;
+}
+.log-line {
+  font-size: 11px; padding: 2px 0;
+  border-bottom: 1px solid rgba(0,255,65,0.03);
+  display: flex; gap: 8px; align-items: baseline;
+}
+
+/* ─── Badge ─── */
+.badge-online {
+  color: #00ff41; border: 1px solid #00ff41;
+  padding: 2px 8px; font-size: 10px; border-radius: 2px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* ─── Camera ─── */
+.camera-feed {
+  position: relative;
+  border: 1px solid #1a3a1a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.camera-feed::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(0,255,65,0.03) 50%, transparent 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+.camera-corner {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: #008f11;
+  z-index: 10;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: rgba(0,255,65,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,255,65,0.2); }
