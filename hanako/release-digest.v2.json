@@ -1,0 +1,2255 @@
+{
+  "schema": 2,
+  "entries": [
+    {
+      "schemaVersion": 1,
+      "tag": "v0.412.7",
+      "version": "0.412.7",
+      "previousTag": "v0.407.15",
+      "generatedAt": "2026-07-18T07:57:18.524Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版重点修启动与升级体验：自动更新进度条会连续走完服务端与渲染层两段下载；修复误把会话事件 ID 当成 Codex 模型写进列表的问题；迁移失败或输入不完整时不再整链卡死，并保留待重试的原始数据；损坏的早期元数据也不会再拦启动。媒体生成运行时并入核心，旧 image-gen 插件会话的展示方式有变化。",
+        "en": "This release hardens startup and upgrades: the update progress bar now runs continuously across both server and renderer downloads; session event IDs are no longer mistaken for Codex model IDs in the catalog; failed or incomplete migrations no longer halt the whole chain, and source bytes are preserved for retry; corrupt early-epoch metadata no longer blocks launch. Media generation runtime moves into core, with a display change for sessions that used the retired image-gen plugin."
+      },
+      "counts": {
+        "feature": 0,
+        "fix": 5,
+        "improvement": 1,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.407.15..v0.412.7",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.412.7",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "cumulative-update-progress",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "更新进度跨两段产物连续显示",
+            "en": "Continuous update progress across both artifacts"
+          },
+          "summary": {
+            "zh": "服务端与渲染层两段下载合并为一条 0–100 进度，中间校验不再误闪「正在应用」。",
+            "en": "Server and renderer downloads share one continuous 0–100 progress bar, and the verify gap no longer flashes an applying state."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "5b9dce70e",
+              "title": "fix(updater): report cumulative progress across both update artifacts"
+            }
+          ]
+        },
+        {
+          "id": "repair-codex-event-id-models",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "修正误写入的 Codex 模型 ID",
+            "en": "Stop treating session event IDs as Codex model IDs"
+          },
+          "summary": {
+            "zh": "不再把会话事件 ID 当成模型 ID；升级会清理因此污染的目录条目。",
+            "en": "Session event IDs are no longer treated as model IDs, and an upgrade repair removes the polluted catalog entries."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "5b5abafdd",
+              "title": "fix(models): stop treating session event ids as Codex model ids"
+            }
+          ]
+        },
+        {
+          "id": "migrations-survive-partial-failure",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "部分迁移失败时仍可启动",
+            "en": "Keep startup available across partial migration failures"
+          },
+          "summary": {
+            "zh": "单项迁移失败不再阻断后续迁移，失败项下次启动再试。",
+            "en": "One failed migration no longer stops the rest of the chain; failed items retry on the next launch."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "21a853be1",
+              "title": "fix(migrations): keep startup available across partial failures"
+            }
+          ]
+        },
+        {
+          "id": "preserve-migration-sources-on-retry",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "迁移重试时保留原始数据",
+            "en": "Preserve legacy sources during migration retries"
+          },
+          "summary": {
+            "zh": "偏好、配置范围、供应商与注册表迁移在输入不可读或不完整时会保留源数据并推迟依赖工作，不再清理后卡死启动。",
+            "en": "Preference, config-scope, provider, and registry migrations keep source bytes and defer dependent work when inputs are unreadable or incomplete, instead of cleaning up and blocking startup."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "32b08808b",
+              "title": "fix(migrations): preserve legacy sources during retries"
+            }
+          ]
+        },
+        {
+          "id": "tolerate-epoch-one-metadata-faults",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "容忍早期元数据损坏",
+            "en": "Tolerate corrupt early-epoch metadata"
+          },
+          "summary": {
+            "zh": "无更高 epoch 证据时，损坏的早期元数据只告警，不拦普通启动。",
+            "en": "Without higher-epoch evidence, corrupt early-epoch metadata is logged and ordinary startup continues."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "75773c1e8",
+              "title": "fix(startup): tolerate unproven epoch-one metadata faults"
+            }
+          ]
+        },
+        {
+          "id": "media-runtime-into-core",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "媒体生成并入核心运行时",
+            "en": "Move media generation runtime into core"
+          },
+          "summary": {
+            "zh": "旧 image-gen 插件退役；其历史会话不再内联展示生成图，改为普通工具结果；错误码同步更名。",
+            "en": "The legacy image-gen plugin is retired; its historical sessions show plain tool results instead of inline images, and the unavailable error code is renamed."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "94275ae74",
+              "title": "refactor(media): retire legacy image-gen plugin, move media runtime into core"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.407.15",
+      "version": "0.407.15",
+      "previousTag": "v0.407.8",
+      "generatedAt": "2026-07-17T05:33:51.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版集中加固从 stable 升级到最新版的兼容性：会在接收新输入前刷新已变化的工具快照，保留历史会话引用的 Codex OAuth 模型，修复旧供应商模型元数据，并迁移钉钉旧版应用认证与项目技能发现策略；同时移除频道中已经失效的私信工具提示。",
+        "en": "This release hardens upgrades from stable: changed tool snapshots are refreshed before new input, Codex OAuth models referenced by existing data are preserved, legacy provider metadata is repaired, and older DingTalk application authentication and project skill-discovery policies are migrated. It also removes obsolete direct-message tool guidance from channels."
+      },
+      "counts": {
+        "feature": 0,
+        "fix": 2,
+        "improvement": 0,
+        "migration": 4
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.407.8..v0.407.15",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.407.15",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "refresh-frozen-tool-snapshots",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "输入前刷新变化的工具快照",
+            "en": "Refresh changed tool snapshots before input"
+          },
+          "summary": {
+            "zh": "插件、MCP 或内置工具发生变化后，已有会话会在接收下一条输入前完成刷新，避免继续使用过期工具定义。",
+            "en": "Existing sessions now refresh changed plugin, MCP, and built-in tool snapshots before accepting the next input instead of continuing with stale definitions."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "ffff66f63",
+              "title": "fix(sessions): preflight frozen tool drift before input (#2156)"
+            }
+          ]
+        },
+        {
+          "id": "preserve-codex-oauth-model-references",
+          "kind": "migration",
+          "importance": "high",
+          "title": {
+            "zh": "保留历史数据引用的 Codex OAuth 模型",
+            "en": "Preserve Codex OAuth models referenced by existing data"
+          },
+          "summary": {
+            "zh": "升级时会扫描现有 Agent、会话、定时任务和频道配置，把仍被引用的官方 Codex OAuth 模型保留在可用列表中。",
+            "en": "Upgrades scan existing agents, sessions, scheduled tasks, and channel settings so referenced official Codex OAuth models remain available."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "c9c30a219",
+              "title": "fix(models): preserve referenced Codex OAuth models on upgrade"
+            }
+          ]
+        },
+        {
+          "id": "repair-provider-model-metadata",
+          "kind": "migration",
+          "importance": "high",
+          "title": {
+            "zh": "修复旧版供应商模型元数据",
+            "en": "Repair legacy provider model metadata"
+          },
+          "summary": {
+            "zh": "升级会先备份供应商目录，再修复不兼容的数字、API、推理和凭证字段；有效模型、排序与自定义信息保持不变。",
+            "en": "The provider catalog is backed up before incompatible numeric, API, reasoning, and credential fields are repaired, while valid models, ordering, and custom metadata stay intact."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "f1f356fbc",
+              "title": "fix(models): repair incompatible catalog metadata on upgrade"
+            }
+          ]
+        },
+        {
+          "id": "remove-obsolete-channel-dm-guidance",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "移除频道中的失效私信提示",
+            "en": "Remove obsolete direct-message guidance from channels"
+          },
+          "summary": {
+            "zh": "频道不再引导 Agent 调用已经移除的私信工具，避免生成无法执行的操作。",
+            "en": "Channels no longer instruct agents to call a removed direct-message tool, preventing actions that cannot be executed."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "4abdf464f",
+              "title": "fix(channels): remove stale direct-message tool guidance"
+            }
+          ]
+        },
+        {
+          "id": "migrate-dingtalk-application-auth",
+          "kind": "migration",
+          "importance": "high",
+          "title": {
+            "zh": "迁移钉钉旧版应用认证",
+            "en": "Migrate legacy DingTalk application authentication"
+          },
+          "summary": {
+            "zh": "从 stable 升级后，既有钉钉应用凭证会明确标记为旧版认证并继续使用对应令牌与发送接口；补齐 corpId 后会自动切换到当前模式。",
+            "en": "Existing DingTalk application credentials are explicitly migrated to legacy authentication with matching token and send endpoints; adding a corpId switches them to the current mode."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "1fb072d9e",
+              "title": "fix(dingtalk): preserve stable application auth on upgrade"
+            }
+          ]
+        },
+        {
+          "id": "preserve-project-skill-discovery-policy",
+          "kind": "migration",
+          "importance": "medium",
+          "title": {
+            "zh": "保留旧 Agent 的项目技能发现行为",
+            "en": "Preserve project skill discovery for existing agents"
+          },
+          "summary": {
+            "zh": "旧 Agent 缺少显式设置时会继续发现兼容的项目技能；已经明确开启或关闭的设置保持原样，新建 Agent 的默认策略也不变。",
+            "en": "Existing agents without an explicit setting keep discovering compatible project skills; explicit choices and the default for newly created agents remain unchanged."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "50707271c",
+              "title": "fix(skills): preserve stable project discovery policy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.407.8",
+      "version": "0.407.8",
+      "previousTag": "v0.407.3",
+      "generatedAt": "2026-07-16T19:47:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版为 Kimi Coding 接入 Kimi K3；修好 Windows 上首次启动或更新激活时因杀软/索引短暂锁文件导致切换失败的问题；并保留你配置的模型 ID（尤其是 Kimi Coding），让需要推理回放的模型在工具调用与压缩后仍按统一协议续上。",
+        "en": "This release adds Kimi K3 for Kimi Coding; on Windows, artifact activation now retries directory swaps when antivirus or the indexer briefly locks freshly extracted files; configured model IDs (especially Kimi Coding) stay canonical, and reasoning-content replay follows centralized protocol contracts across tool loops and compaction."
+      },
+      "counts": {
+        "feature": 1,
+        "fix": 2,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.407.3..v0.407.8",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.407.8",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "kimi-k3-model",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "新增 Kimi K3",
+            "en": "Add Kimi K3"
+          },
+          "summary": {
+            "zh": "Kimi Coding 提供方可选 Kimi K3（约 1M 上下文，支持推理）。",
+            "en": "Kimi Coding can select Kimi K3 (~1M context, reasoning-capable)."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "36c72e2b4",
+              "title": "fix(models): preserve selected ids and reasoning replay"
+            }
+          ]
+        },
+        {
+          "id": "windows-artifact-swap-retry",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "Windows 产物切换遇锁自动重试",
+            "en": "Retry locked artifact directory swaps on Windows"
+          },
+          "summary": {
+            "zh": "杀软或索引短暂占用刚解压文件时，切换会退避重试约 16 秒，不再一碰 EPERM 就启动失败。",
+            "en": "Transient EPERM/EACCES/EBUSY during the activation rename now backs off up to ~16s on Windows only."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "cd9e71b6e",
+              "title": "fix(desktop): retry artifact directory swap when Windows locks freshly extracted files"
+            }
+          ]
+        },
+        {
+          "id": "model-id-and-reasoning-replay",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "保留模型 ID 并统一推理回放",
+            "en": "Keep model IDs and centralize reasoning replay"
+          },
+          "summary": {
+            "zh": "Kimi Coding 等配置 ID 不再被改写成别名；推理回放改走集中协议，工具轮与保留缓存的压缩更稳。",
+            "en": "Configured IDs stay canonical; reasoning replay uses shared protocol contracts across tool loops and cache-preserving compaction."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "36c72e2b4",
+              "title": "fix(models): preserve selected ids and reasoning replay"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.407.3",
+      "version": "0.407.3",
+      "previousTag": "v0.403.0",
+      "generatedAt": "2026-07-16T13:17:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版在数据版本门禁拦住启动时，补上专用恢复界面与命令行恢复路径：桌面给出双语说明与恢复点信息，CLI 可诊断、列出恢复点并在确认后还原；同时修掉拦截对话框英文行里混进中文的问题。",
+        "en": "When a data-version gate blocks startup, this release adds dedicated recovery surfaces: bilingual desktop dialogs with recovery-point details, plus CLI diagnose / list / confirmed restore; it also fixes Chinese text leaking into the English line of the BLOCKED dialog."
+      },
+      "counts": {
+        "feature": 1,
+        "fix": 1,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.403.0..v0.407.3",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.407.3",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "data-version-recovery-surfaces",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "数据版本恢复界面与 CLI",
+            "en": "Data-version recovery surfaces and CLI"
+          },
+          "summary": {
+            "zh": "启动被数据版本门禁拦住时，桌面显示专用双语对话框（本机/戳记版本、恢复点是否可用、两条明确出路）；CLI 新增 hana data diagnose、checkpoints、restore，还原需重打确认短语。",
+            "en": "Blocked startups get dedicated bilingual desktop dialogs (own/stamped epoch, recovery-point availability, two clear next steps); CLI adds hana data diagnose, checkpoints, and restore with a typed confirmation phrase."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "4272857df",
+              "title": "feat: add dedicated data-version recovery surfaces to desktop and CLI"
+            },
+            {
+              "type": "commit",
+              "ref": "3bfecd1f5",
+              "title": "feat(server): add journaled data-epoch restore with guarded stamp republish"
+            },
+            {
+              "type": "commit",
+              "ref": "6edaf9ba1",
+              "title": "feat(server): capture per-store checkpoints before breaking data migrations"
+            }
+          ]
+        },
+        {
+          "id": "blocked-dialog-checkpoint-line-locale",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "拦截对话框英文恢复点行不再串中文",
+            "en": "BLOCKED dialog English checkpoint line no longer mixes Chinese"
+          },
+          "summary": {
+            "zh": "英文 “Recovery point available:” 行不再粘上中文短语。",
+            "en": "The English “Recovery point available:” line no longer prefixes the Chinese phrase."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "59e086c9c",
+              "title": "fix(desktop): stop leaking Chinese text into the BLOCKED dialog's English checkpoint line"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.403.0",
+      "version": "0.403.0",
+      "previousTag": "v0.401.8",
+      "generatedAt": "2026-07-15T18:18:27.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版让 Dreamina 模型与能力随本机 CLI 自动识别，并把完成提醒收成桌面聊天与计划任务/巡检结果两类；同时修复编辑器标题语法与触控 Grabber，以及非会话模型调用的凭证请求头。",
+        "en": "This release discovers Dreamina models from the installed CLI, narrows completion alerts to desktop chats and scheduled/patrol outcomes, and fixes editor heading syntax, touch Grabbers, and credential headers for non-session model calls."
+      },
+      "counts": {
+        "feature": 2,
+        "fix": 3,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.401.8..v0.403.0",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.403.0",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "dreamina-cli-capability-discovery",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "Dreamina CLI 能力发现",
+            "en": "Dreamina CLI capability discovery"
+          },
+          "summary": {
+            "zh": "媒体设置里的 Dreamina 模型与约束改为读取本机 CLI，并在回到设置或开始生成时刷新。",
+            "en": "Dreamina models and constraints now follow the installed CLI and refresh when Media settings regain focus or generation starts."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "284fba7b4",
+              "title": "feat(media): discover Dreamina CLI capabilities at runtime"
+            }
+          ]
+        },
+        {
+          "id": "completion-alert-categories",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "完成提醒分类收紧",
+            "en": "Narrower completion alert categories"
+          },
+          "summary": {
+            "zh": "成功回合不再一律弹完成提醒；仅桌面聊天，以及计划任务/巡检的汇总结果可以通知。",
+            "en": "Successful turns no longer always fire completion alerts; only desktop chats and aggregate scheduled-task or patrol outcomes can notify."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "403bb2775",
+              "title": "feat(notifications): separate completion alert categories"
+            }
+          ]
+        },
+        {
+          "id": "provider-execution-headers",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "非会话模型调用统一请求头",
+            "en": "Unified headers for non-session model calls"
+          },
+          "summary": {
+            "zh": "辅助视觉、记忆、健康检查等非会话模型调用现在共用同一套带凭证的执行配置，避免漏带协议头或误拒仅靠请求头的凭证。",
+            "en": "Auxiliary vision, memory, health checks, and similar non-session calls now share one credential-aware execution config so protocol headers are not omitted and header-only credentials are not rejected."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "5ee661892",
+              "title": "fix(models): unify provider execution headers"
+            }
+          ]
+        },
+        {
+          "id": "bare-heading-hashes-visible",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "裸标题井号保持可见",
+            "en": "Keep bare heading hashes visible"
+          },
+          "summary": {
+            "zh": "只有 `#` 到 `######`、后面还没有空格的行，会当作普通正文显示，不再被提前藏成标题样式。",
+            "en": "Bare `#` through `######` lines stay visible as body text until a space confirms a heading."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "889f7ec0f",
+              "title": "fix(editor): keep bare heading hashes visible"
+            }
+          ]
+        },
+        {
+          "id": "touch-grabber-focused-block",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "触控 Grabber 只跟焦点块",
+            "en": "Touch Grabbers follow the focused block"
+          },
+          "summary": {
+            "zh": "触控设备上只显示当前焦点块的 Grabber；仅点击打开的块菜单不再替换原先悬停的节点。",
+            "en": "Touch surfaces show only the focused block’s Grabber, and click-only block menus no longer replace the hovered node."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "3862f8482",
+              "title": "fix(editor): scope touch Grabbers to the focused block"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.401.8",
+      "version": "0.401.8",
+      "previousTag": "v0.401.7",
+      "generatedAt": "2026-07-15T05:58:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版修复后台会话在缺少持久身份时工具调用失败的问题：计划任务、巡检、子代理、Bridge、Hub 临时会话与手机会话会在执行前先建立并复用稳定会话身份。",
+        "en": "This release fixes tool failures for background sessions that lacked a durable identity. Scheduled activities, patrols, subagents, bridge sessions, Hub temporary sessions, and phone sessions now create and reuse a stable session identity before execution."
+      },
+      "counts": {
+        "feature": 0,
+        "fix": 1,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.401.7..v0.401.8",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.401.8",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "background-session-identity-backfill",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "后台会话先补齐身份再装工具",
+            "en": "Backfill session identity before background tools"
+          },
+          "summary": {
+            "zh": "没有 manifest 的后台会话原先会在装工具时失败；现在会先创建并持久化 SessionRef，再绑定到各运行时。",
+            "en": "Background sessions without a manifest used to fail during tool assembly; they now create and persist a SessionRef first, then bind it across runtimes."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "1eff520c9",
+              "title": "fix(session): backfill identity before background tools"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.401.7",
+      "version": "0.401.7",
+      "previousTag": "v0.397.15",
+      "generatedAt": "2026-07-14T15:43:10.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版给 Markdown 预览加上可拖拽的块手柄、框选与批量操作，插话会在检查点一并送出；会话身份与归档生命周期更稳，Windows 沙箱与 GPU 安全模式迁移更干净，记忆压缩与 OpenCode Go 工具请求也更可靠。",
+        "en": "This release adds draggable Markdown block handles with marquee and batch actions, and drains pending interjections together at steering checkpoints. Session identity and archive lifecycle are steadier, Windows sandbox and GPU safe-mode migration are cleaner, and compaction plus OpenCode Go utility requests are more reliable."
+      },
+      "counts": {
+        "feature": 3,
+        "fix": 5,
+        "improvement": 1,
+        "migration": 2
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.397.15..v0.401.7",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.401.7",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "markdown-block-handles",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "Markdown 块手柄可拖拽重排",
+            "en": "Draggable Markdown block handles"
+          },
+          "summary": {
+            "zh": "预览里每个可编辑块左侧有手柄，可打开既有格式菜单，并拖拽改变块顺序。",
+            "en": "Editable Markdown preview blocks expose a left handle that opens the existing format menu and supports drag reordering."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "49c1ab3ab",
+              "title": "feat(editor): add draggable Markdown block handles"
+            }
+          ]
+        },
+        {
+          "id": "markdown-block-marquee-batch",
+          "kind": "feature",
+          "importance": "medium",
+          "title": {
+            "zh": "框选多块与批量操作",
+            "en": "Marquee multi-block selection and batch actions"
+          },
+          "summary": {
+            "zh": "在槽位框选连续顶层块，共享完整菜单与批量排版，并支持直接引用进对话。",
+            "en": "Gutter marquee selects a contiguous top-level block range so selected blocks share the full menu, batch formatting, and quote-to-chat."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "57d650aeb",
+              "title": "feat: add markdown block marquee selection"
+            },
+            {
+              "type": "commit",
+              "ref": "306df03b2",
+              "title": "feat(editor): add batch Markdown block actions"
+            },
+            {
+              "type": "commit",
+              "ref": "5f1828deb",
+              "title": "fix(editor): render markdown marquee rectangle"
+            }
+          ]
+        },
+        {
+          "id": "markdown-block-interaction-polish",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "块编辑交互打磨",
+            "en": "Polished Markdown block editing"
+          },
+          "summary": {
+            "zh": "Grabber 对齐与留白、引用与代码表面、落点指示、复制保留源 Markdown 等一并修好。",
+            "en": "Grabber alignment and spacing, quote and code surfaces, drop indicators, and source-preserving block copy are tightened together."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "696f9381e",
+              "title": "fix(editor): align blockquote Grabber with the block rail"
+            },
+            {
+              "type": "commit",
+              "ref": "135d02260",
+              "title": "fix(editor): give Markdown block Grabber more space"
+            },
+            {
+              "type": "commit",
+              "ref": "0b12f44ee",
+              "title": "fix(editor): copy raw Markdown block selections"
+            },
+            {
+              "type": "commit",
+              "ref": "96c03c8e8",
+              "title": "fix(editor): align Markdown block geometry"
+            },
+            {
+              "type": "commit",
+              "ref": "d673e9a26",
+              "title": "fix(editor): harden Markdown block interactions"
+            }
+          ]
+        },
+        {
+          "id": "batch-pending-steering",
+          "kind": "feature",
+          "importance": "medium",
+          "title": {
+            "zh": "插话在检查点批量送出",
+            "en": "Batch pending steering messages"
+          },
+          "summary": {
+            "zh": "桌面、移动与 Bridge 积压的插话，到下一个引导检查点时一起送出。",
+            "en": "Pending interjections on desktop, mobile, and Bridge drain together at the next steering checkpoint."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "7e1c7a4a9",
+              "title": "feat(chat): batch pending steering messages"
+            }
+          ]
+        },
+        {
+          "id": "session-identity-before-tools",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "运行前先绑定会话身份",
+            "en": "Bind session identity before runtime tools"
+          },
+          "summary": {
+            "zh": "Bridge、Telegram、Phone 与 Hub 等先确立会话身份再组装工具，避免工具快照缩水。",
+            "en": "Bridge, Telegram, Phone, and Hub runtimes establish session identity before tools are built, so frozen tool contracts no longer silently shrink."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "90a960bb1",
+              "title": "fix(session): bind identity before runtime tools"
+            },
+            {
+              "type": "commit",
+              "ref": "cc9016e7e",
+              "title": "fix(activity): register isolated session identity first"
+            }
+          ]
+        },
+        {
+          "id": "session-locator-lifecycle",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "会话定位器与归档生命周期",
+            "en": "Session locator and archive lifecycle"
+          },
+          "summary": {
+            "zh": "过期历史路径不再当作活跃会话列出；永久删除会保留墓碑记录。",
+            "en": "Stale historical paths are no longer listed as active, and permanent deletion retains a deleted manifest tombstone."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "b08523c2e",
+              "title": "fix(sessions): bind current locator lifecycle"
+            }
+          ]
+        },
+        {
+          "id": "windows-sandbox-cwd-write-grants",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "Windows：工作目录与写入授权分开",
+            "en": "Windows: separate cwd from write grants"
+          },
+          "summary": {
+            "zh": "命令工作目录只决定进程 cwd，写入仍限于会话工作区与显式授权根。",
+            "en": "Per-command workdir selects process cwd without granting write access outside the session workspace and explicitly authorized roots."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "9bf1065d3",
+              "title": "fix(sandbox): separate Windows cwd from write grants"
+            }
+          ]
+        },
+        {
+          "id": "windows-gpu-safe-mode-migration",
+          "kind": "migration",
+          "importance": "medium",
+          "title": {
+            "zh": "Windows：迁移过期 GPU 安全模式",
+            "en": "Windows: migrate stale GPU safe mode"
+          },
+          "summary": {
+            "zh": "有精确旧崩溃证据时迁到沙箱兼容档；清理只动确切旧值，你的显式选择保留。",
+            "en": "Exact legacy crash evidence advances to sandbox compatibility, while cleanup removes only the exact legacy false value and preserves explicit user choices."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "548bc8f97",
+              "title": "fix(gpu): migrate exact stale enabled safe mode"
+            },
+            {
+              "type": "commit",
+              "ref": "d8c06512a",
+              "title": "fix: gate legacy GPU preference cleanup"
+            }
+          ]
+        },
+        {
+          "id": "opencode-go-utility-protocol",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "保住 OpenCode Go 工具协议",
+            "en": "Preserve OpenCode Go utility protocol"
+          },
+          "summary": {
+            "zh": "工具与记忆类请求正确关闭推理、保留 token 字段，不支持的缓冲 API 在联网前拒绝。",
+            "en": "Utility and memory requests disable reasoning correctly, preserve the provider token field, and reject unsupported buffered APIs before network I/O."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a59778545",
+              "title": "fix(memory): preserve OpenCode Go utility protocol"
+            }
+          ]
+        },
+        {
+          "id": "compaction-cache-summary",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "压缩请求不再误加输出上限",
+            "en": "Compaction no longer invents an output cap"
+          },
+          "summary": {
+            "zh": "保留缓存的压缩不再把预留估算当成数字输出帽；有界模式仍保持显式。",
+            "en": "Cache-preserving compaction no longer turns the reserve estimate into a numeric output cap; bounded mode remains explicit."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "033a8036a",
+              "title": "fix(compaction): normalize cache summary requests"
+            }
+          ]
+        },
+        {
+          "id": "pi-runtime-out-of-config",
+          "kind": "migration",
+          "importance": "low",
+          "title": {
+            "zh": "Pi 运行时文件迁出配置目录",
+            "en": "Move Pi runtime files out of config"
+          },
+          "summary": {
+            "zh": "启动时不再在配置目录创建 `.pi`；托管搜索二进制迁到 runtime，并从前置缓存迁入。",
+            "en": "Startup no longer creates a config-directory `.pi` folder. Managed search binaries live under runtime and copy forward from the legacy cache on first use."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "aa80f9f1f",
+              "title": "fix: move Pi runtime support out of config directory"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.397.15",
+      "version": "0.397.15",
+      "previousTag": "v0.397.1",
+      "generatedAt": "2026-07-13T12:31:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版稳住 Windows 桌面内核生命周期与系统证书信任，并一次性迁移旧 GPU 安全模式；侧栏单行模式冷启动可恢复，编辑器表格与正文同宽；Agent 提及与评审卡片更清晰，插件快照不再误刷新会话，提醒隐私与设置草稿也更可靠。",
+        "en": "This release steadies Windows desktop server lifetime and system-certificate trust, with a one-time legacy GPU safe-mode migration; sidebar single-line mode restores after cold start, and editor tables match the text column. Agent mentions and review cards are clearer, plugin snapshots no longer reload live sessions, and reminder privacy plus settings drafts are more reliable."
+      },
+      "counts": {
+        "feature": 0,
+        "fix": 8,
+        "improvement": 2,
+        "migration": 1
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.397.1..v0.397.15",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.397.15",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "windows-server-lifetime-guardian",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "Windows：监护桌面服务端生命周期",
+            "en": "Windows: supervise desktop server lifetime"
+          },
+          "summary": {
+            "zh": "桌面拉起的服务端受父进程 Job 监护；未确认关机失败即止，更新/退出竞态不会再拉起游离替身。",
+            "en": "Desktop-owned servers run under a parent-watching Job guardian. Unconfirmed shutdowns fail closed, and update/quit races can no longer spawn detached replacements."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "4f81fc123",
+              "title": "fix(windows): supervise desktop server lifetime (#2118)"
+            }
+          ]
+        },
+        {
+          "id": "windows-system-certificate-store",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "Windows：信任系统证书库",
+            "en": "Windows: trust the system certificate store"
+          },
+          "summary": {
+            "zh": "HTTPS、插件与更新下载跟系统证书走，仍保留内置根与额外 CA。",
+            "en": "HTTPS clients, plugin installs, and update downloads extend Node trust with the system certificate store while keeping bundled roots and extra CA configuration."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "013b48a83",
+              "title": "fix(windows): trust the system certificate store (#2115)"
+            }
+          ]
+        },
+        {
+          "id": "windows-legacy-gpu-safe-mode-migration",
+          "kind": "migration",
+          "importance": "high",
+          "title": {
+            "zh": "Windows：迁移旧 GPU 安全模式",
+            "en": "Windows: migrate legacy GPU safe mode"
+          },
+          "summary": {
+            "zh": "有明确旧证据时一次性迁到沙箱兼容档；你的显式选择与证据不全的情况不动。",
+            "en": "Exact legacy gpu-child-process-gone evidence migrates once into staged sandbox compatibility. Explicit user choices and incomplete evidence stay untouched."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "9b78ab2c2",
+              "title": "fix(windows): migrate legacy GPU safe mode (#2108 #2109)"
+            }
+          ]
+        },
+        {
+          "id": "sidebar-row-mode-cold-start",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "侧栏单行模式冷启动可恢复",
+            "en": "Sidebar single-line mode restores after cold start"
+          },
+          "summary": {
+            "zh": "等 Studio 连上再读偏好，短暂失败会有限重试，冷启动不再卡在双行。",
+            "en": "Sidebar preferences wait for the active Studio connection and retry transient startup failures, so persisted single-line mode no longer stays stuck on two lines after cold start."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "6ff2ea3a1",
+              "title": "fix(sidebar): restore row mode after cold start"
+            }
+          ]
+        },
+        {
+          "id": "editor-markdown-table-width",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "Markdown 表格与正文同宽",
+            "en": "Markdown tables match the text column width"
+          },
+          "summary": {
+            "zh": "编辑与预览里的表格对齐正文列宽，长词不再把表撑破。",
+            "en": "Editor and Preview tables align to the same content column as body text, and long unbreakable tokens no longer blow past the container."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "6cedcce0b",
+              "title": "fix(editor): 修正 Markdown 表格宽度不跟随正文文字列的问题"
+            }
+          ]
+        },
+        {
+          "id": "agent-mentions-and-review-cards",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "Agent 提及与评审卡片 refinement",
+            "en": "Clearer Agent mentions and review cards"
+          },
+          "summary": {
+            "zh": "提及用 Agent 头像；评审走完整 Markdown，卡片用会话名导航并露出本地化文案。",
+            "en": "Mentions use Agent avatars. Review content renders through full Markdown, and review cards become localized, conversation-named navigation surfaces."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "b9fceb57f",
+              "title": "fix(chat): refine Agent mentions and review cards"
+            },
+            {
+              "type": "commit",
+              "ref": "b4d24efd9",
+              "title": "fix(chat): render Agent reviews through full Markdown preview"
+            }
+          ]
+        },
+        {
+          "id": "plugin-json-configuration-drafts",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "插件 JSON 配置草稿可编辑保存",
+            "en": "Plugin JSON configuration drafts stay editable"
+          },
+          "summary": {
+            "zh": "非法草稿仍可见并拦住保存，修正前不再反复序列化冲掉你的编辑。",
+            "en": "Invalid JSON drafts remain visible and block saving until corrected, without being repeatedly re-serialized away while you edit."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "25df28f57",
+              "title": "fix(plugins): preserve JSON configuration drafts (#2107)"
+            }
+          ]
+        },
+        {
+          "id": "provider-api-type-drafts",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "提供商 API 类型草稿可持久",
+            "en": "Provider API type drafts persist"
+          },
+          "summary": {
+            "zh": "API 类型选择会留下并参与首次保存；服务端/刷新失败会提示，不再静默回退。",
+            "en": "API type selection stays visible, participates in the initial save, and surfaces server or refresh failures instead of silently reverting."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "41a06ebee",
+              "title": "fix(settings): persist provider API type drafts (#2103)"
+            }
+          ]
+        },
+        {
+          "id": "plugin-snapshots-reminder-privacy",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "插件快照保留与提醒隐私",
+            "en": "Preserve plugin snapshots and reminder privacy"
+          },
+          "summary": {
+            "zh": "装插件不再重载已有会话；内部 reminder 块在展示投影里去掉。",
+            "en": "Installing plugins no longer reloads existing sessions, and internal reminder blocks are stripped by the shared display projection."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "c1f8d5dc3",
+              "title": "fix(session): preserve plugin snapshots and reminder privacy (#2105)"
+            }
+          ]
+        },
+        {
+          "id": "workspace-scope-vs-cwd",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "工作区 Scope 与执行 CWD 分开",
+            "en": "Separate workspace Scope from execution CWD"
+          },
+          "summary": {
+            "zh": "Scope 描述工作台与外部项目，Pi CWD 仍是执行基点；缓存提示词不再塞进具体路径状态。",
+            "en": "Scope describes the primary workbench and external project folders, while Pi CWD remains the execution base. Cached Agent prompts no longer carry concrete workspace paths."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "71e030afe",
+              "title": "fix(prompt): separate workspace scope from cwd semantics (#2099)"
+            }
+          ]
+        },
+        {
+          "id": "update-progress-and-sidebar-labels",
+          "kind": "improvement",
+          "importance": "low",
+          "title": {
+            "zh": "更新进度条与侧栏文案",
+            "en": "Update progress bar and sidebar labels"
+          },
+          "summary": {
+            "zh": "下载进度收成一条主题进度条加百分比；更新提示图标移到文案前，中文「社交平台」标签缩短。",
+            "en": "Download progress becomes one themed bar with a single percentage. The update notice icon moves before its text, and the Chinese social-platform sidebar label is shortened."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "bdc18e6ca",
+              "title": "fix: refine update progress and sidebar labels"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.397.1",
+      "version": "0.397.1",
+      "previousTag": "v0.391.2",
+      "generatedAt": "2026-07-13T03:03:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版带来会话与 Agent 的 @ 提及、群聊/私聊 Markdown 导出，并收回 Agent 可调用的 DM 工具；自托管可用 hana bundle 拉取网页前端；数据目录增加防旧内核误开与同目录双开互斥；会话停止更可靠，自动更新下载与激活也更稳；更新后启动不再弹出版本公告。",
+        "en": "This release adds session/Agent @mentions and Markdown export for the open group or DM chat, while retiring the Agent-callable DM tool; self-hosted setups can pull the web UI with hana bundle; the data directory gains an epoch gate and same-home mutual exclusion; Stop is more reliable, update download/activation is steadier; and startup no longer shows a post-update version popup."
+      },
+      "counts": {
+        "feature": 4,
+        "fix": 3,
+        "improvement": 2,
+        "migration": 1
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.391.2..v0.397.1",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.397.1",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "session-agent-mentions",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "会话与 Agent 的 @ 提及",
+            "en": "Session and Agent @mentions"
+          },
+          "summary": {
+            "zh": "可复制稳定 Session ID，输入框支持分页式提及；@Agent 会先开只读评审会话，再把结果交回当前对话，评审回合不提供通用编辑或重新生成。",
+            "en": "Stable Session IDs are copyable, and the composer supports tabbed mentions. @Agent waits for a separate read-only review session before the current turn continues; review turns do not expose generic edit or regenerate actions."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "f12af4271",
+              "title": "feat: add session and agent mentions"
+            }
+          ]
+        },
+        {
+          "id": "retire-dm-tool-export-chats",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "收回 Agent DM 工具，并支持导出当前对话",
+            "en": "Retire the Agent DM tool and export the open chat"
+          },
+          "summary": {
+            "zh": "Agent 不再能启用或调用 dm；既有私信历史与 Agent Phone 仍保留。群聊与私聊检视面板可把当前打开的那一段对话下载为 Markdown。",
+            "en": "Agents can no longer enable or call dm, while existing private-message history and Agent Phone remain. Group and DM inspectors can download only the currently open conversation as Markdown."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "7c77cdb55",
+              "title": "feat: retire Agent DM tool and export chats"
+            }
+          ]
+        },
+        {
+          "id": "cli-bundle-pull-web-ui",
+          "kind": "feature",
+          "importance": "medium",
+          "title": {
+            "zh": "CLI：hana bundle 拉取网页前端",
+            "en": "CLI: pull the web UI with hana bundle"
+          },
+          "summary": {
+            "zh": "自托管可用 hana bundle pull / status 从官方渠道手动拉取并激活网页前端内容包；走与桌面热更新同一套验签与契约门，拉取只在你执行命令时发生。",
+            "en": "Self-hosted installs can manually pull and activate the web UI content pack with hana bundle pull / status, using the same signed update pipeline as desktop hot updates. Pulls only happen when you run the command."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "b9c96d667",
+              "title": "feat(cli): hana bundle pull/status 手动拉取网页前端"
+            }
+          ]
+        },
+        {
+          "id": "web-client-activated-renderer",
+          "kind": "feature",
+          "importance": "medium",
+          "title": {
+            "zh": "网页客户端改供已激活的前端包",
+            "en": "Web clients serve the activated renderer pack"
+          },
+          "summary": {
+            "zh": "/mobile 与 /desktop 不再硬绑源码树：有注入的 renderer 目录就严格使用，没有则引导先跑 hana bundle pull；打包桌面远程页也会跟到热更新已激活的前端版本。",
+            "en": "/mobile and /desktop no longer hard-bind to the source tree: an injected renderer directory is required when provided, otherwise you are guided to run hana bundle pull. Packaged desktop remote pages now follow the hot-updated activated renderer."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "60e8ad9ce",
+              "title": "feat(server): 网页客户端入口按注入的 renderer 目录供货"
+            }
+          ]
+        },
+        {
+          "id": "data-directory-epoch-gate",
+          "kind": "migration",
+          "importance": "high",
+          "title": {
+            "zh": "数据目录 epoch：旧内核拒绝打开新格式数据",
+            "en": "Data-directory epoch blocks older kernels"
+          },
+          "summary": {
+            "zh": "数据目录落下只升不降的 epoch 印章。内核自身 epoch 更低时会明确拒启，并可在知情风险后用显式覆盖启动；普通版本回退不受影响。",
+            "en": "Each data directory now carries a monotonic epoch stamp. A lower-epoch kernel refuses to open it, with an explicit override available when you accept the risk. Ordinary version rollbacks are unaffected."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "9f94d1451",
+              "title": "feat(server): 数据目录 epoch 单调闸，拒止旧内核打开新格式数据"
+            }
+          ]
+        },
+        {
+          "id": "stop-full-session-tree",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "停止会真正取消整棵会话执行树",
+            "en": "Stop cancels the full session execution tree"
+          },
+          "summary": {
+            "zh": "点停止现在会可靠取消当前会话里的工具、子代理、工作流、终端与浏览器等工作，并解锁对话，避免表面上停了其实还在跑。",
+            "en": "Stop now reliably cancels tools, subagents, workflows, terminals, browsers, and related session work, then unlocks the chat instead of silently leaving work running."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "56c6078da",
+              "title": "fix(session): stop the full session execution tree"
+            }
+          ]
+        },
+        {
+          "id": "update-download-and-pointer-reliability",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "更新下载熔断与指针写入串行化",
+            "en": "Update download stall fuse and pointer serialization"
+          },
+          "summary": {
+            "zh": "大文件下载在长时间几乎无进展或单次尝试超时后会熔断并换镜像重试；同进程内指针写入串行化，避免崩溃重试与激活交错把已确认更新抹掉。",
+            "en": "Large downloads abort and rotate mirrors after prolonged near-zero progress or a hard per-attempt timeout. In-process pointer writes are serialized so crash-retry and activation can no longer erase a confirmed update."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "2262156e3",
+              "title": "fix(update): 下载水管增加最低进度熔断与单次尝试硬时限"
+            },
+            {
+              "type": "commit",
+              "ref": "27f7dcfe2",
+              "title": "fix(update): 指针写入进程内串行化，堵住崩溃重试与激活交错丢更新"
+            }
+          ]
+        },
+        {
+          "id": "memory-weekly-daily-dates",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "周记记忆保留每日日期标题",
+            "en": "Weekly memory keeps per-day date headings"
+          },
+          "summary": {
+            "zh": "编译进提示词的周记条目会保留有效的每日 ISO 日期标题，不再把按日结构冲掉。",
+            "en": "Weekly memory compiled into the prompt keeps valid per-day ISO date headings instead of flattening away the daily structure."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "db86b965a",
+              "title": "fix(memory): preserve daily dates in weekly prompt"
+            }
+          ]
+        },
+        {
+          "id": "same-home-kernel-mutex",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "同一数据目录只允许一个内核存活",
+            "en": "Only one kernel may own the same data directory"
+          },
+          "summary": {
+            "zh": "启动前会用 token 认证探测既有内核是否仍存活；仍在跑就拒启并指引退出对方，探测不通则自动清理残留锁，避免两个进程并发写同一批数据。",
+            "en": "Startup probes any recorded kernel with token auth. If it is still alive, launch is refused with guidance to quit the other process; if not, stale lock files are cleaned automatically so two processes do not share one data directory."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "b1b0bdfc2",
+              "title": "feat(server): 同一数据目录的内核互斥（token 认证探测）"
+            }
+          ]
+        },
+        {
+          "id": "no-post-update-startup-popup",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "更新后启动不再弹出公告",
+            "en": "No post-update startup announcement popup"
+          },
+          "summary": {
+            "zh": "应用或组件更新后的启动会直接进入界面；更新历史仍可在关于页查看。",
+            "en": "After an application or component update, startup opens the UI directly. Update history remains available in About."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "8ff85934d",
+              "title": "fix(desktop): remove post-update startup popup"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.391.2",
+      "version": "0.391.2",
+      "previousTag": "v0.390.0",
+      "generatedAt": "2026-07-12T06:00:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "本版把自动更新做得更稳、更可感知：Mac 上热更新后服务端不再因签名缺 JIT 权限而启动即崩；检查更新会并行比对产地与镜像并拒绝通道不符的清单；货架内容比本机更旧时不再当成可更新；连续启动失败回退时会明确提示；记忆提醒也只送达所属 Agent 的会话。",
+        "en": "This release makes updates more reliable and visible: macOS hot updates no longer crash the server at launch due to missing JIT entitlements; update checks compare the origin and mirror in parallel and reject channel-mismatched manifests; older shelf content is no longer offered as an update; crash fallbacks surface a clear notice; and memory reminders only reach sessions owned by the source Agent."
+      },
+      "counts": {
+        "feature": 1,
+        "fix": 4,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.390.0..v0.391.2",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.391.2",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "crash-fallback-user-notice",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "崩溃回退后明确提示",
+            "en": "Clear notice after a crash fallback"
+          },
+          "summary": {
+            "zh": "连续启动失败触发自动回退时，侧栏会展示一次性提示，说明哪个版本出了问题、已退回哪个版本，以及问题版本已隔离不会自动重试。",
+            "en": "When repeated launch failures trigger an automatic rollback, the sidebar shows a one-time notice explaining which version failed, which version was restored, and that the bad version is quarantined from automatic retry."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "367dd3b22",
+              "title": "feat(update): 崩溃回退后向用户明确提示"
+            }
+          ]
+        },
+        {
+          "id": "macos-server-jit-entitlement",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "修复 Mac 热更新服务端启动即崩",
+            "en": "Fix macOS hot-update server crashing on launch"
+          },
+          "summary": {
+            "zh": "箱内 Node 在正式签名时会附带 JIT 权限，并在装箱前做一次启动烟测，避免缺少可执行内存权限导致热更新后服务端立刻崩溃。",
+            "en": "The bundled Node binary now receives JIT entitlements during Developer ID signing, with a pre-pack launch smoke test so a missing executable-memory entitlement can no longer crash the server right after a hot update."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "fc5d17360",
+              "title": "fix(build): macOS server 箱内 node 缺 JIT entitlement 导致启动即崩"
+            }
+          ]
+        },
+        {
+          "id": "dual-source-channel-manifest-checks",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "更新清单双源比对与通道校验",
+            "en": "Dual-source update manifests with channel checks"
+          },
+          "summary": {
+            "zh": "检查更新会并行请求 GitHub 与 AtomGit，两边独立验签后采信车号更新的一方；清单自述通道与请求通道不符时直接拒绝，避免镜像滞后或错通道清单被照单全收。",
+            "en": "Update checks now query GitHub and AtomGit in parallel, independently verify signatures, and prefer the newer train. Manifests whose declared channel does not match the requested channel are rejected instead of being accepted blindly."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "7213d3494",
+              "title": "fix(update): 校验清单通道归属，清单获取改为双源并行、采信车号更新的一方"
+            }
+          ]
+        },
+        {
+          "id": "reject-older-shelf-content",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "更旧的货架内容不再当成更新",
+            "en": "Older shelf content is no longer treated as an update"
+          },
+          "summary": {
+            "zh": "当货架内容版本低于本机已激活版本时，检查与下载都会视为已是最新，避免把实际上更旧的列车当成可更新并造成误降级。",
+            "en": "If shelf content is older than the locally active version, both check and download now treat the install as current, preventing an older train from being offered as an update and applied as a downgrade."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "82330a386",
+              "title": "fix(update): 货架内容版本低于本机时不再被当作可用更新"
+            }
+          ]
+        },
+        {
+          "id": "memory-reminder-agent-scope",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "记忆提醒只送达所属 Agent",
+            "en": "Memory reminders stay on the owning Agent"
+          },
+          "summary": {
+            "zh": "记忆事实变更现在只注入来源 Agent 自己的会话，不再广播到其它 Agent 的会话。",
+            "en": "Memory fact changes are now injected only into sessions owned by the source Agent, instead of being broadcast to every Agent's sessions."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "33af92e1b",
+              "title": "fix(reminder): scope memory facts to owning agent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.390.0",
+      "version": "0.390.0",
+      "previousTag": "v0.389.0",
+      "generatedAt": "2026-07-12T03:07:07.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "Hana 现在能更准确地判断组件更新：同版本内容不再误报为新更新，需要新版应用本体的组件也会在下载前明确拦截并提示升级。本版同时统一四个平台使用的界面更新归档，减少同版本内容不一致。",
+        "en": "Hana now evaluates component updates more accurately: same-version content is no longer reported as a new update, while components that require a newer app shell are blocked before download with a clear upgrade prompt. This release also uses one shared renderer update archive across all four platforms to prevent same-version content drift."
+      },
+      "counts": {
+        "feature": 1,
+        "fix": 1,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.389.0..v0.390.0",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.390.0",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "same-version-update-detection",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "同版本不再误报更新",
+            "en": "Same-version content no longer appears as an update"
+          },
+          "summary": {
+            "zh": "当本地已激活内容与更新列车版本相同时，Hana 会直接判定为已是最新，不再提示一个无法应用的重复更新。四个平台现在复用同一份界面归档，从源头避免同版本归档因构建时间不同而产生哈希漂移。",
+            "en": "When the active local content already matches the update train version, Hana now treats it as current instead of offering a duplicate update that cannot be applied. All four platforms also reuse the same renderer archive, preventing build-time metadata from producing different hashes for the same version."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "e10c8afcf",
+              "title": "fix(update): 检查更新对同版本列车误报\"有新版本可用\""
+            },
+            {
+              "type": "commit",
+              "ref": "23acede2f",
+              "title": "feat(build): renderer 热更新归档改为 CI 单点构建、四平台复用同一份"
+            }
+          ]
+        },
+        {
+          "id": "component-update-contract-gates",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "不兼容的组件更新会提前拦截",
+            "en": "Incompatible component updates are blocked early"
+          },
+          "summary": {
+            "zh": "组件更新现在会实际检查所需的界面 API 与服务协议版本；如果当前应用本体太旧，检查和下载入口都会停止，并沿用明确的“需要更新应用本体”提示，避免下载后才失败。",
+            "en": "Component updates now enforce their required interface API and server protocol versions. If the installed app shell is too old, both update checks and downloads stop with the existing clear prompt to update the app itself, avoiding a failure after download."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "9b2a6578f",
+              "title": "feat(update): 更新契约版本落地为真实门禁与握手"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.389.0",
+      "version": "0.389.0",
+      "previousTag": "v0.386.6",
+      "generatedAt": "2026-07-11T21:30:47.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "Hana 的组件更新现在完全由用户触发：后台只检查，不会静默下载或改写本地文件；发现更新后，用户可以从更新卡片或关于页开始下载并查看进度。本版同时保护正在使用的版本目录，并改善 Windows 滚动条体验。",
+        "en": "Hana's component updates are now fully user-initiated: background checks no longer download or modify local files, and users can start an available update from the update card or About page while following its progress. This release also protects the active version directory and improves Windows scrollbars."
+      },
+      "counts": {
+        "feature": 1,
+        "fix": 2,
+        "improvement": 1,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.386.6..v0.389.0",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.389.0",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "user-initiated-component-updates",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "组件更新由用户决定何时开始",
+            "en": "Users decide when component updates begin"
+          },
+          "summary": {
+            "zh": "后台和手动检查只确认是否有新内容，不再静默下载或应用；发现更新后，可从更新卡片或关于页主动开始下载，并查看下载、校验和应用进度。",
+            "en": "Background and manual checks now only detect new content instead of silently downloading or applying it. When an update is available, users can start it from the update card or About page and follow download, verification, and application progress."
+          },
+          "details": [
+            {
+              "zh": "重复发布相同内容时会识别为已是最新，临时的 304 响应也不会清掉上一轮记录的更新或错误状态。",
+              "en": "Re-published identical content is recognized as already current, while a temporary 304 response no longer clears the previously recorded update or error state."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "074584a22",
+              "title": "feat(update): 自动更新只检查不下载，下载与应用改为用户点击触发"
+            },
+            {
+              "type": "commit",
+              "ref": "v0.389.0",
+              "title": "feat(update): 更新卡片按内容更新语义呈现，版本显示统一到已激活内容"
+            }
+          ]
+        },
+        {
+          "id": "atomic-protected-update-activation",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "更新不再破坏正在使用的版本",
+            "en": "Updates no longer damage the active version"
+          },
+          "summary": {
+            "zh": "新内容会先在临时目录中完整解压并校验，再原子替换旧目录；仍被任一更新通道引用的版本目录会受到保护，失败时保留原有可用内容。",
+            "en": "New content is now fully extracted and verified in a temporary directory before atomically replacing the old one. Version directories still referenced by any update channel are protected, preserving the working installation when activation fails."
+          },
+          "details": [
+            {
+              "zh": "如果新列车复用相同目录名且内容一致，Hana 会直接沿用现有目录；内容不一致时会明确拒绝覆盖。",
+              "en": "If a new train reuses the same directory name with identical content, Hana reuses the existing directory; conflicting content is rejected instead of overwriting it."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "2d765fc88",
+              "title": "fix(update): stop deleting the live version dir before the new one is ready"
+            }
+          ]
+        },
+        {
+          "id": "active-content-version-display",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "版本显示与当前内容保持一致",
+            "en": "Displayed versions match the active content"
+          },
+          "summary": {
+            "zh": "更新卡片、关于页和升级公告现在统一显示当前已激活内容的版本，避免应用外壳版本与实际界面、服务内容不一致。",
+            "en": "The update card, About page, and post-update announcement now consistently show the active content version, avoiding mismatches between the application shell and the interface or server content in use."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "v0.389.0",
+              "title": "feat(update): 更新卡片按内容更新语义呈现，版本显示统一到已激活内容"
+            }
+          ]
+        },
+        {
+          "id": "windows-scrollbar-polish",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "Windows 滚动条更安静",
+            "en": "Quieter Windows scrollbars"
+          },
+          "summary": {
+            "zh": "Windows 滚动条在停止滚动后自动隐藏，并移除原生箭头按钮，让桌面界面更简洁；macOS、Linux 与网页版行为不变。",
+            "en": "Windows scrollbar thumbs now hide after scrolling stops, and native arrow buttons have been removed for a cleaner desktop interface. macOS, Linux, and web behavior is unchanged."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "ab70ee510",
+              "title": "feat(ui): auto-hide Windows scrollbars while idle"
+            },
+            {
+              "type": "commit",
+              "ref": "437230181",
+              "title": "fix(ui): remove Windows scrollbar arrow buttons"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.386.6",
+      "version": "0.386.6",
+      "previousTag": "v0.386.5",
+      "generatedAt": "2026-07-11T15:05:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "修复组件热更新的壳版本门槛：新发布的更新列车不再要求壳版本与列车版本完全一致，已安装的客户端可以继续接收组件更新。",
+        "en": "Fixes the shell-version floor for component updates so new update trains no longer require the shell version to match the train version exactly, allowing already-installed clients to keep receiving component updates."
+      },
+      "counts": {
+        "feature": 0,
+        "fix": 1,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.386.5..d7d48c2cc",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.386.6",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "train-min-shell-compat-floor",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "热更新列车使用固定的壳兼容地板",
+            "en": "Update trains use a fixed shell compatibility floor"
+          },
+          "summary": {
+            "zh": "发布热更新列车时，最低壳版本改为手动维护的兼容地板，而不再等于本班列车版本号，避免每一班新列车把存量客户端挡在门外。",
+            "en": "When publishing update trains, the minimum shell version is now a manually maintained compatibility floor instead of the train version itself, so each new train no longer blocks existing clients."
+          },
+          "details": [
+            {
+              "zh": "当前兼容地板为 0.386.5，与现网列车一致；只有列车开始依赖更老壳无法运行的新能力时才需要抬高。",
+              "en": "The current floor is 0.386.5, matching the live train; raise it only when train contents start depending on capabilities older shells cannot run."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "d7d48c2cc",
+              "title": "fix(release): use a fixed shell compatibility floor for train manifests"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.386.5",
+      "version": "0.386.5",
+      "previousTag": "v0.385.11",
+      "generatedAt": "2026-07-11T13:16:00.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "Hana 的组件热更新现在拥有完整的签名发布链路，已安装客户端可以安全接收服务端与界面更新。本次版本同时修复了 Windows 安装校验与更新历史弹窗的显示问题。",
+        "en": "Hana now has a complete signed publishing pipeline for component updates, allowing installed clients to safely receive server and renderer updates. This release also fixes Windows installation checks and update-history dialog scrolling."
+      },
+      "counts": {
+        "feature": 1,
+        "fix": 2,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.385.11..e837e3ac1",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.386.5",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "signed-hot-update-publishing",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "签名组件更新可以正式发布",
+            "en": "Signed component updates can now be published"
+          },
+          "summary": {
+            "zh": "正式版本会同时发布服务端与界面组件归档，并生成带签名、可续做的稳定版与测试版更新列车，让已安装客户端能够安全发现和下载组件更新。",
+            "en": "Each release now publishes server and renderer archives and produces signed, resumable update trains for stable and beta channels, so installed clients can safely discover and download component updates."
+          },
+          "details": [
+            {
+              "zh": "发布任务中断后可以从已有资产继续，不会重复或倒退更新序号。",
+              "en": "Interrupted publishing can resume from existing assets without duplicating or rolling back update sequence numbers."
+            },
+            {
+              "zh": "读取远端发布状态失败时会明确中止，避免把网络或权限故障误判为首次发布。",
+              "en": "Failures while reading remote release state now stop explicitly instead of being mistaken for a first publication."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "1c8762d9f",
+              "title": "feat(release): add hot-update train publishing pipeline"
+            },
+            {
+              "type": "commit",
+              "ref": "def20a07c",
+              "title": "fix(release): only treat gh's missing-release error as release-absent"
+            }
+          ]
+        },
+        {
+          "id": "windows-seed-install-integrity",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "Windows 安装校验适配新的组件归档",
+            "en": "Windows installation checks support the new component archives"
+          },
+          "summary": {
+            "zh": "Windows 安装器和启动前检查现在验证新的签名 seed 归档，不再因寻找已淘汰的散装服务端文件而错误判定安装损坏。",
+            "en": "The Windows installer and pre-launch checks now validate the new signed seed archives instead of incorrectly reporting corruption while looking for retired loose server files."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "21752a0d8",
+              "title": "fix(windows): install integrity checks use the seed archive layout"
+            }
+          ]
+        },
+        {
+          "id": "settings-update-history-scroll",
+          "kind": "fix",
+          "importance": "medium",
+          "title": {
+            "zh": "更新历史保持在设置窗口内滚动",
+            "en": "Update history scrolls correctly inside Settings"
+          },
+          "summary": {
+            "zh": "更新历史弹窗会限制在设置面板的可见高度内，较长的版本记录可以在弹窗内部平稳滚动。",
+            "en": "The update-history dialog now stays within the visible Settings panel and scrolls long release histories inside the dialog."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "3edd650fd",
+              "title": "fix(settings): constrain update history to settings panel"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.385.11",
+      "version": "0.385.11",
+      "previousTag": "v0.380.10",
+      "generatedAt": "2026-07-11T10:53:36.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "Hana 现在可以在后台安全准备并原地应用组件更新，同时在异常时自动回退或一键修复。设置页布局、更新历史和新会话输入也得到了一轮系统性整理。",
+        "en": "Hana can now safely stage component updates in the background and apply them in place, with automatic rollback and one-click repair when needed. This release also brings a systematic cleanup to Settings, update history, and new-session composing."
+      },
+      "counts": {
+        "feature": 3,
+        "fix": 2,
+        "improvement": 3,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.380.10..a9df4e87e",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.385.11",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "signed-component-trains",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "组件更新可以后台准备、原地应用",
+            "en": "Component updates stage quietly and apply in place"
+          },
+          "summary": {
+            "zh": "服务端与界面组件会作为同一份签名更新一起校验和准备，完成后可直接刷新应用，不再让每次组件升级都变成完整安装。",
+            "en": "Server and renderer components are verified and staged as one signed update, then applied with an in-place refresh instead of turning every component upgrade into a full reinstall."
+          },
+          "details": [
+            {
+              "zh": "后台检查只会在完整下载并验证两类组件后，才把更新标记为可应用。",
+              "en": "An update becomes available only after both component sets are fully downloaded and verified."
+            },
+            {
+              "zh": "设置页与侧栏贴纸共享同一套更新状态，稳定版和测试版通道也会保持一致。",
+              "en": "Settings and the sidebar sticker share one update state, with stable and beta channels kept in sync."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        },
+        {
+          "id": "component-rollback-repair",
+          "kind": "feature",
+          "importance": "high",
+          "title": {
+            "zh": "更新异常时自动回退，也可手动修复组件",
+            "en": "Automatic rollback and manual component repair"
+          },
+          "summary": {
+            "zh": "如果新组件连续启动失败，Hana 会隔离问题版本并回到上一份可用版本；托盘菜单和启动参数也提供了清理并重建组件的修复入口。",
+            "en": "If new components repeatedly fail to start, Hana quarantines the bad version and returns to the previous working set. A repair action is also available from the tray and command line."
+          },
+          "details": [
+            {
+              "zh": "服务端与界面启动都纳入崩溃计数和回退保护。",
+              "en": "Both server and renderer startup are covered by crash counting and rollback protection."
+            },
+            {
+              "zh": "组件清理只回收不再被任何更新通道引用的旧版本。",
+              "en": "Cleanup removes only old component versions that are no longer referenced by any update channel."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        },
+        {
+          "id": "release-history-anthology",
+          "kind": "feature",
+          "importance": "medium",
+          "title": {
+            "zh": "更新历史与跨版本公告集中呈现",
+            "en": "A clearer update history across releases"
+          },
+          "summary": {
+            "zh": "“关于”页面现在可以查看最近五个正式版本的双语更新内容；跨过多个版本升级时，首启公告也会合并展示所有尚未读过的摘要。",
+            "en": "The About page now shows bilingual notes for the five newest published releases, while first-launch announcements collect every unread digest when an upgrade spans multiple versions."
+          },
+          "details": [
+            {
+              "zh": "在线历史读取失败时，会明确回退到安装包内附带的离线历史。",
+              "en": "If online history is unavailable, Hana clearly falls back to the offline history bundled with the app."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        },
+        {
+          "id": "atomgit-first-update-source",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "国内更新检查优先走加速源",
+            "en": "Faster update checks for users in China"
+          },
+          "summary": {
+            "zh": "组件更新会优先尝试国内镜像，并在不可用时自动回到 GitHub；切换稳定版或测试版后，下载、激活和回退都会使用同一通道。",
+            "en": "Component updates try the domestic mirror first and automatically fall back to GitHub. Stable and beta selection now stays consistent across download, activation, and rollback."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        },
+        {
+          "id": "settings-layout-primitives",
+          "kind": "improvement",
+          "importance": "high",
+          "title": {
+            "zh": "设置窗口和同类组件统一到一套布局纪律",
+            "en": "Settings now follows one consistent layout system"
+          },
+          "summary": {
+            "zh": "设置弹窗固定为 884px 外壳，不再随标签页内容改变宽度；卡片、行、开关和分区改用共享原语排列，同时保留原有视觉风格。",
+            "en": "The Settings window now keeps a fixed 884px shell instead of changing width between tabs. Cards, rows, toggles, and sections share consistent primitives while preserving the existing visual style."
+          },
+          "details": [
+            {
+              "zh": "浏览器、界面、Agent、媒体等标签页使用同一内容轨道和间距规则。",
+              "en": "Browser, Interface, Agent, Media, and other tabs now use the same content track and spacing rules."
+            },
+            {
+              "zh": "同类控件的标签、说明文字和右侧操作保持稳定对齐。",
+              "en": "Labels, descriptions, and trailing actions now align consistently across controls of the same type."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        },
+        {
+          "id": "pending-session-composer",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "新会话草稿、Skill 徽章和发送状态保持一致",
+            "en": "New-session drafts, skill badges, and send state stay in sync"
+          },
+          "summary": {
+            "zh": "欢迎页和待创建会话现在都有稳定的草稿身份；恢复草稿或插入 Skill 徽章后，编辑器、发送按钮与实际提交使用同一份内容判断。",
+            "en": "Welcome and pending sessions now have stable draft identities. After restoring a draft or inserting a skill badge, the editor, send button, and submit path use the same content decision."
+          },
+          "details": [
+            {
+              "zh": "纯 Skill 徽章消息不再被当作空消息静默丢弃。",
+              "en": "Skill-badge-only messages are no longer silently treated as empty."
+            },
+            {
+              "zh": "待创建会话发送失败会显示明确提示，而不是没有反应。",
+              "en": "A failed send from a pending session now shows an explicit error instead of doing nothing."
+            }
+          ],
+          "sources": [
+            {
+              "type": "issue",
+              "ref": "#2101",
+              "title": "Pending session and composer consistency"
+            },
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        },
+        {
+          "id": "cross-channel-component-gc",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "测试版通道不再误删刚激活的组件",
+            "en": "Beta updates no longer delete newly activated components"
+          },
+          "summary": {
+            "zh": "组件清理现在会同时保护所有通道正在引用的版本，修复了切换到测试版后，首启可能误删新组件并导致启动失败的问题。",
+            "en": "Component cleanup now protects versions referenced by every channel, fixing a beta-channel first-launch failure where newly activated components could be removed by mistake."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        },
+        {
+          "id": "first-run-preparation-splash",
+          "kind": "improvement",
+          "importance": "medium",
+          "title": {
+            "zh": "首次启动准备过程更清楚",
+            "en": "Clearer first-run preparation"
+          },
+          "summary": {
+            "zh": "首次安装需要解压和验证组件时，独立启动页会持续显示“准备新家”状态，不再依赖尚未准备完成的主界面资源。",
+            "en": "While a fresh install extracts and verifies its components, a standalone splash screen keeps showing the preparation state without depending on renderer assets that are not ready yet."
+          },
+          "details": [],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "a9df4e87e",
+              "title": "feat(runtime): ship signed artifact trains and unify settings"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "tag": "v0.380.10",
+      "version": "0.380.10",
+      "previousTag": "v0.380.9",
+      "generatedAt": "2026-07-11T00:31:45.000Z",
+      "noUserFacingChanges": false,
+      "summary": {
+        "zh": "手动压缩上下文改为按会话身份定位，并明确反馈成功、无需压缩或失败结果。",
+        "en": "Manual context compaction now targets sessions by ID and clearly reports accepted, noop, or failed outcomes."
+      },
+      "counts": {
+        "feature": 0,
+        "fix": 1,
+        "improvement": 0,
+        "migration": 0
+      },
+      "source": {
+        "owner": "liliMozi",
+        "repo": "openhanako",
+        "commitRange": "v0.380.9..b32b5415b",
+        "releaseUrl": "https://github.com/liliMozi/openhanako/releases/tag/v0.380.10",
+        "releaseNotes": ""
+      },
+      "items": [
+        {
+          "id": "manual-compaction-session-id",
+          "kind": "fix",
+          "importance": "high",
+          "title": {
+            "zh": "手动压缩按会话 ID 生效",
+            "en": "Manual compaction is session-ID authoritative"
+          },
+          "summary": {
+            "zh": "手动压缩会准确作用在当前会话，并给出成功、无需压缩或失败的明确反馈，不再静默按路径猜测。",
+            "en": "Manual compaction now hits the focused session reliably and surfaces accepted, noop, or failure feedback instead of silent path-based guesses."
+          },
+          "details": [
+            {
+              "zh": "桌面与移动端手动压缩均改为以会话 ID 为准。",
+              "en": "Desktop and mobile manual compaction both resolve targets by session ID."
+            },
+            {
+              "zh": "旧的路径寻址仍在协议边界兼容转换，但结果会明确回传。",
+              "en": "Legacy path addressing remains converted at the protocol boundary, with explicit terminal outcomes."
+            }
+          ],
+          "sources": [
+            {
+              "type": "commit",
+              "ref": "b32b5415b",
+              "title": "fix: make manual compaction session-id authoritative"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

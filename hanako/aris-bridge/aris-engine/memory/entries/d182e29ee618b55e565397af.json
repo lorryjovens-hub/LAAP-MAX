@@ -1,0 +1,16 @@
+{
+  "_id": "d182e29ee618b55e565397af",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 8,
+  "lamport": 1784732564.1530006,
+  "parents": [
+    "ae220d242545a76aa59998a8"
+  ],
+  "payload": {
+    "user": "",
+    "assistant": "跑了，每一轮都在记录",
+    "length": 10
+  },
+  "ttl_days": 0.0
+}

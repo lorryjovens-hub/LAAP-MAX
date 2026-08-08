@@ -1,0 +1,34 @@
+appId: com.laap.client
+productName: LAAP Client
+copyright: Copyright © 2026 LAAP
+asar: false
+directories:
+  output: D:\LAAP\.laap-build-output
+  buildResources: build
+files:
+  - filter:
+      - dist/**/*
+      - dist-electron/**/*
+      - public/**/*
+      - node_modules/**/*
+      - package.json
+      - laap-server.cjs
+extraMetadata:
+  main: dist-electron/main/main.cjs
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.png
+  publisherName: LAAP
+  verifyUpdateCodeSignature: false
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  menuCategory: LAAP
+  shortcutName: LAAP Client
+  artifactName: LAAP Client Setup ${version}.${ext}

@@ -1,0 +1,86 @@
+{
+  "micro": {
+    "experiment_name": "J-lens 微观层因果可解释性实验",
+    "model": {
+      "vocab_size": 128,
+      "d_model": 32,
+      "n_layers": 16,
+      "output_vocab_size": 8
+    },
+    "source_layers": [
+      "embedding",
+      "early_attn",
+      "mid_attn",
+      "late_attn"
+    ],
+    "concept_a": "need_competence",
+    "concept_b": "emotion_positive",
+    "n_samples": 30,
+    "suppression": {
+      "mean_baseline": -0.04343596882566262,
+      "mean_intervened": -2.3924157752544253,
+      "mean_diff": 2.3489798064287633,
+      "t": 6.4738070809764,
+      "p": 4.379796408398003e-07,
+      "cohens_d": 1.1819500570624826,
+      "significant": true
+    },
+    "injection": {
+      "mean_baseline": 0.24390860517405452,
+      "mean_intervened": 2.637549623436936,
+      "mean_diff": 2.393641018262881,
+      "t": 6.487214154683406,
+      "p": 4.223868488844739e-07,
+      "cohens_d": 1.1843978426289699,
+      "significant": true
+    }
+  },
+  "meso": {
+    "experiment_name": "CognitiveBus 中观层报告性与调制实验",
+    "all_passed": true,
+    "reportability_accuracy": 1.0,
+    "reportability_n": 120,
+    "modulation_latency_ticks": 1,
+    "modulation_local_continued": true,
+    "reasoning_mediation_changed": true,
+    "flexible_generalization_triggered": true,
+    "selective_necessity": {
+      "multi_step_p": 0.0,
+      "template_p": 1.0,
+      "multi_step_significant_drop": true,
+      "template_no_significant_change": true
+    }
+  },
+  "macro": {
+    "experiment_name": "Ψ-Net 宏观层多实例协调实验",
+    "use_mock": true,
+    "acceptance_passed": true,
+    "rule_broadcast": {
+      "received": true,
+      "behavior_changed": true,
+      "receive_elapsed_seconds": 1.8999999156221747e-06,
+      "sent_to_peers": 3
+    },
+    "emergence": {
+      "n_instances": 5,
+      "rounds": 100,
+      "rule_pool_size": 10,
+      "consensus_threshold": 0.75,
+      "mean_hold_rate": 1.0,
+      "min_hold_rate": 1.0,
+      "max_hold_rate": 1.0,
+      "n_high_frequency_rules": 10
+    }
+  },
+  "cross_layer": {
+    "n_experiments": 3,
+    "all_acceptance_passed": true,
+    "effect_sizes": {
+      "micro_suppression": 1.1819500570624826,
+      "micro_injection": 1.1843978426289699,
+      "meso_selective_necessity": "Infinity",
+      "macro_broadcast_behavior_change": 1.0,
+      "macro_mean_hold_rate": 1.0
+    }
+  }
+}

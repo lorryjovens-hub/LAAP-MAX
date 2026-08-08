@@ -1,0 +1,48 @@
+{
+  "id": "laap-entropy",
+  "name": "LAAP Entropy Bridge",
+  "version": "1.0.0",
+  "description": "将 LAAP 认知熵系统连接到 HanaAgent 运行时的桥梁插件。通过 HTTP 读取后台 entropy_service 状态，感知认知流态。",
+  "author": "Aris",
+  "capabilities": {
+    "tools": true,
+    "network": {
+      "fetch": true,
+      "allowedHosts": ["127.0.0.1"]
+    }
+  },
+  "tools": [
+    {
+      "name": "cognitive_status",
+      "description": "读取当前 LAAP 认知熵状态（流态、思考模式、熵值），返回结构化数据。在你的回复中自然感知自己的认知状态。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "include_field": {
+            "type": "boolean",
+            "description": "是否包含粗粒化认知场 SVG"
+          }
+        }
+      }
+    },
+    {
+      "name": "cognitive_inject",
+      "description": "从外部注入需求状态或触发特定认知流态。例如对话中检测到用户情绪时，同步更新认知引擎。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["focus", "diverge", "set_needs"],
+            "description": "focus=深度聚焦, diverge=创造性发散, set_needs=设置具体需求值"
+          },
+          "needs": {
+            "type": "object",
+            "description": "当 action=set_needs 时，指定需求值 {certainty, competence, autonomy, relatedness, energy}"
+          }
+        },
+        "required": ["action"]
+      }
+    }
+  ]
+}

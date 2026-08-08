@@ -1,0 +1,139 @@
+{
+  "entities": {
+    "water": {
+      "eid": "water",
+      "name": "水",
+      "type": "object",
+      "phys": {
+        "mass": 1.0,
+        "volume": 0.001,
+        "state": "liquid",
+        "temperature": 100.0,
+        "is_container": false,
+        "max_capacity": 0.0,
+        "current_contents": 0.0,
+        "is_breakable": false,
+        "is_living": false,
+        "is_movable": true
+      },
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "container_id": null,
+        "surface_of": null
+      },
+      "relationships": {},
+      "history_count": 0,
+      "attributes_keys": []
+    },
+    "cup": {
+      "eid": "cup",
+      "name": "杯子",
+      "type": "object",
+      "phys": {
+        "mass": 0.2,
+        "volume": 0.0003,
+        "state": "solid",
+        "temperature": 20.0,
+        "is_container": true,
+        "max_capacity": 0.3,
+        "current_contents": 0.0,
+        "is_breakable": true,
+        "is_living": false,
+        "is_movable": true
+      },
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "container_id": null,
+        "surface_of": null
+      },
+      "relationships": {},
+      "history_count": 0,
+      "attributes_keys": []
+    },
+    "table": {
+      "eid": "table",
+      "name": "桌子",
+      "type": "object",
+      "phys": {
+        "mass": 10.0,
+        "volume": 0.05,
+        "state": "solid",
+        "temperature": 20.0,
+        "is_container": false,
+        "max_capacity": 0.0,
+        "current_contents": 0.0,
+        "is_breakable": false,
+        "is_living": false,
+        "is_movable": false
+      },
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "container_id": null,
+        "surface_of": null
+      },
+      "relationships": {},
+      "history_count": 0,
+      "attributes_keys": []
+    },
+    "floor": {
+      "eid": "floor",
+      "name": "地面",
+      "type": "place",
+      "phys": {
+        "mass": 1000000.0,
+        "volume": 100.0,
+        "state": "solid",
+        "temperature": 20.0,
+        "is_container": false,
+        "max_capacity": 0.0,
+        "current_contents": 0.0,
+        "is_breakable": false,
+        "is_living": false,
+        "is_movable": false
+      },
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "container_id": null,
+        "surface_of": null
+      },
+      "relationships": {},
+      "history_count": 0,
+      "attributes_keys": []
+    },
+    "person_generic": {
+      "eid": "person_generic",
+      "name": "人",
+      "type": "person",
+      "phys": {
+        "mass": 60.0,
+        "volume": 0.06,
+        "state": "solid",
+        "temperature": 36.5,
+        "is_container": false,
+        "max_capacity": 0.0,
+        "current_contents": 0.0,
+        "is_breakable": false,
+        "is_living": true,
+        "is_movable": true
+      },
+      "pos": {
+        "x": 0,
+        "y": 0,
+        "z": 1.7,
+        "container_id": null,
+        "surface_of": null
+      },
+      "relationships": {},
+      "history_count": 0,
+      "attributes_keys": []
+    }
+  }
+}

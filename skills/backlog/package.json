@@ -1,0 +1,50 @@
+{
+  "name": "agent-teams-task-mcp",
+  "version": "2.4.2",
+  "description": "Persistent task management plugin for Claude Code and agent teams",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "lint": "eslint src/ tests/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "mcp",
+    "claude-code"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@backloghq/agentdb": "^2.2.1",
+    "@cfworker/json-schema": "^4.1.1",
+    "@modelcontextprotocol/server": "^2.0.0-alpha.2",
+    "zod": "^4.3.6"
+  },
+  "peerDependencies": {
+    "@backloghq/opslog-s3": "^0.4.1",
+    "@backloghq/termlog-s3": "^0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@backloghq/opslog-s3": {
+      "optional": true
+    },
+    "@backloghq/termlog-s3": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@types/node": "^25.5.2",
+    "@vitest/coverage-v8": "^4.1.2",
+    "eslint": "^10.2.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^4.1.2"
+  }
+}

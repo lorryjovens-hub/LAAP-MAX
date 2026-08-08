@@ -1,0 +1,558 @@
+# ========== 环境文件 ==========
+.env
+.env.local
+.env.production
+xiaozhi_mcp_token.txt
+
+# ========== 运行时状态 ==========
+state/
+state/*.json
+state/**/*.json
+!state/.gitkeep
+snapshots/
+logs/
+*.log
+*.log.gz
+
+# ========== Python 缓存 ==========
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# ========== 模型数据 ==========
+corpus/
+**/corpus/
+rsi_backups/
+**/rsi_backups/
+models/
+**/models/
+*.safetensors
+*.bin
+*.gguf
+*.onnx
+*.parquet
+*.pkl
+*.pt
+*.pth
+
+# ========== 构建产物 ==========
+target/
+**/target/
+*.exe
+*.dll
+*.so
+*.dylib
+build/
+dist/
+dist_native/
+build_native/
+*.pkg
+*.tpz
+aris_brain/psi_core/
+aris_brain/captures/
+
+# ========== 编辑器 ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ========== 临时文件 ==========
+_gen_*.py
+_build_*.py
+_tmp*.txt
+_tmp*.py
+
+# ========== Node ==========
+node_modules/
+psi_state.json
+audit_log.jsonl
+
+# ========== 隐私/认证（全路径排除） ==========
+**/.env
+**/.env.*
+**/xiaozhi_mcp_token.txt
+**/.deepseek_key
+**/.ao_key
+**/.aris_key
+**/.auth_marker
+**/.master_key
+**/.pypirc
+**/.pypirc.example
+**/*.key
+**/*.pem
+**/credentials.json
+**/service_account*.json
+
+# ========== 嵌套仓库/外部项目（独立维护） ==========
+Agent-Reach/
+claw-in-chrome/
+laap-open/
+harness/shadcn-ui-mcp-server/
+external/
+laap-agi/
+laap-AGI-repo/
+laap-github/
+
+# ========== 第三方依赖/源码（可从外部获取） ==========
+harness/godot-master/
+harness/three.js-master/
+harness/MediaPipeUnityPlugin-master/
+harness/ui-main/
+harness/tools/
+_archive/
+
+# ========== 运行时数据库/状态 ==========
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/.codegraph/
+**/.codeatlas/
+**/.trae/
+**/.laap/
+**/state/
+**/snapshots/
+
+# ========== 备份/临时输出 ==========
+nul
+**/nul
+*.bak
+*.bak2
+*_test_log.txt
+final_verify.txt
+test_*.txt
+subset_results.xml
+
+# ========== aris_brain 运行时产物（保留源码，排除状态/输出） ==========
+aris_brain/.aris_queue/
+aris_brain/memory/
+aris_brain/outputs/
+aris_brain/output/
+aris_brain/_snap_*.txt
+aris_brain/_line_*.txt
+aris_brain/_rpt*.txt
+aris_brain/snap_*.txt
+aris_brain/snapshot*.txt
+aris_brain/*_output.txt
+aris_brain/*_result.txt
+aris_brain/*_result.json
+aris_brain/*.csv
+aris_brain/paper_kb/
+aris_brain/prod_*.html
+aris_brain/ui_*.html
+aris_brain/test_*.html
+aris_brain/test_*.png
+aris_brain/outputs/
+aris_brain/*.log
+
+# ========== Electron/Node 构建产物 ==========
+laap-client/release-build-temp/
+laap-client/dist/
+laap-client/out/
+
+# ========== Godot 缓存 ==========
+*.godot/
+*.tmp
+
+# ========== 压缩包/大文件 ==========
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# ========== 废案目录（完整排除，不上传） ==========
+# 早期Aris大脑实验：临时文件/日志/归档代码/二进制构建产物
+aris_brain/
+# Neko Aris实验性Live2D角色原型：快速迭代废案
+neko_aris/
+# Windows x64二进制分发版：含.wasm/.node编译产物，可重编译
+Pi/pi-windows-x64/
+# CDP浏览器自动化临时脚本
+.cdp/
+# Edge浏览器锁文件状态
+.edge-laap/
+# 早期空Wiki原型
+LAAP WIKI/
+# 特定网站素材（临时原型项目）
+网站HEP素材/
+# 媒体发布创作（临时原型项目）
+媒体发布创作/
+# 用户临时文件目录
+user/
+
+# ========== Pi目录下的仅针对废案的启动脚本 ==========
+Pi/启动*.bat
+
+# ========== wiki/.obsidian（Obsidian编辑器配置，个人偏好） ==========
+wiki/.obsidian/
+wiki/**/.obsidian/
+wiki/.hermes-tmp.*
+wiki/_index_backup.txt
+wiki/_log_backup.txt
+
+# ========== 根目录临时/调试脚本（_前缀文件） ==========
+_ab_v4.py
+_ab_v4_output.txt
+_audit_out.txt
+_audit_temp.py
+_benchmark.py
+_cleanup_aris.py
+_corpus_list.txt
+_demo_body.py
+_emergence_test.py
+_find_sidebar.py
+_get_ip.py
+_show_results.py
+_task8_verify.py
+_test_e2e.py
+_test_final.py
+_test_quick.py
+_test_wiky.py
+_write_wm.py
+
+# ========== 根目录临时调试/一次性脚本 ==========
+patch.py
+patch_hud.py
+patch_page.py
+kernel_patch.py
+fix_scale.py
+fix-hana-port.mjs
+debug_api.py
+debug_api_deep.py
+debug_models.py
+debug_petri.py
+dev_asgi.py
+check_manifest.py
+check_state.py
+check_disk.ps1
+final_verify.ps1
+get_error_uia.py
+get_error_uia2.py
+inspect_chat.py
+poll_installer.py
+hello.py
+bubble_sort.py
+tmp_tui_test.py
+tmp_tui_test2.py
+tmp_tui_test3.py
+test_moss_tts.py
+test_z_image.py
+voice_cloning.py
+verify_task72.py
+
+# ========== 根目录运行时缓存/状态文件 ==========
+.agent_events.json
+.audit_trail.jsonl
+.coverage
+.task_board.json
+.test_failures.txt
+.guardian_mode
+auth.json
+models-cache.json
+models.json
+users.json
+usage-ledger.json
+server-info.json
+server-node.json
+studios.json
+web-sessions.json
+devices.json
+data-epoch.json
+laap-state.json
+list_windows.json
+models-cache.json
+mcp_*.pid
+port2668.txt
+loop_debug.txt
+axtree.json
+added-models.yaml
+bridge_result.txt
+
+# ========== 根目录本地启动脚本/批处理 ==========
+启动*.bat
+hermes-aris.ps1
+laap_startup.vbs
+start_laap.cmd
+
+# ========== 根目录输出/日志文件 ==========
+output.txt
+*.log
+_out.txt
+
+# ========== 根目录图片（非必要素材，可外部托管） ==========
+_edge_state.png
+logo*.png
+logo*.jpg
+龙logo.jpg
+laap_window.jpg
+
+# ========== 根目录PDF ==========
+*.pdf
+
+# ========== hanako/构建产物 ==========
+hanako/build/
+hanako/.local/
+hanako/main.obj
+hanako/build_log.txt
+hanako/**/node_modules/
+hanako/**/.venv/
+hanako/desktop/src/assets/*.png
+hanako/desktop/src/assets/*.ico
+hanako/desktop/src/assets/*.icns
+
+# ========== 子项目的node_modules和.venv ==========
+laap-netlify/node_modules/
+laap-client/node_modules/
+ui-main/**/node_modules/
+ui/node_modules/
+Pi/pi-gui-src/pi-gui-main/**/node_modules/
+Pi/pi-gui-src/pi-gui-main/**/.venv/
+openhanako/node_modules/
+
+# ========== laap_memory临时 ==========
+laap_memory/*.log
+
+# ========== hanako/额外二进制 ==========
+hanako/**/release-build-temp/
+hanako/**/dist/
+hanako/**/out/
+hanako/**/*.exe
+hanako/**/*.node
+hanako/**/*.wasm
+
+# ========== Pi/pi-gui-src下的编译产物 ==========
+Pi/pi-gui-src/pi-gui-main/**/dist/
+Pi/pi-gui-src/pi-gui-main/**/out/
+Pi/pi-gui-src/pi-gui-main/**/release/
+Pi/pi-gui-src/pi-gui-main/apps/desktop/src/assets/
+
+# ========== 所有嵌套仓库的.git目录（保留源码，避免submodule） ==========
+**/.git/
+!/.git/
+
+# ========== 外部/废弃独立项目（完整排除） ==========
+Agent-Reach/
+Android-Proot-Builder/
+claw-in-chrome/
+laap-open/
+external/
+harness/shadcn-ui-mcp-server/
+
+# ========== 废案/实验/重复目录 ==========
+# 重复的BaiLongma版本，保留BaiLongma-main
+BaiLongma-latest/
+# LAAP Client二进制分发包（.pak等Electron打包产物）
+LAAP Client/
+# LAAP-MAX-audit独立旧审计仓库（重复D:\LAAP源码）
+LAAP-MAX-audit/
+# OmniRoute压缩二进制发布版
+OmniRoute-release-v3.8.50/
+# 临时资产/备份
+_apex_assets/
+_backup/
+# 运行时agents人格数据目录（本地生成）
+agents/
+# 早期Aris body实验（aris_brain已排除，这里也是重复实验）
+aris-body/
+# 早期桥接原型
+aris_bridge/
+# OTA构建产物
+artifacts/
+# 早期Brotherhood logo废案
+brotherhood/
+# 本地运行时频道数据
+channels/
+# 运行时策略数据
+data/
+# 独立旧审计
+analysis/
+# 早期logo素材文件夹
+laap logo/
+# 客户端本地状态缓存
+laap-client-data/
+# 临时打包目录
+laap-guard-pkg/
+# 小技能桥接（openminis-bridge是skills子目录级）
+openminis-bridge/
+# 临时npm包装
+packages/
+# 插件运行时配置
+plugin-data/
+# 样例小插件（非核心plugin系统）
+plugins/
+# 单个PoC设计文件
+poc/
+# PsiLang标准草案
+psilang-standards/
+# 基准运行结果
+results/
+# 运行时安全配置/哈希
+security/
+# 小桥接实验
+self_model_bridge/
+# Python虚拟环境
+sharp_env/
+# 旧端口工作树（废案）
+worktree-port-old/
+
+# ========== skills/下的第三方技能独立仓库（保留为普通源码但排除其.git） ==========
+# 已被**/.git/规则覆盖
+
+# ========== 根目录更多临时/调试脚本 ==========
+_ab_test_harness.py
+_ab_test_harness_v3.py
+_ab_test_results.json
+_setup_integration.py
+_test_components.py
+_test_psi_systems.py
+analyze_harness_status.py
+aris-memory-maintain.py
+benchmark_deepseek_chat.py
+benchmark_final.py
+benchmark_final_fixed.py
+benchmark_harness_fix.py
+benchmark_harness_full.py
+benchmark_llm_tasks.py
+benchmark_minesweeper.py
+benchmark_multiround.py
+benchmark_real_llm.py
+brotherhood_connect.py
+check_torch_wheel.ps1
+debug_api_params.py
+debug_benchmark.py
+debug_prompt_length.py
+debug_reasoning.py
+device-credentials.json
+docker-compose.yml
+download_models.py
+fix_redacted_defaults.py
+generate_charts.py
+generate_report.py
+generate_whitepaper.js
+get-error-text.ps1
+hanako-launcher.mjs
+hanako_search.json
+input-drafts.v1.json
+inspect_checkbox.py
+inspect_laap_ui.py
+inspect_settings.py
+install_torch_cuda.ps1
+installer_check.jpg
+installer_snap.jpg
+laap-client-screenshot-1.png
+laap-client-screenshot-2.png
+laap_web_config.yaml
+laap_window_clean.jpg
+launch_gateway_silent.vbs
+le_wm_dashboard.html
+local-user-auth.json
+loop_debug_async.txt
+moss_realtime_server.py
+pairing-sessions.json
+pi_psi_startup.vbs
+plugin-installs.json
+port_agi_modules.py
+provider-catalog.json
+requirements-rag.txt
+run_mcp_8091.py
+run_mcp_8091_dev.py
+run_tokens_experiment.py
+server-network.json
+setup_aris_hanako.cmd
+setup_aris_hanako.sh
+start_gateway_silent.vbs
+start_laap_mcp_8091.bat
+studio-mounts.json
+subagent-runs.json
+subagent-threads.json
+test_advanced_world_model.py
+test_causal_backend.py
+test_cf_profiling.py
+test_cua_final2.py
+test_meta_cognitive_fix.py
+test_moss_stream.py
+test_world_model.py
+verify_and_install_tts.ps1
+verify_integration.py
+workflow-activity.json
+last-update-version
+aris_voice_test.mp3
+test_tts_output.mp3
+修复*.bat
+laap的agi框架
+cognitive_species.json
+LAAP_Whitepaper_v4.0.0.docx
+*.docx
+
+# ========== dependabot 临时分支目录 ==========
+LAAP-Living-Agent-Application-Protocol--dependabot-*/
+
+# ========== 旧版本归档/实验（废案） ==========
+archive_old_versions/
+experiments/
+checkpoints/
+uploads/
+session-files/
+plugin-backups/
+plugin-dev-runs/
+plugin-dev-sources/
+plugins-dev/
+laap-agi-worktree/
+# 早期小桥接原型/废案目录（未列入重磅功能）
+bridge/
+charters/
+provider-plugins/
+# 独立桥接小脚本（废案原型代码）
+*_bridge.py
+laap-aris
+
+# ========== 根目录中文废案/分析文档（文件和目录都匹配，通配符兜底避免编码问题） ==========
+# 媒体发布（临时原型项目）
+媒体发布写作/
+*发布*写作/
+# V4.5关闭
+laap V4.5关闭
+*V4.5*
+# 可行性分析（废案报告）
+laap可行性分析6.10
+*可行性分析*
+# LAAP介绍（废案文档）
+LAAP介绍
+LAAP协议工程实现可行性分析报告.md
+LAAP数字生命体终极方案报告.md
+*数字生命体*
+# 游戏角色开发（废案）
+LAAP游戏角色虚拟数字生命开发
+*游戏角色*虚拟数字*
+
+# ========== 根目录临时benchmark/调试脚本 ==========
+benchmark_*.py
+debug_*.py
+test_world_models_integration.py
+
+# ========== 根目录运行时状态/窗口配置 ==========
+laap-client-window-state.json
+
+# ========== 异常/损坏目录名 ==========
+"D\uff7a/"
+D*/
+
+# ========== 根目录运行时状态文件（更多） ==========
+.agent_knowledge_graph.json
+.agent_registry.json
+.ephemeral/
+.evolution_memory.json
+.integrity_baseline.json
+.laap-build-output/
+.laap_data/
+.security_baseline.json
+.zombie_tracker.json
+.pre-commit-config.yaml

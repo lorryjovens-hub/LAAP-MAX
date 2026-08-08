@@ -1,0 +1,4 @@
+#!/bin/sh
+# LAAPApp URL interceptor — routes x-www-browser into the host-side
+# OpenOffloadHandler via laap-open. See laap-open for details.
+exec /usr/local/bin/laap-open "$@"

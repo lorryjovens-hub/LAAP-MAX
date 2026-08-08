@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LAAP 一键导出 APK</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">LAAP</span><span class="brand-sub">导出 APK</span></div>
+  <nav><a class="nav-btn link" href="/">← 返回社区</a></nav>
+</header>
+
+<main>
+  <section class="card">
+    <h2>一键导出独立 APK</h2>
+    <p class="hint">选择一个已发布的社区应用，选择权限，点击「开始构建」。桌面端会用 Gradle 打包出可独立安装的 APK。</p>
+
+    <label>选择应用
+      <select id="app-select"><option value="">加载中…</option></select>
+    </label>
+
+    <label>包名
+      <input id="pkg-id" placeholder="org.laap.webapp.myapp" />
+    </label>
+
+    <fieldset class="perms">
+      <legend>运行时权限</legend>
+      <label class="check"><input type="checkbox" value="camera" /> 相机</label>
+      <label class="check"><input type="checkbox" value="microphone" /> 麦克风</label>
+      <label class="check"><input type="checkbox" value="location" /> 定位</label>
+      <label class="check"><input type="checkbox" value="storage" /> 存储</label>
+      <label class="check"><input type="checkbox" value="notifications" /> 通知</label>
+    </fieldset>
+
+    <button id="build-btn" type="button">开始构建 APK</button>
+    <div id="build-msg" class="msg"></div>
+    <div id="build-log" class="log"></div>
+  </section>
+</main>
+
+<script>
+"use strict";
+const sel = document.getElementById("app-select");
+const pkg = document.getElementById("pkg-id");
+const btn = document.getElementById("build-btn");
+const msg = document.getElementById("build-msg");
+const log = document.getElementById("build-log");
+
+async function load() {
+  try {
+    const apps = await fetch("/api/apps").then((r) => r.json());
+    sel.innerHTML = apps.map((a) => `<option value="${a.id}">${a.name} (${a.id})</option>`).join("") || "<option value=''>暂无发布的应用</option>";
+    if (apps[0]) pkg.value = "org.laap.webapp." + apps[0].name.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().slice(0, 24) || "app";
+  } catch (e) {
+    sel.innerHTML = "<option value=''>加载失败</option>";
+  }
+}
+
+btn.addEventListener("click", async () => {
+  const perms = Array.from(document.querySelectorAll(".perms input:checked")).map((i) => i.value);
+  const appId = sel.value;
+  if (!appId) { msg.textContent = "请先选择应用"; return; }
+  btn.disabled = true;
+  msg.textContent = "正在构建（首次会下载 Gradle 依赖，可能需要几分钟）…";
+  log.textContent = "";
+  try {
+    const res = await fetch("/api/export", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ appId, permissions: perms, packageId: pkg.value.trim() }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "HTTP " + res.status);
+    msg.innerHTML = `构建成功！<a href="${data.downloadUrl}" download>点击下载 APK</a>`;
+    log.textContent = data.stdout || "";
+  } catch (e) {
+    msg.textContent = "构建失败: " + e.message;
+    log.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+load();
+</script>

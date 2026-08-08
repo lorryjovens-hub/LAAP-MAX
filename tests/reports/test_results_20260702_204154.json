@@ -1,0 +1,42 @@
+[
+  {
+    "test_file": "test_conscience_harness_full.py",
+    "status": "failed",
+    "duration": 1.59,
+    "passed": 0,
+    "failed": 0,
+    "total": 0,
+    "stdout": "[Quadrants] version 1.0.2, llvm 22.1.0, commit 701c11a9, win, python 3.13.2\n",
+    "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\pytest\\__main__.py\", line 9, in <module>\n    raise SystemExit(pytest.console_main())\n                     ~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 223, in console_main\n    code = main()\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 193, in main\n    config = _prepareconfig(new_args, plugins)\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 361, in _prepareconfig\n    config: Config = pluginmanager.hook.pytest_cmdline_parse(\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        pluginmanager=pluginmanager, args=args\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  "
+  },
+  {
+    "test_file": "test_memory_integration.py",
+    "status": "failed",
+    "duration": 1.58,
+    "passed": 0,
+    "failed": 0,
+    "total": 0,
+    "stdout": "[Quadrants] version 1.0.2, llvm 22.1.0, commit 701c11a9, win, python 3.13.2\n",
+    "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\pytest\\__main__.py\", line 9, in <module>\n    raise SystemExit(pytest.console_main())\n                     ~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 223, in console_main\n    code = main()\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 193, in main\n    config = _prepareconfig(new_args, plugins)\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 361, in _prepareconfig\n    config: Config = pluginmanager.hook.pytest_cmdline_parse(\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        pluginmanager=pluginmanager, args=args\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  "
+  },
+  {
+    "test_file": "test_affective_dynamics.py",
+    "status": "failed",
+    "duration": 1.57,
+    "passed": 0,
+    "failed": 0,
+    "total": 0,
+    "stdout": "[Quadrants] version 1.0.2, llvm 22.1.0, commit 701c11a9, win, python 3.13.2\n",
+    "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\pytest\\__main__.py\", line 9, in <module>\n    raise SystemExit(pytest.console_main())\n                     ~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 223, in console_main\n    code = main()\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 193, in main\n    config = _prepareconfig(new_args, plugins)\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 361, in _prepareconfig\n    config: Config = pluginmanager.hook.pytest_cmdline_parse(\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        pluginmanager=pluginmanager, args=args\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  "
+  },
+  {
+    "test_file": "test_meta_cognitive_full.py",
+    "status": "failed",
+    "duration": 1.55,
+    "passed": 0,
+    "failed": 0,
+    "total": 0,
+    "stdout": "[Quadrants] version 1.0.2, llvm 22.1.0, commit 701c11a9, win, python 3.13.2\n",
+    "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\pytest\\__main__.py\", line 9, in <module>\n    raise SystemExit(pytest.console_main())\n                     ~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 223, in console_main\n    code = main()\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 193, in main\n    config = _prepareconfig(new_args, plugins)\n  File \"C:\\Users\\user\\AppData\\Roaming\\Python\\Python313\\site-packages\\_pytest\\config\\__init__.py\", line 361, in _prepareconfig\n    config: Config = pluginmanager.hook.pytest_cmdline_parse(\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        pluginmanager=pluginmanager, args=args\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  "
+  }
+]

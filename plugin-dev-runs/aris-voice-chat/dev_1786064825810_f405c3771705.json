@@ -1,0 +1,12 @@
+{
+  "devRunId": "dev_1786064825810_f405c3771705",
+  "pluginId": "aris-voice-chat",
+  "sourcePath": "C:\\Users\\user\\Desktop\\OH-WorkSpace\\aris-voice-chat",
+  "targetDir": "D:\\LAAP\\plugins-dev\\aris-voice-chat",
+  "status": "restricted",
+  "version": "0.1.0",
+  "allowFullAccess": false,
+  "startedAt": "2026-08-07T01:07:05.810Z",
+  "completedAt": "2026-08-07T01:07:08.099Z",
+  "error": null
+}

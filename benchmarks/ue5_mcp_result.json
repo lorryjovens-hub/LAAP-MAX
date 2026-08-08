@@ -1,0 +1,111 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "tools": [
+      {
+        "name": "ToolsetRegistry.AgentSkillToolset.UpdateSkill",
+        "description": "更新现有AgentSkill。\n这应该只在获得用户的明确指示或许可后才调用。",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "skillPath": {
+              "type": "string",
+              "description": "要修改的技能的完整路径，即/Game/Skills/MySkill.MySkill_C。"
+            },
+            "description": {
+              "type": "string",
+              "description": "技能的简要描述。"
+            },
+            "details": {
+              "title": "AgentSkillDetails",
+              "description": "关于如何使用技能的详细信息。",
+              "type": "object",
+              "properties": {
+                "instructions": {
+                  "type": "string",
+                  "description": "有关如何使用该技能的详细信息。"
+                }
+              },
+              "required": [
+                "instructions"
+              ]
+            }
+          },
+          "required": [
+            "skillPath",
+            "description",
+            "details"
+          ]
+        }
+      },
+      {
+        "name": "ToolsetRegistry.AgentSkillToolset.ListSkills",
+        "description": "获取项目中所有AgentSkills的摘要。",
+        "inputSchema": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "ToolsetRegistry.AgentSkillToolset.GetSkills",
+        "description": "返回关于特定AgentSkills集的详细信息。",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "skillPaths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "要检索的AgentSkills的路径列表。"
+            }
+          },
+          "required": [
+            "skillPaths"
+          ]
+        }
+      },
+      {
+        "name": "ToolsetRegistry.AgentSkillToolset.CreateSkill",
+        "description": "创建一个新的AgentSkill。\n这应该只在获得用户的明确指示或许可后才调用。",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "folderPath": {
+              "type": "string",
+              "description": "在其中创建技能的文件夹。即/Game/Skills/。"
+            },
+            "assetName": {
+              "type": "string",
+              "description": "要创建的技能的名称，即MySkill。"
+            },
+            "description": {
+              "type": "string",
+              "description": "技能的简要描述。"
+            },
+            "details": {
+              "title": "AgentSkillDetails",
+              "description": "关于如何使用技能的详细信息。",
+              "type": "object",
+              "properties": {
+                "instructions": {
+                  "type": "string",
+                  "description": "有关如何使用该技能的详细信息。"
+                }
+              },
+              "required": [
+                "instructions"
+              ]
+            }
+          },
+          "required": [
+            "folderPath",
+            "assetName",
+            "description",
+            "details"
+          ]
+        }
+      }
+    ]
+  }
+}

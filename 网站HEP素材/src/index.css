@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --gradient-x {
+  syntax: '<percentage>';
+  initial-value: 48.79%;
+  inherits: false;
+}
+
+@property --gradient-y {
+  syntax: '<percentage>';
+  initial-value: 39.14%;
+  inherits: false;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 9%;            /* #171717 */
+    --foreground: 0 0% 96%;           /* #f5f5f5 */
+    --card: 0 0% 16%;                 /* #292929 */
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 6% 5%;  /* #09090b */
+    --secondary: 0 0% 19%;            /* #303030 */
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 19%;
+    --muted-foreground: 0 0% 67%;     /* #ababab */
+    --accent: 0 0% 24%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 19%;               /* #303030 */
+    --input: 0 0% 19%;
+    --ring: 0 0% 83%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ---- animated radial gradient text ---- */
+@keyframes gradient-shift {
+  0% {
+    --gradient-x: 44.37%;
+    --gradient-y: 35.15%;
+  }
+  50% {
+    --gradient-x: 48.79%;
+    --gradient-y: 39.14%;
+  }
+  100% {
+    --gradient-x: 44.37%;
+    --gradient-y: 35.15%;
+  }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+
+.gradient-word {
+  background-image: radial-gradient(
+    80.17% 109.2% at var(--gradient-x) var(--gradient-y),
+    #d0b2ff 0%,
+    #ffeed8 42.83%,
+    #e8400d 88.38%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-glow {
+  background-image: radial-gradient(
+    80.17% 109.2% at var(--gradient-x) var(--gradient-y),
+    #d0b2ff 0%,
+    #ffeed8 42.83%,
+    #e8400d 88.38%
+  );
+  filter: blur(28px);
+  opacity: 0.75;
+}
+
+/* ---- card hover ---- */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ---- shimmer loading ---- */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* ---- marquee ---- */
+@keyframes marquee-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee-x {
+  animation: marquee-x 30s linear infinite;
+}
+
+/* ---- subtle noise texture ---- */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* ---- thin scrollbar for dropdowns ---- */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+/* skip rendering off-screen cards: fixes raster dropouts on very tall grids */
+.grid > * {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 335px;
+}

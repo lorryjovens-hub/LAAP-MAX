@@ -1,0 +1,16 @@
+{
+  "_id": "dfcd67ea262943a3db45da01",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 37,
+  "lamport": 1785510118.3860645,
+  "parents": [
+    "42ceb63a112ef181f0259186"
+  ],
+  "payload": {
+    "user": "继续昨天的讨论",
+    "role": "user",
+    "timestamp": 1785510118.3853846
+  },
+  "ttl_days": 0.0
+}

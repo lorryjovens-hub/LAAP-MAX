@@ -1,0 +1,41 @@
+{
+  "kind": "session-manifest-migration-checkpoint",
+  "schemaVersion": 1,
+  "id": "legacy-session-manifest-2026-07-26T18-43-22-383Z",
+  "appVersion": "0.412.7",
+  "createdAt": "2026-07-26T18:43:22.383Z",
+  "hanaHome": "D:\\LAAP",
+  "gitAnchors": {},
+  "includes": [
+    {
+      "name": "agents",
+      "source": "D:\\LAAP\\agents",
+      "checkpointPath": "D:\\LAAP\\checkpoints\\session-manifest\\legacy-session-manifest-2026-07-26T18-43-22-383Z\\agents",
+      "exists": true
+    },
+    {
+      "name": "session-files",
+      "source": "D:\\LAAP\\session-files",
+      "checkpointPath": "D:\\LAAP\\checkpoints\\session-manifest\\legacy-session-manifest-2026-07-26T18-43-22-383Z\\session-files",
+      "exists": false
+    },
+    {
+      "name": "bridge",
+      "source": "D:\\LAAP\\bridge",
+      "checkpointPath": "D:\\LAAP\\checkpoints\\session-manifest\\legacy-session-manifest-2026-07-26T18-43-22-383Z\\bridge",
+      "exists": true
+    },
+    {
+      "name": "phone",
+      "source": "D:\\LAAP\\phone",
+      "checkpointPath": "D:\\LAAP\\checkpoints\\session-manifest\\legacy-session-manifest-2026-07-26T18-43-22-383Z\\phone",
+      "exists": false
+    },
+    {
+      "name": "plugins",
+      "source": "D:\\LAAP\\plugins",
+      "checkpointPath": "D:\\LAAP\\checkpoints\\session-manifest\\legacy-session-manifest-2026-07-26T18-43-22-383Z\\plugins",
+      "exists": true
+    }
+  ]
+}

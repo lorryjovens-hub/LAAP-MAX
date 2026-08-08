@@ -1,0 +1,51 @@
+{
+  "fixture_name": "multi_step_tasks",
+  "description": "多步推理任务集，用于验证工作空间的多步信息整合",
+  "count": 3,
+  "tasks": [
+    {
+      "task_id": "mst_001",
+      "name": "因果链推理",
+      "description": "根据前提逐步推导结论",
+      "domain": "causal_reasoning",
+      "steps": [
+        "如果下雨，地面会湿",
+        "今天下雨了",
+        "因此地面是湿的"
+      ],
+      "query": "地面是否湿？",
+      "expected_answer": "是",
+      "difficulty": "easy"
+    },
+    {
+      "task_id": "mst_002",
+      "name": "算术规划",
+      "description": "按照顺序执行多步算术操作",
+      "domain": "arithmetic_planning",
+      "steps": [
+        "初始值为 10",
+        "先加 5 得到 15",
+        "再乘以 2 得到 30",
+        "最后减去 6 得到 24"
+      ],
+      "query": "最终结果是多少？",
+      "expected_answer": "24",
+      "difficulty": "medium"
+    },
+    {
+      "task_id": "mst_003",
+      "name": "工具使用序列",
+      "description": "选择正确的工具并按顺序使用",
+      "domain": "tool_use",
+      "steps": [
+        "识别任务：拧紧螺丝",
+        "选择工具：螺丝刀",
+        "定位螺丝孔",
+        "顺时针旋转螺丝刀直至紧固"
+      ],
+      "query": "完成任务需要什么工具？",
+      "expected_answer": "螺丝刀",
+      "difficulty": "easy"
+    }
+  ]
+}

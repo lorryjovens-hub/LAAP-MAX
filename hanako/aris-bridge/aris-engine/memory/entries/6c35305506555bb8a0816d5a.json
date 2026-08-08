@@ -1,0 +1,18 @@
+{
+  "_id": "6c35305506555bb8a0816d5a",
+  "type": "psi",
+  "device_id": "aris-hana",
+  "clock": 30,
+  "lamport": 1784904155.2467725,
+  "parents": [
+    "f09adf90c8b66bab4d287979"
+  ],
+  "payload": {
+    "competence": 0.552,
+    "autonomy": 0.48,
+    "relatedness": 0.46,
+    "certainty": 0.468,
+    "growth": 0.476
+  },
+  "ttl_days": 0.0
+}

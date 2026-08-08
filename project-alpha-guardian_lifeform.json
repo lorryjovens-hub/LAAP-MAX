@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "config": {
+    "name": "project-alpha-guardian",
+    "role": "architect",
+    "sandbox_id": "sb-alpha-001",
+    "personality": {
+      "openness": 0.8,
+      "conscientiousness": 0.9,
+      "extraversion": 0.4,
+      "agreeableness": 0.6,
+      "neuroticism": 0.2
+    },
+    "psi_profile": {
+      "base_needs": {
+        "certainty": 0.6,
+        "competence": 0.8,
+        "exploration": 0.5,
+        "affiliation": 0.4,
+        "self_growth": 0.7
+      },
+      "risk_appetite": 0.3,
+      "cycle_hz": 100
+    },
+    "memory": {
+      "working_capacity": 7,
+      "episodic_retention": 1000,
+      "consolidation_interval": 300
+    },
+    "engines": {
+      "psi": true,
+      "qre": false,
+      "causal": true,
+      "world_model": "local",
+      "conscious": true,
+      "memory": true
+    },
+    "governance": {
+      "human_oversight": "required_for_changes",
+      "audit_level": "full"
+    },
+    "language_cortex": {
+      "provider": "deepseek",
+      "model": "deepseek-chat"
+    }
+  },
+  "state": {
+    "sandbox_id": "sb-alpha-001",
+    "name": "project-alpha-guardian",
+    "role": "architect",
+    "created_at": 1782569904.6178436,
+    "updated_at": 1782569904.6178436,
+    "engine_status": {},
+    "needs": {},
+    "emotion": {},
+    "memory": {},
+    "goals": []
+  },
+  "engine_status": {}
+}

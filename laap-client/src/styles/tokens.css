@@ -1,0 +1,53 @@
+/**
+ * LAAP 设计 Token
+ * 定义全局色彩、字体、圆角、间距等变量，供全应用统一使用。
+ */
+
+:root {
+  /* 背景层级 */
+  --laap-bg-primary: #050608;
+  --laap-bg-secondary: #0a0a10;
+  --laap-bg-tertiary: #111118;
+
+  /* 强调色 */
+  --laap-accent: #7c7cff;
+  --laap-accent-light: #a07cff;
+  --laap-secondary: #00f5d4;
+
+  /* 文字颜色 */
+  --laap-text-primary: #f5f5f7;
+  --laap-text-secondary: rgba(255, 255, 255, 0.6);
+  --laap-text-tertiary: rgba(255, 255, 255, 0.4);
+
+  /* 边框与分隔 */
+  --laap-border: rgba(255, 255, 255, 0.08);
+
+  /* 圆角 */
+  --laap-radius-sm: 12px;
+  --laap-radius-md: 22px;
+  --laap-radius-lg: 34px;
+  --laap-radius-pill: 999px;
+
+  /* 字体 */
+  --laap-font-sans: "Inter", "PingFang SC", system-ui, sans-serif;
+  --laap-font-mono: "JetBrains Mono", "Geist Mono", ui-monospace, monospace;
+
+  /* 玻璃拟态常用变量 */
+  --laap-glass-bg: rgba(0, 0, 0, 0.1);
+  --laap-glass-blur: 12px;
+  --laap-glass-saturate: 1.8;
+  --laap-glass-brightness: 1.16;
+  --laap-glass-backdrop: blur(var(--laap-glass-blur)) saturate(var(--laap-glass-saturate)) brightness(var(--laap-glass-brightness));
+  --laap-glass-shadow:
+    inset 0 0 2px 1px rgba(255, 255, 255, 0.35),
+    inset 0 0 10px 4px rgba(255, 255, 255, 0.15),
+    0 4px 16px rgba(17, 17, 26, 0.05),
+    0 8px 24px rgba(17, 17, 26, 0.05),
+    0 16px 56px rgba(17, 17, 26, 0.05);
+
+  /* 状态颜色（非 emoji，供标签/日志使用） */
+  --laap-status-ok: #00f5d4;
+  --laap-status-error: #ff6b6b;
+  --laap-status-warn: #ffd166;
+  --laap-status-info: #7c7cff;
+}

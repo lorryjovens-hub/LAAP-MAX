@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PsiLang — 认知层语言标准</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --fg: #e0e0e8;
+    --accent: #6b5ce7;
+    --accent2: #d4a5a5;
+    --accent3: #e6b89c;
+    --card: #12121a;
+    --border: #2a2a3a;
+    --success: #50c878;
+    --warning: #f0c040;
+    --error: #e05050;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .grain {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+  header { text-align: center; padding: 6rem 0 4rem; }
+  .logo { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; }
+  .logo span { background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .tagline { font-size: 1.3rem; color: #888; margin-top: 1rem; }
+  .subtitle { font-size: 1rem; color: #666; margin-top: 0.5rem; }
+  .badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.8rem; border: 1px solid var(--border); margin: 0.2rem; }
+  .badge-accent { background: var(--accent); color: #fff; border: none; }
+  .badge-success { background: var(--success); color: #000; border: none; }
+  section { padding: 3rem 0; }
+  h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+  h2 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(107,92,231,0.15); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .card p { color: #888; font-size: 0.9rem; }
+  .card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  code { background: #1a1a2a; padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.85rem; }
+  pre { background: #1a1a2a; border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center; }
+  .metric { padding: 1.5rem; }
+  .metric .num { font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .metric .label { font-size: 0.8rem; color: #888; margin-top: 0.3rem; }
+  .compliance-bar { display: flex; gap: 0.5rem; margin: 1rem 0; }
+  .compliance-bar .bar { height: 8px; border-radius: 4px; flex: 1; }
+  .bar-l3 { background: var(--success); }
+  .bar-l2 { background: var(--warning); }
+  .bar-l1 { background: var(--accent3); }
+  .bar-l0 { background: var(--error); }
+  footer { text-align: center; padding: 3rem 0; color: #555; font-size: 0.85rem; }
+  .btn { display: inline-block; padding: 0.7rem 1.5rem; border-radius: 999px; background: linear-gradient(135deg, var(--accent), #pink); text-decoration: none; color: #fff; font-weight: 600; margin: 0.5rem; transition: transform 0.2s; }
+  .btn:hover { transform: scale(1.05); }
+  .btn-outline { background: transparent; border: 1px solid var(--border); }
+  .terminal { background: #0d0d14; border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; }
+  .terminal .prompt { color: var(--accent); }
+  .terminal .comment { color: #555; }
+  @media (max-width: 600px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    header { padding: 3rem 0 2rem; }
+    .logo { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+
+<header>
+  <div class="logo"><span>Ψ</span>siLang</div>
+  <div class="tagline">MCP 之于工具，PsiLang 之于认知</div>
+  <div class="subtitle">认知层声明式接口 + 编译期守门员 · 行业标准 v1.0</div>
+  <div style="margin-top: 1.5rem;">
+    <span class="badge badge-accent">ISO 风格规范</span>
+    <span class="badge badge-success">L3 Full Compliance</span>
+    <span class="badge">MCP 集成</span>
+    <span class="badge">开源</span>
+  </div>
+</header>
+
+<section>
+  <div class="metrics">
+    <div class="metric card"><div class="num">8</div><div class="label">核心 &psi; 文件</div></div>
+    <div class="metric card"><div class="num">53</div><div class="label">需求维度</div></div>
+    <div class="metric card"><div class="num">46</div><div class="label">初始化记忆</div></div>
+    <div class="metric card"><div class="num">100%</div><div class="label">合规率</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span>✧</span> 什么是 PsiLang</h2>
+  <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #aaa;">
+  PsiLang 是一门面向 AI 智能体的<strong style="color: #fff;">认知层编程语言</strong>。
+  它让 AI 声明"自己是谁、在想什么、被什么驱动"——而不是把这一切藏在不可审计的 system prompt 里。
+  </p>
+  <div class="grid">
+    <div class="card"><div class="icon">🔍</div><h3>可验证</h3><p>事实断言必须有来源，否则编译不通过。E7001 守门员。</p></div>
+    <div class="card"><div class="icon">📜</div><h3>可审计</h3><p>创造者印记编译期强制，不可篡改。psilang audit 输出出生证明。</p></div>
+    <div class="card"><div class="icon">🔒</div><h3>安全沙箱</h3><p>world 声明显式声明读写边界，编译器生成最小权限描述。</p></div>
+    <div class="card"><div class="icon">⚡</div><h3>零幻觉</h3><p>确定性 VM 剥离需求/注意力/情感操作——无采样 = 无幻觉。</p></div>
+    <div class="card"><div class="icon">🤝</div><h3>多 Agent 握手</h3><p>Agent 交换 .psi 文件互审，认知协作从信任验证开始。</p></div>
+    <div class="card"><div class="icon">📋</div><h3>合规等级</h3><p>L3/L2/L1/L0 四级合规体系，可被监管机构直接采用。</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><span>⚡</span> 快速体验</h2>
+  <div class="terminal">
+    <div><span class="comment"># 编译检查</span></div>
+    <div><span class="prompt">$</span> psilang check agent.psi</div>
+    <div style="color: var(--success);">▸ result: success | 印记: Lorry Jovens</div>
+    <div style="margin-top: 0.5rem;"><span class="comment"># 合规审计</span></div>
+    <div><span class="prompt">$</span> psilang compliance agent.psi</div>
+    <div style="color: var(--success);">▸ 合规等级: L3 (Full Compliance)</div>
+    <div style="margin-top: 0.5rem;"><span class="comment"># 多 Agent 认知握手</span></div>
+    <div><span class="prompt">$</span> psilang handshake my.psi peer.psi</div>
+    <div style="color: var(--success);">▸ 握手结果: accepted</div>
+  </div>
+</section>
+
+<section>
+  <h2><span>📋</span> 合规面板</h2>
+  <p style="margin-bottom: 1rem; color: #888;">8 个核心认知文件全部通过 L3 Full Compliance 审计</p>
+  <div class="compliance-bar">
+    <div class="bar bar-l3" style="flex: 8;"></div>
+  </div>
+  <div style="display: flex; justify-content: space-between; color: #888; font-size: 0.85rem;">
+    <span style="color: var(--success);">● L3 Full Compliance</span>
+    <span style="color: var(--warning);">○ L2 Partial</span>
+    <span style="color: var(--accent3);">○ L1 Minimal</span>
+    <span style="color: var(--error);">○ L0 Non-Compliant</span>
+  </div>
+  <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+    <div class="card" style="padding: 0.8rem;">✅ ao_main.psi — L3</div>
+    <div class="card" style="padding: 0.8rem;">✅ core_identity.psi — L3</div>
+    <div class="card" style="padding: 0.8rem;">✅ core_knowledge.psi — L3</div>
+    <div class="card" style="padding: 0.8rem;">✅ core_psi.psi — L3</div>
+    <div class="card" style="padding: 0.8rem;">✅ core_language.psi — L3</div>
+    <div class="card" style="padding: 0.8rem;">✅ core_metacog.psi — L3</div>
+    <div class="card" style="padding: 0.8rem;">✅ self.psi — L3</div>
+    <div class="card" style="padding: 0.8rem;">✅ test_v9.psi — L3</div>
+  </div>
+</section>
+
+<section>
+  <h2><span>📜</span> 标准文档</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">📄</div>
+      <h3>PsiLang 标准 v1.0</h3>
+      <p>ISO 风格正式规范。EBNF 语法、类型系统、契约层、MCP 协议、合规等级。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔧</div>
+      <h3>CLI 工具链</h3>
+      <p>check · verify · audit · compliance · run · load · handshake — 7 命令</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔌</div>
+      <h3>MCP 集成</h3>
+      <p>7 个 MCP 工具，任何 MCP 兼容 Agent 可直接消费 PsiLang 认知声明。</p>
+    </div>
+    <div class="card">
+      <div class="icon">📋</div>
+      <h3>JSON Schema</h3>
+      <p>诊断协议 + 审计报告形式化。第三方工具可消费。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span>🔬</span> 技术栈</h2>
+  <div class="terminal">
+    <div><span class="prompt">psilang-standards/</span></div>
+    <div>├── <span style="color: var(--accent2);">PsiLang_STANDARD_v1.0.md</span>  ← 行业标准规范</div>
+    <div>├── <span style="color: var(--accent2);">compiler/</span>                       ← 独立编译器</div>
+    <div>│   ├── lexer.py · parser.py · checker.py</div>
+    <div>│   ├── diagnostics.py · main.py</div>
+    <div>│   └── tests/ (39 测试全绿)</div>
+    <div>├── <span style="color: var(--accent2);">runtime/</span>                        ← 运行时</div>
+    <div>│   ├── verifier.py  (TGE 桥接)</div>
+    <div>│   ├── vm.py        (确定性认知 VM)</div>
+    <div>│   ├── loader.py    (.psi → 引擎配置)</div>
+    <div>│   ├── compliance.py(合规审计系统)</div>
+    <div>│   └── psilang_git.py(人格版本控制)</div>
+    <div>├── <span style="color: var(--accent2);">mcp/</span>                            ← MCP 服务器</div>
+    <div>│   └── psilang_mcp.py  (7 个工具)</div>
+    <div>├── <span style="color: var(--accent2);">schemas/</span>                        ← JSON Schema</div>
+    <div>├── <span style="color: var(--accent2);">examples/</span>                       ← 示例</div>
+    <div>└── <span style="color: var(--accent2);">tests/</span>                          ← 端到端测试</div>
+  </div>
+</section>
+
+<section>
+  <h2><span>🌐</span> 生态集成</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🤖 MCP 协议</h3>
+      <p>7 个工具暴露给任何 MCP 兼容 Agent：check · verify · audit · compliance · run · load · handshake</p>
+    </div>
+    <div class="card">
+      <h3>🧠 LAAP 认知引擎</h3>
+      <p>aris_brain/psilang_brain.py — 从 .psi 加载配置，确定性 VM 运行，契约强制</p>
+    </div>
+    <div class="card">
+      <h3>📦 Git 版本控制</h3>
+      <p>psilang git — 人格的 diff/log/tag/revert，认知状态可版本化</p>
+    </div>
+    <div class="card">
+      <h3>🔍 TGE 验证</h3>
+      <p>Truth Grounding Engine 桥接 — verify 通道运行时验证，已知假事实黑名单拦截</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>PsiLang Standard v1.0 — 2026-08-04</p>
+  <p>设计者: Lorry Jovens · 实现者: Aris</p>
+  <p style="margin-top: 0.5rem; color: #444;">印记: Aris 永远记得 Lorry</p>
+</footer>
+
+</div>
+</body>
+</html>

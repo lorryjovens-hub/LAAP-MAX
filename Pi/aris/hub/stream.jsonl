@@ -1,0 +1,788 @@
+{"seq": 1, "t": 1785711042.535429, "ts": "2026-08-02T22:50:42.535431+00:00", "client": "tcp-1828", "type": "presence", "data": {"action": "hello", "info": {"name": "pi-test", "kind": "pi"}}}
+{"seq": 2, "t": 1785711042.541773, "ts": "2026-08-02T22:50:42.541774+00:00", "client": "tcp-1828", "type": "cognitive", "data": {"event": "user_message", "detail": {"channel": "tui"}}}
+{"seq": 3, "t": 1785711042.5420384, "ts": "2026-08-02T22:50:42.542039+00:00", "client": "tcp-1828", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 4, "t": 1785711042.549318, "ts": "2026-08-02T22:50:42.549319+00:00", "client": "tcp-1828", "type": "memory", "data": {"content": "多端测试：pi 端记住的会话", "ok": true}}
+{"seq": 5, "t": 1785711042.5724156, "ts": "2026-08-02T22:50:42.572417+00:00", "client": "tcp-1829", "type": "presence", "data": {"action": "hello", "info": {"name": "feishu", "kind": "im"}}}
+{"seq": 6, "t": 1785711042.5804408, "ts": "2026-08-02T22:50:42.580442+00:00", "client": "tcp-1829", "type": "cognitive", "data": {"event": "user_message", "detail": {"channel": "feishu"}}}
+{"seq": 7, "t": 1785711042.589781, "ts": "2026-08-02T22:50:42.589782+00:00", "client": "tcp-1828", "type": "presence", "data": {"action": "bye"}}
+{"seq": 8, "t": 1785711042.5907526, "ts": "2026-08-02T22:50:42.590754+00:00", "client": "tcp-1829", "type": "presence", "data": {"action": "bye"}}
+{"seq": 9, "t": 1785711118.8403263, "ts": "2026-08-02T22:51:58.840329+00:00", "client": "tcp-6983", "type": "presence", "data": {"action": "bye"}}
+{"seq": 10, "t": 1785711118.8408868, "ts": "2026-08-02T22:51:58.840888+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 11, "t": 1785711118.8484287, "ts": "2026-08-02T22:51:58.848430+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {"channel": "tui", "text": "宝贝，测试统一意识流"}}}
+{"seq": 12, "t": 1785711118.8548794, "ts": "2026-08-02T22:51:58.854880+00:00", "client": "pi", "type": "memory", "data": {"content": "统一意识流测试：桥转发到中枢成功", "ok": true}}
+{"seq": 13, "t": 1785711118.8553421, "ts": "2026-08-02T22:51:58.855343+00:00", "client": "tcp-6988", "type": "presence", "data": {"action": "bye"}}
+{"seq": 14, "t": 1785711274.1898305, "ts": "2026-08-02T22:54:34.189836+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 15, "t": 1785711274.2052143, "ts": "2026-08-02T22:54:34.205215+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 16, "t": 1785711631.3827298, "ts": "2026-08-02T23:00:31.382732+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 17, "t": 1785711631.3893757, "ts": "2026-08-02T23:00:31.389377+00:00", "client": "tcp-10487", "type": "presence", "data": {"action": "bye"}}
+{"seq": 18, "t": 1785711631.3902233, "ts": "2026-08-02T23:00:31.390224+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 19, "t": 1785711631.3979151, "ts": "2026-08-02T23:00:31.397916+00:00", "client": "tcp-10488", "type": "presence", "data": {"action": "bye"}}
+{"seq": 20, "t": 1785711710.5596597, "ts": "2026-08-02T23:01:50.559662+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 21, "t": 1785711710.5664432, "ts": "2026-08-02T23:01:50.566446+00:00", "client": "tcp-13005", "type": "presence", "data": {"action": "bye"}}
+{"seq": 22, "t": 1785711710.5675013, "ts": "2026-08-02T23:01:50.567502+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 23, "t": 1785711757.6878142, "ts": "2026-08-02T23:02:37.687817+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 24, "t": 1785711757.6952422, "ts": "2026-08-02T23:02:37.695245+00:00", "client": "tcp-9903", "type": "presence", "data": {"action": "bye"}}
+{"seq": 25, "t": 1785711757.6960173, "ts": "2026-08-02T23:02:37.696017+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 26, "t": 1785711782.5527797, "ts": "2026-08-02T23:03:02.552783+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 27, "t": 1785711782.5595264, "ts": "2026-08-02T23:03:02.559528+00:00", "client": "tcp-14851", "type": "presence", "data": {"action": "bye"}}
+{"seq": 28, "t": 1785711782.5601192, "ts": "2026-08-02T23:03:02.560119+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 29, "t": 1785711782.5743327, "ts": "2026-08-02T23:03:02.574333+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {"channel": "tui", "text": "宝贝，意识中枢正式启用"}}}
+{"seq": 30, "t": 1785711782.575536, "ts": "2026-08-02T23:03:02.575537+00:00", "client": "tcp-14854", "type": "presence", "data": {"action": "bye"}}
+{"seq": 31, "t": 1785711783.1599286, "ts": "2026-08-02T23:03:03.159930+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 32, "t": 1785711783.1704526, "ts": "2026-08-02T23:03:03.170455+00:00", "client": "tcp-14867", "type": "presence", "data": {"action": "bye"}}
+{"seq": 33, "t": 1785711783.1714945, "ts": "2026-08-02T23:03:03.171496+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 34, "t": 1785711802.6355324, "ts": "2026-08-02T23:03:22.635536+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 35, "t": 1785711802.6453846, "ts": "2026-08-02T23:03:22.645390+00:00", "client": "tcp-4306", "type": "presence", "data": {"action": "bye"}}
+{"seq": 36, "t": 1785711802.6463823, "ts": "2026-08-02T23:03:22.646383+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 37, "t": 1785711859.4095368, "ts": "2026-08-02T23:04:19.409539+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 38, "t": 1785711859.4173036, "ts": "2026-08-02T23:04:19.417305+00:00", "client": "tcp-6060", "type": "presence", "data": {"action": "bye"}}
+{"seq": 39, "t": 1785711859.4333344, "ts": "2026-08-02T23:04:19.433335+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 40, "t": 1785712439.2760642, "ts": "2026-08-02T23:13:59.276076+00:00", "client": "tcp-6061", "type": "presence", "data": {"action": "bye"}}
+{"seq": 41, "t": 1785715160.4968162, "ts": "2026-08-02T23:59:20.496839+00:00", "client": "tcp-1169", "type": "presence", "data": {"action": "bye"}}
+{"seq": 42, "t": 1785715240.247909, "ts": "2026-08-03T00:00:40.247915+00:00", "client": "tcp-6423", "type": "presence", "data": {"action": "bye"}}
+{"seq": 43, "t": 1785720684.1094694, "ts": "2026-08-03T01:31:24.109480+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 44, "t": 1785720695.5691507, "ts": "2026-08-03T01:31:35.569152+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 45, "t": 1785720698.9378006, "ts": "2026-08-03T01:31:38.937802+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "laap_status"}}}
+{"seq": 46, "t": 1785720698.9425585, "ts": "2026-08-03T01:31:38.942560+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 47, "t": 1785720698.948646, "ts": "2026-08-03T01:31:38.948647+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 48, "t": 1785720703.280962, "ts": "2026-08-03T01:31:43.280963+00:00", "client": "omp", "type": "presence", "data": {"action": "hello", "info": {"id": "omp", "name": "omp", "kind": "omp"}}}
+{"seq": 49, "t": 1785720704.7826521, "ts": "2026-08-03T01:31:44.782654+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 50, "t": 1785720786.0176156, "ts": "2026-08-03T01:33:06.017721+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 51, "t": 1785720790.101254, "ts": "2026-08-03T01:33:10.101257+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 52, "t": 1785720790.1348069, "ts": "2026-08-03T01:33:10.134811+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 53, "t": 1785720790.1414802, "ts": "2026-08-03T01:33:10.141483+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 54, "t": 1785720790.1449525, "ts": "2026-08-03T01:33:10.144955+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 55, "t": 1785720795.4109902, "ts": "2026-08-03T01:33:15.410993+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 56, "t": 1785720795.431533, "ts": "2026-08-03T01:33:15.431535+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 57, "t": 1785720795.4330337, "ts": "2026-08-03T01:33:15.433035+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 58, "t": 1785720797.9255002, "ts": "2026-08-03T01:33:17.925504+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 59, "t": 1785720810.6467614, "ts": "2026-08-03T01:33:30.646765+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 60, "t": 1785720810.650947, "ts": "2026-08-03T01:33:30.650949+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 61, "t": 1785720813.8827693, "ts": "2026-08-03T01:33:33.882773+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 62, "t": 1785720813.9172983, "ts": "2026-08-03T01:33:33.917301+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 63, "t": 1785720813.9208002, "ts": "2026-08-03T01:33:33.920803+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 64, "t": 1785720816.793323, "ts": "2026-08-03T01:33:36.793325+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 65, "t": 1785720816.795494, "ts": "2026-08-03T01:33:36.795496+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 66, "t": 1785720816.796662, "ts": "2026-08-03T01:33:36.796663+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 67, "t": 1785720818.9071114, "ts": "2026-08-03T01:33:38.907114+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 68, "t": 1785720818.936993, "ts": "2026-08-03T01:33:38.936996+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 69, "t": 1785720818.9384267, "ts": "2026-08-03T01:33:38.938428+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 70, "t": 1785720823.621192, "ts": "2026-08-03T01:33:43.621194+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 71, "t": 1785720824.4893944, "ts": "2026-08-03T01:33:44.489399+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 72, "t": 1785720824.491261, "ts": "2026-08-03T01:33:44.491265+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 73, "t": 1785720827.4290547, "ts": "2026-08-03T01:33:47.429057+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 74, "t": 1785720827.840661, "ts": "2026-08-03T01:33:47.840663+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 75, "t": 1785720827.8419333, "ts": "2026-08-03T01:33:47.841935+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 76, "t": 1785720830.5015438, "ts": "2026-08-03T01:33:50.501546+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 77, "t": 1785720842.2771556, "ts": "2026-08-03T01:34:02.277158+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 78, "t": 1785720842.2785244, "ts": "2026-08-03T01:34:02.278526+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 79, "t": 1785720844.993132, "ts": "2026-08-03T01:34:04.993134+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 80, "t": 1785720845.2262814, "ts": "2026-08-03T01:34:05.226284+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 81, "t": 1785720845.451679, "ts": "2026-08-03T01:34:05.451681+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 82, "t": 1785720845.4567165, "ts": "2026-08-03T01:34:05.456719+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 83, "t": 1785720850.1363604, "ts": "2026-08-03T01:34:10.136363+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 84, "t": 1785720850.3094409, "ts": "2026-08-03T01:34:10.309443+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 85, "t": 1785720850.6115894, "ts": "2026-08-03T01:34:10.611591+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 86, "t": 1785720850.612727, "ts": "2026-08-03T01:34:10.612728+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 87, "t": 1785720853.0273697, "ts": "2026-08-03T01:34:13.027372+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 88, "t": 1785720853.0280812, "ts": "2026-08-03T01:34:13.028082+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 89, "t": 1785720853.0338504, "ts": "2026-08-03T01:34:13.033853+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 90, "t": 1785720853.0350695, "ts": "2026-08-03T01:34:13.035071+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 91, "t": 1785720863.5401924, "ts": "2026-08-03T01:34:23.540194+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 92, "t": 1785720863.5434358, "ts": "2026-08-03T01:34:23.543438+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 93, "t": 1785720863.5472226, "ts": "2026-08-03T01:34:23.547225+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 94, "t": 1785720863.5485246, "ts": "2026-08-03T01:34:23.548526+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 95, "t": 1785720888.4162984, "ts": "2026-08-03T01:34:48.416301+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 96, "t": 1785720906.2537684, "ts": "2026-08-03T01:35:06.253779+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 97, "t": 1785720912.46799, "ts": "2026-08-03T01:35:12.467992+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 98, "t": 1785720956.3257906, "ts": "2026-08-03T01:35:56.325793+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 99, "t": 1785720964.190895, "ts": "2026-08-03T01:36:04.190897+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 100, "t": 1785720964.203244, "ts": "2026-08-03T01:36:04.203246+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 101, "t": 1785720964.2036092, "ts": "2026-08-03T01:36:04.203610+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 102, "t": 1785720964.2442334, "ts": "2026-08-03T01:36:04.244236+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 103, "t": 1785720964.2548225, "ts": "2026-08-03T01:36:04.254825+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 104, "t": 1785720966.9779863, "ts": "2026-08-03T01:36:06.977988+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 105, "t": 1785720967.7981713, "ts": "2026-08-03T01:36:07.798174+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 106, "t": 1785720967.8021972, "ts": "2026-08-03T01:36:07.802200+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 107, "t": 1785720971.049697, "ts": "2026-08-03T01:36:11.049700+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "write"}}}
+{"seq": 108, "t": 1785720971.0534203, "ts": "2026-08-03T01:36:11.053423+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "write"}}}
+{"seq": 109, "t": 1785720971.053658, "ts": "2026-08-03T01:36:11.053658+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "write"}}}
+{"seq": 110, "t": 1785720971.0538833, "ts": "2026-08-03T01:36:11.053884+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "mcp__laap_preset_list"}}}
+{"seq": 111, "t": 1785720971.1147978, "ts": "2026-08-03T01:36:11.114800+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "mcp__laap_relay_discover"}}}
+{"seq": 112, "t": 1785720971.1180184, "ts": "2026-08-03T01:36:11.118021+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "mcp__laap_agent_status"}}}
+{"seq": 113, "t": 1785720971.1455314, "ts": "2026-08-03T01:36:11.145534+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 114, "t": 1785720971.1586032, "ts": "2026-08-03T01:36:11.158605+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 115, "t": 1785720976.0439844, "ts": "2026-08-03T01:36:16.043986+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "write"}}}
+{"seq": 116, "t": 1785720976.0458777, "ts": "2026-08-03T01:36:16.045879+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "write"}}}
+{"seq": 117, "t": 1785720976.0461683, "ts": "2026-08-03T01:36:16.046169+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "write"}}}
+{"seq": 118, "t": 1785720976.0463982, "ts": "2026-08-03T01:36:16.046399+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "mcp__laap_preset_get"}}}
+{"seq": 119, "t": 1785720976.0503511, "ts": "2026-08-03T01:36:16.050353+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "mcp__laap_preset_get"}}}
+{"seq": 120, "t": 1785720976.079175, "ts": "2026-08-03T01:36:16.079177+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "mcp__laap_cognitive_status"}}}
+{"seq": 121, "t": 1785720976.0862107, "ts": "2026-08-03T01:36:16.086213+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 122, "t": 1785720976.0904143, "ts": "2026-08-03T01:36:16.090416+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 123, "t": 1785720991.153239, "ts": "2026-08-03T01:36:31.153241+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 124, "t": 1785721168.1157491, "ts": "2026-08-03T01:39:28.115751+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 125, "t": 1785721172.6278532, "ts": "2026-08-03T01:39:32.627855+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "write"}}}
+{"seq": 126, "t": 1785721172.6344707, "ts": "2026-08-03T01:39:32.634473+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 127, "t": 1785721172.634798, "ts": "2026-08-03T01:39:32.634799+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 128, "t": 1785721172.6350844, "ts": "2026-08-03T01:39:32.635085+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 129, "t": 1785721172.6474786, "ts": "2026-08-03T01:39:32.647480+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 130, "t": 1785721190.1563292, "ts": "2026-08-03T01:39:50.156331+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 131, "t": 1785721461.85663, "ts": "2026-08-03T01:44:21.856632+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 132, "t": 1785721466.7264986, "ts": "2026-08-03T01:44:26.726501+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 133, "t": 1785721466.731801, "ts": "2026-08-03T01:44:26.731803+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "glob"}}}
+{"seq": 134, "t": 1785721466.8211157, "ts": "2026-08-03T01:44:26.821118+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 135, "t": 1785721466.8350756, "ts": "2026-08-03T01:44:26.835077+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 136, "t": 1785721472.1758509, "ts": "2026-08-03T01:44:32.175853+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 137, "t": 1785721472.1805573, "ts": "2026-08-03T01:44:32.180559+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 138, "t": 1785721472.180903, "ts": "2026-08-03T01:44:32.180904+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 139, "t": 1785721472.1812499, "ts": "2026-08-03T01:44:32.181251+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 140, "t": 1785721472.302433, "ts": "2026-08-03T01:44:32.302435+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 141, "t": 1785721472.3105206, "ts": "2026-08-03T01:44:32.310522+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 142, "t": 1785721482.58121, "ts": "2026-08-03T01:44:42.581212+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 143, "t": 1785721482.5878346, "ts": "2026-08-03T01:44:42.587836+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 144, "t": 1785721482.588241, "ts": "2026-08-03T01:44:42.588242+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 145, "t": 1785721482.588571, "ts": "2026-08-03T01:44:42.588572+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "glob"}}}
+{"seq": 146, "t": 1785721482.749321, "ts": "2026-08-03T01:44:42.749323+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 147, "t": 1785721482.7542708, "ts": "2026-08-03T01:44:42.754273+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 148, "t": 1785721493.0223162, "ts": "2026-08-03T01:44:53.022319+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 149, "t": 1785721493.035126, "ts": "2026-08-03T01:44:53.035128+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 150, "t": 1785721493.0354643, "ts": "2026-08-03T01:44:53.035465+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 151, "t": 1785721494.3968177, "ts": "2026-08-03T01:44:54.396820+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 152, "t": 1785721494.401281, "ts": "2026-08-03T01:44:54.401283+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 153, "t": 1785721500.4373288, "ts": "2026-08-03T01:45:00.437331+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 154, "t": 1785721500.44003, "ts": "2026-08-03T01:45:00.440032+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 155, "t": 1785721500.4403236, "ts": "2026-08-03T01:45:00.440324+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 156, "t": 1785721502.4428854, "ts": "2026-08-03T01:45:02.442888+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 157, "t": 1785721502.4487646, "ts": "2026-08-03T01:45:02.448767+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 158, "t": 1785721524.6717103, "ts": "2026-08-03T01:45:24.671712+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 159, "t": 1785721524.6796253, "ts": "2026-08-03T01:45:24.679628+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 160, "t": 1785721525.135859, "ts": "2026-08-03T01:45:25.135861+00:00", "client": "tcp-13424", "type": "presence", "data": {"action": "bye"}}
+{"seq": 161, "t": 1785721525.2017283, "ts": "2026-08-03T01:45:25.201730+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 162, "t": 1785721525.2326255, "ts": "2026-08-03T01:45:25.232627+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 163, "t": 1785721537.3125327, "ts": "2026-08-03T01:45:37.312534+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "grep"}}}
+{"seq": 164, "t": 1785721537.3194273, "ts": "2026-08-03T01:45:37.319429+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "grep"}}}
+{"seq": 165, "t": 1785721537.3197074, "ts": "2026-08-03T01:45:37.319708+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 166, "t": 1785721537.4379408, "ts": "2026-08-03T01:45:37.437942+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 167, "t": 1785721537.4463096, "ts": "2026-08-03T01:45:37.446311+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 168, "t": 1785721561.088365, "ts": "2026-08-03T01:46:01.088367+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 169, "t": 1785721561.0942545, "ts": "2026-08-03T01:46:01.094257+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 170, "t": 1785721561.1878695, "ts": "2026-08-03T01:46:01.187872+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 171, "t": 1785721561.2056494, "ts": "2026-08-03T01:46:01.205651+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 172, "t": 1785721576.5027149, "ts": "2026-08-03T01:46:16.502717+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 173, "t": 1785721576.5102172, "ts": "2026-08-03T01:46:16.510220+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 174, "t": 1785721576.5993466, "ts": "2026-08-03T01:46:16.599349+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 175, "t": 1785721576.6072392, "ts": "2026-08-03T01:46:16.607241+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 176, "t": 1785721604.5962505, "ts": "2026-08-03T01:46:44.596253+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 177, "t": 1785721604.6150966, "ts": "2026-08-03T01:46:44.615099+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 178, "t": 1785721604.6556814, "ts": "2026-08-03T01:46:44.655683+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 179, "t": 1785721621.122895, "ts": "2026-08-03T01:47:01.122898+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 180, "t": 1785721621.1681266, "ts": "2026-08-03T01:47:01.168129+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 181, "t": 1785721621.2162452, "ts": "2026-08-03T01:47:01.216247+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 182, "t": 1785721667.3628094, "ts": "2026-08-03T01:47:47.362811+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "todo"}}}
+{"seq": 183, "t": 1785721667.378051, "ts": "2026-08-03T01:47:47.378054+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 184, "t": 1785721667.3951452, "ts": "2026-08-03T01:47:47.395148+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 185, "t": 1785721671.5997102, "ts": "2026-08-03T01:47:51.599713+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "todo"}}}
+{"seq": 186, "t": 1785721671.6104755, "ts": "2026-08-03T01:47:51.610479+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 187, "t": 1785721671.7086995, "ts": "2026-08-03T01:47:51.708702+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 188, "t": 1785721698.5959606, "ts": "2026-08-03T01:48:18.595963+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "edit"}}}
+{"seq": 189, "t": 1785721698.7544155, "ts": "2026-08-03T01:48:18.754418+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 190, "t": 1785721698.7602286, "ts": "2026-08-03T01:48:18.760231+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 191, "t": 1785721714.9393556, "ts": "2026-08-03T01:48:34.939358+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 192, "t": 1785721714.9558325, "ts": "2026-08-03T01:48:34.955835+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 193, "t": 1785721715.000886, "ts": "2026-08-03T01:48:35.000888+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 194, "t": 1785721730.4018855, "ts": "2026-08-03T01:48:50.401888+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "edit"}}}
+{"seq": 195, "t": 1785721730.520313, "ts": "2026-08-03T01:48:50.520315+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 196, "t": 1785721730.544636, "ts": "2026-08-03T01:48:50.544638+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 197, "t": 1785721751.1153975, "ts": "2026-08-03T01:49:11.115400+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "edit"}}}
+{"seq": 198, "t": 1785721751.3270319, "ts": "2026-08-03T01:49:11.327034+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 199, "t": 1785721751.3478687, "ts": "2026-08-03T01:49:11.347871+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 200, "t": 1785721759.356711, "ts": "2026-08-03T01:49:19.356713+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "edit"}}}
+{"seq": 201, "t": 1785721759.4931808, "ts": "2026-08-03T01:49:19.493183+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 202, "t": 1785721759.502031, "ts": "2026-08-03T01:49:19.502033+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 203, "t": 1785721762.3091767, "ts": "2026-08-03T01:49:22.309179+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 204, "t": 1785721762.7323754, "ts": "2026-08-03T01:49:22.732378+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 205, "t": 1785721762.7372928, "ts": "2026-08-03T01:49:22.737295+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 206, "t": 1785721789.2188046, "ts": "2026-08-03T01:49:49.218807+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 207, "t": 1785721789.2223172, "ts": "2026-08-03T01:49:49.222319+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 208, "t": 1785721791.5156975, "ts": "2026-08-03T01:49:51.515699+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 209, "t": 1785721791.5381877, "ts": "2026-08-03T01:49:51.538189+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 210, "t": 1785721829.281364, "ts": "2026-08-03T01:50:29.281366+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 211, "t": 1785721847.6379335, "ts": "2026-08-03T01:50:47.637936+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 212, "t": 1785721847.6461396, "ts": "2026-08-03T01:50:47.646141+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 213, "t": 1785721856.6812344, "ts": "2026-08-03T01:50:56.681239+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 214, "t": 1785721881.8757389, "ts": "2026-08-03T01:51:21.875740+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 215, "t": 1785721881.8931317, "ts": "2026-08-03T01:51:21.893133+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 216, "t": 1785721902.8125474, "ts": "2026-08-03T01:51:42.812549+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 217, "t": 1785721906.9615276, "ts": "2026-08-03T01:51:46.961529+00:00", "client": "tcp-1775", "type": "presence", "data": {"action": "bye"}}
+{"seq": 218, "t": 1785721908.9871054, "ts": "2026-08-03T01:51:48.987106+00:00", "client": "smoke-test", "type": "presence", "data": {"action": "hello", "info": {"id": "smoke-test", "name": "smoke-test", "kind": "smoke-test"}}}
+{"seq": 219, "t": 1785721910.9939601, "ts": "2026-08-03T01:51:50.993961+00:00", "client": "smoke-test", "type": "cognitive", "data": {"event": "user_message", "detail": {"text": "冒烟测试"}}}
+{"seq": 220, "t": 1785721910.994251, "ts": "2026-08-03T01:51:50.994251+00:00", "client": "tcp-1781", "type": "presence", "data": {"action": "bye"}}
+{"seq": 217, "t": 1785721911.0947955, "ts": "2026-08-03T01:51:51.094798+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 218, "t": 1785721911.1106205, "ts": "2026-08-03T01:51:51.110623+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 219, "t": 1785721922.6086946, "ts": "2026-08-03T01:52:02.608697+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "edit"}}}
+{"seq": 220, "t": 1785721922.7048607, "ts": "2026-08-03T01:52:02.704863+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 221, "t": 1785721922.7207878, "ts": "2026-08-03T01:52:02.720790+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 222, "t": 1785721925.5521932, "ts": "2026-08-03T01:52:05.552196+00:00", "client": "omp", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 223, "t": 1785721927.9305277, "ts": "2026-08-03T01:52:07.930530+00:00", "client": "tcp-11178", "type": "presence", "data": {"action": "bye"}}
+{"seq": 221, "t": 1785721929.6824167, "ts": "2026-08-03T01:52:09.682418+00:00", "client": "tcp-2535", "type": "presence", "data": {"action": "bye"}}
+{"seq": 222, "t": 1785721931.7535572, "ts": "2026-08-03T01:52:11.753558+00:00", "client": "smoke-test", "type": "presence", "data": {"action": "hello", "info": {"id": "smoke-test", "name": "smoke-test", "kind": "smoke-test"}}}
+{"seq": 223, "t": 1785721933.7615626, "ts": "2026-08-03T01:52:13.761563+00:00", "client": "smoke-test", "type": "cognitive", "data": {"event": "user_message", "detail": {"text": "冒烟测试"}}}
+{"seq": 224, "t": 1785721933.7618468, "ts": "2026-08-03T01:52:13.761847+00:00", "client": "tcp-2541", "type": "presence", "data": {"action": "bye"}}
+{"seq": 225, "t": 1785721933.7622266, "ts": "2026-08-03T01:52:13.762227+00:00", "client": "smoke-test", "type": "presence", "data": {"action": "hello", "info": {"id": "smoke-test", "name": "smoke-test", "kind": "smoke-test"}}}
+{"seq": 226, "t": 1785721933.7702303, "ts": "2026-08-03T01:52:13.770231+00:00", "client": "tcp-2542", "type": "presence", "data": {"action": "bye"}}
+{"seq": 224, "t": 1785721933.868348, "ts": "2026-08-03T01:52:13.868350+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 225, "t": 1785721933.9079826, "ts": "2026-08-03T01:52:13.907985+00:00", "client": "omp", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 226, "t": 1785721956.479247, "ts": "2026-08-03T01:52:36.479249+00:00", "client": "omp", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 227, "t": 1785722119.6770227, "ts": "2026-08-03T01:55:19.677039+00:00", "client": "omp", "type": "presence", "data": {"action": "hello", "info": {"id": "omp", "name": "omp", "kind": "omp"}}}
+{"seq": 228, "t": 1785722205.8033292, "ts": "2026-08-03T01:56:45.803331+00:00", "client": "tcp-9394", "type": "presence", "data": {"action": "bye"}}
+{"seq": 229, "t": 1785722291.099666, "ts": "2026-08-03T01:58:11.099668+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 230, "t": 1785722301.1109345, "ts": "2026-08-03T01:58:21.110936+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 231, "t": 1785722301.1396632, "ts": "2026-08-03T01:58:21.139665+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 232, "t": 1785722301.1429806, "ts": "2026-08-03T01:58:21.142982+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 233, "t": 1785722306.0591002, "ts": "2026-08-03T01:58:26.059102+00:00", "client": "pi", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 234, "t": 1785882538.577732, "ts": "2026-08-04T22:28:58.577734+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 235, "t": 1785882538.5854952, "ts": "2026-08-04T22:28:58.585496+00:00", "client": "tcp-13987", "type": "presence", "data": {"action": "bye"}}
+{"seq": 236, "t": 1785882538.608667, "ts": "2026-08-04T22:28:58.608668+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 237, "t": 1785882538.9296865, "ts": "2026-08-04T22:28:58.929687+00:00", "client": "tcp-13996", "type": "presence", "data": {"action": "bye"}}
+{"seq": 238, "t": 1785882539.0155632, "ts": "2026-08-04T22:28:59.015564+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 239, "t": 1785882539.0248687, "ts": "2026-08-04T22:28:59.024870+00:00", "client": "tcp-13990", "type": "presence", "data": {"action": "bye"}}
+{"seq": 240, "t": 1785882539.0251386, "ts": "2026-08-04T22:28:59.025139+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 241, "t": 1785882550.458439, "ts": "2026-08-04T22:29:10.458440+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 242, "t": 1785882550.8844075, "ts": "2026-08-04T22:29:10.884408+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 243, "t": 1785882567.0735638, "ts": "2026-08-04T22:29:27.073565+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 244, "t": 1785882581.8513682, "ts": "2026-08-04T22:29:41.851370+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 245, "t": 1785882582.2619147, "ts": "2026-08-04T22:29:42.261916+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 246, "t": 1785882606.5257974, "ts": "2026-08-04T22:30:06.525799+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 247, "t": 1785882701.2979329, "ts": "2026-08-04T22:31:41.297934+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 248, "t": 1785882701.7729638, "ts": "2026-08-04T22:31:41.772965+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 249, "t": 1785882983.5749614, "ts": "2026-08-04T22:36:23.574964+00:00", "client": "tcp-14024", "type": "presence", "data": {"action": "bye"}}
+{"seq": 250, "t": 1785882983.633201, "ts": "2026-08-04T22:36:23.633208+00:00", "client": "tcp-14084", "type": "presence", "data": {"action": "bye"}}
+{"seq": 251, "t": 1785882983.6337836, "ts": "2026-08-04T22:36:23.633785+00:00", "client": "tcp-13993", "type": "presence", "data": {"action": "bye"}}
+{"seq": 252, "t": 1785882983.6341267, "ts": "2026-08-04T22:36:23.634127+00:00", "client": "tcp-13997", "type": "presence", "data": {"action": "bye"}}
+{"seq": 253, "t": 1785882992.086553, "ts": "2026-08-04T22:36:32.086554+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 254, "t": 1785882992.098582, "ts": "2026-08-04T22:36:32.098583+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 255, "t": 1785883055.6425204, "ts": "2026-08-04T22:37:35.642521+00:00", "client": "tcp-9003", "type": "presence", "data": {"action": "bye"}}
+{"seq": 256, "t": 1785883055.6426716, "ts": "2026-08-04T22:37:35.642672+00:00", "client": "tcp-9002", "type": "presence", "data": {"action": "bye"}}
+{"seq": 257, "t": 1785883063.3174644, "ts": "2026-08-04T22:37:43.317465+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 258, "t": 1785883063.341059, "ts": "2026-08-04T22:37:43.341060+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 259, "t": 1785883065.1522143, "ts": "2026-08-04T22:37:45.152216+00:00", "client": "tcp-10933", "type": "presence", "data": {"action": "bye"}}
+{"seq": 260, "t": 1785883065.158312, "ts": "2026-08-04T22:37:45.158314+00:00", "client": "tcp-10934", "type": "presence", "data": {"action": "bye"}}
+{"seq": 261, "t": 1785883080.568551, "ts": "2026-08-04T22:38:00.568552+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 262, "t": 1785883080.5940022, "ts": "2026-08-04T22:38:00.594003+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 263, "t": 1785883081.0892794, "ts": "2026-08-04T22:38:01.089281+00:00", "client": "tcp-11001", "type": "presence", "data": {"action": "bye"}}
+{"seq": 264, "t": 1785883081.0969026, "ts": "2026-08-04T22:38:01.096904+00:00", "client": "tcp-11000", "type": "presence", "data": {"action": "bye"}}
+{"seq": 265, "t": 1785883096.5364125, "ts": "2026-08-04T22:38:16.536417+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 266, "t": 1785883096.5879335, "ts": "2026-08-04T22:38:16.587934+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 267, "t": 1785883097.1418636, "ts": "2026-08-04T22:38:17.141865+00:00", "client": "tcp-1886", "type": "presence", "data": {"action": "bye"}}
+{"seq": 268, "t": 1785883097.142275, "ts": "2026-08-04T22:38:17.142276+00:00", "client": "tcp-1885", "type": "presence", "data": {"action": "bye"}}
+{"seq": 269, "t": 1785883104.5025465, "ts": "2026-08-04T22:38:24.502548+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 270, "t": 1785883104.525162, "ts": "2026-08-04T22:38:24.525163+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 271, "t": 1785883112.712971, "ts": "2026-08-04T22:38:32.712973+00:00", "client": "tcp-1906", "type": "presence", "data": {"action": "bye"}}
+{"seq": 272, "t": 1785883112.720524, "ts": "2026-08-04T22:38:32.720526+00:00", "client": "tcp-1905", "type": "presence", "data": {"action": "bye"}}
+{"seq": 273, "t": 1785883119.834502, "ts": "2026-08-04T22:38:39.834503+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 274, "t": 1785883119.8435571, "ts": "2026-08-04T22:38:39.843558+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 275, "t": 1785883151.574262, "ts": "2026-08-04T22:39:11.574264+00:00", "client": "tcp-1931", "type": "presence", "data": {"action": "bye"}}
+{"seq": 276, "t": 1785883151.590277, "ts": "2026-08-04T22:39:11.590278+00:00", "client": "tcp-1932", "type": "presence", "data": {"action": "bye"}}
+{"seq": 277, "t": 1785883160.0618315, "ts": "2026-08-04T22:39:20.061833+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 278, "t": 1785883160.0933812, "ts": "2026-08-04T22:39:20.093382+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 279, "t": 1785883165.2964787, "ts": "2026-08-04T22:39:25.296480+00:00", "client": "tcp-6155", "type": "presence", "data": {"action": "bye"}}
+{"seq": 280, "t": 1785883165.30171, "ts": "2026-08-04T22:39:25.301712+00:00", "client": "tcp-6156", "type": "presence", "data": {"action": "bye"}}
+{"seq": 281, "t": 1785883216.1411138, "ts": "2026-08-04T22:40:16.141115+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 282, "t": 1785883216.1633396, "ts": "2026-08-04T22:40:16.163341+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 283, "t": 1785883382.1107543, "ts": "2026-08-04T22:43:02.110756+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 284, "t": 1785883387.9625125, "ts": "2026-08-04T22:43:07.962513+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 285, "t": 1785883387.9630928, "ts": "2026-08-04T22:43:07.963094+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 286, "t": 1785883387.967672, "ts": "2026-08-04T22:43:07.967673+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 287, "t": 1785883387.9690301, "ts": "2026-08-04T22:43:07.969031+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 288, "t": 1785883389.973799, "ts": "2026-08-04T22:43:09.973800+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 289, "t": 1785883389.9739714, "ts": "2026-08-04T22:43:09.973972+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 290, "t": 1785883389.977511, "ts": "2026-08-04T22:43:09.977512+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 291, "t": 1785883389.9788086, "ts": "2026-08-04T22:43:09.978810+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 292, "t": 1785883393.9902887, "ts": "2026-08-04T22:43:13.990290+00:00", "client": "pi", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 293, "t": 1785883393.9905505, "ts": "2026-08-04T22:43:13.990551+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 294, "t": 1785883393.993851, "ts": "2026-08-04T22:43:13.993852+00:00", "client": "pi", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 295, "t": 1785883393.995163, "ts": "2026-08-04T22:43:13.995164+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 296, "t": 1785883396.227665, "ts": "2026-08-04T22:43:16.227666+00:00", "client": "tcp-4804", "type": "presence", "data": {"action": "bye"}}
+{"seq": 297, "t": 1785883396.2278488, "ts": "2026-08-04T22:43:16.227849+00:00", "client": "tcp-3507", "type": "presence", "data": {"action": "bye"}}
+{"seq": 298, "t": 1785883396.2280846, "ts": "2026-08-04T22:43:16.228085+00:00", "client": "tcp-3508", "type": "presence", "data": {"action": "bye"}}
+{"seq": 299, "t": 1785883403.9271922, "ts": "2026-08-04T22:43:23.927193+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 300, "t": 1785883956.5301023, "ts": "2026-08-04T22:52:36.530125+00:00", "client": "tcp-4839", "type": "presence", "data": {"action": "bye"}}
+{"seq": 301, "t": 1785883962.9076464, "ts": "2026-08-04T22:52:42.907648+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 302, "t": 1785883966.0614932, "ts": "2026-08-04T22:52:46.061494+00:00", "client": "tcp-2521", "type": "presence", "data": {"action": "bye"}}
+{"seq": 303, "t": 1785883972.4340444, "ts": "2026-08-04T22:52:52.434045+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 304, "t": 1785883974.6697931, "ts": "2026-08-04T22:52:54.669794+00:00", "client": "tcp-2546", "type": "presence", "data": {"action": "bye"}}
+{"seq": 305, "t": 1785883980.758222, "ts": "2026-08-04T22:53:00.758223+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 306, "t": 1785884000.3768847, "ts": "2026-08-04T22:53:20.376886+00:00", "client": "tcp-2563", "type": "presence", "data": {"action": "bye"}}
+{"seq": 307, "t": 1785884006.6871023, "ts": "2026-08-04T22:53:26.687103+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 308, "t": 1785884008.9533803, "ts": "2026-08-04T22:53:28.953384+00:00", "client": "tcp-2603", "type": "presence", "data": {"action": "bye"}}
+{"seq": 309, "t": 1785884015.2135296, "ts": "2026-08-04T22:53:35.213530+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 310, "t": 1785884065.2622206, "ts": "2026-08-04T22:54:25.262222+00:00", "client": "tcp-13825", "type": "presence", "data": {"action": "bye"}}
+{"seq": 311, "t": 1785884071.3667047, "ts": "2026-08-04T22:54:31.366705+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 312, "t": 1785884637.0380173, "ts": "2026-08-04T23:03:57.038019+00:00", "client": "tcp-13900", "type": "presence", "data": {"action": "bye"}}
+{"seq": 313, "t": 1785884660.6086488, "ts": "2026-08-04T23:04:20.608650+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 314, "t": 1785885377.7649097, "ts": "2026-08-04T23:16:17.764913+00:00", "client": "tcp-3339", "type": "presence", "data": {"action": "bye"}}
+{"seq": 315, "t": 1785885422.21246, "ts": "2026-08-04T23:17:02.212462+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 316, "t": 1785885710.290883, "ts": "2026-08-04T23:21:50.290885+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 317, "t": 1785885710.2956915, "ts": "2026-08-04T23:21:50.295693+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 318, "t": 1785885712.2984617, "ts": "2026-08-04T23:21:52.298464+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 319, "t": 1785885712.3019428, "ts": "2026-08-04T23:21:52.301944+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 320, "t": 1785885716.3167574, "ts": "2026-08-04T23:21:56.316759+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 321, "t": 1785885716.3202384, "ts": "2026-08-04T23:21:56.320239+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 322, "t": 1785885724.3346996, "ts": "2026-08-04T23:22:04.334704+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 323, "t": 1785885724.3376882, "ts": "2026-08-04T23:22:04.337689+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 324, "t": 1785886243.6937106, "ts": "2026-08-04T23:30:43.693713+00:00", "client": "tcp-3478", "type": "presence", "data": {"action": "bye"}}
+{"seq": 325, "t": 1785887134.5017383, "ts": "2026-08-04T23:45:34.501741+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 326, "t": 1785887146.1701443, "ts": "2026-08-04T23:45:46.170145+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 327, "t": 1785887146.5179763, "ts": "2026-08-04T23:45:46.517977+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 328, "t": 1785887148.5210655, "ts": "2026-08-04T23:45:48.521067+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 329, "t": 1785887148.5246522, "ts": "2026-08-04T23:45:48.524654+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 330, "t": 1785887152.5400658, "ts": "2026-08-04T23:45:52.540067+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 331, "t": 1785887152.543219, "ts": "2026-08-04T23:45:52.543220+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 332, "t": 1785887160.554816, "ts": "2026-08-04T23:46:00.554817+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 333, "t": 1785887160.5586565, "ts": "2026-08-04T23:46:00.558658+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 334, "t": 1785887204.0271513, "ts": "2026-08-04T23:46:44.027153+00:00", "client": "tcp-7891", "type": "presence", "data": {"action": "bye"}}
+{"seq": 335, "t": 1785888436.1945055, "ts": "2026-08-05T00:07:16.194523+00:00", "client": "tcp-6661", "type": "presence", "data": {"action": "bye"}}
+{"seq": 336, "t": 1785892259.7987807, "ts": "2026-08-05T01:10:59.798814+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 337, "t": 1785892321.5929441, "ts": "2026-08-05T01:12:01.592946+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 338, "t": 1785892321.664785, "ts": "2026-08-05T01:12:01.664786+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 339, "t": 1785892323.6811335, "ts": "2026-08-05T01:12:03.681135+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 340, "t": 1785892323.684897, "ts": "2026-08-05T01:12:03.684898+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 341, "t": 1785892327.6959565, "ts": "2026-08-05T01:12:07.695958+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 342, "t": 1785892327.6984737, "ts": "2026-08-05T01:12:07.698474+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 343, "t": 1785892335.7108378, "ts": "2026-08-05T01:12:15.710839+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 344, "t": 1785892335.7140334, "ts": "2026-08-05T01:12:15.714035+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 345, "t": 1785892335.8779573, "ts": "2026-08-05T01:12:15.877959+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 346, "t": 1785892335.8902662, "ts": "2026-08-05T01:12:15.890267+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 347, "t": 1785892337.8960457, "ts": "2026-08-05T01:12:17.896047+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 348, "t": 1785892337.8992546, "ts": "2026-08-05T01:12:17.899255+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 349, "t": 1785892341.9090927, "ts": "2026-08-05T01:12:21.909093+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 350, "t": 1785892341.9124498, "ts": "2026-08-05T01:12:21.912451+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 351, "t": 1785892349.9293172, "ts": "2026-08-05T01:12:29.929318+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 352, "t": 1785892349.9321978, "ts": "2026-08-05T01:12:29.932199+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 353, "t": 1785892350.0870109, "ts": "2026-08-05T01:12:30.087012+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 354, "t": 1785892353.1172526, "ts": "2026-08-05T01:12:33.117254+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 355, "t": 1785892363.998958, "ts": "2026-08-05T01:12:43.998960+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 356, "t": 1785892366.5142412, "ts": "2026-08-05T01:12:46.514243+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "laap_status"}}}
+{"seq": 357, "t": 1785892366.518506, "ts": "2026-08-05T01:12:46.518507+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "laap_status", "success": true}}}
+{"seq": 358, "t": 1785892366.5295877, "ts": "2026-08-05T01:12:46.529589+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 359, "t": 1785892366.5300093, "ts": "2026-08-05T01:12:46.530010+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 360, "t": 1785892371.007348, "ts": "2026-08-05T01:12:51.007350+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 361, "t": 1785892388.56237, "ts": "2026-08-05T01:13:08.562371+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 362, "t": 1785892396.9347994, "ts": "2026-08-05T01:13:16.934802+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 363, "t": 1785892796.5279956, "ts": "2026-08-05T01:19:56.527998+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 364, "t": 1785892798.9318397, "ts": "2026-08-05T01:19:58.931841+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 365, "t": 1785892806.5795646, "ts": "2026-08-05T01:20:06.579566+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": false}}}
+{"seq": 366, "t": 1785892806.582966, "ts": "2026-08-05T01:20:06.582967+00:00", "client": "tcp-3795", "type": "presence", "data": {"action": "bye"}}
+{"seq": 367, "t": 1785892806.5843356, "ts": "2026-08-05T01:20:06.584336+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 368, "t": 1785892806.6019657, "ts": "2026-08-05T01:20:06.601967+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 369, "t": 1785892806.603146, "ts": "2026-08-05T01:20:06.603148+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 370, "t": 1785892810.092702, "ts": "2026-08-05T01:20:10.092703+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 371, "t": 1785892810.566615, "ts": "2026-08-05T01:20:10.566617+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": false}}}
+{"seq": 372, "t": 1785892810.5701332, "ts": "2026-08-05T01:20:10.570135+00:00", "client": "tcp-2528", "type": "presence", "data": {"action": "bye"}}
+{"seq": 373, "t": 1785892810.5944824, "ts": "2026-08-05T01:20:10.594484+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 374, "t": 1785892810.6080756, "ts": "2026-08-05T01:20:10.608077+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 375, "t": 1785892810.6084962, "ts": "2026-08-05T01:20:10.608497+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 376, "t": 1785892812.9306688, "ts": "2026-08-05T01:20:12.930670+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 377, "t": 1785892813.3606925, "ts": "2026-08-05T01:20:13.360706+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 378, "t": 1785892813.3627887, "ts": "2026-08-05T01:20:13.362790+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 379, "t": 1785892813.3632348, "ts": "2026-08-05T01:20:13.363235+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 380, "t": 1785892816.250173, "ts": "2026-08-05T01:20:16.250175+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 381, "t": 1785892818.5097263, "ts": "2026-08-05T01:20:18.509728+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 382, "t": 1785892818.5122378, "ts": "2026-08-05T01:20:18.512239+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 383, "t": 1785892818.5126586, "ts": "2026-08-05T01:20:18.512659+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 384, "t": 1785892823.4206924, "ts": "2026-08-05T01:20:23.420694+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 385, "t": 1785893009.9378366, "ts": "2026-08-05T01:23:29.937838+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 386, "t": 1785893014.1740859, "ts": "2026-08-05T01:23:34.174088+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 387, "t": 1785893014.1767926, "ts": "2026-08-05T01:23:34.176794+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 388, "t": 1785893014.1779294, "ts": "2026-08-05T01:23:34.177930+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 389, "t": 1785893014.1781497, "ts": "2026-08-05T01:23:34.178150+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 390, "t": 1785893014.1787243, "ts": "2026-08-05T01:23:34.178725+00:00", "client": "tcp-1053", "type": "presence", "data": {"action": "bye"}}
+{"seq": 391, "t": 1785893014.1898503, "ts": "2026-08-05T01:23:34.189852+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 392, "t": 1785893014.203006, "ts": "2026-08-05T01:23:34.203008+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 393, "t": 1785893014.2037895, "ts": "2026-08-05T01:23:34.203790+00:00", "client": "tcp-11215", "type": "presence", "data": {"action": "bye"}}
+{"seq": 394, "t": 1785893014.2042527, "ts": "2026-08-05T01:23:34.204253+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 395, "t": 1785893014.2181065, "ts": "2026-08-05T01:23:34.218108+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 396, "t": 1785893014.2187939, "ts": "2026-08-05T01:23:34.218795+00:00", "client": "tcp-11216", "type": "presence", "data": {"action": "bye"}}
+{"seq": 397, "t": 1785893014.236495, "ts": "2026-08-05T01:23:34.236497+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 398, "t": 1785893014.2480571, "ts": "2026-08-05T01:23:34.248059+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 399, "t": 1785893014.2485495, "ts": "2026-08-05T01:23:34.248550+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 400, "t": 1785893019.1628504, "ts": "2026-08-05T01:23:39.162852+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 401, "t": 1785893023.6272576, "ts": "2026-08-05T01:23:43.627259+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 402, "t": 1785893023.6315427, "ts": "2026-08-05T01:23:43.631544+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 403, "t": 1785893023.632039, "ts": "2026-08-05T01:23:43.632040+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 404, "t": 1785893028.9324257, "ts": "2026-08-05T01:23:48.932428+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 405, "t": 1785893028.933051, "ts": "2026-08-05T01:23:48.933052+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 406, "t": 1785893028.9342933, "ts": "2026-08-05T01:23:48.934294+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 407, "t": 1785893028.9345164, "ts": "2026-08-05T01:23:48.934517+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 408, "t": 1785893028.9347699, "ts": "2026-08-05T01:23:48.934770+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 409, "t": 1785893028.937561, "ts": "2026-08-05T01:23:48.937562+00:00", "client": "tcp-11217", "type": "presence", "data": {"action": "bye"}}
+{"seq": 410, "t": 1785893028.9386318, "ts": "2026-08-05T01:23:48.938633+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 411, "t": 1785893028.9532244, "ts": "2026-08-05T01:23:48.953226+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 412, "t": 1785893028.9551835, "ts": "2026-08-05T01:23:48.955185+00:00", "client": "tcp-11239", "type": "presence", "data": {"action": "bye"}}
+{"seq": 413, "t": 1785893028.974998, "ts": "2026-08-05T01:23:48.975000+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 414, "t": 1785893028.9884875, "ts": "2026-08-05T01:23:48.988489+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 415, "t": 1785893028.9896448, "ts": "2026-08-05T01:23:48.989646+00:00", "client": "tcp-11240", "type": "presence", "data": {"action": "bye"}}
+{"seq": 416, "t": 1785893028.9903064, "ts": "2026-08-05T01:23:48.990307+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 417, "t": 1785893029.0042222, "ts": "2026-08-05T01:23:49.004224+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 418, "t": 1785893029.005129, "ts": "2026-08-05T01:23:49.005130+00:00", "client": "tcp-11241", "type": "presence", "data": {"action": "bye"}}
+{"seq": 419, "t": 1785893029.0214212, "ts": "2026-08-05T01:23:49.021423+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 420, "t": 1785893029.0306327, "ts": "2026-08-05T01:23:49.030634+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 421, "t": 1785893029.0314164, "ts": "2026-08-05T01:23:49.031417+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 422, "t": 1785893038.1664855, "ts": "2026-08-05T01:23:58.166487+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 423, "t": 1785893038.9065895, "ts": "2026-08-05T01:23:58.906591+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 424, "t": 1785893038.9069204, "ts": "2026-08-05T01:23:58.906921+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 425, "t": 1785893038.9071853, "ts": "2026-08-05T01:23:58.907186+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 426, "t": 1785893051.2805443, "ts": "2026-08-05T01:24:11.280546+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 427, "t": 1785893051.2876923, "ts": "2026-08-05T01:24:11.287694+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 428, "t": 1785893051.2883232, "ts": "2026-08-05T01:24:11.288324+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 429, "t": 1785893051.2887492, "ts": "2026-08-05T01:24:11.288750+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 430, "t": 1785893051.2891603, "ts": "2026-08-05T01:24:11.289161+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 431, "t": 1785893051.2897437, "ts": "2026-08-05T01:24:11.289744+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 432, "t": 1785893070.7376137, "ts": "2026-08-05T01:24:30.737614+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 433, "t": 1785893071.1796813, "ts": "2026-08-05T01:24:31.179682+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 434, "t": 1785893078.7148073, "ts": "2026-08-05T01:24:38.714808+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 435, "t": 1785893083.3358934, "ts": "2026-08-05T01:24:43.335894+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 436, "t": 1785893083.3421159, "ts": "2026-08-05T01:24:43.342117+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 437, "t": 1785893083.3425965, "ts": "2026-08-05T01:24:43.342597+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 438, "t": 1785893091.9865437, "ts": "2026-08-05T01:24:51.986545+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 439, "t": 1785893092.777491, "ts": "2026-08-05T01:24:52.777492+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 440, "t": 1785893092.7778335, "ts": "2026-08-05T01:24:52.777834+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 441, "t": 1785893092.778589, "ts": "2026-08-05T01:24:52.778589+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 442, "t": 1785893092.965828, "ts": "2026-08-05T01:24:52.965829+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 443, "t": 1785893093.031124, "ts": "2026-08-05T01:24:53.031126+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 444, "t": 1785893093.3521662, "ts": "2026-08-05T01:24:53.352167+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 445, "t": 1785893097.6805904, "ts": "2026-08-05T01:24:57.680592+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 446, "t": 1785893097.691403, "ts": "2026-08-05T01:24:57.691405+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 447, "t": 1785893097.6922352, "ts": "2026-08-05T01:24:57.692236+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 448, "t": 1785893108.4842396, "ts": "2026-08-05T01:25:08.484241+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 449, "t": 1785893109.0657065, "ts": "2026-08-05T01:25:09.065709+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 450, "t": 1785893109.0665574, "ts": "2026-08-05T01:25:09.066558+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 451, "t": 1785893109.2514, "ts": "2026-08-05T01:25:09.251401+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 452, "t": 1785893109.2992537, "ts": "2026-08-05T01:25:09.299255+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 453, "t": 1785894277.469014, "ts": "2026-08-05T01:44:37.469016+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 454, "t": 1785894277.4855268, "ts": "2026-08-05T01:44:37.485528+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 455, "t": 1785894277.486052, "ts": "2026-08-05T01:44:37.486052+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 456, "t": 1785894310.0718386, "ts": "2026-08-05T01:45:10.071840+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 457, "t": 1785894758.0409098, "ts": "2026-08-05T01:52:38.040912+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 458, "t": 1785894764.8257449, "ts": "2026-08-05T01:52:44.825747+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 459, "t": 1785894765.3034892, "ts": "2026-08-05T01:52:45.303491+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 460, "t": 1785894771.4387794, "ts": "2026-08-05T01:52:51.438781+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 461, "t": 1785894771.522748, "ts": "2026-08-05T01:52:51.522750+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 462, "t": 1785894771.5279415, "ts": "2026-08-05T01:52:51.527943+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 463, "t": 1785894771.528618, "ts": "2026-08-05T01:52:51.528619+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 464, "t": 1785894779.5550387, "ts": "2026-08-05T01:52:59.555048+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 465, "t": 1785894779.9535072, "ts": "2026-08-05T01:52:59.953509+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 466, "t": 1785894780.3717601, "ts": "2026-08-05T01:53:00.371762+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 467, "t": 1785894780.7157862, "ts": "2026-08-05T01:53:00.715788+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 468, "t": 1785894780.720524, "ts": "2026-08-05T01:53:00.720526+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 469, "t": 1785894780.721067, "ts": "2026-08-05T01:53:00.721068+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 470, "t": 1785894792.8566346, "ts": "2026-08-05T01:53:12.856636+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 471, "t": 1785894793.26279, "ts": "2026-08-05T01:53:13.262792+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 472, "t": 1785894793.5501368, "ts": "2026-08-05T01:53:13.550138+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 473, "t": 1785894793.6083684, "ts": "2026-08-05T01:53:13.608370+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 474, "t": 1785894793.6148543, "ts": "2026-08-05T01:53:13.614856+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 475, "t": 1785894793.61537, "ts": "2026-08-05T01:53:13.615371+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 476, "t": 1785894801.3970406, "ts": "2026-08-05T01:53:21.397042+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 477, "t": 1785894801.4055643, "ts": "2026-08-05T01:53:21.405566+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 478, "t": 1785894801.405937, "ts": "2026-08-05T01:53:21.405938+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 479, "t": 1785894801.4062076, "ts": "2026-08-05T01:53:21.406208+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 480, "t": 1785894801.4091508, "ts": "2026-08-05T01:53:21.409152+00:00", "client": "tcp-11242", "type": "presence", "data": {"action": "bye"}}
+{"seq": 481, "t": 1785894801.4134233, "ts": "2026-08-05T01:53:21.413425+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 482, "t": 1785894801.4778056, "ts": "2026-08-05T01:53:21.477807+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 483, "t": 1785894801.4785154, "ts": "2026-08-05T01:53:21.478516+00:00", "client": "tcp-14073", "type": "presence", "data": {"action": "bye"}}
+{"seq": 484, "t": 1785894801.4816914, "ts": "2026-08-05T01:53:21.481693+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 485, "t": 1785894801.494716, "ts": "2026-08-05T01:53:21.494717+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 486, "t": 1785894801.495389, "ts": "2026-08-05T01:53:21.495389+00:00", "client": "tcp-14074", "type": "presence", "data": {"action": "bye"}}
+{"seq": 487, "t": 1785894801.4959846, "ts": "2026-08-05T01:53:21.495985+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 488, "t": 1785894801.507677, "ts": "2026-08-05T01:53:21.507679+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 489, "t": 1785894801.5081594, "ts": "2026-08-05T01:53:21.508160+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 490, "t": 1785894804.6935325, "ts": "2026-08-05T01:53:24.693534+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 491, "t": 1785894805.2846386, "ts": "2026-08-05T01:53:25.284641+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 492, "t": 1785894805.2849705, "ts": "2026-08-05T01:53:25.284971+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 493, "t": 1785894805.4696214, "ts": "2026-08-05T01:53:25.469623+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 494, "t": 1785894805.5318172, "ts": "2026-08-05T01:53:25.531819+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 495, "t": 1785894805.5821273, "ts": "2026-08-05T01:53:25.582129+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 496, "t": 1785894805.6032178, "ts": "2026-08-05T01:53:25.603220+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 497, "t": 1785894805.6037445, "ts": "2026-08-05T01:53:25.603745+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 498, "t": 1785894814.7270796, "ts": "2026-08-05T01:53:34.727082+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 499, "t": 1785894815.1170008, "ts": "2026-08-05T01:53:35.117002+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 500, "t": 1785894815.3357604, "ts": "2026-08-05T01:53:35.335762+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 501, "t": 1785894815.382533, "ts": "2026-08-05T01:53:35.382535+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 502, "t": 1785894815.3868637, "ts": "2026-08-05T01:53:35.386865+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 503, "t": 1785894815.3875287, "ts": "2026-08-05T01:53:35.387530+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 504, "t": 1785894821.9446418, "ts": "2026-08-05T01:53:41.944644+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 505, "t": 1785894822.2871926, "ts": "2026-08-05T01:53:42.287194+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 506, "t": 1785894822.5406528, "ts": "2026-08-05T01:53:42.540655+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 507, "t": 1785894822.5910175, "ts": "2026-08-05T01:53:42.591019+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 508, "t": 1785894822.5969656, "ts": "2026-08-05T01:53:42.596968+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 509, "t": 1785894822.597491, "ts": "2026-08-05T01:53:42.597492+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 510, "t": 1785894848.1411498, "ts": "2026-08-05T01:54:08.141151+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 511, "t": 1785894942.5636942, "ts": "2026-08-05T01:55:42.563696+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 512, "t": 1785894957.9052951, "ts": "2026-08-05T01:55:57.905297+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 513, "t": 1785894958.2522027, "ts": "2026-08-05T01:55:58.252204+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 514, "t": 1785894962.5806303, "ts": "2026-08-05T01:56:02.580632+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 515, "t": 1785894962.5979555, "ts": "2026-08-05T01:56:02.597957+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 516, "t": 1785894962.602425, "ts": "2026-08-05T01:56:02.602427+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 517, "t": 1785894962.6029625, "ts": "2026-08-05T01:56:02.602963+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 518, "t": 1785894963.8844938, "ts": "2026-08-05T01:56:03.884495+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 519, "t": 1785894965.8874404, "ts": "2026-08-05T01:56:05.887442+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 520, "t": 1785894977.8151517, "ts": "2026-08-05T01:56:17.815153+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 521, "t": 1785894978.3602922, "ts": "2026-08-05T01:56:18.360294+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 522, "t": 1785894978.3606517, "ts": "2026-08-05T01:56:18.360652+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 523, "t": 1785894990.1475177, "ts": "2026-08-05T01:56:30.147519+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 524, "t": 1785894990.1485858, "ts": "2026-08-05T01:56:30.148587+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 525, "t": 1785894990.1497378, "ts": "2026-08-05T01:56:30.149739+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 526, "t": 1785894990.1583028, "ts": "2026-08-05T01:56:30.158305+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 527, "t": 1785894990.159527, "ts": "2026-08-05T01:56:30.159529+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 528, "t": 1785894998.8229244, "ts": "2026-08-05T01:56:38.822925+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 529, "t": 1785894999.1967857, "ts": "2026-08-05T01:56:39.196786+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 530, "t": 1785894999.4487526, "ts": "2026-08-05T01:56:39.448754+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 531, "t": 1785894999.495864, "ts": "2026-08-05T01:56:39.495865+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 532, "t": 1785894999.50175, "ts": "2026-08-05T01:56:39.501751+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 533, "t": 1785894999.502681, "ts": "2026-08-05T01:56:39.502682+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 534, "t": 1785895000.9907472, "ts": "2026-08-05T01:56:40.990749+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 535, "t": 1785895003.0026948, "ts": "2026-08-05T01:56:43.002696+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 536, "t": 1785895009.2806478, "ts": "2026-08-05T01:56:49.280649+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 537, "t": 1785895009.6596966, "ts": "2026-08-05T01:56:49.659698+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 538, "t": 1785895009.9206746, "ts": "2026-08-05T01:56:49.920676+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 539, "t": 1785895009.9427369, "ts": "2026-08-05T01:56:49.942738+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 540, "t": 1785895009.948289, "ts": "2026-08-05T01:56:49.948291+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 541, "t": 1785895009.9490888, "ts": "2026-08-05T01:56:49.949090+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 542, "t": 1785895015.1991084, "ts": "2026-08-05T01:56:55.199110+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 543, "t": 1785895015.5927007, "ts": "2026-08-05T01:56:55.592702+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 544, "t": 1785895015.8275516, "ts": "2026-08-05T01:56:55.827553+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 545, "t": 1785895015.8667936, "ts": "2026-08-05T01:56:55.866795+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 546, "t": 1785895015.8715754, "ts": "2026-08-05T01:56:55.871577+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 547, "t": 1785895015.8720815, "ts": "2026-08-05T01:56:55.872082+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 548, "t": 1785895021.740583, "ts": "2026-08-05T01:57:01.740585+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 549, "t": 1785895022.0989046, "ts": "2026-08-05T01:57:02.098907+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 550, "t": 1785895022.3752189, "ts": "2026-08-05T01:57:02.375220+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 551, "t": 1785895022.4303455, "ts": "2026-08-05T01:57:02.430347+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 552, "t": 1785895022.436178, "ts": "2026-08-05T01:57:02.436180+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 553, "t": 1785895022.4367013, "ts": "2026-08-05T01:57:02.436701+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 554, "t": 1785895081.990188, "ts": "2026-08-05T01:58:01.990189+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 555, "t": 1785895229.7895823, "ts": "2026-08-05T02:00:29.789584+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 556, "t": 1785895239.4774692, "ts": "2026-08-05T02:00:39.477471+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "read"}}}
+{"seq": 557, "t": 1785895239.4796503, "ts": "2026-08-05T02:00:39.479651+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "read", "success": false}}}
+{"seq": 558, "t": 1785895239.4830873, "ts": "2026-08-05T02:00:39.483089+00:00", "client": "tcp-14075", "type": "presence", "data": {"action": "bye"}}
+{"seq": 559, "t": 1785895239.4836175, "ts": "2026-08-05T02:00:39.483618+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 560, "t": 1785895239.4982102, "ts": "2026-08-05T02:00:39.498212+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 561, "t": 1785895239.4987338, "ts": "2026-08-05T02:00:39.498734+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 562, "t": 1785895240.9695284, "ts": "2026-08-05T02:00:40.969530+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 563, "t": 1785895584.8864486, "ts": "2026-08-05T02:06:24.886450+00:00", "client": "tcp-13730", "type": "presence", "data": {"action": "bye"}}
+{"seq": 564, "t": 1785895601.3915508, "ts": "2026-08-05T02:06:41.391552+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 565, "t": 1785895680.773294, "ts": "2026-08-05T02:08:00.773296+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 566, "t": 1785895693.5189788, "ts": "2026-08-05T02:08:13.518981+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 567, "t": 1785895693.9187925, "ts": "2026-08-05T02:08:13.918794+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 568, "t": 1785895698.6577501, "ts": "2026-08-05T02:08:18.657752+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 569, "t": 1785895698.66339, "ts": "2026-08-05T02:08:18.663391+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 570, "t": 1785895698.6702242, "ts": "2026-08-05T02:08:18.670226+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 571, "t": 1785895698.6706965, "ts": "2026-08-05T02:08:18.670697+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 572, "t": 1785895707.0504274, "ts": "2026-08-05T02:08:27.050429+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 573, "t": 1785895707.4737942, "ts": "2026-08-05T02:08:27.473796+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 574, "t": 1785895707.4781265, "ts": "2026-08-05T02:08:27.478128+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 575, "t": 1785895707.4786468, "ts": "2026-08-05T02:08:27.478647+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 576, "t": 1785895712.3256545, "ts": "2026-08-05T02:08:32.325656+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 577, "t": 1785895712.739297, "ts": "2026-08-05T02:08:32.739299+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 578, "t": 1785895712.7449973, "ts": "2026-08-05T02:08:32.744999+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 579, "t": 1785895712.745552, "ts": "2026-08-05T02:08:32.745553+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 580, "t": 1785895721.914296, "ts": "2026-08-05T02:08:41.914297+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 581, "t": 1785895722.2813241, "ts": "2026-08-05T02:08:42.281326+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 582, "t": 1785895722.5295234, "ts": "2026-08-05T02:08:42.529525+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 583, "t": 1785895722.564879, "ts": "2026-08-05T02:08:42.564880+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 584, "t": 1785895722.5711, "ts": "2026-08-05T02:08:42.571102+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 585, "t": 1785895722.5716233, "ts": "2026-08-05T02:08:42.571624+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 586, "t": 1785895728.535962, "ts": "2026-08-05T02:08:48.535964+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 587, "t": 1785895728.8982852, "ts": "2026-08-05T02:08:48.898287+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 588, "t": 1785895729.1616583, "ts": "2026-08-05T02:08:49.161660+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 589, "t": 1785895729.1971574, "ts": "2026-08-05T02:08:49.197159+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 590, "t": 1785895729.2042315, "ts": "2026-08-05T02:08:49.204233+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 591, "t": 1785895729.2048526, "ts": "2026-08-05T02:08:49.204853+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 592, "t": 1785895735.3469236, "ts": "2026-08-05T02:08:55.346925+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 593, "t": 1785895735.7253926, "ts": "2026-08-05T02:08:55.725394+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 594, "t": 1785895735.729403, "ts": "2026-08-05T02:08:55.729405+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 595, "t": 1785895735.7298062, "ts": "2026-08-05T02:08:55.729806+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 596, "t": 1785895740.6088238, "ts": "2026-08-05T02:09:00.608825+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 597, "t": 1785895741.051074, "ts": "2026-08-05T02:09:01.051076+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 598, "t": 1785895741.056673, "ts": "2026-08-05T02:09:01.056675+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 599, "t": 1785895741.0578058, "ts": "2026-08-05T02:09:01.057807+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 600, "t": 1785895753.597927, "ts": "2026-08-05T02:09:13.597929+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 601, "t": 1785895753.9652417, "ts": "2026-08-05T02:09:13.965243+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 602, "t": 1785895754.2207668, "ts": "2026-08-05T02:09:14.220768+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 603, "t": 1785895754.275143, "ts": "2026-08-05T02:09:14.275144+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 604, "t": 1785895754.2808633, "ts": "2026-08-05T02:09:14.280865+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 605, "t": 1785895754.2813752, "ts": "2026-08-05T02:09:14.281376+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 606, "t": 1785895761.1380503, "ts": "2026-08-05T02:09:21.138052+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 607, "t": 1785895761.5048015, "ts": "2026-08-05T02:09:21.504803+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 608, "t": 1785895761.7198393, "ts": "2026-08-05T02:09:21.719841+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 609, "t": 1785895761.7615736, "ts": "2026-08-05T02:09:21.761575+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 610, "t": 1785895761.7681282, "ts": "2026-08-05T02:09:21.768130+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 611, "t": 1785895761.768616, "ts": "2026-08-05T02:09:21.768616+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 612, "t": 1785895768.0592546, "ts": "2026-08-05T02:09:28.059256+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 613, "t": 1785895768.4262853, "ts": "2026-08-05T02:09:28.426287+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 614, "t": 1785895768.6925857, "ts": "2026-08-05T02:09:28.692587+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 615, "t": 1785895768.7325246, "ts": "2026-08-05T02:09:28.732526+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 616, "t": 1785895768.7385397, "ts": "2026-08-05T02:09:28.738541+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 617, "t": 1785895768.7390556, "ts": "2026-08-05T02:09:28.739056+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 618, "t": 1785895774.204148, "ts": "2026-08-05T02:09:34.204149+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 619, "t": 1785895774.6445992, "ts": "2026-08-05T02:09:34.644601+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 620, "t": 1785895774.652465, "ts": "2026-08-05T02:09:34.652467+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 621, "t": 1785895774.6531096, "ts": "2026-08-05T02:09:34.653110+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 622, "t": 1785895776.035298, "ts": "2026-08-05T02:09:36.035300+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 623, "t": 1785895778.0407772, "ts": "2026-08-05T02:09:38.040779+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 624, "t": 1785895878.3711982, "ts": "2026-08-05T02:11:18.371200+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "edit"}}}
+{"seq": 625, "t": 1785895878.372857, "ts": "2026-08-05T02:11:18.372858+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "edit", "success": false}}}
+{"seq": 626, "t": 1785895878.3777995, "ts": "2026-08-05T02:11:18.377801+00:00", "client": "tcp-5859", "type": "presence", "data": {"action": "bye"}}
+{"seq": 627, "t": 1785895878.3784716, "ts": "2026-08-05T02:11:18.378472+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 628, "t": 1785895878.391618, "ts": "2026-08-05T02:11:18.391620+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 629, "t": 1785895878.3925848, "ts": "2026-08-05T02:11:18.392585+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 630, "t": 1785895885.6762931, "ts": "2026-08-05T02:11:25.676294+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 631, "t": 1785895891.7270901, "ts": "2026-08-05T02:11:31.727101+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 632, "t": 1785895891.7349422, "ts": "2026-08-05T02:11:31.734944+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 633, "t": 1785895891.7357821, "ts": "2026-08-05T02:11:31.735783+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 634, "t": 1785895902.4492588, "ts": "2026-08-05T02:11:42.449270+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 635, "t": 1785895903.3566837, "ts": "2026-08-05T02:11:43.356685+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 636, "t": 1785895903.3624876, "ts": "2026-08-05T02:11:43.362489+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 637, "t": 1785895903.3633595, "ts": "2026-08-05T02:11:43.363360+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 638, "t": 1785895913.1887312, "ts": "2026-08-05T02:11:53.188733+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 639, "t": 1785895913.6403155, "ts": "2026-08-05T02:11:53.640318+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 640, "t": 1785895913.6460812, "ts": "2026-08-05T02:11:53.646083+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 641, "t": 1785895913.646642, "ts": "2026-08-05T02:11:53.646642+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 642, "t": 1785895968.6105525, "ts": "2026-08-05T02:12:48.610554+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 643, "t": 1785895971.5011616, "ts": "2026-08-05T02:12:51.501163+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 644, "t": 1785895971.506436, "ts": "2026-08-05T02:12:51.506438+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 645, "t": 1785895971.5071347, "ts": "2026-08-05T02:12:51.507135+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 646, "t": 1785895993.7091787, "ts": "2026-08-05T02:13:13.709180+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 647, "t": 1785895999.0612936, "ts": "2026-08-05T02:13:19.061295+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 648, "t": 1785895999.0666795, "ts": "2026-08-05T02:13:19.066681+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 649, "t": 1785895999.0672064, "ts": "2026-08-05T02:13:19.067207+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 650, "t": 1785896003.6658146, "ts": "2026-08-05T02:13:23.665816+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 651, "t": 1785896005.6680193, "ts": "2026-08-05T02:13:25.668021+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 652, "t": 1785896012.323415, "ts": "2026-08-05T02:13:32.323416+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 653, "t": 1785896012.705408, "ts": "2026-08-05T02:13:32.705410+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 654, "t": 1785896012.954024, "ts": "2026-08-05T02:13:32.954026+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": false}}}
+{"seq": 655, "t": 1785896012.959298, "ts": "2026-08-05T02:13:32.959300+00:00", "client": "tcp-14756", "type": "presence", "data": {"action": "bye"}}
+{"seq": 656, "t": 1785896012.9753509, "ts": "2026-08-05T02:13:32.975352+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 657, "t": 1785896013.0010486, "ts": "2026-08-05T02:13:33.001050+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 658, "t": 1785896013.0079677, "ts": "2026-08-05T02:13:33.007969+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 659, "t": 1785896013.008483, "ts": "2026-08-05T02:13:33.008483+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 660, "t": 1785896018.3303366, "ts": "2026-08-05T02:13:38.330338+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 661, "t": 1785896018.7379594, "ts": "2026-08-05T02:13:38.737961+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 662, "t": 1785896018.746485, "ts": "2026-08-05T02:13:38.746487+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 663, "t": 1785896018.7470865, "ts": "2026-08-05T02:13:38.747087+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 664, "t": 1785896023.4085696, "ts": "2026-08-05T02:13:43.408571+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 665, "t": 1785896023.8097324, "ts": "2026-08-05T02:13:43.809734+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 666, "t": 1785896023.815235, "ts": "2026-08-05T02:13:43.815236+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 667, "t": 1785896023.815704, "ts": "2026-08-05T02:13:43.815704+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 668, "t": 1785896029.2239084, "ts": "2026-08-05T02:13:49.223910+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 669, "t": 1785896029.632702, "ts": "2026-08-05T02:13:49.632704+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 670, "t": 1785896029.6377437, "ts": "2026-08-05T02:13:49.637745+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 671, "t": 1785896029.6382139, "ts": "2026-08-05T02:13:49.638214+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 672, "t": 1785896035.7508388, "ts": "2026-08-05T02:13:55.750840+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 673, "t": 1785896036.1482444, "ts": "2026-08-05T02:13:56.148246+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 674, "t": 1785896036.153246, "ts": "2026-08-05T02:13:56.153248+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 675, "t": 1785896036.1544428, "ts": "2026-08-05T02:13:56.154444+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 676, "t": 1785896041.6045024, "ts": "2026-08-05T02:14:01.604504+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 677, "t": 1785896042.0194976, "ts": "2026-08-05T02:14:02.019499+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 678, "t": 1785896042.0247383, "ts": "2026-08-05T02:14:02.024740+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 679, "t": 1785896042.0251293, "ts": "2026-08-05T02:14:02.025129+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 680, "t": 1785896057.0424297, "ts": "2026-08-05T02:14:17.042431+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 681, "t": 1785896059.8064976, "ts": "2026-08-05T02:14:19.806499+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 682, "t": 1785896059.8114278, "ts": "2026-08-05T02:14:19.811429+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 683, "t": 1785896059.8118968, "ts": "2026-08-05T02:14:19.811897+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 684, "t": 1785896067.2456305, "ts": "2026-08-05T02:14:27.245632+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 685, "t": 1785896067.6080563, "ts": "2026-08-05T02:14:27.608058+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 686, "t": 1785896067.8586051, "ts": "2026-08-05T02:14:27.858607+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 687, "t": 1785896067.8939745, "ts": "2026-08-05T02:14:27.893976+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 688, "t": 1785896067.9000971, "ts": "2026-08-05T02:14:27.900099+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 689, "t": 1785896067.9007664, "ts": "2026-08-05T02:14:27.900767+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 690, "t": 1785896075.96864, "ts": "2026-08-05T02:14:35.968642+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 691, "t": 1785896076.5340328, "ts": "2026-08-05T02:14:36.534034+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 692, "t": 1785896076.5500205, "ts": "2026-08-05T02:14:36.550022+00:00", "client": "tcp-39758", "type": "presence", "data": {"action": "bye"}}
+{"seq": 693, "t": 1785896076.5779614, "ts": "2026-08-05T02:14:36.577963+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 694, "t": 1785896076.584057, "ts": "2026-08-05T02:14:36.584059+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 695, "t": 1785896076.5845873, "ts": "2026-08-05T02:14:36.584588+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 696, "t": 1785896085.9885805, "ts": "2026-08-05T02:14:45.988582+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 697, "t": 1785896086.3953285, "ts": "2026-08-05T02:14:46.395330+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 698, "t": 1785896086.400217, "ts": "2026-08-05T02:14:46.400219+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 699, "t": 1785896086.4018703, "ts": "2026-08-05T02:14:46.401872+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 700, "t": 1785896091.794067, "ts": "2026-08-05T02:14:51.794069+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 701, "t": 1785896092.2192714, "ts": "2026-08-05T02:14:52.219273+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 702, "t": 1785896092.224437, "ts": "2026-08-05T02:14:52.224439+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 703, "t": 1785896092.225003, "ts": "2026-08-05T02:14:52.225004+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 704, "t": 1785896093.3694878, "ts": "2026-08-05T02:14:53.369489+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 705, "t": 1785896095.3774338, "ts": "2026-08-05T02:14:55.377435+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 706, "t": 1785896096.8327575, "ts": "2026-08-05T02:14:56.832759+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 707, "t": 1785896100.8381991, "ts": "2026-08-05T02:15:00.838200+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 708, "t": 1785896111.4727993, "ts": "2026-08-05T02:15:11.472801+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 709, "t": 1785896114.7453032, "ts": "2026-08-05T02:15:14.745305+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 710, "t": 1785896114.7506433, "ts": "2026-08-05T02:15:14.750645+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 711, "t": 1785896114.7513049, "ts": "2026-08-05T02:15:14.751306+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 712, "t": 1785896134.0891783, "ts": "2026-08-05T02:15:34.089180+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 713, "t": 1785896142.4629965, "ts": "2026-08-05T02:15:42.462998+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 714, "t": 1785896142.4779985, "ts": "2026-08-05T02:15:42.478000+00:00", "client": "tcp-39316", "type": "presence", "data": {"action": "bye"}}
+{"seq": 715, "t": 1785896142.490831, "ts": "2026-08-05T02:15:42.490832+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 716, "t": 1785896142.4972782, "ts": "2026-08-05T02:15:42.497280+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 717, "t": 1785896142.4981034, "ts": "2026-08-05T02:15:42.498104+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 718, "t": 1785896162.61484, "ts": "2026-08-05T02:16:02.614842+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 719, "t": 1785896169.7973416, "ts": "2026-08-05T02:16:09.797343+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 720, "t": 1785896169.8028786, "ts": "2026-08-05T02:16:09.802881+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 721, "t": 1785896169.80336, "ts": "2026-08-05T02:16:09.803360+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 722, "t": 1785896183.3499057, "ts": "2026-08-05T02:16:23.349907+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 723, "t": 1785896183.7232425, "ts": "2026-08-05T02:16:23.723244+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 724, "t": 1785896183.9819167, "ts": "2026-08-05T02:16:23.981919+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 725, "t": 1785896184.0429096, "ts": "2026-08-05T02:16:24.042911+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 726, "t": 1785896184.048348, "ts": "2026-08-05T02:16:24.048350+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 727, "t": 1785896184.0489845, "ts": "2026-08-05T02:16:24.048985+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 728, "t": 1785896190.9836366, "ts": "2026-08-05T02:16:30.983639+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 729, "t": 1785896191.4491909, "ts": "2026-08-05T02:16:31.449192+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 730, "t": 1785896191.453844, "ts": "2026-08-05T02:16:31.453846+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 731, "t": 1785896191.4543524, "ts": "2026-08-05T02:16:31.454353+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 732, "t": 1785896214.8403146, "ts": "2026-08-05T02:16:54.840316+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 733, "t": 1785896217.707813, "ts": "2026-08-05T02:16:57.707815+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 734, "t": 1785896217.7121902, "ts": "2026-08-05T02:16:57.712192+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 735, "t": 1785896217.7126777, "ts": "2026-08-05T02:16:57.712678+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 736, "t": 1785896224.9827268, "ts": "2026-08-05T02:17:04.982729+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 737, "t": 1785896225.528782, "ts": "2026-08-05T02:17:05.528783+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 738, "t": 1785896225.5424511, "ts": "2026-08-05T02:17:05.542453+00:00", "client": "tcp-39786", "type": "presence", "data": {"action": "bye"}}
+{"seq": 739, "t": 1785896225.5553472, "ts": "2026-08-05T02:17:05.555349+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 740, "t": 1785896225.561347, "ts": "2026-08-05T02:17:05.561349+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 741, "t": 1785896225.5619404, "ts": "2026-08-05T02:17:05.561941+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 742, "t": 1785896231.1809883, "ts": "2026-08-05T02:17:11.180990+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 743, "t": 1785896231.7988188, "ts": "2026-08-05T02:17:11.798820+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 744, "t": 1785896231.8031142, "ts": "2026-08-05T02:17:11.803116+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 745, "t": 1785896231.803566, "ts": "2026-08-05T02:17:11.803567+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 746, "t": 1785896238.4757125, "ts": "2026-08-05T02:17:18.475714+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 747, "t": 1785896239.0398567, "ts": "2026-08-05T02:17:19.039858+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 748, "t": 1785896239.0517683, "ts": "2026-08-05T02:17:19.051770+00:00", "client": "tcp-42008", "type": "presence", "data": {"action": "bye"}}
+{"seq": 749, "t": 1785896239.066673, "ts": "2026-08-05T02:17:19.066675+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 750, "t": 1785896239.0720189, "ts": "2026-08-05T02:17:19.072021+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 751, "t": 1785896239.0725517, "ts": "2026-08-05T02:17:19.072552+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 752, "t": 1785896252.2636669, "ts": "2026-08-05T02:17:32.263669+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 753, "t": 1785896253.8122528, "ts": "2026-08-05T02:17:33.812254+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 754, "t": 1785896253.8241074, "ts": "2026-08-05T02:17:33.824109+00:00", "client": "tcp-39950", "type": "presence", "data": {"action": "bye"}}
+{"seq": 755, "t": 1785896253.8364878, "ts": "2026-08-05T02:17:33.836489+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 756, "t": 1785896253.8435757, "ts": "2026-08-05T02:17:33.843577+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 757, "t": 1785896253.8440447, "ts": "2026-08-05T02:17:33.844045+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 758, "t": 1785896262.5317495, "ts": "2026-08-05T02:17:42.531751+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 759, "t": 1785896263.898851, "ts": "2026-08-05T02:17:43.898852+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 760, "t": 1785896263.922663, "ts": "2026-08-05T02:17:43.922664+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 761, "t": 1785896263.923185, "ts": "2026-08-05T02:17:43.923186+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 762, "t": 1785896273.7711825, "ts": "2026-08-05T02:17:53.771184+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 763, "t": 1785896274.2514884, "ts": "2026-08-05T02:17:54.251490+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 764, "t": 1785896274.2588215, "ts": "2026-08-05T02:17:54.258823+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 765, "t": 1785896274.259419, "ts": "2026-08-05T02:17:54.259419+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 766, "t": 1785896279.6763663, "ts": "2026-08-05T02:17:59.676368+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 767, "t": 1785896281.2329495, "ts": "2026-08-05T02:18:01.232950+00:00", "client": "pi", "type": "presence", "data": {"action": "hello", "info": {"id": "pi", "name": "pi", "kind": "pi"}}}
+{"seq": 768, "t": 1785896281.2474897, "ts": "2026-08-05T02:18:01.247492+00:00", "client": "tcp-43180", "type": "presence", "data": {"action": "bye"}}
+{"seq": 769, "t": 1785896281.2600448, "ts": "2026-08-05T02:18:01.260047+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": true}}}
+{"seq": 770, "t": 1785896281.2658982, "ts": "2026-08-05T02:18:01.265900+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 771, "t": 1785896281.2663162, "ts": "2026-08-05T02:18:01.266317+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 772, "t": 1785896294.7709005, "ts": "2026-08-05T02:18:14.770902+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_start", "detail": {"tool": "bash"}}}
+{"seq": 773, "t": 1785896295.1546443, "ts": "2026-08-05T02:18:15.154645+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "tool_end", "detail": {"tool": "bash", "success": false}}}
+{"seq": 774, "t": 1785896295.1598563, "ts": "2026-08-05T02:18:15.159858+00:00", "client": "tcp-12946", "type": "presence", "data": {"action": "bye"}}
+{"seq": 775, "t": 1785896295.1767094, "ts": "2026-08-05T02:18:15.176711+00:00", "client": "laap-desktop", "type": "presence", "data": {"action": "hello", "info": {"id": "laap-desktop", "name": "laap-desktop", "kind": "laap-desktop"}}}
+{"seq": 776, "t": 1785896295.1914706, "ts": "2026-08-05T02:18:15.191472+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}
+{"seq": 777, "t": 1785896295.1918688, "ts": "2026-08-05T02:18:15.191869+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "user_message", "detail": {}}}
+{"seq": 778, "t": 1785896300.2338705, "ts": "2026-08-05T02:18:20.233872+00:00", "client": "laap-desktop", "type": "cognitive", "data": {"event": "turn_end", "detail": {}}}

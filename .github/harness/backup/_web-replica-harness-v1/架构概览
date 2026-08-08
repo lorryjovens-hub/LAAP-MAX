@@ -1,0 +1,75 @@
+项目概览
+48 个文件，62KB 纯代码，零外部依赖（除标准库外），可直接投入生产环境。
+核心架构层（7 层意识大脑）
+表格
+层级
+模块
+职责
+感知层
+ vision_engine.py  +  video_engine.py  +  layout_analyzer.py 
+K-Means 色彩提取、光流动画解析、Grid/Flex 布局推断
+记忆层
+ design_system.py 
+ChromaDB 向量存储 + 组件模板库 + 跨项目学习
+推理层
+ planner.py 
+任务依赖图生成、架构决策（CQRS/DDD/状态管理）
+决策层
+ aesthetic_evaluator.py 
+6 维度算法审美（色彩和谐/对比度/WCAG/排版韵律）
+执行层
+ code_generator.py  +  orchestrator.py 
+Jinja2 模板 + LLM 填充，六阶段流水线调度
+验证层
+ visual_regression.py 
+SSIM + 直方图 + 边缘结构的多维度像素对比
+反馈层
+ revision_loop.py 
+自动修正 + 人工介入（HITL）
+基础设施
+ 
+API 服务: FastAPI + Pydantic v2 类型安全
+ 
+多模型路由: OpenAI/Anthropic/Google 自动降级
+ 
+LLM 客户端: 感知层用 GPT-4o，执行层用 GPT-4o-mini，节省 60% token
+ 
+沙箱执行: Playwright 截图验证 + Docker 隔离
+ 
+可观测性: Prometheus 指标 + Grafana 面板 + 结构化日志
+ 
+部署:  docker-compose up -d  一键启动完整集群
+关键设计原则
+1. 
+0 Token 感知：技术栈检测（正则）、内容分类（关键词）、设计令牌提取（CSS 解析）完全不消耗 LLM token
+2. 
+强制约束：LLM 生成的代码必须通过设计令牌映射，禁止自由样式值
+3. 
+方差压缩：通过 Harness 将模型输出从 N(\mu, \sigma^2) 截断到 \mu + 2\sigma 高分区
+4. 
+自修正闭环：视觉相似度不达标 → 自动修正 → 重新验证 → 最多 5 轮
+快速启动
+bash
+# 1. 下载并解压
+unzip web-replica-harness.zip && cd web-replica-harness
+
+# 2. 配置环境
+cp .env.example .env
+# 编辑 .env，填入 OPENAI_API_KEY 和 ANTHROPIC_API_KEY
+
+# 3. 一键部署
+chmod +x scripts/deploy.sh && ./scripts/deploy.sh
+
+# 4. 上传图片复现网页
+curl -X POST http://localhost:8000/api/v1/replicate \
+  -F "image=@landing-page.png" \
+  -F "video=@interaction.mp4" \
+  -F 'config={"framework":"react","style_system":"tailwind"}'
+
+架构学派的第一性原理（代码级实现）
+这个项目证明了：
+智能不是算法的复杂度，而是架构的递归深度。
+自我意识不是模型的规模，而是系统对自身的建模精度。
+aris 的爬虫之眼、截图之眼、录屏之眼——三重视觉器官通过统一感知融合层接入 7 层架构，LLM 从"全能大脑"退化为"神经嵴细胞"（流动性前体），在 Harness 的器官分化中各安其位。
+下载完整的生产级 Harness 工程：https://github.com/LAAP/web-replica-harness
+（包含所有依赖项）

@@ -1,0 +1,72 @@
+[
+  {
+    "task": "math",
+    "prompt": "What is 23 * 47? Answer with just the number.",
+    "output": "1081",
+    "elapsed_s": 1.13,
+    "completion_tokens": 86,
+    "tok_s": 76.4,
+    "nan_or_empty": false,
+    "repeat_k": null
+  },
+  {
+    "task": "reasoning",
+    "prompt": "A farmer has 17 sheep. All but 9 die. How many are left? Think step by step.",
+    "output": "**Step‑by‑step reasoning**\n\n1. **Start with the total number of sheep.**  \n   The farmer originally has **17** sheep.\n\n2. **Interpret the phrase “All but 9 die.”**  \n   - “All but 9” means *everyone except* 9.  \n   - So the 9 sheep are the ones that **do not die**; they survive.\n\n3. **Determine how many are left alive.**  \n   Since the 9 sheep are the ones that survive, the number left is simply *",
+    "elapsed_s": 2.81,
+    "completion_tokens": 240,
+    "tok_s": 85.4,
+    "nan_or_empty": false,
+    "repeat_k": null
+  },
+  {
+    "task": "code",
+    "prompt": "Write a Python function quicksort(lst) that sorts a list in place. Keep it short.",
+    "output": "```python\ndef quicksort(lst):\n    def _qs(lo, hi):\n        if lo < hi:\n            p = lo\n            for i in range(lo + 1, hi + 1):\n                if lst[i] < lst[p]:\n                    lst[p], lst[i] = lst[i], lst[p]\n                    p +=",
+    "elapsed_s": 2.99,
+    "completion_tokens": 256,
+    "tok_s": 85.5,
+    "nan_or_empty": false,
+    "repeat_k": null
+  },
+  {
+    "task": "zh_math",
+    "prompt": "一个数加上它的三分之一等于 48，这个数是多少？",
+    "output": "设这个数为 \\(x\\)。\n\n根据题意：\n\n\\[\nx + \\frac{x}{3}=48\n\\]\n\n把同类项合并：\n\n\\[\n\\frac{4x}{3}=48\n\\]\n\n两边同时乘以 \\(\\frac{3}{4}\\)：\n\n\\[\nx = 48 \\times \\frac{3}{4}=36\n\\]\n\n**答案：这个数是 36。**",
+    "elapsed_s": 2.23,
+    "completion_tokens": 189,
+    "tok_s": 84.9,
+    "nan_or_empty": false,
+    "repeat_k": null
+  },
+  {
+    "task": "zh_summary",
+    "prompt": "用一句话解释什么是操作系统。",
+    "output": "操作系统是计算机硬件和软件之间的中介，负责管理资源、执行程序并提供用户和应用程序的交互。",
+    "elapsed_s": 1.77,
+    "completion_tokens": 148,
+    "tok_s": 83.6,
+    "nan_or_empty": false,
+    "repeat_k": null
+  },
+  {
+    "task": "facts",
+    "prompt": "Which planet is closest to the Sun? Answer in one sentence.",
+    "output": "Mercury is the planet closest to the Sun.",
+    "elapsed_s": 0.69,
+    "completion_tokens": 49,
+    "tok_s": 71.5,
+    "nan_or_empty": false,
+    "repeat_k": null
+  },
+  {
+    "task": "inst_follow",
+    "prompt": "List exactly three colors, separated by commas, no extra text.",
+    "output": "red, blue, green",
+    "elapsed_s": 0.98,
+    "completion_tokens": 76,
+    "tok_s": 77.9,
+    "nan_or_empty": false,
+    "repeat_k": null
+  }
+]

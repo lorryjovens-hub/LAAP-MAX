@@ -1,0 +1,37 @@
+[
+  {
+    "name": "business-blue",
+    "category": "Business",
+    "path": "/live-previews/business-blue/index.html"
+  },
+  {
+    "name": "agency-wide",
+    "category": "Agency",
+    "path": "/live-previews/agency-wide/index.html"
+  },
+  {
+    "name": "black-clean",
+    "category": "Technology",
+    "path": "/live-previews/black-clean/index.html"
+  },
+  {
+    "name": "green-enterprise",
+    "category": "Healthcare",
+    "path": "/live-previews/green-enterprise/index.html"
+  },
+  {
+    "name": "ecommerce-shop",
+    "category": "Ecommerce",
+    "path": "/live-previews/ecommerce-shop/index.html"
+  },
+  {
+    "name": "black-hero",
+    "category": "Portfolio",
+    "path": "/live-previews/black-hero/index.html"
+  },
+  {
+    "name": "photography",
+    "category": "Creative",
+    "path": "/live-previews/photography/index.html"
+  }
+]

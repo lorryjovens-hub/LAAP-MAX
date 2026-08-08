@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEP — Harness Engineering Protocol · 零 Token 页面生成引擎</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #1a1a2e;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --accent: #6366f1;
+  --accent-soft: rgba(99,102,241,0.08);
+  --accent-glow: rgba(99,102,241,0.04);
+  --border: #e5e7eb;
+  --border-light: #f3f4f6;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.02);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition: 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 16px 40px; display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(250,250,250,0.8);
+  border-bottom: 1px solid var(--border-light);
+  transition: var(--transition);
+}
+nav.scrolled { padding: 10px 40px; background: rgba(250,250,250,0.95); box-shadow: var(--shadow); }
+nav .logo { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+nav .logo-icon { width: 28px; height: 28px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 800; }
+nav .logo span { color: var(--accent); }
+nav .links { display: flex; gap: 24px; align-items: center; }
+nav a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.3s; position: relative; }
+nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; border-radius: 1px; }
+nav a:hover { color: var(--text); }
+nav a:hover::after { width: 100%; }
+nav .gh-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; background: var(--text); color: #fff !important; font-size: 12px; font-weight: 600; transition: all 0.3s; }
+nav .gh-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+nav .gh-btn::after { display: none; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.hero-bg .orb {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+.hero-bg .orb:nth-child(1) { width: 400px; height: 400px; background: var(--accent); top: -100px; left: -100px; animation-delay: 0s; }
+.hero-bg .orb:nth-child(2) { width: 300px; height: 300px; background: #a78bfa; bottom: -50px; right: -50px; animation-delay: -7s; }
+.hero-bg .orb:nth-child(3) { width: 200px; height: 200px; background: #818cf8; top: 50%; left: 50%; animation-delay: -14s; }
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.1); }
+  66% { transform: translate(-20px, 30px) scale(0.9); }
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 100px;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+  margin-bottom: 28px; border: 1px solid rgba(99,102,241,0.12);
+}
+.hero h1 {
+  font-size: clamp(40px, 7vw, 80px); font-weight: 900;
+  letter-spacing: -3px; line-height: 1.05; margin-bottom: 20px;
+  color: var(--text);
+}
+.hero h1 .highlight { background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p {
+  font-size: clamp(15px, 1.6vw, 19px); color: var(--text-secondary);
+  max-width: 640px; margin: 0 auto 36px; line-height: 1.8;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: var(--radius-sm);
+  background: var(--text); color: #fff; font-size: 14px;
+  font-weight: 600; text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: var(--radius-sm);
+  background: transparent; color: var(--text); font-size: 14px;
+  font-weight: 500; text-decoration: none; border: 1px solid var(--border); cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Scroll Indicator ── */
+.scroll-indicator {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-tertiary); font-size: 11px; font-weight: 500;
+  animation: fadeInUp 1s ease 2s both;
+}
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(180deg, var(--border), transparent); position: relative; overflow: hidden; }
+.scroll-line::after { content: ''; position: absolute; top: -10px; left: 0; width: 100%; height: 10px; background: var(--accent); border-radius: 2px; animation: scrollLine 2s ease-in-out infinite; }
+@keyframes scrollLine { 0% { top: -10px; } 100% { top: 40px; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+/* ── Section Common ── */
+section { padding: 100px 24px; position: relative; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--accent);
+  margin-bottom: 12px; text-transform: uppercase;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 48px); font-weight: 800;
+  letter-spacing: -2px; margin-bottom: 16px; color: var(--text);
+}
+.section-subtitle {
+  font-size: 16px; color: var(--text-secondary);
+  max-width: 600px; line-height: 1.7; margin-bottom: 50px;
+}
+
+/* ── Drawer / Accordion ── */
+.drawer-group { display: flex; flex-direction: column; gap: 8px; }
+.drawer {
+  background: var(--surface); border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm); overflow: hidden;
+  transition: all 0.3s; box-shadow: var(--shadow);
+}
+.drawer:hover { border-color: var(--border); box-shadow: var(--shadow-md); }
+.drawer-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 24px; cursor: pointer; user-select: none;
+  transition: background 0.3s;
+}
+.drawer-header:hover { background: var(--accent-soft); }
+.drawer-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+  background: var(--accent-soft); color: var(--accent);
+  transition: all 0.4s;
+}
+.drawer.open .drawer-icon { background: var(--accent); color: #fff; }
+.drawer-info { flex: 1; min-width: 0; }
+.drawer-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.drawer-info p { font-size: 13px; color: var(--text-secondary); }
+.drawer-arrow {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-tertiary); transition: all 0.4s; flex-shrink: 0;
+  font-size: 14px;
+}
+.drawer.open .drawer-arrow { transform: rotate(180deg); color: var(--accent); }
+.drawer-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.drawer.open .drawer-body { max-height: 600px; }
+.drawer-content { padding: 0 24px 24px; border-top: 1px solid var(--border-light); padding-top: 20px; }
+.drawer-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
+.code-block {
+  background: #f8f9fb; border: 1px solid var(--border-light); border-radius: 8px;
+  padding: 16px 20px; font-size: 13px; line-height: 1.7; overflow-x: auto;
+  font-family: 'SF Mono', 'JetBrains Mono', monospace; color: var(--text-secondary);
+}
+.code-block .kw { color: var(--accent); font-weight: 600; }
+.code-block .str { color: #10b981; }
+.code-block .cm { color: var(--text-tertiary); font-style: italic; }
+.drawer-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.drawer-tags span {
+  padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 500;
+  background: var(--accent-soft); color: var(--accent);
+}
+
+/* ── Token Counter ── */
+.token-counter {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  margin-bottom: 50px;
+}
+.token-card {
+  text-align: center; padding: 32px 16px;
+  background: var(--surface); border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm); box-shadow: var(--shadow);
+  transition: all 0.3s;
+}
+.token-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.token-number { font-size: 36px; font-weight: 900; letter-spacing: -2px; color: var(--accent); margin-bottom: 6px; }
+.token-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
+.token-meta { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; }
+
+/* ── Process Flow ── */
+.process-flow { display: flex; align-items: center; justify-content: center; gap: 0; padding: 40px 0; flex-wrap: wrap; }
+.process-step {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 20px; position: relative; min-width: 120px;
+}
+.process-step:not(:last-child)::after {
+  content: '→'; position: absolute; right: -12px; top: 50%;
+  transform: translateY(-50%); color: var(--accent); font-size: 20px; font-weight: 300;
+  opacity: 0.5;
+}
+.process-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent); opacity: 0.3; transition: all 0.5s;
+  animation: pulse 2s ease-in-out infinite;
+}
+.process-step:nth-child(1) .process-dot { animation-delay: 0s; }
+.process-step:nth-child(2) .process-dot { animation-delay: 0.3s; }
+.process-step:nth-child(3) .process-dot { animation-delay: 0.6s; }
+.process-step:nth-child(4) .process-dot { animation-delay: 0.9s; }
+@keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.3); } }
+.process-step h4 { font-size: 13px; font-weight: 600; color: var(--text); }
+.process-step p { font-size: 11px; color: var(--text-secondary); text-align: center; max-width: 100px; }
+
+/* ── Phase Cards ── */
+.phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.phase-card {
+  padding: 28px; background: var(--surface); border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm); box-shadow: var(--shadow);
+  transition: all 0.4s; position: relative; overflow: hidden;
+}
+.phase-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0; transition: opacity 0.4s;
+}
+.phase-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+.phase-card:hover::before { opacity: 1; }
+.phase-num { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+.phase-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.phase-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+/* ── Stats Row ── */
+.stats-row { display: flex; justify-content: space-around; padding: 60px 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); flex-wrap: wrap; gap: 24px; }
+.stat-item { text-align: center; min-width: 100px; }
+.stat-item .num { font-size: 28px; font-weight: 800; color: var(--text); }
+.stat-item .num span { color: var(--accent); }
+.stat-item .desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.stat-item .label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 1px; }
+
+/* ── CTA ── */
+.cta-block {
+  text-align: center; padding: 80px 24px;
+  background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border-light); box-shadow: var(--shadow-md);
+}
+.cta-block .emoji-big { font-size: 48px; margin-bottom: 16px; }
+.cta-block h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 12px; }
+.cta-block p { font-size: 15px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 28px; line-height: 1.7; }
+
+/* ── Counter Animation ── */
+.count-up { display: inline-block; }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 40px 24px; font-size: 12px; color: var(--text-tertiary); border-top: 1px solid var(--border-light); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  nav { padding: 12px 20px; }
+  nav .links a:not(.gh-btn) { display: none; }
+  .token-counter { grid-template-columns: repeat(2, 1fr); }
+  .phase-grid { grid-template-columns: 1fr; }
+  .process-flow { flex-direction: column; gap: 16px; }
+  .process-step:not(:last-child)::after { content: '↓'; right: auto; bottom: -16px; top: auto; left: 50%; transform: translateX(-50%); }
+  .drawer-header { padding: 16px; }
+  .drawer-icon { width: 32px; height: 32px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="logo"><div class="logo-icon">H</div> Harness <span>EP</span></div>
+  <div class="links">
+    <a href="#how">原理</a>
+    <a href="#drawers">组件库</a>
+    <a href="#phases">管线</a>
+    <a href="#zero">零 Token</a>
+    <a class="gh-btn" href="https://github.com/lorryjovens-hub/laap-AGI" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      零 Token · 纯白盒 · 确定性
+    </div>
+    <h1>你正在看的这个页面<br>就是 <span class="highlight">0 Token</span> 生成的</h1>
+    <p>这个页面本身没有任何 LLM 参与——每个像素、每行代码、每段文案都由 HEP 协议预编译后直接装配。你在阅读的，不是一个 AI 生成的结果，而是一个<strong>白盒引擎的自我介绍</strong>。</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#how">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        看它怎么工作
+      </a>
+      <a class="btn-secondary" href="#drawers">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        展开组件库
+      </a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>向下滚动</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="padding: 0;">
+  <div class="section-inner">
+    <div class="stats-row">
+      <div class="stat-item"><div class="num"><span class="count-up" data-target="42">0</span>+</div><div class="desc">注册组件</div><div class="label">Atoms → Sections</div></div>
+      <div class="stat-item"><div class="num"><span class="count-up" data-target="9">0</span></div><div class="desc">风格预设</div><div class="label">一键切换主题</div></div>
+      <div class="stat-item"><div class="num"><span class="count-up" data-target="6">0</span></div><div class="desc">页面类型</div><div class="label">Landing → Dashboard</div></div>
+      <div class="stat-item"><div class="num"><span class="count-up" data-target="0">0</span></div><div class="desc">Token 消耗</div><div class="label">每次生成都是 0</div></div>
+      <div class="stat-item"><div class="num">~<span class="count-up" data-target="2">0</span>ms</div><div class="desc">生成速度</div><div class="label">比 LLM 快 10,000×</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-label">核心逻辑</div>
+    <h2 class="section-title">编译一次 · 运行永远零成本</h2>
+    <p class="section-subtitle">HEP 的核心洞察：LLM 每次都在"发明轮子"。HEP 把轮子做好，LLM 只负责选轮子。</p>
+
+    <div class="token-counter">
+      <div class="token-card"><div class="token-number">95%</div><div class="token-label">Token 节省</div><div class="token-meta">对比传统 LLM 生成</div></div>
+      <div class="token-card"><div class="token-number">~2ms</div><div class="token-label">生成延迟</div><div class="token-meta">纯 Python 字符串拼接</div></div>
+      <div class="token-card"><div class="token-number">∞</div><div class="token-label">边际成本</div><div class="token-meta">第 1 次 = 第 10000 次</div></div>
+      <div class="token-card"><div class="token-number">100%</div><div class="token-label">确定性</div><div class="token-meta">相同输入 = 相同输出</div></div>
+    </div>
+
+    <div class="process-flow">
+      <div class="process-step"><div class="process-dot"></div><h4>IntentMapper</h4><p>自然语言 → JSON Spec</p></div>
+      <div class="process-step"><div class="process-dot"></div><h4>StyleEngine</h4><p>风格预设 → CSS 变量</p></div>
+      <div class="process-step"><div class="process-dot"></div><h4>ComponentRegistry</h4><p>匹配组件 → 解析依赖</p></div>
+      <div class="process-step"><div class="process-dot"></div><h4>ProductionComposer</h4><p>JSON Spec → 生产级 HTML</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Drawers -->
+<section id="drawers" style="background: #f8f9fb;">
+  <div class="section-inner">
+    <div class="section-label">组件体系</div>
+    <h2 class="section-title">四层抽屉 · 逐级展开</h2>
+    <p class="section-subtitle">每个抽屉都是一组 HEP 组件。点击展开，看到的不只是代码——是这个页面的每一块积木。</p>
+
+    <div class="drawer-group">
+
+      <!-- Drawer 1 -->
+      <div class="drawer open">
+        <div class="drawer-header" onclick="toggleDrawer(this)">
+          <div class="drawer-icon">A</div>
+          <div class="drawer-info"><h3>Atoms — 基础原子组件</h3><p>8 类 · ~40 组件 · 设计系统的最小积木</p></div>
+          <div class="drawer-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-content">
+            <p>所有高阶组件的基础。每个 Atom 都有 3-6 种变体，覆盖所有常见 UI 场景。这个页面中的每个按钮、每个卡片、每段排版都来自下面的清单。</p>
+            <div class="code-block">
+              <span class="cm"># Atoms 注册清单</span><br>
+              Button:     <span class="kw">6 variants</span> (primary / secondary / ghost / outline / danger / glass)<br>
+              Typography: <span class="kw">7 levels</span>  (h1-h6 / body / small / code / quote)<br>
+              Input:      <span class="kw">8 types</span>   (text / email / password / search / textarea / select / date / file)<br>
+              Icon:       <span class="kw">1745 SVGs</span> (Lucide 开源图标库, 零 emoji)<br>
+              Badge / Avatar / Divider / Skeleton / Card
+            </div>
+            <div class="drawer-tags"><span>确定性</span><span>零依赖</span><span>~0.001ms 检索</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer 2 -->
+      <div class="drawer">
+        <div class="drawer-header" onclick="toggleDrawer(this)">
+          <div class="drawer-icon">M</div>
+          <div class="drawer-info"><h3>Molecules — 组合分子组件</h3><p>12 类 · ~60 组件 · 功能单元</p></div>
+          <div class="drawer-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-content">
+            <p>Atoms 的有序组合，形成独立的功能单元。每个 Molecule 负责一个完整的功能模块。</p>
+            <div class="code-block">
+              <span class="cm"># Molecules 注册清单</span><br>
+              Card:   <span class="kw">12 variants</span> (default / glass / hover-scale / pricing / testimonial ...)<br>
+              Modal:  <span class="kw">6 variants</span>  (center / side / bottom / full / confirm / form)<br>
+              Tabs / Accordion / Dropdown / Toast / Pagination<br>
+              Breadcrumb / DataTable / Toggle / Tooltip
+            </div>
+            <div class="drawer-tags"><span>可组合</span><span>状态封装</span><span>~0.01ms</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer 3 -->
+      <div class="drawer">
+        <div class="drawer-header" onclick="toggleDrawer(this)">
+          <div class="drawer-icon">S</div>
+          <div class="drawer-info"><h3>Sections — 页面段落模板</h3><p>13 类 · ~64 模板 · 页面就是段落拼接</p></div>
+          <div class="drawer-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-content">
+            <p>这就是你正在看的这个页面：Hero + Stats + HowItWorks + Drawers + Phases + CTA + Footer。每个 Section 是一个预编译的 HTML 模板，填入 JSON 数据即可。</p>
+            <div class="code-block">
+              <span class="cm"># Sections 模板清单（本页面使用的）</span><br>
+              Hero:       <span class="str">"零 Token · 纯白盒 · 确定性"</span> ← 你看到的标题<br>
+              Stats:      <span class="str">42+ 组件 · 9 风格 · 0 Token · ~2ms</span><br>
+              Accordion:  <span class="str">Atoms → Molecules → Sections → Presets</span> ← 正在展开<br>
+              Phases:     <span class="str">编译 → 匹配 → 装配 → 生成</span><br>
+              CTA:        <span class="str">"你也能做到"</span>
+            </div>
+            <div class="drawer-tags"><span>模板化</span><span>JSON 驱动</span><span>~0.1ms 装配</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer 4 -->
+      <div class="drawer">
+        <div class="drawer-header" onclick="toggleDrawer(this)">
+          <div class="drawer-icon">P</div>
+          <div class="drawer-info"><h3>Presets — 设计系统预设</h3><p>9 套完整视觉语言 · 一键切换</p></div>
+          <div class="drawer-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-content">
+            <p>每个 Preset 是一套完整的 CSS 变量体系：色板、字体、圆角、间距、阴影。切换预设 = 更换整个视觉系统。这个页面使用的是 <strong>minimal_white</strong> 预设。</p>
+            <div class="code-block">
+              <span class="cm"># STYLE_PRESETS 注册清单</span><br>
+              apple_dark       →  <span class="str">"Apple 深色"</span>     premium · dark · minimal<br>
+              apple_light      →  <span class="str">"Apple 浅色"</span>     premium · light · clean<br>
+              dark_tech        →  <span class="str">"暗夜科技"</span>       cyber · dark · tech<br>
+              warm_earth       →  <span class="str">"暖土"</span>           warm · organic · serif<br>
+              glassmorphism    →  <span class="str">"玻璃拟态"</span>       glass · frosted · modern<br>
+              retro_terminal   →  <span class="str">"复古终端"</span>       retro · terminal · green<br>
+              <span class="kw">minimal_white</span>   →  <span class="str">"极简白"</span>    ← 本页面正在使用的<br>
+              sunset / ocean
+            </div>
+            <div class="drawer-tags"><span>CSS 变量</span><span>一键切换</span><span>零 Token 换肤</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Phases -->
+<section id="phases">
+  <div class="section-inner">
+    <div class="section-label">生成管线</div>
+    <h2 class="section-title">从文本到页面的四步心跳</h2>
+    <p class="section-subtitle">你不是在"写"页面——你只是在"选"积木。剩下的 HEP 替你完成。</p>
+
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-num">PHASE 01</div>
+        <h3>Intent Matching</h3>
+        <p>自然语言 → 结构化 JSON Spec。纯关键词匹配，12 种页面类型，9 种风格，11 种内容领域。零 LLM，~0.1ms。</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 02</div>
+        <h3>Style Injection</h3>
+        <p>匹配 Style Preset → 注入 CSS 变量体系。色板、字体、间距、阴影全部从预设中读取。~0.01ms。</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 03</div>
+        <h3>Component Assembly</h3>
+        <p>从 HEP Registry 查询匹配组件 → 解析依赖树 → 拓扑排序 → 装配。全部白盒，可审计。~0.6ms。</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 04</div>
+        <h3>Zero-Token Generation</h3>
+        <p>JSON Spec + CSS vars + 组件代码 → 纯字符串拼接 → 生产级 HTML。无 LLM，无概率，无幻觉。~2ms。</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 05</div>
+        <h3>Quality Gates</h3>
+        <p>Emoji 检测（强制使用 Lucide SVG）、响应式断点覆盖、可访问性检查、性能评估。硬性门禁，不通过不出页。</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 06</div>
+        <h3>HEP Registry</h3>
+        <p>每次新组件被创建 → 注册到 HEP Registry → 下次调用即可零成本复用。"编译一次，运行永远零成本"。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Zero Token Deep Dive -->
+<section id="zero" style="background: #f8f9fb;">
+  <div class="section-inner">
+    <div class="section-label">关键概念</div>
+    <h2 class="section-title">两种"零 Token"的区别</h2>
+    <p class="section-subtitle">这是 HEP 最容易被误解的地方——运行时零 Token ≠ 编译零成本。理解这个区别，你就理解了整个哲学。</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;">
+      <div class="phase-card" style="border-left:3px solid var(--accent);">
+        <h3>运行时零 Token</h3>
+        <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">HEP 保证的——<code style="background:var(--accent-soft);padding:2px 6px;border-radius:4px;font-size:12px;">ProductionComposer.from_spec()</code> = 0 Token。纯字符串拼接，每次都是。你正在读的这个页面就是这样生成的。</p>
+        <div class="drawer-tags" style="margin-top:12px;"><span>确定性</span><span>可审计</span><span>每次 0</span></div>
+      </div>
+      <div class="phase-card" style="border-left:3px solid #10b981;">
+        <h3>编译时 Token 消耗</h3>
+        <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;">模板本身是用 Token 写的——一次性的。写一个 Hero 模板可能花 200 Token，但这个模板可以用一万次，每次生成 0 Token。</p>
+        <div class="drawer-tags" style="margin-top:12px;"><span>一次性成本</span><span>无限复用</span><span>摊薄约等于 0</span></div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div style="font-size:48px;margin-bottom:16px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h2>你也能做到</h2>
+      <p>这个页面是开源的。整个 Harness 引擎都在 LAAP 仓库中。<br>你读到的每一个设计模式、每一个组件、每一行 CSS，都是你可以直接使用的。</p>
+      <a class="btn-primary" href="https://github.com/lorryjovens-hub/laap-AGI" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        去 GitHub 查看源码
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  HEP — Harness Engineering Protocol v1.0 &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; 构建于 LAAP
+</footer>
+
+<script>
+// ── Drawer Toggle ──
+function toggleDrawer(header) {
+  const drawer = header.parentElement;
+  const isOpen = drawer.classList.contains('open');
+
+  // Close all
+  document.querySelectorAll('.drawer.open').forEach(d => d.classList.remove('open'));
+
+  // Toggle current
+  if (!isOpen) drawer.classList.add('open');
+}
+
+// ── Nav Scroll Effect ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── Count-up Animation ──
+function animateCountUp(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 1500;
+  const start = performance.now();
+  function update(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// IntersectionObserver for count-up
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.count-up').forEach(el => {
+        if (!el.dataset.animated) {
+          el.dataset.animated = 'true';
+          animateCountUp(el);
+        }
+      });
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stats-row').forEach(row => observer.observe(row));
+
+// ── Smooth Scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ── Open first drawer by default ──
+document.addEventListener('DOMContentLoaded', () => {
+  // First drawer is already open via HTML class
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAAP Voice Barge-in Test</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0f0f13;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: linear-gradient(135deg, #1a1a24, #0f0f13);
+  border-bottom: 1px solid #2a2a3a;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.header h1 { font-size: 18px; font-weight: 600; color: #f5a623; }
+.header .subtitle { font-size: 12px; color: #888; }
+.container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+.controls {
+  width: 360px;
+  min-width: 360px;
+  padding: 16px;
+  border-right: 1px solid #2a2a3a;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+.controls h3 { font-size: 13px; color: #f5a623; font-weight: 500; margin-bottom: 4px; }
+.control-group {
+  background: #1a1a24;
+  border: 1px solid #2a2a3a;
+  border-radius: 8px;
+  padding: 12px;
+}
+.control-group label { display: block; font-size: 12px; color: #aaa; margin-bottom: 6px; }
+.control-group select, .control-group input[type="range"] {
+  width: 100%;
+  margin-bottom: 8px;
+}
+.control-group select {
+  background: #0f0f13;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+button:not(:disabled):hover { transform: translateY(-1px); }
+.btn-primary { background: #f5a623; color: #0f0f13; }
+.btn-primary:hover { background: #f7b84a; }
+.btn-danger { background: #e74c3c; color: white; }
+.btn-danger:hover { background: #ef5350; }
+.btn-success { background: #27ae60; color: white; }
+.btn-success:hover { background: #2ecc71; }
+.btn-outline { background: transparent; color: #f5a623; border: 1px solid #f5a623; }
+.btn-outline:hover { background: #f5a62320; }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #1a1a24;
+  border: 1px solid #2a2a3a;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.status-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #555;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.status-dot.idle { background: #666; }
+.status-dot.listening { background: #2ecc71; box-shadow: 0 0 8px #2ecc7180; }
+.status-dot.speaking { background: #f5a623; box-shadow: 0 0 8px #f5a62380; }
+.status-dot.thinking { background: #9b59b6; box-shadow: 0 0 8px #9b59b680; }
+.status-label { flex: 1; }
+.status-time { color: #666; font-size: 11px; font-family: monospace; }
+
+.trigger-stat {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #aaa;
+}
+.trigger-stat span { padding: 2px 8px; border-radius: 4px; background: #0f0f13; }
+.trigger-stat .vad { color: #2ecc71; }
+.trigger-stat .asr { color: #f5a623; }
+
+.log-area {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.log-header h3 { font-size: 13px; color: #f5a623; font-weight: 500; }
+.log-header button { font-size: 11px; padding: 4px 10px; }
+#logContainer {
+  flex: 1;
+  background: #0a0a0f;
+  border: 1px solid #2a2a3a;
+  border-radius: 8px;
+  padding: 12px;
+  overflow-y: auto;
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.log-entry {
+  padding: 2px 0;
+  border-bottom: 1px solid #1a1a24;
+  word-break: break-all;
+}
+.log-entry .ts { color: #666; }
+.log-entry .vad { color: #2ecc71; }
+.log-entry .asr { color: #f5a623; }
+.log-entry .tts { color: #3498db; }
+.log-entry .state { color: #9b59b6; }
+.log-entry .info { color: #aaa; }
+.log-entry .transcript { color: #e0e0e0; background: #1a1a24; padding: 1px 4px; border-radius: 2px; }
+.log-entry .warn { color: #e74c3c; }
+.log-entry .highlight { color: #fff; background: #f5a62330; padding: 1px 4px; border-radius: 2px; font-weight: bold; }
+
+#scenario {
+  margin-top: 4px;
+  padding: 8px;
+  background: #0a0a0f;
+  border: 1px dashed #333;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>LAAP Voice Barge-in Test</h1>
+  <span class="subtitle">模拟连续对话 · 测试打断延迟</span>
+</div>
+
+<div class="container">
+
+<!-- Controls -->
+<div class="controls">
+  <div class="control-group">
+    <h3>状态</h3>
+    <div class="status-bar">
+      <div class="status-dot idle" id="statusDot"></div>
+      <span class="status-label" id="statusLabel">idle</span>
+      <span class="status-time" id="statusTime">0ms</span>
+    </div>
+    <div class="trigger-stat" style="margin-top:8px">
+      <span class="vad">VAD: <span id="vadCount">0</span></span>
+      <span class="asr">ASR: <span id="asrCount">0</span></span>
+      <span>RT: <span id="triggerLatency">-</span></span>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <h3>模拟对话场景</h3>
+    <div id="scenario">
+      <strong>测试步骤：</strong><br>
+      1. 点击"开始模拟对话" → 助手开始朗读<br>
+      2. 朗读过程中 <strong>说一句话</strong>（如"等一下"、"我觉得不对"）<br>
+      3. 观察日志：VAD 应在 ~10-50ms 内触发，ASR 在 ~300-500ms 内触发<br>
+      4. TTS 应被立即打断，状态变为 listening<br>
+      5. 查看 <strong>console</strong> 获取完整 [BARGEIN] 日志
+    </div>
+  </div>
+
+  <div class="control-group">
+    <h3>操作</h3>
+    <div class="btn-row">
+      <button class="btn-primary" id="btnStartConversation" disabled>开始模拟对话</button>
+      <button class="btn-danger" id="btnStopTTS">停止 TTS</button>
+      <button class="btn-outline" id="btnClearLogs">清空日志</button>
+    </div>
+    <div style="margin-top:8px">
+      <button class="btn-success" id="btnTestVAD">测试 VAD 灵敏度</button>
+      <button class="btn-outline" id="btnTestASR" style="margin-left:4px">测试 ASR 单独</button>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <h3>参数</h3>
+    <label>VAD 阈值: <span id="vadThresholdLabel">0.10</span></label>
+    <input type="range" id="vadThreshold" min="0.02" max="0.30" step="0.01" value="0.10">
+    <label>VAD 连续帧数: <span id="vadFramesLabel">3</span></label>
+    <input type="range" id="vadFrames" min="1" max="10" step="1" value="3">
+    <label>模拟 TTS 语速: <span id="ttsRateLabel">1.0</span></label>
+    <input type="range" id="ttsRate" min="0.5" max="2.0" step="0.1" value="1.0">
+  </div>
+
+  <div class="control-group">
+    <h3>模拟对话内容</h3>
+    <label>TTS 朗读文本：</label>
+    <textarea id="ttsText" rows="4" style="width:100%;background:#0f0f13;color:#e0e0e0;border:1px solid #333;border-radius:4px;padding:6px;font-size:12px;resize:vertical">你好，欢迎来到 LAAP 语音对话测试。现在正在模拟连续对话场景，如果你听到这段话，可以尝试打断我说话，看看打断的灵敏度如何。这是一个端到端的语音对话测试。</textarea>
+  </div>
+</div>
+
+<!-- Log -->
+<div class="log-area">
+  <div class="log-header">
+    <h3>运行日志</h3>
+    <span id="logCount" style="font-size:11px;color:#666">0 条</span>
+  </div>
+  <div id="logContainer"></div>
+</div>
+
+</div>
+
+<script>
+// ============================================================================
+// Test Framework — Standalone Voice Barge-in Test
+// ============================================================================
+
+// ─── State ───
+const state = {
+  mode: 'idle', // idle | listening | speaking
+  bargeinActive: false,
+  vadTriggered: false,
+  asrTriggered: false,
+  vadCount: 0,
+  asrCount: 0,
+  lastTriggerTime: 0,
+  simulationRunning: false,
+};
+
+// ─── DOM refs ───
+const logContainer = document.getElementById('logContainer');
+const statusDot = document.getElementById('statusDot');
+const statusLabel = document.getElementById('statusLabel');
+const statusTime = document.getElementById('statusTime');
+const vadCountEl = document.getElementById('vadCount');
+const asrCountEl = document.getElementById('asrCount');
+const triggerLatency = document.getElementById('triggerLatency');
+const logCountEl = document.getElementById('logCount');
+
+// ─── Logging ───
+const startTs = performance.now();
+let logEntries = 0;
+
+function logToScreen(tag, message, cls = 'info') {
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  const elapsed = (performance.now() - startTs).toFixed(1);
+  entry.innerHTML = `<span class="ts">[+${elapsed}ms]</span> <span class="${cls}">[${tag}]</span> ${message}`;
+  logContainer.appendChild(entry);
+  logContainer.scrollTop = logContainer.scrollHeight;
+  logEntries++;
+  logCountEl.textContent = logEntries + ' 条';
+}
+
+function logToConsole(tag, ...args) {
+  const elapsed = (performance.now() - startTs).toFixed(1);
+  console.log(`%c[TEST][+${elapsed}ms]`, 'color:#f5a623', `[${tag}]`, ...args);
+}
+
+function logBoth(tag, message, cls = 'info') {
+  logToScreen(tag, message, cls);
+  logToConsole(tag, message);
+}
+
+// ─── Update State UI ───
+function updateStatus(mode, vad = state.vadTriggered, asr = state.asrTriggered) {
+  state.mode = mode;
+  statusDot.className = 'status-dot ' + mode;
+  statusLabel.textContent = mode;
+  statusTime.textContent = (performance.now() - startTs).toFixed(0) + 'ms';
+  vadCountEl.textContent = state.vadCount;
+  asrCountEl.textContent = state.asrCount;
+}
+
+// ============================================================================
+// Voice Activity Detector (same as useVoiceChat.ts)
+// ============================================================================
+
+class VoiceActivityDetector {
+  constructor(threshold = 0.10, requiredFrames = 3) {
+    this.threshold = threshold;
+    this.requiredFrames = requiredFrames;
+    this.stream = null;
+    this.audioCtx = null;
+    this.analyser = null;
+    this.dataArray = null;
+    this.rafId = null;
+    this.onVoiceDetected = null;
+    this.consecutiveFrames = 0;
+    this.running = false;
+  }
+
+  async start(onVoiceDetected) {
+    if (this.running) return;
+    this.onVoiceDetected = onVoiceDetected;
+    this.consecutiveFrames = 0;
+    try {
+      this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const source = this.audioCtx.createMediaStreamSource(this.stream);
+      this.analyser = this.audioCtx.createAnalyser();
+      this.analyser.fftSize = 256;
+      source.connect(this.analyser);
+      this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+      this.running = true;
+      logBoth('VAD', 'VoiceActivityDetector started (threshold=' + this.threshold + ', requiredFrames=' + this.requiredFrames + ')', 'vad');
+      this.poll();
+    } catch (err) {
+      logBoth('VAD', 'getUserMedia failed: ' + err.message, 'warn');
+    }
+  }
+
+  poll = () => {
+    if (!this.running || !this.analyser || !this.dataArray) return;
+    this.analyser.getByteTimeDomainData(this.dataArray);
+    let sumSquares = 0;
+    for (let i = 0; i < this.dataArray.length; i++) {
+      const normalized = (this.dataArray[i] - 128) / 128;
+      sumSquares += normalized * normalized;
+    }
+    const rms = Math.sqrt(sumSquares / this.dataArray.length);
+    if (rms > this.threshold) {
+      this.consecutiveFrames++;
+      if (this.consecutiveFrames >= this.requiredFrames && !state.vadTriggered) {
+        state.vadTriggered = true;
+        state.vadCount++;
+        const elapsed = (performance.now() - startTs).toFixed(0);
+        state.lastTriggerTime = performance.now();
+        logBoth('VAD', '<span class="highlight">VOICE DETECTED! rms=' + rms.toFixed(4) + ', frames=' + this.consecutiveFrames + '</span>', 'vad');
+        this.consecutiveFrames = 0;
+        this.onVoiceDetected?.();
+      }
+    } else {
+      this.consecutiveFrames = 0;
+    }
+    this.rafId = requestAnimationFrame(this.poll);
+  };
+
+  stop() {
+    if (!this.running) return;
+    this.running = false;
+    if (this.rafId) cancelAnimationFrame(this.rafId);
+    if (this.audioCtx) this.audioCtx.close().catch(() => {});
+    if (this.stream) this.stream.getTracks().forEach(t => t.stop());
+    this.analyser = null;
+    this.dataArray = null;
+    logBoth('VAD', 'VoiceActivityDetector stopped', 'vad');
+  }
+}
+
+// ============================================================================
+// Speech Recognition Wrapper
+// ============================================================================
+
+const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+function createBargeinASR(lang, onSpeech, onTranscript, onReady) {
+  if (!SpeechRecognitionAPI) return null;
+  const recognition = new SpeechRecognitionAPI();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = lang;
+
+  let triggered = false;
+  let warmedUp = false;
+
+  recognition.onstart = () => {
+    warmedUp = true;
+    logBoth('ASR', 'Barge-in ASR engine ready', 'asr');
+    onReady?.();
+  };
+
+  recognition.onresult = (event) => {
+    let hasSpeech = false;
+    let interimText = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const t = event.results[i][0].transcript.trim();
+      if (t.length > 0) {
+        hasSpeech = true;
+        interimText += t;
+        if (event.results[i].isFinal) {
+          onTranscript?.(t);
+        }
+      }
+    }
+    if (hasSpeech && !triggered) {
+      triggered = true;
+      state.asrTriggered = true;
+      state.asrCount++;
+      state.lastTriggerTime = performance.now();
+      const elapsed = (performance.now() - startTs).toFixed(0);
+      logBoth('ASR', '<span class="highlight">Barge-in triggered! text="' + interimText + '" (warmedUp=' + warmedUp + ')</span>', 'asr');
+      onSpeech?.(interimText);
+    }
+  };
+
+  recognition.onerror = (e) => {
+    logBoth('ASR', 'Error: ' + e.error + (e.message ? ' - ' + e.message : ''), 'warn');
+  };
+
+  recognition.onend = () => {
+    logBoth('ASR', 'Recognition ended (triggered=' + triggered + ')', 'asr');
+  };
+
+  return recognition;
+}
+
+// ============================================================================
+// TTS (simulate assistant speaking)
+// ============================================================================
+
+let currentTTS = null;
+
+function speakTTS(text, rate = 1.0) {
+  return new Promise((resolve) => {
+    if (!window.speechSynthesis) { resolve(); return; }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    utterance.rate = rate;
+    utterance.onend = () => { currentTTS = null; resolve(); };
+    utterance.onerror = () => { currentTTS = null; resolve(); };
+    currentTTS = utterance;
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
+function stopTTS() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  currentTTS = null;
+}
+
+// ============================================================================
+// Barge-in Controller
+// ============================================================================
+
+let vad = null;
+let asr = null;
+
+async function startBargein() {
+  if (state.bargeinActive) return;
+  state.bargeinActive = true;
+  state.vadTriggered = false;
+  state.asrTriggered = false;
+  state.vadCount = 0;
+  state.asrCount = 0;
+  vadCountEl.textContent = '0';
+  asrCountEl.textContent = '0';
+
+  logBoth('BARGEIN', '=== Barge-in started ===', 'info');
+
+  // ── Layer 1: VAD ──
+  const threshold = parseFloat(document.getElementById('vadThreshold').value);
+  const frames = parseInt(document.getElementById('vadFrames').value);
+  vad = new VoiceActivityDetector(threshold, frames);
+  await vad.start(() => {
+    if (state.mode === 'speaking') {
+      logBoth('BARGEIN', 'VAD triggered barge-in → cancelling TTS', 'highlight');
+      stopTTS();
+      updateStatus('listening');
+    }
+  });
+
+  // ── Layer 2: ASR ──
+  asr = createBargeinASR(
+    'zh-CN',
+    (text) => {
+      if (state.mode === 'speaking') {
+        logBoth('BARGEIN', 'ASR triggered barge-in → cancelling TTS', 'highlight');
+        stopTTS();
+        updateStatus('listening');
+      }
+    },
+    (finalText) => {
+      logBoth('ASR', 'Final transcript: <span class="transcript">"' + finalText + '"</span>', 'asr');
+    },
+    () => {
+      // ASR ready
+    }
+  );
+
+  if (asr) {
+    try {
+      asr.start();
+    } catch (e) {
+      logBoth('ASR', 'start() failed: ' + e.message, 'warn');
+    }
+  }
+}
+
+function stopBargein() {
+  state.bargeinActive = false;
+  if (vad) { vad.stop(); vad = null; }
+  if (asr) { try { asr.abort(); } catch {} asr = null; }
+  logBoth('BARGEIN', '=== Barge-in stopped ===', 'info');
+}
+
+// ============================================================================
+// Scenarios
+// ============================================================================
+
+async function runSimulatedConversation() {
+  if (state.simulationRunning) return;
+  state.simulationRunning = true;
+  document.getElementById('btnStartConversation').disabled = true;
+  document.getElementById('btnStartConversation').textContent = '模拟中...';
+
+  const ttsText = document.getElementById('ttsText').value.trim();
+  const rate = parseFloat(document.getElementById('ttsRate').value);
+  if (!ttsText) {
+    logBoth('SCENARIO', '错误：TTS 文本为空', 'warn');
+    state.simulationRunning = false;
+    document.getElementById('btnStartConversation').disabled = false;
+    document.getElementById('btnStartConversation').textContent = '开始模拟对话';
+    return;
+  }
+
+  logBoth('SCENARIO', '=== 模拟对话开始 ===', 'state');
+  logBoth('SCENARIO', '助手开始朗读，你可以随时打断...', 'state');
+
+  // Start barge-in
+  await startBargein();
+
+  // Speak TTS
+  updateStatus('speaking');
+  logBoth('TTS', 'TTS 开始朗读 (' + splitText(ttsText, 200).length + ' chunks)', 'tts');
+
+  const chunks = splitText(ttsText, 200);
+  for (let i = 0; i < chunks.length; i++) {
+    if (state.mode === 'listening' || state.mode === 'idle') {
+      logBoth('TTS', 'Chunk ' + i + ' 被跳过 (barge-in 打断)', 'tts');
+      break;
+    }
+    logBoth('TTS', '朗读 chunk ' + i + ': "' + truncate(chunks[i], 40) + '"', 'tts');
+    await speakTTS(chunks[i], rate);
+  }
+
+  if (state.mode === 'speaking') {
+    logBoth('TTS', 'TTS 朗读完毕（未被打断）', 'tts');
+    updateStatus('idle');
+  }
+
+  // Show latency
+  if (state.vadTriggered || state.asrTriggered) {
+    const lat = (state.lastTriggerTime - (performance.now() - (state.lastTriggerTime - startTs))).toFixed(0);
+    // Actually compute the latency properly
+    const firstTrigger = Math.min(
+      state.vadTriggered ? state.lastTriggerTime : Infinity,
+      state.asrTriggered ? state.lastTriggerTime : Infinity
+    );
+    if (firstTrigger !== Infinity) {
+      const latency = (firstTrigger - startTs).toFixed(0);
+      triggerLatency.textContent = latency + 'ms';
+      logBoth('SCENARIO', '🎯 打断延迟: VAD=' + (state.vadTriggered ? 'yes' : 'no') + ' ASR=' + (state.asrTriggered ? 'yes' : 'no') + ' 总延迟=' + latency + 'ms', 'highlight');
+    }
+  } else {
+    triggerLatency.textContent = '无打断';
+    logBoth('SCENARIO', '场景结束：未检测到用户打断', 'info');
+  }
+
+  // Stop barge-in
+  if (state.mode !== 'listening') {
+    stopBargein();
+  } else {
+    // Keep listening for a bit in case user continues speaking
+    logBoth('SCENARIO', '保持 listening 5秒等待更多输入...', 'info');
+    setTimeout(() => {
+      stopBargein();
+      if (state.mode === 'listening') updateStatus('idle');
+      logBoth('SCENARIO', '=== 模拟对话结束 ===', 'state');
+    }, 5000);
+  }
+
+  state.simulationRunning = false;
+  document.getElementById('btnStartConversation').disabled = false;
+  document.getElementById('btnStartConversation').textContent = '开始模拟对话';
+}
+
+function splitText(text, maxLen) {
+  const chunks = [];
+  let current = '';
+  for (const sentence of text.split(/(?<=[。！？.!?\n])/)) {
+    if ((current + sentence).length > maxLen && current) {
+      chunks.push(current.trim());
+      current = sentence;
+    } else {
+      current += sentence;
+    }
+  }
+  if (current.trim()) chunks.push(current.trim());
+  return chunks;
+}
+
+function truncate(s, n) {
+  return s.length > n ? s.slice(0, n) + '...' : s;
+}
+
+// ============================================================================
+// Test VAD Sensitivity
+// ============================================================================
+
+async function testVADSensitivity() {
+  const threshold = parseFloat(document.getElementById('vadThreshold').value);
+  const frames = parseInt(document.getElementById('vadFrames').value);
+  logBoth('TEST', '测试 VAD 灵敏度 (threshold=' + threshold + ', frames=' + frames + ')', 'info');
+  logBoth('TEST', '请对着麦克风说几句话，观察触发情况...', 'info');
+
+  state.vadCount = 0;
+  state.vadTriggered = false;
+  const testVad = new VoiceActivityDetector(threshold, frames);
+  await testVad.start(() => {
+    state.vadCount++;
+    state.vadTriggered = true;
+    const elapsed = (performance.now() - startTs).toFixed(0);
+    logBoth('TEST', 'VAD 触发! (count=' + state.vadCount + ')', 'highlight');
+    vadCountEl.textContent = state.vadCount;
+  });
+
+  // Auto-stop after 10 seconds
+  setTimeout(() => {
+    testVad.stop();
+    logBoth('TEST', 'VAD 灵敏度测试结束 (触发次数=' + state.vadCount + ')', 'info');
+  }, 10000);
+}
+
+// ============================================================================
+// Test ASR standalone
+// ============================================================================
+
+function testASRStandalone() {
+  if (!SpeechRecognitionAPI) {
+    logBoth('TEST', 'ASR 不支持 (需要 Chrome/Edge)', 'warn');
+    return;
+  }
+  logBoth('TEST', '测试 ASR 单独识别 (无 VAD)', 'info');
+  logBoth('TEST', '请说话，观察 ASR 识别结果...', 'info');
+
+  const recognition = new SpeechRecognitionAPI();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = 'zh-CN';
+
+  recognition.onresult = (event) => {
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const t = event.results[i][0].transcript.trim();
+      if (t.length > 0) {
+        const elapsed = (performance.now() - startTs).toFixed(0);
+        if (event.results[i].isFinal) {
+          logBoth('TEST', 'ASR final: <span class="transcript">"' + t + '"</span> (' + elapsed + 'ms)', 'asr');
+        } else {
+          logBoth('TEST', 'ASR interim: "' + t + '" (' + elapsed + 'ms)', 'asr');
+        }
+      }
+    }
+  };
+
+  recognition.onerror = (e) => {
+    logBoth('TEST', 'ASR error: ' + e.error, 'warn');
+  };
+
+  recognition.onend = () => {
+    logBoth('TEST', 'ASR 识别结束', 'asr');
+  };
+
+  try {
+    recognition.start();
+    setTimeout(() => {
+      try { recognition.stop(); } catch {}
+      logBoth('TEST', 'ASR 测试结束 (10秒超时)', 'info');
+    }, 10000);
+  } catch (e) {
+    logBoth('TEST', 'ASR start failed: ' + e.message, 'warn');
+  }
+}
+
+// ============================================================================
+// Event Bindings
+// ============================================================================
+
+document.getElementById('btnStartConversation').addEventListener('click', runSimulatedConversation);
+document.getElementById('btnStopTTS').addEventListener('click', () => {
+  stopTTS();
+  stopBargein();
+  if (state.mode === 'speaking') updateStatus('idle');
+  logBoth('CTRL', '手动停止 TTS', 'warn');
+});
+document.getElementById('btnClearLogs').addEventListener('click', () => {
+  logContainer.innerHTML = '';
+  logEntries = 0;
+  logCountEl.textContent = '0 条';
+  console.clear();
+});
+document.getElementById('btnTestVAD').addEventListener('click', testVADSensitivity);
+document.getElementById('btnTestASR').addEventListener('click', testASRStandalone);
+
+// Parameter sliders
+document.getElementById('vadThreshold').addEventListener('input', (e) => {
+  document.getElementById('vadThresholdLabel').textContent = parseFloat(e.target.value).toFixed(2);
+});
+document.getElementById('vadFrames').addEventListener('input', (e) => {
+  document.getElementById('vadFramesLabel').textContent = e.target.value;
+});
+document.getElementById('ttsRate').addEventListener('input', (e) => {
+  document.getElementById('ttsRateLabel').textContent = parseFloat(e.target.value).toFixed(1);
+});
+
+// ─── Init ───
+logBoth('INIT', '测试页面加载完成', 'info');
+logBoth('INIT', 'SpeechRecognition: ' + (SpeechRecognitionAPI ? '可用' : '不可用'), 'info');
+logBoth('INIT', 'SpeechSynthesis: ' + (window.speechSynthesis ? '可用' : '不可用'), 'info');
+updateStatus('idle');
+
+// Check browser support
+if (!SpeechRecognitionAPI) {
+  logBoth('INIT', '⚠ 请使用 Chrome 或 Edge 浏览器', 'warn');
+  document.getElementById('btnStartConversation').disabled = true;
+} else {
+  document.getElementById('btnStartConversation').disabled = false;
+}
+</script>
+
+</body>
+</html>

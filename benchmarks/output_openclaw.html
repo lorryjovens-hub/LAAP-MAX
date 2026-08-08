@@ -1,0 +1,354 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Timer</title>
+  <style>
+    /* ─── Reset & Base ─── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+    }
+
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* ─── Title ─── */
+    h1 {
+      font-weight: 300;
+      font-size: 2rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      color: #bb86fc;
+    }
+
+    /* ─── Circle ─── */
+    .timer-wrapper {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .timer-wrapper svg {
+      transform: rotate(-90deg);
+      width: 280px;
+      height: 280px;
+    }
+
+    /* background ring */
+    .bg-ring {
+      fill: none;
+      stroke: #2a2a2a;
+      stroke-width: 6;
+    }
+
+    /* progress ring (circular countdown) */
+    .progress-ring {
+      fill: none;
+      stroke: #bb86fc;
+      stroke-width: 6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.35s ease, stroke 0.35s ease;
+    }
+
+    /* center time display */
+    .time-display {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.2rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .time-display .phase-label {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    /* ─── Buttons ─── */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1.5px solid #bb86fc;
+      color: #bb86fc;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 0.6rem 1.8rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn:hover {
+      background: #bb86fc;
+      color: #121212;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: #bb86fc;
+      color: #121212;
+      min-width: 130px;
+    }
+
+    .btn-primary:hover {
+      background: #ce93fd;
+      border-color: #ce93fd;
+    }
+
+    .btn-danger {
+      border-color: #cf6679;
+      color: #cf6679;
+    }
+
+    .btn-danger:hover {
+      background: #cf6679;
+      color: #121212;
+    }
+
+    /* ─── Session counter ─── */
+    .session-count {
+      margin-top: 1.8rem;
+      font-size: 0.85rem;
+      color: #666;
+      letter-spacing: 1px;
+    }
+
+    .session-count span {
+      color: #bb86fc;
+      font-weight: 600;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 400px) {
+      .timer-wrapper {
+        width: 220px;
+        height: 220px;
+      }
+      .timer-wrapper svg {
+        width: 220px;
+        height: 220px;
+      }
+      .time-display {
+        font-size: 2.4rem;
+      }
+      .btn {
+        font-size: 0.8rem;
+        padding: 0.45rem 1.2rem;
+      }
+      .btn-primary {
+        min-width: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Pomodoro</h1>
+
+  <!-- ─── Circular Timer ─── -->
+  <div class="timer-wrapper">
+    <svg viewBox="0 0 280 280">
+      <!-- Background ring -->
+      <circle
+        class="bg-ring"
+        cx="140"
+        cy="140"
+        r="125"
+      />
+      <!-- Progress ring – circumference = 2 * π * 125 ≈ 785.4 -->
+      <circle
+        class="progress-ring"
+        id="progress"
+        cx="140"
+        cy="140"
+        r="125"
+        stroke-dasharray="785.4"
+        stroke-dashoffset="0"
+      />
+    </svg>
+
+    <div class="time-display">
+      <span id="timer">25:00</span>
+      <span class="phase-label" id="phaseLabel">Focus</span>
+    </div>
+  </div>
+
+  <!-- ─── Controls ─── -->
+  <div class="controls">
+    <button class="btn btn-primary" id="startPauseBtn">Start</button>
+    <button class="btn btn-danger" id="resetBtn">Reset</button>
+  </div>
+
+  <!-- ─── Session counter ─── -->
+  <div class="session-count">
+    Sessions completed: <span id="sessionCount">0</span>
+  </div>
+</div>
+
+<script>
+  (() => {
+    /* ─── Configuration ─── */
+    const FOCUS_TIME = 25 * 60;   // 25 minutes
+    const BREAK_TIME = 5 * 60;    // 5 minutes
+
+    const CIRCUMFERENCE = 2 * Math.PI * 125; // ≈ 785.4
+
+    /* ─── DOM references ─── */
+    const timerEl      = document.getElementById('timer');
+    const phaseLabel   = document.getElementById('phaseLabel');
+    const progressRing = document.getElementById('progress');
+    const startPauseBtn = document.getElementById('startPauseBtn');
+    const resetBtn     = document.getElementById('resetBtn');
+    const sessionCountEl = document.getElementById('sessionCount');
+
+    /* ─── State ─── */
+    let state = {
+      timeLeft: FOCUS_TIME,
+      totalTime: FOCUS_TIME,
+      phase: 'focus',           // 'focus' | 'break'
+      running: false,
+      sessionCount: 0,
+      intervalId: null,
+    };
+
+    /* ─── Helper: format mm:ss ─── */
+    const formatTime = (seconds) => {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    };
+
+    /* ─── Update the UI (time, ring, label) ─── */
+    const updateUI = () => {
+      timerEl.textContent = formatTime(state.timeLeft);
+
+      const offset = CIRCUMFERENCE - (state.timeLeft / state.totalTime) * CIRCUMFERENCE;
+      progressRing.style.strokeDashoffset = offset;
+
+      phaseLabel.textContent = state.phase === 'focus' ? 'Focus' : 'Break';
+
+      /* colour the ring */
+      progressRing.style.stroke = state.phase === 'focus' ? '#bb86fc' : '#03dac6';
+
+      startPauseBtn.textContent = state.running ? 'Pause' : 'Start';
+    };
+
+    /* ─── Switch phase ─── */
+    const switchPhase = () => {
+      if (state.phase === 'focus') {
+        state.phase = 'break';
+        state.totalTime = BREAK_TIME;
+        state.timeLeft = BREAK_TIME;
+        state.sessionCount += 1;
+        sessionCountEl.textContent = state.sessionCount;
+      } else {
+        state.phase = 'focus';
+        state.totalTime = FOCUS_TIME;
+        state.timeLeft = FOCUS_TIME;
+      }
+      updateUI();
+    };
+
+    /* ─── Tick every second ─── */
+    const tick = () => {
+      state.timeLeft -= 1;
+
+      if (state.timeLeft <= 0) {
+        /* time's up → switch phase */
+        switchPhase();
+        /* keep running into the next phase */
+      }
+
+      updateUI();
+    };
+
+    /* ─── Start the interval ─── */
+    const startTimer = () => {
+      if (state.intervalId) return;
+      state.running = true;
+      state.intervalId = setInterval(tick, 1000);
+      updateUI();
+    };
+
+    /* ─── Pause the interval ─── */
+    const pauseTimer = () => {
+      if (state.intervalId) {
+        clearInterval(state.intervalId);
+        state.intervalId = null;
+      }
+      state.running = false;
+      updateUI();
+    };
+
+    /* ─── Toggle start / pause ─── */
+    const toggleStartPause = () => {
+      if (state.running) {
+        pauseTimer();
+      } else {
+        startTimer();
+      }
+    };
+
+    /* ─── Full reset (back to focus, 25:00, stopped) ─── */
+    const resetTimer = () => {
+      pauseTimer();               // stop & clear interval
+      state.phase = 'focus';
+      state.totalTime = FOCUS_TIME;
+      state.timeLeft = FOCUS_TIME;
+      updateUI();
+    };
+
+    /* ─── Attach event listeners ─── */
+    startPauseBtn.addEventListener('click', toggleStartPause);
+    resetBtn.addEventListener('click', resetTimer);
+
+    /* ─── Initial render ─── */
+    updateUI();
+  })();
+</script>
+
+</body>
+</html>
+```

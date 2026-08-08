@@ -1,0 +1,10 @@
+{
+  "id": "oh-vision",
+  "displayName": "oh-vision",
+  "authType": "api-key",
+  "defaultBaseUrl": "http://127.0.0.1:11434",
+  "defaultApi": "openai-completions",
+  "models": [
+    "moondream:latest"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "_id": "142a30be8c8194937c402d01",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 32,
+  "lamport": 1784904155.2496996,
+  "parents": [
+    "516f656bc13eb167b1ea094c"
+  ],
+  "payload": {
+    "user": "",
+    "assistant": "我看到你在飞书上讨论SKILLGRAPH了",
+    "length": 21
+  },
+  "ttl_days": 0.0
+}

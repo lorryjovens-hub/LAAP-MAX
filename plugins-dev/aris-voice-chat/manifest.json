@@ -1,0 +1,94 @@
+{
+  "manifestVersion": 1,
+  "id": "aris-voice-chat",
+  "name": "Aris 语音通话",
+  "version": "0.1.0",
+  "description": "端到端语音对话（Speech-to-Speech）— 基于 HuggingFace speech-to-speech，像打电话一样和 Aris 实时交谈",
+  "trust": "full-access",
+  "activationEvents": ["onStartup"],
+  "capabilities": [],
+  "contributes": {
+    "page": {
+      "title": {
+        "zh": "语音通话",
+        "en": "Voice Chat"
+      },
+      "route": "/voice-chat",
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z\"/><path d=\"M19 10v2a7 7 0 0 1-14 0v-2\"/><line x1=\"12\" y1=\"19\" x2=\"12\" y2=\"22\"/><path d=\"M8 22h8\"/><path d=\"M5 5a10 10 0 0 0 14 0\"/></svg>"
+    },
+    "configuration": {
+      "properties": {
+        "s2sPort": {
+          "type": "number",
+          "title": "S2S 服务端口",
+          "description": "speech-to-speech 服务监听端口",
+          "default": 8765,
+          "ui": { "control": "text" }
+        },
+        "llmBackend": {
+          "type": "string",
+          "title": "LLM 后端",
+          "description": "responses-api / chat-completions / transformers / mlx-lm",
+          "default": "responses-api",
+          "ui": { "control": "text" }
+        },
+        "modelName": {
+          "type": "string",
+          "title": "LLM 模型",
+          "description": "对话模型 (如 deepseek-chat, gpt-4o-mini, Qwen3-4B)",
+          "default": "deepseek-chat",
+          "ui": { "control": "text" }
+        },
+        "sttBackend": {
+          "type": "string",
+          "title": "STT 后端",
+          "description": "parakeet-tdt / whisper / faster-whisper / paraformer",
+          "default": "faster-whisper",
+          "ui": { "control": "text" }
+        },
+        "ttsBackend": {
+          "type": "string",
+          "title": "TTS 后端",
+          "description": "qwen3 / kokoro / pocket / chattts",
+          "default": "qwen3",
+          "ui": { "control": "text" }
+        },
+        "language": {
+          "type": "string",
+          "title": "对话语言",
+          "description": "zh / en / auto",
+          "default": "zh",
+          "ui": { "control": "text" }
+        },
+        "responsesApiBaseUrl": {
+          "type": "string",
+          "title": "LLM API Base URL",
+          "description": "OpenAI 兼容 API 地址",
+          "default": "",
+          "ui": { "control": "text" }
+        },
+        "responsesApiApiKey": {
+          "type": "string",
+          "title": "LLM API Key",
+          "description": "OpenAI 兼容 API 密钥",
+          "default": "",
+          "ui": { "control": "password" }
+        },
+        "voice": {
+          "type": "string",
+          "title": "语音",
+          "description": "TTS 语音 (如 Aiden, af_bella)",
+          "default": "Aiden",
+          "ui": { "control": "text" }
+        },
+        "instructions": {
+          "type": "string",
+          "title": "系统提示词",
+          "description": "对话指令，保持简短口语化",
+          "default": "You are a friendly voice assistant named Aris. Keep replies short, warm, and spoken. Avoid long monologues. Reply in the same language the user speaks.",
+          "ui": { "control": "textarea" }
+        }
+      }
+    }
+  }
+}

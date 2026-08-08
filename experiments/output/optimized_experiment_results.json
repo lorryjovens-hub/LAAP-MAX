@@ -1,0 +1,544 @@
+{
+  "report": {
+    "experiment_count": 28,
+    "scenarios": [
+      "代码生成",
+      "文本摘要",
+      "问答",
+      "创意写作"
+    ],
+    "harness": {
+      "count": 14,
+      "total_tokens": 1145,
+      "avg_tokens": 81.79,
+      "avg_latency_ms": 0.0,
+      "avg_quality": 0.83,
+      "scenarios": "{'创意写作', '代码生成', '文本摘要', '问答'}"
+    },
+    "traditional": {
+      "count": 14,
+      "total_tokens": 384,
+      "avg_tokens": 27.43,
+      "avg_latency_ms": 0.0,
+      "avg_quality": 0.5,
+      "scenarios": "{'创意写作', '代码生成', '文本摘要', '问答'}"
+    },
+    "comparison": {
+      "tokens_reduction_percent": -198.18,
+      "tokens_reduction_ratio": 0.34,
+      "harness_avg_tokens": 81.79,
+      "traditional_avg_tokens": 27.43
+    }
+  },
+  "experiments": [
+    {
+      "experiment_id": "exp_aecb95af",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 58,
+      "output_tokens": 0,
+      "total_tokens": 58,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.84,
+      "quality_details": {
+        "overall": 0.84
+      },
+      "timestamp": 1783076789.1711912,
+      "harness_context_size": 40
+    },
+    {
+      "experiment_id": "exp_dc4b54ea",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 17,
+      "output_tokens": 0,
+      "total_tokens": 17,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1712184,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_c5918500",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 60,
+      "output_tokens": 0,
+      "total_tokens": 60,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.84,
+      "quality_details": {
+        "overall": 0.84
+      },
+      "timestamp": 1783076789.171336,
+      "harness_context_size": 41
+    },
+    {
+      "experiment_id": "exp_53c8fe7b",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 18,
+      "output_tokens": 0,
+      "total_tokens": 18,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1713603,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_9e98e898",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 50,
+      "output_tokens": 0,
+      "total_tokens": 50,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.84,
+      "quality_details": {
+        "overall": 0.84
+      },
+      "timestamp": 1783076789.171455,
+      "harness_context_size": 36
+    },
+    {
+      "experiment_id": "exp_a13a0845",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 13,
+      "output_tokens": 0,
+      "total_tokens": 13,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1714754,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_3371d2a4",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 50,
+      "output_tokens": 0,
+      "total_tokens": 50,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.84,
+      "quality_details": {
+        "overall": 0.84
+      },
+      "timestamp": 1783076789.1716032,
+      "harness_context_size": 36
+    },
+    {
+      "experiment_id": "exp_d4ce399c",
+      "scenario": "代码生成",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 13,
+      "output_tokens": 0,
+      "total_tokens": 13,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1716273,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_c00b9c45",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 225,
+      "output_tokens": 0,
+      "total_tokens": 225,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.8049999999999999,
+      "quality_details": {
+        "overall": 0.8049999999999999
+      },
+      "timestamp": 1783076789.1720128,
+      "harness_context_size": 128
+    },
+    {
+      "experiment_id": "exp_e9256e8f",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 97,
+      "output_tokens": 0,
+      "total_tokens": 97,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1721027,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_c603ae06",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 179,
+      "output_tokens": 0,
+      "total_tokens": 179,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.8049999999999999,
+      "quality_details": {
+        "overall": 0.8049999999999999
+      },
+      "timestamp": 1783076789.1723623,
+      "harness_context_size": 105
+    },
+    {
+      "experiment_id": "exp_40a7ac13",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 74,
+      "output_tokens": 0,
+      "total_tokens": 74,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1724274,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_7b5c88fe",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 151,
+      "output_tokens": 0,
+      "total_tokens": 151,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.8049999999999999,
+      "quality_details": {
+        "overall": 0.8049999999999999
+      },
+      "timestamp": 1783076789.1726367,
+      "harness_context_size": 91
+    },
+    {
+      "experiment_id": "exp_7aa91ddb",
+      "scenario": "文本摘要",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 60,
+      "output_tokens": 0,
+      "total_tokens": 60,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.172687,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_71382480",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 56,
+      "output_tokens": 0,
+      "total_tokens": 56,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.875,
+      "quality_details": {
+        "overall": 0.875
+      },
+      "timestamp": 1783076789.1727936,
+      "harness_context_size": 40
+    },
+    {
+      "experiment_id": "exp_7c017991",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 16,
+      "output_tokens": 0,
+      "total_tokens": 16,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1728134,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_db2ce0e7",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 47,
+      "output_tokens": 0,
+      "total_tokens": 47,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.875,
+      "quality_details": {
+        "overall": 0.875
+      },
+      "timestamp": 1783076789.1729047,
+      "harness_context_size": 35
+    },
+    {
+      "experiment_id": "exp_127fe7f2",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 11,
+      "output_tokens": 0,
+      "total_tokens": 11,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1729221,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_9794fdfd",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 50,
+      "output_tokens": 0,
+      "total_tokens": 50,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.875,
+      "quality_details": {
+        "overall": 0.875
+      },
+      "timestamp": 1783076789.1730163,
+      "harness_context_size": 37
+    },
+    {
+      "experiment_id": "exp_12fd9541",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 13,
+      "output_tokens": 0,
+      "total_tokens": 13,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1730363,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_2e3c7ceb",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 47,
+      "output_tokens": 0,
+      "total_tokens": 47,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.875,
+      "quality_details": {
+        "overall": 0.875
+      },
+      "timestamp": 1783076789.1731162,
+      "harness_context_size": 35
+    },
+    {
+      "experiment_id": "exp_216d0ec6",
+      "scenario": "问答",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 11,
+      "output_tokens": 0,
+      "total_tokens": 11,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1731477,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_db1da49f",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 48,
+      "output_tokens": 0,
+      "total_tokens": 48,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.77,
+      "quality_details": {
+        "overall": 0.77
+      },
+      "timestamp": 1783076789.1732376,
+      "harness_context_size": 38
+    },
+    {
+      "experiment_id": "exp_c7c396bf",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 9,
+      "output_tokens": 0,
+      "total_tokens": 9,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1732514,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_54718cc7",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 66,
+      "output_tokens": 0,
+      "total_tokens": 66,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.77,
+      "quality_details": {
+        "overall": 0.77
+      },
+      "timestamp": 1783076789.1733387,
+      "harness_context_size": 47
+    },
+    {
+      "experiment_id": "exp_e5389e55",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 18,
+      "output_tokens": 0,
+      "total_tokens": 18,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1733563,
+      "harness_context_size": 0
+    },
+    {
+      "experiment_id": "exp_1b3a2f46",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": true,
+      "input_tokens": 58,
+      "output_tokens": 0,
+      "total_tokens": 58,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.77,
+      "quality_details": {
+        "overall": 0.77
+      },
+      "timestamp": 1783076789.1734402,
+      "harness_context_size": 43
+    },
+    {
+      "experiment_id": "exp_6e73081d",
+      "scenario": "创意写作",
+      "iteration": 0,
+      "use_harness": false,
+      "input_tokens": 14,
+      "output_tokens": 0,
+      "total_tokens": 14,
+      "latency_ms": 0.0,
+      "task_quality_score": 0.5,
+      "quality_details": {
+        "overall": 0.5
+      },
+      "timestamp": 1783076789.1734564,
+      "harness_context_size": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "代码生成",
+      "description": "生成Python代码解决特定问题",
+      "tasks": [
+        "生成一个Python函数，计算斐波那契数列的第n项",
+        "生成一个Python类，实现二叉树的前序、中序、后序遍历",
+        "生成一个Python脚本，读取CSV文件并计算统计信息",
+        "生成一个REST API服务，使用FastAPI实现用户CRUD操作"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    },
+    {
+      "name": "文本摘要",
+      "description": "对长文本进行摘要",
+      "tasks": [
+        "摘要：人工智能（Artificial Intelligence，AI）是计算机科学的一个分支，致力于研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统。人工智能是一门极富挑战性的科学，从事这项工作的人必须懂得计算机知识、心理学和哲学。人工智能是包括十分广泛的科学，它由不同的领域组成，如机器学习、计算机视觉等等。",
+        "摘要：机器学习是人工智能的核心，它是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演绎。机器学习的核心是学习算法，通过学习算法，计算机可以从数据中学习规律，从而对未知数据进行预测或决策。",
+        "摘要：深度学习是机器学习的一个分支，它使用多层神经网络来模拟人脑的学习过程。深度学习在图像识别、语音识别、自然语言处理等领域取得了突破性进展，是当前人工智能研究的热点。"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    },
+    {
+      "name": "问答",
+      "description": "回答技术问题",
+      "tasks": [
+        "什么是机器学习中的过拟合？如何防止过拟合？",
+        "解释神经网络中的反向传播算法原理",
+        "什么是Transformer架构？它与RNN有什么区别？",
+        "解释什么是梯度下降算法及其变种"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    },
+    {
+      "name": "创意写作",
+      "description": "生成创意文本",
+      "tasks": [
+        "写一首关于人工智能未来的诗",
+        "写一个简短的科幻故事，描述AI与人类的友谊",
+        "写一段关于数字生命诞生的哲学思考"
+      ],
+      "quality_dimensions": [
+        "correctness",
+        "completeness",
+        "relevance"
+      ]
+    }
+  ],
+  "timestamp": 1783076789.1735332
+}

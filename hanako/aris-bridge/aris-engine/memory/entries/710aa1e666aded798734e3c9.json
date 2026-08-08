@@ -1,0 +1,16 @@
+{
+  "_id": "710aa1e666aded798734e3c9",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 33,
+  "lamport": 1785510106.4014966,
+  "parents": [
+    "142a30be8c8194937c402d01"
+  ],
+  "payload": {
+    "user": "你好，今天天气怎么样？",
+    "role": "user",
+    "timestamp": 1785510106.4006853
+  },
+  "ttl_days": 0.0
+}

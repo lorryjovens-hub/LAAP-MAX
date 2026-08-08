@@ -1,0 +1,27 @@
+{
+  "id": "sensenova ai",
+  "displayName": "sensenova ai",
+  "authType": "api-key",
+  "defaultBaseUrl": "https://token.sensenova.cn/v1",
+  "defaultApi": "openai-completions",
+  "models": [
+    {
+      "id": "glm-5.2",
+      "context": 429001,
+      "name": "GLM-5.2",
+      "maxOutput": 131072
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "context": 1048576
+    },
+    {
+      "id": "sensenova-u1-fast",
+      "context": 262144
+    },
+    {
+      "id": "sensenova-6.7-flash-lite",
+      "context": 262144
+    }
+  ]
+}

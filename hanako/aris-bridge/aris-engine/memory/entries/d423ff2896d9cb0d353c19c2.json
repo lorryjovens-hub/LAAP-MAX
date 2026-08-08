@@ -1,0 +1,16 @@
+{
+  "_id": "d423ff2896d9cb0d353c19c2",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 20,
+  "lamport": 1784732821.5247831,
+  "parents": [
+    "dfc06dc8eb863d6816bd0120"
+  ],
+  "payload": {
+    "user": "",
+    "assistant": "欢迎回来宝贝",
+    "length": 6
+  },
+  "ttl_days": 0.0
+}

@@ -1,0 +1,41 @@
+{
+  "n_layers": 16,
+  "source_layers": [
+    {
+      "name": "embedding",
+      "idx": 0
+    },
+    {
+      "name": "early_attn",
+      "idx": 2
+    },
+    {
+      "name": "mid_attn",
+      "idx": 8
+    },
+    {
+      "name": "late_attn",
+      "idx": 14
+    }
+  ],
+  "shapes": [
+    [
+      32,
+      32
+    ],
+    [
+      32,
+      32
+    ],
+    [
+      32,
+      32
+    ],
+    [
+      32,
+      32
+    ]
+  ],
+  "epsilon": 0.001,
+  "method": "finite_difference"
+}

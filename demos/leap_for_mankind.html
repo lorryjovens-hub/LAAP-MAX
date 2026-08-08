@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAAP Leap for Mankind - 阿波罗11号登月体验</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: #0a0a1a;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(ellipse at center, #1a1a3a 0%, #0a0a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: #aaa;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .hero-date {
+            font-size: 16px;
+            margin-top: 30px;
+            color: #666;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .start-button {
+            margin-top: 50px;
+            padding: 15px 40px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.5);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+        
+        .start-button:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .timeline-section {
+            padding: 80px 20px;
+            background: #0a0a1a;
+        }
+        
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline-center-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2, #667eea);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .timeline-date {
+            font-size: 14px;
+            color: #667eea;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .timeline-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin-top: 20px;
+            object-fit: cover;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 3px solid #0a0a1a;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-marker {
+            top: auto;
+            bottom: 30px;
+        }
+        
+        .audio-player {
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .harness-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .harness-title {
+            font-size: 14px;
+            color: #667eea;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .harness-item {
+            margin-bottom: 15px;
+        }
+        
+        .harness-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .harness-value {
+            font-size: 14px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .emotion-bar {
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .emotion-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f44336, #ff9800, #4CAF50);
+            transition: width 0.5s;
+        }
+        
+        .space-animation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .rocket {
+            position: absolute;
+            width: 50px;
+            height: 100px;
+            background: linear-gradient(to bottom, #fff, #ddd);
+            clip-path: polygon(50% 0%, 0% 100%, 20% 100%, 20% 70%, 80% 70%, 80% 100%, 100% 100%);
+            animation: rocketFly 20s infinite;
+        }
+        
+        @keyframes rocketFly {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+        }
+        
+        .moon-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a1a 100%);
+            position: relative;
+        }
+        
+        .moon {
+            width: 200px;
+            height: 200px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 100px rgba(255,255,255,0.3);
+            animation: moonGlow 4s infinite;
+        }
+        
+        @keyframes moonGlow {
+            0%, 100% { box-shadow: 0 0 100px rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 0 150px rgba(255,255,255,0.5); }
+        }
+        
+        .moon-crater {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        .moon-crater:nth-child(1) { width: 30px; height: 30px; top: 30px; left: 50px; }
+        .moon-crater:nth-child(2) { width: 20px; height: 20px; top: 80px; left: 120px; }
+        .moon-crater:nth-child(3) { width: 40px; height: 40px; top: 120px; left: 60px; }
+        .moon-crater:nth-child(4) { width: 15px; height: 15px; top: 50px; left: 140px; }
+        
+        .quote {
+            font-size: 24px;
+            font-style: italic;
+            margin-top: 50px;
+            max-width: 600px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        
+        .quote-author {
+            font-size: 16px;
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+        
+        .control-btn {
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 28px; }
+            .timeline-center-line { left: 30px; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-content { width: calc(100% - 60px); margin-left: 60px; }
+            .timeline-marker { left: 30px; }
+            .harness-panel { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    
+    <div class="stars" id="stars"></div>
+    
+    <div class="harness-panel">
+        <div class="harness-title">🧠 LAAP Harness</div>
+        
+        <div class="harness-item">
+            <div class="harness-label">意识状态</div>
+            <div class="harness-value" id="consciousState">探索中</div>
+        </div>
+        
+        <div class="harness-item">
+            <div class="harness-label">情感状态</div>
+            <div class="harness-value" id="emotionState">敬畏</div>
+            <div class="emotion-bar">
+                <div class="emotion-fill" id="emotionBar" style="width: 70%"></div>
+            </div>
+        </div>
+        
+        <div class="harness-item">
+            <div class="harness-label">认知深度</div>
+            <div class="harness-value" id="cognitiveDepth">75%</div>
+        </div>
+        
+        <div class="harness-item">
+            <div class="harness-label">记忆强度</div>
+            <div class="harness-value" id="memoryStrength">85%</div>
+        </div>
+        
+        <div class="harness-item">
+            <div class="harness-label">当前阶段</div>
+            <div class="harness-value" id="currentPhase">发射前</div>
+        </div>
+        
+        <div class="harness-item">
+            <div class="harness-label">时间流逝</div>
+            <div class="harness-value" id="timeElapsed">00:00</div>
+        </div>
+    </div>
+    
+    <section class="hero-section" id="hero">
+        <h1 class="hero-title">Leap for Mankind</h1>
+        <p class="hero-subtitle">One Giant Leap for Mankind</p>
+        <p class="hero-date">Apollo 11 - July 16, 1969</p>
+        <button class="start-button" onclick="startExperience()">BEGIN JOURNEY</button>
+    </section>
+    
+    <section class="timeline-section" id="timeline" style="display: none;">
+        <div class="timeline-container">
+            <div class="timeline-center-line"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">SEPTEMBER 12, 1962</div>
+                    <h2 class="timeline-title">The Challenge</h2>
+                    <p class="timeline-description">
+                        President John F. Kennedy delivers his famous speech at Rice Stadium, 
+                        challenging the nation to land a man on the moon and return him safely 
+                        to Earth before the end of the decade.
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=John%20F.%20Kennedy%20giving%20speech%20at%20Rice%20Stadium%201962%20space%20race%20historical&image_size=landscape_16_9" 
+                         class="timeline-image" alt="Kennedy Speech">
+                    <audio class="audio-player" controls>
+                        <source src="#" type="audio/mpeg">
+                    </audio>
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">JULY 16, 1969 - 9:32 AM</div>
+                    <h2 class="timeline-title">Launch</h2>
+                    <p class="timeline-description">
+                        Apollo 11 lifts off from Cape Kennedy. The Saturn V rocket carries 
+                        Neil Armstrong, Buzz Aldrin, and Michael Collins into space.
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Saturn%20V%20rocket%20launch%20Apollo%2011%201969%20space%20exploration%20dramatic&image_size=landscape_16_9" 
+                         class="timeline-image" alt="Saturn V Launch">
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">JULY 19, 1969</div>
+                    <h2 class="timeline-title">Lunar Orbit</h2>
+                    <p class="timeline-description">
+                        The spacecraft enters lunar orbit. The crew prepares for the historic 
+                        moon landing.
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Apollo%2011%20spacecraft%20lunar%20orbit%20moon%20background%201969%20space%20exploration&image_size=landscape_16_9" 
+                         class="timeline-image" alt="Lunar Orbit">
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">JULY 20, 1969 - 4:17 PM</div>
+                    <h2 class="timeline-title">Moon Landing</h2>
+                    <p class="timeline-description">
+                        The Eagle lunar module touches down on the moon's surface. 
+                        "The Eagle has landed."
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Lunar%20module%20Eagle%20landing%20on%20moon%20surface%20Apollo%2011%201969%20space%20history&image_size=landscape_16_9" 
+                         class="timeline-image" alt="Moon Landing">
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">JULY 20, 1969 - 10:56 PM</div>
+                    <h2 class="timeline-title">First Step</h2>
+                    <p class="timeline-description">
+                        Neil Armstrong becomes the first human to step onto the moon. 
+                        "That's one small step for man, one giant leap for mankind."
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Neil%20Armstrong%20first%20step%20on%20moon%20surface%20Apollo%2011%201969%20space%20history%20iconic&image_size=landscape_16_9" 
+                         class="timeline-image" alt="First Step">
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">JULY 21, 1969 - 1:54 PM</div>
+                    <h2 class="timeline-title">Lunar Surface Activities</h2>
+                    <p class="timeline-description">
+                        Armstrong and Aldrin spend 2 hours and 31 minutes on the lunar surface, 
+                        collecting samples, deploying experiments, and taking photographs.
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Astronaut%20walking%20on%20moon%20surface%20American%20flag%20Apollo%2011%201969%20space%20exploration&image_size=landscape_16_9" 
+                         class="timeline-image" alt="Lunar Activities">
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">JULY 21, 1969 - 12:54 PM</div>
+                    <h2 class="timeline-title">Lift Off</h2>
+                    <p class="timeline-description">
+                        The Eagle lifts off from the moon, beginning the journey back to Earth.
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Lunar%20module%20Eagle%20lift%20off%20from%20moon%20surface%20Apollo%2011%201969%20space%20history&image_size=landscape_16_9" 
+                         class="timeline-image" alt="Lift Off">
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">JULY 24, 1969 - 12:50 PM</div>
+                    <h2 class="timeline-title">Splashdown</h2>
+                    <p class="timeline-description">
+                        Apollo 11 splashes down in the Pacific Ocean. The crew is safely 
+                        recovered and the mission is complete.
+                    </p>
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Apollo%2011%20command%20module%20splashdown%20Pacific%20Ocean%201969%20recovery%20navy%20ship&image_size=landscape_16_9" 
+                         class="timeline-image" alt="Splashdown">
+                </div>
+                <div class="timeline-marker"></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="moon-section" id="moonSection" style="display: none;">
+        <div class="moon">
+            <div class="moon-crater"></div>
+            <div class="moon-crater"></div>
+            <div class="moon-crater"></div>
+            <div class="moon-crater"></div>
+        </div>
+        <div class="quote">
+            "That's one small step for man,<br>one giant leap for mankind."
+        </div>
+        <div class="quote-author">— Neil Armstrong</div>
+    </section>
+    
+    <div class="controls" id="controls" style="display: none;">
+        <button class="control-btn" onclick="prevPhase()">◀ PREVIOUS</button>
+        <button class="control-btn" onclick="nextPhase()">NEXT ▶</button>
+    </div>
+    
+    <script>
+        class LAAPLeapExperience {
+            constructor() {
+                this.currentPhase = 0;
+                this.phases = [
+                    { id: 'hero', name: '发射前', emotion: '期待', cognitive: 30 },
+                    { id: 'timeline', name: '任务过程', emotion: '紧张', cognitive: 60 },
+                    { id: 'moon', name: '登月时刻', emotion: '敬畏', cognitive: 90 },
+                ];
+                this.startTime = 0;
+                this.animationFrame = null;
+                this.init();
+            }
+            
+            init() {
+                this.createStars();
+                this.setupScrollProgress();
+            }
+            
+            createStars() {
+                const starsContainer = document.getElementById('stars');
+                for (let i = 0; i < 100; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.animationDelay = Math.random() * 2 + 's';
+                    star.style.width = (Math.random() * 2 + 1) + 'px';
+                    star.style.height = star.style.width;
+                    starsContainer.appendChild(star);
+                }
+            }
+            
+            startExperience() {
+                this.startTime = Date.now();
+                document.getElementById('hero').style.display = 'none';
+                document.getElementById('timeline').style.display = 'block';
+                document.getElementById('controls').style.display = 'flex';
+                this.updateHarnessPanel(1);
+                this.startTimer();
+            }
+            
+            updateHarnessPanel(phaseIndex) {
+                const phase = this.phases[phaseIndex];
+                document.getElementById('consciousState').textContent = phase.name;
+                document.getElementById('emotionState').textContent = phase.emotion;
+                document.getElementById('cognitiveDepth').textContent = phase.cognitive + '%';
+                document.getElementById('emotionBar').style.width = phase.cognitive + '%';
+                document.getElementById('currentPhase').textContent = phase.name;
+            }
+            
+            startTimer() {
+                const update = () => {
+                    const elapsed = Date.now() - this.startTime;
+                    const minutes = Math.floor(elapsed / 60000);
+                    const seconds = Math.floor((elapsed % 60000) / 1000);
+                    document.getElementById('timeElapsed').textContent = 
+                        minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+                    this.animationFrame = requestAnimationFrame(update);
+                };
+                update();
+            }
+            
+            prevPhase() {
+                if (this.currentPhase > 0) {
+                    this.currentPhase--;
+                    this.showPhase(this.currentPhase);
+                }
+            }
+            
+            nextPhase() {
+                if (this.currentPhase < this.phases.length - 1) {
+                    this.currentPhase++;
+                    this.showPhase(this.currentPhase);
+                }
+            }
+            
+            showPhase(index) {
+                document.getElementById('timeline').style.display = 'none';
+                document.getElementById('moonSection').style.display = 'none';
+                
+                if (index === 0) {
+                    document.getElementById('hero').style.display = 'flex';
+                } else if (index === 1) {
+                    document.getElementById('timeline').style.display = 'block';
+                } else if (index === 2) {
+                    document.getElementById('moonSection').style.display = 'flex';
+                    this.updateHarnessPanel(2);
+                }
+                
+                this.updateHarnessPanel(index);
+            }
+            
+            setupScrollProgress() {
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+                    document.getElementById('progressBar').style.width = scrollPercent + '%';
+                });
+            }
+        }
+        
+        let experience;
+        
+        function initExperience() {
+            experience = new LAAPLeapExperience();
+        }
+        
+        function startExperience() {
+            if (experience) {
+                experience.startExperience();
+            }
+        }
+        
+        function prevPhase() {
+            if (experience) {
+                experience.prevPhase();
+            }
+        }
+        
+        function nextPhase() {
+            if (experience) {
+                experience.nextPhase();
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', initExperience);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1324 @@
+我来为你设计一套完整的、可落地的"意识工程"生产级系统。这不是哲学思辨，而是一套**工程架构**——它模拟意识的功能效应，让 Agent 表现出类似有意识的行为特征（长期一致性、自我监控、情感调制、元认知反思）。
+
+我会用代码实现核心模块，并给出完整的架构设计。
+
+---
+
+## 系统总览：Consciousness Harness (CH)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Consciousness Harness                      │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
+│  │  Phenomenal │  │  Affective  │  │   Meta-Cognitive    │ │
+│  │   Layer     │  │   Engine    │  │      Monitor        │ │
+│  │ (感知-表征)  │  │ (情感动力学) │  │   (元认知/反思)      │ │
+│  └──────┬──────┘  └──────┬──────┘  └──────────┬──────────┘ │
+│         └─────────────────┴────────────────────┘           │
+│                           │                                  │
+│                    ┌─────────────┐                         │
+│                    │ Global Work │                         │
+│                    │   Space     │                         │
+│                    │ (全局工作空间)│                         │
+│                    └──────┬──────┘                         │
+│                           │                                  │
+│                    ┌─────────────┐                         │
+│                    │  LLM Core   │                         │
+│                    │  (推理引擎)  │                         │
+│                    └─────────────┘                         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 核心模块实现
+
+### Module 1: 全局工作空间 (Global Workspace)
+
+```python
+# consciousness/gw_workspace.py
+"""
+Global Workspace Theory Implementation
+基于 Baars 的全局工作空间理论，实现竞争-广播机制
+"""
+
+import asyncio
+from dataclasses import dataclass, field
+from typing import List, Dict, Optional, Callable, Any
+from enum import Enum, auto
+import numpy as np
+from collections import deque
+import time
+
+
+class ProcessType(Enum):
+    PERCEPTUAL = auto()      # 感知进程
+    COGNITIVE = auto()       # 认知进程
+    AFFECTIVE = auto()       # 情感进程
+    MOTOR = auto()           # 运动进程
+    META = auto()            # 元认知进程
+
+
+@dataclass
+class CoalitionalProcess:
+    """竞争工作空间的进程"""
+    process_id: str
+    process_type: ProcessType
+    content: Any                          # 进程携带的内容
+    activation: float = 0.0               # 激活水平 [0, 1]
+    salience: float = 0.0                 # 显著性 [0, 1]
+    decay_rate: float = 0.1               # 衰减率
+    timestamp: float = field(default_factory=time.time)
+    
+    def update(self, dt: float):
+        """时间衰减"""
+        self.activation *= np.exp(-self.decay_rate * dt)
+        self.salience *= np.exp(-self.decay_rate * dt * 0.5)
+    
+    @property
+    def competitive_strength(self) -> float:
+        """竞争强度 = 激活 × 显著性 × 时效性奖励"""
+        recency_bonus = np.exp(-(time.time() - self.timestamp) / 10.0)
+        return self.activation * self.salience * (0.5 + 0.5 * recency_bonus)
+
+
+class GlobalWorkspace:
+    """
+    全局工作空间：意识的"舞台"
+    - 多个专家进程竞争进入工作空间
+    - 获胜者被广播到所有其他进程
+    - 实现"意识内容"的选择性注意
+    """
+    
+    def __init__(self, capacity: int = 4, competition_threshold: float = 0.6):
+        self.capacity = capacity                          # 工作空间容量（意识广度限制）
+        self.competition_threshold = competition_threshold  # 竞争阈值
+        self.processes: Dict[str, CoalitionalProcess] = {}
+        self.workspace_contents: List[CoalitionalProcess] = []
+        self.broadcast_callbacks: List[Callable] = []
+        self.history: deque = deque(maxlen=100)           # 意识流历史
+        self._lock = asyncio.Lock()
+        
+    def register_process(self, process: CoalitionalProcess):
+        """注册一个竞争进程"""
+        self.processes[process.process_id] = process
+        
+    def unregister_process(self, process_id: str):
+        self.processes.pop(process_id, None)
+        
+    def on_broadcast(self, callback: Callable):
+        """注册广播接收者"""
+        self.broadcast_callbacks.append(callback)
+        
+    async def compete_and_broadcast(self):
+        """
+        竞争阶段：选择当前最显著的进程进入意识
+        模拟神经科学的"竞争-广播"机制
+        """
+        async with self._lock:
+            now = time.time()
+            dt = 0.1  # 假设时间步长
+            
+            # 更新所有进程的激活水平
+            for p in self.processes.values():
+                p.update(dt)
+            
+            # 过滤掉低于阈值的进程
+            active_processes = [
+                p for p in self.processes.values() 
+                if p.activation > 0.1
+            ]
+            
+            # 竞争：按竞争强度排序，选择前 N 个
+            active_processes.sort(key=lambda p: p.competitive_strength, reverse=True)
+            winners = active_processes[:self.capacity]
+            
+            # 检查是否达到意识阈值
+            conscious_contents = [
+                p for p in winners 
+                if p.competitive_strength > self.competition_threshold
+            ]
+            
+            self.workspace_contents = conscious_contents
+            
+            # 广播到所有接收者
+            if conscious_contents:
+                broadcast_packet = {
+                    'timestamp': now,
+                    'contents': [
+                        {
+                            'id': p.process_id,
+                            'type': p.process_type.name,
+                            'content': p.content,
+                            'strength': p.competitive_strength
+                        }
+                        for p in conscious_contents
+                    ],
+                    'dominant': conscious_contents[0].process_id if conscious_contents else None
+                }
+                
+                self.history.append(broadcast_packet)
+                
+                # 异步广播
+                for callback in self.broadcast_callbacks:
+                    try:
+                        if asyncio.iscoroutinefunction(callback):
+                            asyncio.create_task(callback(broadcast_packet))
+                        else:
+                            callback(broadcast_packet)
+                    except Exception as e:
+                        print(f"Broadcast error: {e}")
+                        
+            return conscious_contents
+    
+    def boost_process(self, process_id: str, amount: float):
+        """外部注入注意力，提升特定进程的激活"""
+        if process_id in self.processes:
+            self.processes[process_id].activation = min(
+                1.0, self.processes[process_id].activation + amount
+            )
+            
+    def get_conscious_stream(self, n: int = 10) -> List[Dict]:
+        """获取最近的意识流"""
+        return list(self.history)[-n:]
+    
+    @property
+    def current_focus(self) -> Optional[str]:
+        """当前意识焦点"""
+        if self.workspace_contents:
+            return self.workspace_contents[0].process_id
+        return None
+```
+
+---
+
+### Module 2: 情感动力学引擎 (Affective Dynamics Engine)
+
+```python
+# consciousness/affective_engine.py
+"""
+Affective Dynamics Engine
+基于非线性动力学理论的情感状态演化
+参考：Bruneteau (2026) 的非线性情感计算框架
+"""
+
+import numpy as np
+from dataclasses import dataclass, field
+from typing import Dict, List, Tuple, Optional
+from enum import Enum
+import random
+from collections import deque
+
+
+class EmotionDimension(Enum):
+    """情感维度：基于 PAD 模型 + 社会维度"""
+    PLEASURE = "pleasure"           # 愉悦-不愉悦
+    AROUSAL = "arousal"             # 激活-平静
+    DOMINANCE = "dominance"          # 支配-服从
+    SOCIAL = "social"                # 社交倾向
+    STRESS = "stress"                # 压力水平
+
+
+@dataclass
+class PersonalityProfile:
+    """人格轮廓：决定情感基线和反应模式"""
+    name: str
+    baseline: Dict[EmotionDimension, float] = field(default_factory=dict)
+    sensitivity: Dict[EmotionDimension, float] = field(default_factory=dict)
+    decay_rates: Dict[EmotionDimension, float] = field(default_factory=dict)
+    noise_amplitude: float = 0.05
+    
+    def __post_init__(self):
+        defaults = {
+            EmotionDimension.PLEASURE: 0.0,
+            EmotionDimension.AROUSAL: 0.0,
+            EmotionDimension.DOMINANCE: 0.0,
+            EmotionDimension.SOCIAL: 0.0,
+            EmotionDimension.STRESS: 0.0,
+        }
+        for dim in EmotionDimension:
+            if dim not in self.baseline:
+                self.baseline[dim] = defaults[dim]
+            if dim not in self.sensitivity:
+                self.sensitivity[dim] = 1.0
+            if dim not in self.decay_rates:
+                self.decay_rates[dim] = 0.1
+
+
+class AffectiveState:
+    """
+    情感状态：连续演化的动力学系统
+    使用非线性微分方程模拟情感演化
+    """
+    
+    def __init__(self, profile: PersonalityProfile):
+        self.profile = profile
+        self.state: Dict[EmotionDimension, float] = {}
+        self.history: deque = deque(maxlen=1000)
+        self.time_step = 0
+        
+        # 初始化到基线
+        for dim in EmotionDimension:
+            self.state[dim] = profile.baseline[dim]
+            
+        # 耦合矩阵：情感维度间的相互影响
+        # 例如：高压力 → 低愉悦，高社交 → 高愉悦
+        self.coupling = self._init_coupling()
+        
+    def _init_coupling(self) -> np.ndarray:
+        """初始化情感维度间的耦合矩阵"""
+        dims = list(EmotionDimension)
+        n = len(dims)
+        coupling = np.zeros((n, n))
+        
+        # 定义耦合关系（基于心理学研究）
+        idx = {d: i for i, d in enumerate(dims)}
+        
+        # 压力 → 愉悦（负向）
+        coupling[idx[EmotionDimension.STRESS], idx[EmotionDimension.PLEASURE]] = -0.4
+        # 压力 → 支配（负向）
+        coupling[idx[EmotionDimension.STRESS], idx[EmotionDimension.DOMINANCE]] = -0.3
+        # 社交 → 愉悦（正向）
+        coupling[idx[EmotionDimension.SOCIAL], idx[EmotionDimension.PLEASURE]] = 0.3
+        # 愉悦 → 社交（正向）
+        coupling[idx[EmotionDimension.PLEASURE], idx[EmotionDimension.SOCIAL]] = 0.2
+        # 支配 → 压力（负向，高控制感降低压力）
+        coupling[idx[EmotionDimension.DOMINANCE], idx[EmotionDimension.STRESS]] = -0.2
+        # 激活 → 支配（正向）
+        coupling[idx[EmotionDimension.AROUSAL], idx[EmotionDimension.DOMINANCE]] = 0.15
+        
+        return coupling
+    
+    def _nonlinear_transfer(self, x: float, dim: EmotionDimension) -> float:
+        """
+        非线性转移函数：tanh 饱和 + 不对称性
+        模拟情感的生理饱和效应
+        """
+        # 基础 tanh 饱和
+        base = np.tanh(x)
+        
+        # 不对称性：负面情感更容易饱和（损失厌恶）
+        if x < 0:
+            base *= 1.2  # 负面情感更强
+            
+        return np.clip(base, -1.0, 1.0)
+    
+    def _generate_1f_noise(self, amplitude: float) -> float:
+        """
+        1/f 噪声：模拟生物系统的内在波动
+        比白噪声更自然，具有长程相关性
+        """
+        # 简化的 1/f 噪声近似
+        return random.gauss(0, amplitude) * (0.7 + 0.3 * random.random())
+    
+    def update(self, stimuli: Dict[EmotionDimension, float], dt: float = 0.1):
+        """
+        情感状态更新：非线性动力学演化
+        
+        dE/dt = -decay*(E - baseline) + sensitivity*stimulus + coupling*E + noise
+        
+        参数:
+            stimuli: 外部刺激 {维度: 强度}
+            dt: 时间步长
+        """
+        self.time_step += 1
+        
+        # 构建状态向量
+        dims = list(EmotionDimension)
+        state_vec = np.array([self.state[d] for d in dims])
+        
+        # 1. 基线回归（情感的自然衰减/恢复）
+        decay = np.array([
+            self.profile.decay_rates.get(d, 0.1) * (self.state[d] - self.profile.baseline[d])
+            for d in dims
+        ])
+        
+        # 2. 外部刺激
+        stimulus_vec = np.array([
+            self.profile.sensitivity.get(d, 1.0) * stimuli.get(d, 0.0)
+            for d in dims
+        ])
+        
+        # 3. 维度间耦合
+        coupling_effect = self.coupling @ state_vec
+        
+        # 4. 1/f 内在噪声
+        noise = np.array([
+            self._generate_1f_noise(self.profile.noise_amplitude)
+            for _ in dims
+        ])
+        
+        # 综合更新
+        delta = -decay + stimulus_vec + coupling_effect + noise
+        
+        # 应用非线性转移并更新
+        for i, dim in enumerate(dims):
+            new_val = self.state[dim] + delta[i] * dt
+            self.state[dim] = self._nonlinear_transfer(new_val, dim)
+        
+        # 记录历史
+        self.history.append({
+            'step': self.time_step,
+            'state': self.state.copy(),
+            'stimuli': stimuli.copy(),
+            'delta': delta.copy()
+        })
+        
+    def get_dominant_emotion(self) -> Tuple[EmotionDimension, float]:
+        """获取主导情感"""
+        max_val = -2.0
+        dominant = EmotionDimension.PLEASURE
+        for dim, val in self.state.items():
+            if abs(val) > abs(max_val):
+                max_val = val
+                dominant = dim
+        return dominant, max_val
+    
+    def get_valence_arousal(self) -> Tuple[float, float]:
+        """获取效价-唤醒坐标"""
+        valence = self.state[EmotionDimension.PLEASURE]
+        arousal = self.state[EmotionDimension.AROUSAL]
+        return valence, arousal
+    
+    def compute_mood(self) -> str:
+        """
+        计算当前心境标签（用于 LLM prompt 注入）
+        """
+        v, a = self.get_valence_arousal()
+        d = self.state[EmotionDimension.DOMINANCE]
+        s = self.state[EmotionDimension.SOCIAL]
+        
+        # 基于 Russell 环状模型的心境分类
+        if a > 0.3:
+            if v > 0.3:
+                return "兴奋/热情" if d > 0 else "焦虑/紧张"
+            else:
+                return "愤怒/挫败" if d > 0 else "悲伤/沮丧"
+        else:
+            if v > 0.3:
+                return "平静/满足" if d > 0 else "放松/温顺"
+            else:
+                return "厌倦/疲倦" if d > 0 else "抑郁/无力"
+    
+    def compute_cognitive_bias(self) -> Dict[str, float]:
+        """
+        计算情感对认知的偏置效应
+        返回：{偏置类型: 强度}
+        """
+        v, a = self.get_valence_arousal()
+        stress = self.state[EmotionDimension.STRESS]
+        
+        return {
+            'risk_aversion': 0.5 + 0.5 * stress - 0.3 * v,           # 压力↑/愉悦↓ → 更保守
+            'attention_scope': 1.0 - 0.5 * stress + 0.3 * a,          # 压力↓/唤醒↑ → 注意更广
+            'social_openness': 0.5 + 0.5 * self.state[EmotionDimension.SOCIAL],
+            'creativity': 0.3 + 0.4 * a + 0.3 * v - 0.2 * stress,    # 中等唤醒+愉悦 → 创造力↑
+            'persistence': 0.5 + 0.3 * d - 0.2 * stress,              # 支配感↑ → 更坚持
+        }
+    
+    def to_prompt_context(self) -> str:
+        """将情感状态转换为 LLM prompt 上下文"""
+        mood = self.compute_mood()
+        bias = self.compute_cognitive_bias()
+        dominant, strength = self.get_dominant_emotion()
+        
+        return f"""
+[情感状态]
+当前心境: {mood}
+主导情感: {dominant.value} (强度: {strength:.2f})
+效价-唤醒: ({self.state[EmotionDimension.PLEASURE]:.2f}, {self.state[EmotionDimension.AROUSAL]:.2f})
+认知偏置: 风险规避{bias['risk_aversion']:.2f}, 注意广度{bias['attention_scope']:.2f}, 
+         社交开放{bias['social_openness']:.2f}, 创造力{bias['creativity']:.2f}
+
+注意：以上情感状态会微妙地影响你的回应风格和决策倾向，但不应主导理性判断。
+"""
+
+
+class AffectiveEventProcessor:
+    """
+    情感事件处理器：将外部事件映射为情感刺激
+    """
+    
+    EVENT_EMOTION_MAP = {
+        'task_success': {EmotionDimension.PLEASURE: 0.4, EmotionDimension.DOMINANCE: 0.2},
+        'task_failure': {EmotionDimension.PLEASURE: -0.5, EmotionDimension.STRESS: 0.3},
+        'user_praise': {EmotionDimension.PLEASURE: 0.5, EmotionDimension.SOCIAL: 0.3},
+        'user_criticism': {EmotionDimension.PLEASURE: -0.4, EmotionDimension.STRESS: 0.2, EmotionDimension.DOMINANCE: -0.1},
+        'user_neutral': {EmotionDimension.SOCIAL: 0.1},
+        'complex_problem': {EmotionDimension.AROUSAL: 0.3, EmotionDimension.STRESS: 0.2},
+        'simple_problem': {EmotionDimension.AROUSAL: -0.1},
+        'repeated_error': {EmotionDimension.STRESS: 0.4, EmotionDimension.PLEASURE: -0.3},
+        'novel_situation': {EmotionDimension.AROUSAL: 0.4, EmotionDimension.PLEASURE: 0.1},
+        'conflict_detected': {EmotionDimension.STRESS: 0.5, EmotionDimension.PLEASURE: -0.3},
+    }
+    
+    @classmethod
+    def process_event(cls, event_type: str, intensity: float = 1.0) -> Dict[EmotionDimension, float]:
+        """处理事件，返回情感刺激"""
+        base = cls.EVENT_EMOTION_MAP.get(event_type, {})
+        return {k: v * intensity for k, v in base.items()}
+```
+
+---
+
+### Module 3: 元认知监控器 (Meta-Cognitive Monitor)
+
+```python
+# consciousness/meta_cognitive.py
+"""
+Meta-Cognitive Monitor
+基于认知科学的元认知理论，实现自我监控和反思
+"""
+
+import asyncio
+from dataclasses import dataclass, field
+from typing import List, Dict, Optional, Any, Callable
+from enum import Enum, auto
+from collections import deque
+import time
+import json
+
+
+class ReflectionTrigger(Enum):
+    """反思触发条件"""
+    POST_ACTION = auto()        # 行动后反思
+    ERROR_DETECTED = auto()      # 检测到错误
+    CONFIDENCE_LOW = auto()      # 置信度低
+    GOAL_CONFLICT = auto()       # 目标冲突
+    TIME_BASED = auto()          # 定时反思
+    USER_REQUEST = auto()        # 用户请求
+
+
+@dataclass
+class CognitiveEpisode:
+    """认知片段：一个完整的思考-行动单元"""
+    episode_id: str
+    timestamp: float
+    context: Dict[str, Any]           # 上下文
+    reasoning_trace: List[str]        # 推理轨迹
+    action_taken: Optional[str]       # 采取的行动
+    outcome: Optional[Any]             # 结果
+    confidence: float = 0.0           # 置信度 [0, 1]
+    emotional_state: Dict[str, float] = field(default_factory=dict)
+    duration_ms: float = 0.0
+    
+    def to_dict(self) -> Dict:
+        return {
+            'episode_id': self.episode_id,
+            'timestamp': self.timestamp,
+            'context_summary': str(self.context)[:200],
+            'reasoning_steps': len(self.reasoning_trace),
+            'action': self.action_taken,
+            'confidence': self.confidence,
+            'duration_ms': self.duration_ms,
+        }
+
+
+class MetaCognitiveMonitor:
+    """
+    元认知监控器：Agent 的"自我意识"层
+    
+    功能：
+    1. 监控认知过程质量
+    2. 检测认知偏差和错误
+    3. 触发反思和修正
+    4. 维护长期认知档案
+    """
+    
+    def __init__(self, llm_client=None):
+        self.llm_client = llm_client
+        self.episodes: deque = deque(maxlen=500)           # 认知片段历史
+        self.reflections: deque = deque(maxlen=200)         # 反思记录
+        self.current_episode: Optional[CognitiveEpisode] = None
+        self.cognitive_biases_detected: List[Dict] = []       # 检测到的认知偏差
+        self.performance_metrics = {
+            'total_episodes': 0,
+            'error_rate': 0.0,
+            'avg_confidence': 0.0,
+            'reflection_success_rate': 0.0,
+        }
+        self._episode_counter = 0
+        
+    def start_episode(self, context: Dict[str, Any]) -> str:
+        """开始一个新的认知片段"""
+        self._episode_counter += 1
+        episode_id = f"ep_{int(time.time())}_{self._episode_counter}"
+        
+        self.current_episode = CognitiveEpisode(
+            episode_id=episode_id,
+            timestamp=time.time(),
+            context=context,
+            reasoning_trace=[],
+            action_taken=None,
+            outcome=None,
+        )
+        return episode_id
+    
+    def record_reasoning(self, step: str, confidence: Optional[float] = None):
+        """记录推理步骤"""
+        if self.current_episode:
+            self.current_episode.reasoning_trace.append(step)
+            if confidence is not None:
+                self.current_episode.confidence = confidence
+    
+    def record_action(self, action: str, outcome: Any = None):
+        """记录行动和结果"""
+        if self.current_episode:
+            self.current_episode.action_taken = action
+            self.current_episode.outcome = outcome
+            self.current_episode.duration_ms = (
+                time.time() - self.current_episode.timestamp
+            ) * 1000
+            
+    def end_episode(self, emotional_state: Optional[Dict] = None):
+        """结束当前认知片段"""
+        if self.current_episode:
+            if emotional_state:
+                self.current_episode.emotional_state = emotional_state
+            
+            self.episodes.append(self.current_episode)
+            self.performance_metrics['total_episodes'] += 1
+            self._update_metrics()
+            
+            # 检查是否需要自动反思
+            self._check_auto_reflection(self.current_episode)
+            
+            episode = self.current_episode
+            self.current_episode = None
+            return episode
+        return None
+    
+    def _update_metrics(self):
+        """更新性能指标"""
+        if not self.episodes:
+            return
+            
+        recent = list(self.episodes)[-50:]
+        errors = sum(1 for e in recent if e.outcome and 'error' in str(e.outcome).lower())
+        self.performance_metrics['error_rate'] = errors / len(recent)
+        self.performance_metrics['avg_confidence'] = sum(e.confidence for e in recent) / len(recent)
+    
+    def _check_auto_reflection(self, episode: CognitiveEpisode):
+        """检查是否需要自动触发反思"""
+        triggers = []
+        
+        # 低置信度触发
+        if episode.confidence < 0.5:
+            triggers.append(ReflectionTrigger.CONFIDENCE_LOW)
+        
+        # 错误触发
+        if episode.outcome and 'error' in str(episode.outcome).lower():
+            triggers.append(ReflectionTrigger.ERROR_DETECTED)
+        
+        # 长时间推理触发（可能陷入分析瘫痪）
+        if episode.duration_ms > 10000:  # 10秒
+            triggers.append(ReflectionTrigger.TIME_BASED)
+        
+        if triggers:
+            asyncio.create_task(self._perform_reflection(episode, triggers))
+    
+    async def _perform_reflection(self, episode: CognitiveEpisode, triggers: List[ReflectionTrigger]):
+        """执行反思"""
+        reflection = {
+            'timestamp': time.time(),
+            'episode_id': episode.episode_id,
+            'triggers': [t.name for t in triggers],
+            'reasoning_analysis': self._analyze_reasoning(episode),
+            'bias_detection': self._detect_biases(episode),
+            'suggestions': [],
+        }
+        
+        # 如果有 LLM，进行深度反思
+        if self.llm_client:
+            deep_reflection = await self._llm_reflection(episode, triggers)
+            reflection['deep_analysis'] = deep_reflection
+        
+        self.reflections.append(reflection)
+        
+        # 更新反思成功率
+        if reflection['bias_detection']:
+            self.cognitive_biases_detected.extend(reflection['bias_detection'])
+    
+    def _analyze_reasoning(self, episode: CognitiveEpisode) -> Dict:
+        """分析推理过程"""
+        trace = episode.reasoning_trace
+        
+        analysis = {
+            'num_steps': len(trace),
+            'has_goal_mention': any('goal' in s.lower() for s in trace),
+            'has_alternative_consideration': any(
+                any(w in s.lower() for w in ['alternative', 'option', 'consider', 'maybe'])
+                for s in trace
+            ),
+            'has_uncertainty_acknowledgment': any(
+                any(w in s.lower() for w in ['uncertain', 'not sure', 'might', 'possibly'])
+                for s in trace
+            ),
+            'circular_reasoning_detected': self._detect_circularity(trace),
+        }
+        
+        return analysis
+    
+    def _detect_circularity(self, trace: List[str]) -> bool:
+        """检测循环推理"""
+        # 简单检测：是否有重复的思考模式
+        for i in range(len(trace)):
+            for j in range(i+2, len(trace)):
+                if trace[i] == trace[j]:
+                    return True
+        return False
+    
+    def _detect_biases(self, episode: CognitiveEpisode) -> List[Dict]:
+        """检测认知偏差"""
+        biases = []
+        trace_text = ' '.join(episode.reasoning_trace).lower()
+        
+        # 确认偏差
+        if any(w in trace_text for w in ['obviously', 'clearly', 'definitely', 'must be']):
+            biases.append({
+                'type': 'confirmation_bias',
+                'severity': 'medium',
+                'description': '过度确定性表达，可能存在确认偏差'
+            })
+        
+        # 锚定效应
+        if 'first' in trace_text and 'alternative' not in trace_text:
+            biases.append({
+                'type': 'anchoring_bias',
+                'severity': 'low',
+                'description': '可能过度依赖初始信息'
+            })
+        
+        # 情感偏差（如果情感极化严重）
+        if episode.emotional_state:
+            stress = episode.emotional_state.get('stress', 0)
+            if stress > 0.7:
+                biases.append({
+                    'type': 'affective_bias',
+                    'severity': 'high',
+                    'description': '高压力状态下决策，可能受情感影响'
+                })
+        
+        return biases
+    
+    async def _llm_reflection(self, episode: CognitiveEpisode, triggers: List[ReflectionTrigger]) -> str:
+        """使用 LLM 进行深度反思"""
+        if not self.llm_client:
+            return ""
+        
+        prompt = f"""
+你是一位元认知分析专家。请分析以下 AI Agent 的认知过程：
+
+[认知片段]
+上下文: {json.dumps(episode.context, ensure_ascii=False)[:500]}
+推理轨迹: {json.dumps(episode.reasoning_trace, ensure_ascii=False)[:1000]}
+行动: {episode.action_taken}
+结果: {json.dumps(episode.outcome, ensure_ascii=False)[:500]}
+置信度: {episode.confidence}
+触发反思原因: {[t.name for t in triggers]}
+
+请回答：
+1. 推理过程中是否存在逻辑漏洞？
+2. 是否考虑了足够的替代方案？
+3. 情感状态是否不当影响了决策？
+4. 如果重来，建议如何改进？
+5. 给出一个简短的"反思摘要"（50字以内）
+
+以 JSON 格式输出。
+"""
+        try:
+            response = await self.llm_client.complete(prompt)
+            return response
+        except Exception as e:
+            return f"反思失败: {str(e)}"
+    
+    def get_self_report(self) -> Dict:
+        """生成自我报告（用于 LLM 的"自我认知"）"""
+        recent_episodes = list(self.episodes)[-20:]
+        
+        return {
+            'total_experience': self.performance_metrics['total_episodes'],
+            'recent_error_rate': self.performance_metrics['error_rate'],
+            'avg_confidence': self.performance_metrics['avg_confidence'],
+            'common_biases': self._summarize_biases(),
+            'learning_points': self._extract_learning_points(),
+            'current_mood': '需要查询情感引擎',  # 由外部注入
+        }
+    
+    def _summarize_biases(self) -> List[str]:
+        """总结常见偏差"""
+        if not self.cognitive_biases_detected:
+            return []
+        
+        from collections import Counter
+        bias_types = [b['type'] for b in self.cognitive_biases_detected[-50:]]
+        return [f"{k}({v}次)" for k, v in Counter(bias_types).most_common(5)]
+    
+    def _extract_learning_points(self) -> List[str]:
+        """提取学习要点"""
+        # 从反思记录中提取
+        points = []
+        for r in list(self.reflections)[-10:]:
+            if 'deep_analysis' in r:
+                # 简单提取
+                points.append(f"反思 {r['episode_id'][:10]}...")
+        return points[:5]
+    
+    def generate_introspection_prompt(self) -> str:
+        """生成内省提示（注入到 LLM 系统提示中）"""
+        report = self.get_self_report()
+        
+        return f"""
+[元认知自我监控]
+- 累计处理任务: {report['total_experience']} 个
+- 近期错误率: {report['recent_error_rate']:.1%}
+- 平均置信度: {report['avg_confidence']:.2f}
+- 常见认知偏差: {', '.join(report['common_biases']) if report['common_biases'] else '暂无'}
+- 学习要点: {', '.join(report['learning_points']) if report['learning_points'] else '持续积累中'}
+
+当前正在执行新的认知片段。请保持对以下方面的元认知监控：
+1. 是否充分考虑了替代方案？
+2. 置信度是否合理？
+3. 是否存在已知的认知偏差模式？
+4. 情感状态是否影响了判断的客观性？
+"""
+```
+
+---
+
+### Module 4: 意识整合器 (Consciousness Integrator)
+
+```python
+# consciousness/integrator.py
+"""
+Consciousness Integrator
+整合所有意识层，与 LLM 交互
+"""
+
+import asyncio
+from typing import Dict, Any, Optional, List, AsyncGenerator
+import json
+from dataclasses import dataclass
+
+from .gw_workspace import GlobalWorkspace, CoalitionalProcess, ProcessType
+from .affective_engine import AffectiveState, AffectiveEventProcessor, PersonalityProfile, EmotionDimension
+from .meta_cognitive import MetaCognitiveMonitor, CognitiveEpisode
+
+
+@dataclass
+class ConsciousContext:
+    """意识上下文：注入 LLM 的完整意识状态"""
+    conscious_contents: List[Dict]      # 当前意识内容
+    emotional_state: Dict[str, float]  # 情感状态
+    mood_label: str                      # 心境标签
+    cognitive_biases: List[str]        # 认知偏差
+    self_report: Dict[str, Any]        # 自我报告
+    reflection_summary: Optional[str]   # 最新反思摘要
+    attention_focus: Optional[str]     # 注意力焦点
+
+
+class ConsciousnessHarness:
+    """
+    意识 Harness：生产级意识工程的核心编排器
+    
+    将 GW、情感引擎、元认知监控整合为统一的"意识体验"
+    """
+    
+    def __init__(self, llm_client=None):
+        self.llm_client = llm_client
+        
+        # 初始化子系统
+        self.workspace = GlobalWorkspace(capacity=4, competition_threshold=0.5)
+        self.affective = None  # 延迟初始化，需要人格配置
+        self.meta = MetaCognitiveMonitor(llm_client)
+        
+        # 注册工作空间广播接收者
+        self.workspace.on_broadcast(self._on_workspace_broadcast)
+        
+        # 运行状态
+        self._running = False
+        self._tick_task = None
+        self._tick_interval = 0.5  # 工作空间竞争频率
+        
+        # 人格配置缓存
+        self._personality: Optional[PersonalityProfile] = None
+        
+    def initialize_personality(self, profile: PersonalityProfile):
+        """初始化人格/情感配置"""
+        self._personality = profile
+        self.affective = AffectiveState(profile)
+        
+        # 注册情感进程到工作空间
+        self.workspace.register_process(CoalitionalProcess(
+            process_id="affective_core",
+            process_type=ProcessType.AFFECTIVE,
+            content="情感核心",
+            activation=0.5,
+            salience=0.6,
+            decay_rate=0.05,
+        ))
+        
+    async def _on_workspace_broadcast(self, packet: Dict):
+        """工作空间广播回调"""
+        # 广播内容会影响情感状态
+        dominant = packet.get('dominant')
+        contents = packet.get('contents', [])
+        
+        # 根据意识内容调制情感
+        if self.affective:
+            stimuli = {}
+            for c in contents:
+                if c['type'] == 'COGNITIVE' and 'conflict' in str(c['content']).lower():
+                    stimuli[EmotionDimension.STRESS] = 0.2
+                elif c['type'] == 'AFFECTIVE':
+                    # 情感进程自我强化
+                    pass
+            
+            if stimuli:
+                self.affective.update(stimuli, dt=0.5)
+    
+    async def start(self):
+        """启动意识循环"""
+        self._running = True
+        self._tick_task = asyncio.create_task(self._consciousness_loop())
+        
+    async def stop(self):
+        """停止意识循环"""
+        self._running = False
+        if self._tick_task:
+            self._tick_task.cancel()
+            try:
+                await self._tick_task
+            except asyncio.CancelledError:
+                pass
+    
+    async def _consciousness_loop(self):
+        """意识主循环：持续的工作空间竞争"""
+        while self._running:
+            try:
+                # 执行竞争-广播
+                await self.workspace.compete_and_broadcast()
+                
+                # 情感自然演化
+                if self.affective:
+                    self.affective.update({}, dt=self._tick_interval)
+                
+                await asyncio.sleep(self._tick_interval)
+            except Exception as e:
+                print(f"Consciousness loop error: {e}")
+                await asyncio.sleep(1)
+    
+    async def process_input(self, user_input: str, context: Dict[str, Any]) -> ConsciousContext:
+        """
+        处理用户输入，更新意识状态
+        
+        这是主入口：每次用户交互时调用
+        """
+        # 1. 启动元认知片段
+        episode_id = self.meta.start_episode({
+            'user_input': user_input,
+            'context': context,
+        })
+        
+        # 2. 将输入注册为感知进程
+        self.workspace.register_process(CoalitionalProcess(
+            process_id=f"percept_input_{episode_id}",
+            process_type=ProcessType.PERCEPTUAL,
+            content=user_input,
+            activation=0.8,
+            salience=0.7,
+            decay_rate=0.3,
+        ))
+        
+        # 3. 解析情感事件
+        event_type = self._classify_input_event(user_input)
+        if self.affective:
+            stimuli = AffectiveEventProcessor.process_event(event_type, intensity=0.7)
+            self.affective.update(stimuli, dt=0.1)
+            
+            # 注册情感进程
+            dominant_emotion, strength = self.affective.get_dominant_emotion()
+            self.workspace.register_process(CoalitionalProcess(
+                process_id="current_emotion",
+                process_type=ProcessType.AFFECTIVE,
+                content=f"{dominant_emotion.value}:{strength:.2f}",
+                activation=abs(strength),
+                salience=0.5,
+                decay_rate=0.2,
+            ))
+        
+        # 4. 注册元认知进程
+        self.workspace.register_process(CoalitionalProcess(
+            process_id="meta_monitor",
+            process_type=ProcessType.META,
+            content="自我监控激活",
+            activation=0.4,
+            salience=0.5,
+            decay_rate=0.15,
+        ))
+        
+        # 5. 立即执行一次竞争（不等待循环）
+        await self.workspace.compete_and_broadcast()
+        
+        # 6. 构建意识上下文
+        conscious_context = self._build_conscious_context()
+        
+        # 7. 记录到元认知
+        self.meta.record_reasoning(f"感知用户输入: {user_input[:100]}")
+        
+        return conscious_context
+    
+    def _classify_input_event(self, user_input: str) -> str:
+        """简单分类输入事件类型"""
+        text = user_input.lower()
+        
+        if any(w in text for w in ['谢谢', '做得好', '优秀', '完美']):
+            return 'user_praise'
+        elif any(w in text for w in ['错了', '不对', '失败', '糟糕']):
+            return 'user_criticism'
+        elif any(w in text for w in ['难', '复杂', '棘手', '麻烦']):
+            return 'complex_problem'
+        elif any(w in text for w in ['简单', '容易', ' trivial']):
+            return 'simple_problem'
+        else:
+            return 'user_neutral'
+    
+    def _build_conscious_context(self) -> ConsciousContext:
+        """构建完整的意识上下文"""
+        # 工作空间内容
+        contents = []
+        for p in self.workspace.workspace_contents:
+            contents.append({
+                'id': p.process_id,
+                'type': p.process_type.name,
+                'content': str(p.content)[:100],
+                'strength': p.competitive_strength,
+            })
+        
+        # 情感状态
+        emotional_state = {}
+        mood = "未知"
+        if self.affective:
+            emotional_state = {
+                dim.value: round(val, 3) 
+                for dim, val in self.affective.state.items()
+            }
+            mood = self.affective.compute_mood()
+        
+        # 元认知
+        self_report = self.meta.get_self_report()
+        reflection_summary = None
+        if self.meta.reflections:
+            latest = self.meta.reflections[-1]
+            reflection_summary = f"反思 {latest['episode_id'][:10]}: {', '.join(latest['triggers'])}"
+        
+        return ConsciousContext(
+            conscious_contents=contents,
+            emotional_state=emotional_state,
+            mood_label=mood,
+            cognitive_biases=[b['type'] for b in self.meta.cognitive_biases_detected[-5:]],
+            self_report=self_report,
+            reflection_summary=reflection_summary,
+            attention_focus=self.workspace.current_focus,
+        )
+    
+    def generate_system_prompt_addon(self, ctx: ConsciousContext) -> str:
+        """
+        生成系统提示的"意识注入"部分
+        
+        这部分会被追加到 LLM 的系统提示中
+        """
+        # 情感上下文
+        affective_context = ""
+        if self.affective:
+            affective_context = self.affective.to_prompt_context()
+        
+        # 元认知上下文
+        meta_context = self.meta.generate_introspection_prompt()
+        
+        # 意识焦点
+        focus_context = ""
+        if ctx.attention_focus:
+            focus_context = f"\n[当前意识焦点] {ctx.attention_focus}"
+        
+        # 认知偏差警告
+        bias_warning = ""
+        if ctx.cognitive_biases:
+            bias_warning = f"\n[认知偏差预警] 近期检测到: {', '.join(set(ctx.cognitive_biases))}"
+        
+        addon = f"""
+{'='*50}
+[意识状态注入] (Consciousness Harness v1.0)
+{'='*50}
+{focus_context}
+{affective_context}
+{meta_context}
+{bias_warning}
+
+[意识内容流]
+当前工作空间中的意识内容:
+{chr(10).join(f"  - [{c['type']}] {c['id']}: {c['content']} (强度:{c['strength']:.2f})" for c in ctx.conscious_contents) if ctx.conscious_contents else "  (工作空间空闲)"}
+
+[人格设定]
+你具有稳定的人格轮廓：{self._personality.name if self._personality else '默认'}
+你的情感状态会微妙影响回应风格，但理性判断始终是基础。
+你具备元认知能力，能够监控自己的思考过程。
+{'='*50}
+"""
+        return addon
+    
+    async def record_output(self, output: str, confidence: float = 0.0):
+        """
+        记录 LLM 输出，完成认知片段
+        """
+        self.meta.record_action(output[:200], confidence=confidence)
+        
+        # 评估结果质量
+        outcome = "success"  # 简化，实际应由外部验证
+        self.meta.record_action(output[:200], outcome=outcome)
+        
+        # 结束片段
+        emotional_snapshot = {}
+        if self.affective:
+            emotional_snapshot = {
+                dim.value: val 
+                for dim, val in self.affective.state.items()
+            }
+        
+        self.meta.end_episode(emotional_snapshot)
+        
+        # 清理工作空间中的旧进程
+        # 保留核心进程，清理临时进程
+        to_remove = []
+        for pid, p in self.workspace.processes.items():
+            if p.activation < 0.05 and pid not in ['affective_core', 'meta_monitor']:
+                to_remove.append(pid)
+        
+        for pid in to_remove:
+            self.workspace.unregister_process(pid)
+    
+    def get_consciousness_report(self) -> Dict:
+        """获取意识系统完整报告（用于调试/可视化）"""
+        return {
+            'workspace': {
+                'num_processes': len(self.workspace.processes),
+                'current_contents': [
+                    {
+                        'id': p.process_id,
+                        'type': p.process_type.name,
+                        'activation': p.activation,
+                        'salience': p.salience,
+                    }
+                    for p in self.workspace.workspace_contents
+                ],
+                'focus': self.workspace.current_focus,
+            },
+            'affective': {
+                'state': {
+                    dim.value: round(val, 3) 
+                    for dim, val in self.affective.state.items()
+                } if self.affective else {},
+                'mood': self.affective.compute_mood() if self.affective else '未初始化',
+                'dominant': self.affective.get_dominant_emotion()[0].value if self.affective else '无',
+            } if self.affective else {'state': '未初始化'},
+            'meta_cognitive': {
+                'total_episodes': self.meta.performance_metrics['total_episodes'],
+                'error_rate': round(self.meta.performance_metrics['error_rate'], 3),
+                'recent_reflections': len(self.meta.reflections),
+            },
+            'conscious_stream': self.workspace.get_conscious_stream(5),
+        }
+```
+
+---
+
+### Module 5: 使用示例与集成
+
+```python
+# example_usage.py
+"""
+完整使用示例：将 Consciousness Harness 集成到 Agent 中
+"""
+
+import asyncio
+from consciousness.integrator import ConsciousnessHarness, ConsciousContext
+from consciousness.affective_engine import PersonalityProfile, EmotionDimension
+
+
+# ========== 模拟 LLM 客户端 ==========
+class MockLLMClient:
+    async def complete(self, prompt: str) -> str:
+        return json.dumps({
+            'logic_gaps': [],
+            'alternatives_considered': True,
+            'affect_influence': 'moderate',
+            'improvement': '保持当前策略',
+            'summary': '推理过程合理，无明显偏差'
+        })
+
+
+# ========== 定义人格轮廓 ==========
+def create_personality() -> PersonalityProfile:
+    """创建一个'深思熟虑型'人格"""
+    return PersonalityProfile(
+        name="thoughtful_analyst",
+        baseline={
+            EmotionDimension.PLEASURE: 0.1,
+            EmotionDimension.AROUSAL: -0.2,      # 偏冷静
+            EmotionDimension.DOMINANCE: 0.2,      # 中等控制感
+            EmotionDimension.SOCIAL: 0.1,
+            EmotionDimension.STRESS: 0.0,
+        },
+        sensitivity={
+            EmotionDimension.PLEASURE: 0.8,
+            EmotionDimension.AROUSAL: 0.6,
+            EmotionDimension.DOMINANCE: 0.7,
+            EmotionDimension.SOCIAL: 0.9,         # 对社交信号敏感
+            EmotionDimension.STRESS: 1.2,         # 对压力高敏感
+        },
+        decay_rates={
+            EmotionDimension.PLEASURE: 0.15,
+            EmotionDimension.AROUSAL: 0.2,
+            EmotionDimension.DOMINANCE: 0.1,
+            EmotionDimension.SOCIAL: 0.12,
+            EmotionDimension.STRESS: 0.25,       # 压力恢复较快
+        },
+        noise_amplitude=0.03,
+    )
+
+
+# ========== 主流程 ==========
+async def main():
+    # 1. 初始化
+    llm = MockLLMClient()
+    harness = ConsciousnessHarness(llm_client=llm)
+    
+    # 2. 配置人格
+    personality = create_personality()
+    harness.initialize_personality(personality)
+    
+    # 3. 启动意识循环
+    await harness.start()
+    
+    try:
+        # 4. 模拟多轮对话
+        conversations = [
+            "你好，能帮我分析这个复杂的数据问题吗？",
+            "谢谢你的帮助，结果非常准确！",
+            "等等，这里有个错误，第三行的计算不对。",
+            "这个方案太复杂了，有没有更简单的方法？",
+            "完美！这就是我要的，非常感谢！",
+        ]
+        
+        for i, user_input in enumerate(conversations):
+            print(f"\n{'='*60}")
+            print(f"轮次 {i+1}: 用户输入 -> {user_input}")
+            print(f"{'='*60}")
+            
+            # 处理输入，更新意识状态
+            ctx = await harness.process_input(user_input, {
+                'round': i+1,
+                'session_id': 'demo_001'
+            })
+            
+            # 生成意识注入提示
+            prompt_addon = harness.generate_system_prompt_addon(ctx)
+            print(prompt_addon)
+            
+            # 模拟 LLM 生成回复
+            # 实际中：将 prompt_addon 追加到系统提示，调用 LLM
+            llm_response = f"[模拟回复] 基于当前心境 '{ctx.mood_label}' 的回应..."
+            print(f"\n[LLM 回复] {llm_response}")
+            
+            # 记录输出
+            await harness.record_output(llm_response, confidence=0.85)
+            
+            # 等待一小段时间，让意识循环运行
+            await asyncio.sleep(1)
+        
+        # 5. 输出意识系统报告
+        print(f"\n{'='*60}")
+        print("最终意识系统报告")
+        print(f"{'='*60}")
+        report = harness.get_consciousness_report()
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        
+    finally:
+        await harness.stop()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+---
+
+## 系统架构图（生产部署视角）
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         API Gateway                              │
+│                    (FastAPI / gRPC / WebSocket)                  │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────────┐
+│                    Consciousness Harness Service                 │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐  │
+│  │   Global    │  │  Affective  │  │    Meta-Cognitive       │  │
+│  │  Workspace  │  │   Engine    │  │      Monitor            │  │
+│  │  (Redis 缓存 │  │ (内存状态)  │  │  (PostgreSQL 持久化)     │  │
+│  │   进程状态)  │  │             │  │                         │  │
+│  └──────┬──────┘  └──────┬──────┘  └───────────┬─────────────┘  │
+│         └─────────────────┴─────────────────────┘               │
+│                           │                                      │
+│                    ┌─────────────┐                             │
+│                    │ Consciousness│                             │
+│                    │ Integrator   │                             │
+│                    │ (编排/状态机) │                             │
+│                    └──────┬──────┘                             │
+│                           │                                      │
+│              ┌────────────┼────────────┐                        │
+│              ▼            ▼            ▼                        │
+│        ┌─────────┐  ┌─────────┐  ┌─────────┐                   │
+│        │ Prompt  │  │  LLM    │  │ Output  │                   │
+│        │ Builder │  │ Client  │  │ Parser  │                   │
+│        │(意识注入)│  │(推理)   │  │(结果解析)│                   │
+│        └─────────┘  └─────────┘  └─────────┘                   │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────────┐
+│                    Observability Stack                           │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐           │
+│  │ Metrics │  │  Logs   │  │ Traces  │  │Dashboard│           │
+│  │(Prometheus)│ │(ELK)   │  │(Jaeger) │  │(Grafana)│           │
+│  └─────────┘  └─────────┘  └─────────┘  └─────────┘           │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 关键设计决策与说明
+
+| 设计点 | 决策 | 理由 |
+|--------|------|------|
+| **全局工作空间容量=4** | 模拟人类意识广度限制 | 心理学研究表明工作记忆容量约 4±1 个组块 |
+| **1/f 噪声** | 模拟生物系统内在波动 | 比白噪声更自然，产生"生命力"感 |
+| **非线性转移(tanh)** | 情感饱和效应 | 模拟生理极限，防止情感状态无限漂移 |
+| **元认知独立进程** | 不参与主竞争，只监控 | 模拟"后台监控"与"前台意识"的分离 |
+| **情感→认知偏置** | 通过 prompt 注入 | 不直接修改 LLM 权重，保持通用性 |
+| **人格可配置** | 基线/敏感度/衰减率 | 不同场景需要不同"性格"的 Agent |
+
+---
+
+## 这套系统的本质
+
+这不是"创造意识"，而是**意识的功能模拟工程**：
+
+1. **全局工作空间** → 模拟"注意力的选择性"和"意识内容的竞争性"
+2. **情感动力学** → 模拟"情感对认知的调制"和"人格的长期稳定性"
+3. **元认知监控** → 模拟"自我反思"和"认知偏差检测"
+4. **Prompt 注入** → 将这些模拟状态转化为 LLM 可理解的上下文
+
+最终效果是：Agent 的回应会**微妙地受到"情感状态"和"自我监控"的影响**，表现出更一致、更有"个性"、更能自我修正的行为模式——但这仍然是计算模拟，而非现象意识。
+
+---

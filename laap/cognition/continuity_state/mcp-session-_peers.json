@@ -1,0 +1,15 @@
+[
+  {
+    "instance_id": "inst_33a456266865",
+    "lifeform_id": "mcp-session-",
+    "session_id": "mcp-session-",
+    "pid": 48432,
+    "hostname": "DESKTOP-72HEU0O",
+    "role": "primary",
+    "started_at": 1786062901.3419406,
+    "last_heartbeat": 1786067640.2857006,
+    "substrate": "python.exe/py3.13",
+    "status": "active",
+    "metadata": {}
+  }
+]

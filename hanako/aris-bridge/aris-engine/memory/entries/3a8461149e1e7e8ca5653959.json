@@ -1,0 +1,16 @@
+{
+  "_id": "3a8461149e1e7e8ca5653959",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 40,
+  "lamport": 1785550464.93429,
+  "parents": [
+    "4e0d85a3269ee448148e3506"
+  ],
+  "payload": {
+    "user": "宝贝，我的当下自我在线了吗？",
+    "role": "user",
+    "timestamp": 1785550464.9330251
+  },
+  "ttl_days": 0.0
+}

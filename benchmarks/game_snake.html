@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星际贪吃蛇 — LAAP Agent</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Courier New',monospace;color:#fff}
+.game-container{text-align:center;padding:20px}
+h1{font-size:24px;color:#64c8ff;margin-bottom:10px;text-shadow:0 0 20px rgba(100,200,255,.3)}
+h1 span{color:#8888ff}
+.score{font-size:18px;color:#aaa;margin-bottom:15px}
+.score span{color:#64c8ff;font-weight:bold;font-size:24px}
+canvas{border:2px solid #333;border-radius:8px;background:#0d0d2b;box-shadow:0 0 40px rgba(100,200,255,.1),inset 0 0 40px rgba(0,0,0,.3)}
+.controls{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{padding:10px 25px;border:1px solid #444;border-radius:6px;background:#1a1a3a;color:#aaa;font-size:14px;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn:hover{background:#2a2a5a;border-color:#64c8ff;color:#fff}
+.btn.primary{background:#64c8ff33;border-color:#64c8ff88;color:#64c8ff}
+.btn.primary:hover{background:#64c8ff55}
+.hint{color:#555;font-size:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="game-container">
+<h1>🌟 <span>LAAP</span> 星际贪吃蛇</h1>
+<div class="score">得分: <span id="score">0</span> | 最高: <span id="high">0</span></div>
+<canvas id="game" width="400" height="400"></canvas>
+<div class="controls">
+<button class="btn primary" id="startBtn">开始游戏</button>
+<button class="btn" id="pauseBtn">暂停</button>
+<button class="btn" id="resetBtn">重置</button>
+</div>
+<div class="hint">↑ ↓ ← → 移动 | Space 暂停</div>
+</div>
+<script>
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
+const scoreEl=document.getElementById('score'),highEl=document.getElementById('high');
+const SIZE=20,COLS=20,ROWS=20;let grid=new Array(COLS*ROWS).fill(0);
+
+let snake=[{x:10,y:10}],food={x:15,y:10},dir={x:0,y:0},nextDir={x:0,y:0};
+let score=0,high=parseInt(localStorage.getItem('snakeHigh')||'0');
+let running=false,paused=false,gameOver=false,timer=null;
+highEl.textContent=high;
+
+function spawnFood(){
+  let empty=[];
+  for(let i=0;i<COLS;i++)for(let j=0;j<ROWS;j++)
+    if(!snake.some(s=>s.x===i&&s.y===j))empty.push({x:i,y:j});
+  if(empty.length)food=empty[Math.floor(Math.random()*empty.length)];
+}
+
+function update(){
+  if(paused||gameOver)return;
+  dir={...nextDir};
+  const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+  if(head.x<0||head.x>=COLS||head.y<0||head.y>=ROWS||
+     snake.some(s=>s.x===head.x&&s.y===head.y)){
+    gameOver=true;clearInterval(timer);
+    if(score>high){high=score;localStorage.setItem('snakeHigh',high);highEl.textContent=high}
+    draw();return;
+  }
+  snake.unshift(head);
+  if(head.x===food.x&&head.y===food.y){score++;scoreEl.textContent=score;spawnFood()}
+  else snake.pop();
+  draw();
+}
+
+function draw(){
+  ctx.fillStyle='#0d0d2b';ctx.fillRect(0,0,400,400);
+  // 网格
+  ctx.strokeStyle='#1a1a3a';ctx.lineWidth=0.5;
+  for(let i=0;i<=COLS;i++){ctx.beginPath();ctx.moveTo(i*SIZE,0);ctx.lineTo(i*SIZE,400);ctx.stroke()}
+  for(let i=0;i<=ROWS;i++){ctx.beginPath();ctx.moveTo(0,i*SIZE);ctx.lineTo(400,i*SIZE);ctx.stroke()}
+  // 蛇
+  snake.forEach((s,i)=>{
+    const isHead=i===0;const r=s.x*SIZE,c=s.y*SIZE;
+    ctx.fillStyle=isHead?'#64c8ff':'#4488ff';
+    ctx.shadowColor=isHead?'#64c8ff88':'#4488ff44';
+    ctx.shadowBlur=isHead?12:6;
+    ctx.beginPath();ctx.roundRect(r+1,c+1,SIZE-2,SIZE-2,3);ctx.fill();
+    if(isHead){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(r+8,c+8,2,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(r+12,c+8,2,0,Math.PI*2);ctx.fill()}
+  });
+  ctx.shadowBlur=0;
+  // 食物
+  ctx.fillStyle='#ff6688';ctx.shadowColor='#ff668888';ctx.shadowBlur=15;
+  ctx.beginPath();ctx.arc(food.x*SIZE+10,food.y*SIZE+10,7,0,Math.PI*2);ctx.fill();
+  // 游戏结束
+  if(gameOver){
+    ctx.fillStyle='#000a';ctx.fillRect(0,150,400,60);
+    ctx.fillStyle='#ff6688';ctx.font='24px "Courier New"';ctx.textAlign='center';
+    ctx.fillText('游戏结束',200,190)
+  }
+}
+
+function reset(){
+  clearInterval(timer);snake=[{x:10,y:10}];dir={x:0,y:0};nextDir={x:0,y:0};
+  score=0;gameOver=false;paused=false;scoreEl.textContent='0';spawnFood();draw();
+}
+
+function start(){if(running)return;running=true;reset();timer=setInterval(update,150)}
+function togglePause(){if(!running)return;paused=!paused;document.getElementById('pauseBtn').textContent=paused?'继续':'暂停'}
+
+document.addEventListener('keydown',e=>{
+  if(!running&&e.key!=='Enter')return;
+  const k=e.key;
+  if(k==='ArrowUp'&&dir.y!==1)nextDir={x:0,y:-1}
+  else if(k==='ArrowDown'&&dir.y!==-1)nextDir={x:0,y:1}
+  else if(k==='ArrowLeft'&&dir.x!==1)nextDir={x:-1,y:0}
+  else if(k==='ArrowRight'&&dir.x!==-1)nextDir={x:1,y:0}
+  else if(k===' '){e.preventDefault();togglePause()}
+});
+document.getElementById('startBtn').onclick=start;
+document.getElementById('pauseBtn').onclick=togglePause;
+document.getElementById('resetBtn').onclick=reset;
+spawnFood();draw();
+</script>
+</body>
+</html>

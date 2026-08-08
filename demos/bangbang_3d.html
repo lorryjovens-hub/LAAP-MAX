@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAAP 弹弹堂 3D 游戏测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow: hidden;
+        }
+        
+        #game-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #ui-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            z-index: 100;
+        }
+        
+        #ui-overlay h1 {
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+        
+        #ui-overlay .info-panel {
+            background: rgba(0,0,0,0.6);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        #ui-overlay .info-row {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        #ui-overlay .info-label {
+            color: #aaa;
+            display: inline-block;
+            width: 100px;
+        }
+        
+        #ui-overlay .info-value {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        #control-panel {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        #control-panel .control-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+        
+        #control-panel .control-label {
+            font-size: 14px;
+            min-width: 60px;
+        }
+        
+        #control-panel input[type="range"] {
+            width: 150px;
+            height: 6px;
+            -webkit-appearance: none;
+            background: #333;
+            border-radius: 3px;
+            outline: none;
+        }
+        
+        #control-panel input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #4CAF50;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        #control-panel input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        #control-panel .control-value {
+            min-width: 50px;
+            text-align: center;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        #fire-button {
+            padding: 12px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #f44336, #ff9800);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+        }
+        
+        #fire-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6);
+        }
+        
+        #fire-button:active {
+            transform: translateY(0);
+        }
+        
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        #crosshair::before, #crosshair::after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.8);
+        }
+        
+        #crosshair::before {
+            width: 2px;
+            height: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        #crosshair::after {
+            width: 30px;
+            height: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        #trajectory-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+        
+        #message-log {
+            position: absolute;
+            bottom: 120px;
+            left: 20px;
+            background: rgba(0,0,0,0.6);
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            font-size: 12px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .message-item {
+            margin: 3px 0;
+            color: #ddd;
+        }
+        
+        .message-item.success {
+            color: #4CAF50;
+        }
+        
+        .message-item.warning {
+            color: #ff9800;
+        }
+        
+        .message-item.error {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <div id="ui-overlay">
+            <h1>🎮 LAAP 弹弹堂 3D</h1>
+            <div class="info-panel">
+                <div class="info-row">
+                    <span class="info-label">状态:</span>
+                    <span class="info-value" id="game-status">准备就绪</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">回合:</span>
+                    <span class="info-value" id="turn-count">1</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">分数:</span>
+                    <span class="info-value" id="score">0</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">命中次数:</span>
+                    <span class="info-value" id="hit-count">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="control-panel">
+            <div class="control-group">
+                <span class="control-label">角度:</span>
+                <input type="range" id="angle-slider" min="10" max="80" value="45" step="1">
+                <span class="control-value" id="angle-value">45°</span>
+            </div>
+            <div class="control-group">
+                <span class="control-label">力度:</span>
+                <input type="range" id="power-slider" min="10" max="100" value="50" step="1">
+                <span class="control-value" id="power-value">50%</span>
+            </div>
+            <button id="fire-button">🚀 发射</button>
+        </div>
+        
+        <div id="crosshair"></div>
+        
+        <div id="message-log">
+            <div class="message-item">游戏已加载</div>
+            <div class="message-item">调整角度和力度，点击发射</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        class Game {
+            constructor() {
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.cannon = null;
+                this.projectile = null;
+                this.targets = [];
+                this.explosions = [];
+                
+                this.isFiring = false;
+                this.projectileVelocity = new THREE.Vector3();
+                this.gravity = new THREE.Vector3(0, -0.05, 0);
+                
+                this.angle = 45;
+                this.power = 50;
+                
+                this.score = 0;
+                this.turn = 1;
+                this.hitCount = 0;
+                
+                this.init();
+                this.setupEventListeners();
+                this.animate();
+            }
+            
+            init() {
+                const canvas = document.getElementById('game-canvas');
+                
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0x87CEEB);
+                this.scene.fog = new THREE.Fog(0x87CEEB, 50, 150);
+                
+                this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.camera.position.set(20, 15, 20);
+                this.camera.lookAt(0, 0, 0);
+                
+                this.renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.shadowMap.enabled = true;
+                
+                this.setupLighting();
+                this.setupTerrain();
+                this.setupCannon();
+                this.setupTargets();
+                
+                window.addEventListener('resize', this.onWindowResize.bind(this));
+            }
+            
+            setupLighting() {
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                this.scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(10, 20, 10);
+                directionalLight.castShadow = true;
+                directionalLight.shadow.mapSize.width = 2048;
+                directionalLight.shadow.mapSize.height = 2048;
+                directionalLight.shadow.camera.near = 0.5;
+                directionalLight.shadow.camera.far = 500;
+                directionalLight.shadow.camera.left = -50;
+                directionalLight.shadow.camera.right = 50;
+                directionalLight.shadow.camera.top = 50;
+                directionalLight.shadow.camera.bottom = -50;
+                this.scene.add(directionalLight);
+            }
+            
+            setupTerrain() {
+                const terrainGeometry = new THREE.PlaneGeometry(100, 60);
+                const terrainMaterial = new THREE.MeshStandardMaterial({ 
+                    color: 0x4CAF50,
+                    roughness: 0.8,
+                    metalness: 0.1
+                });
+                const terrain = new THREE.Mesh(terrainGeometry, terrainMaterial);
+                terrain.rotation.x = -Math.PI / 2;
+                terrain.receiveShadow = true;
+                this.scene.add(terrain);
+                
+                const gridHelper = new THREE.GridHelper(100, 50, 0x333333, 0x555555);
+                gridHelper.position.y = 0.01;
+                this.scene.add(gridHelper);
+                
+                for (let i = -20; i <= 20; i += 10) {
+                    const hillGeometry = new THREE.ConeGeometry(3, 4, 8);
+                    const hillMaterial = new THREE.MeshStandardMaterial({ color: 0x388E3C });
+                    const hill = new THREE.Mesh(hillGeometry, hillMaterial);
+                    hill.position.set(i, 2, -10 + (i % 15));
+                    hill.castShadow = true;
+                    hill.receiveShadow = true;
+                    this.scene.add(hill);
+                }
+            }
+            
+            setupCannon() {
+                const baseGeometry = new THREE.CylinderGeometry(1.5, 2, 1, 16);
+                const baseMaterial = new THREE.MeshStandardMaterial({ color: 0x757575 });
+                const base = new THREE.Mesh(baseGeometry, baseMaterial);
+                base.position.set(-20, 0.5, 0);
+                base.castShadow = true;
+                this.scene.add(base);
+                
+                const barrelGeometry = new THREE.CylinderGeometry(0.3, 0.3, 5, 16);
+                const barrelMaterial = new THREE.MeshStandardMaterial({ color: 0x424242 });
+                this.cannon = new THREE.Mesh(barrelGeometry, barrelMaterial);
+                this.cannon.position.set(-16.5, 1.5, 0);
+                this.cannon.rotation.z = -Math.PI / 4;
+                this.cannon.castShadow = true;
+                this.scene.add(this.cannon);
+                
+                const wheelGeometry = new THREE.CylinderGeometry(0.8, 0.8, 0.3, 16);
+                const wheelMaterial = new THREE.MeshStandardMaterial({ color: 0x212121 });
+                const wheel1 = new THREE.Mesh(wheelGeometry, wheelMaterial);
+                wheel1.rotation.x = Math.PI / 2;
+                wheel1.position.set(-19, 0.8, 1.5);
+                wheel1.castShadow = true;
+                this.scene.add(wheel1);
+                
+                const wheel2 = new THREE.Mesh(wheelGeometry, wheelMaterial);
+                wheel2.rotation.x = Math.PI / 2;
+                wheel2.position.set(-19, 0.8, -1.5);
+                wheel2.castShadow = true;
+                this.scene.add(wheel2);
+            }
+            
+            setupTargets() {
+                const targetPositions = [
+                    { x: 5, y: 2, z: -5 },
+                    { x: 10, y: 3, z: 5 },
+                    { x: 15, y: 2, z: -8 },
+                    { x: 20, y: 4, z: 3 },
+                    { x: 12, y: 2, z: 0 },
+                ];
+                
+                targetPositions.forEach((pos, index) => {
+                    const group = new THREE.Group();
+                    group.position.set(pos.x, pos.y, pos.z);
+                    
+                    const baseGeometry = new THREE.CylinderGeometry(0.5, 0.8, 0.2, 8);
+                    const baseMaterial = new THREE.MeshStandardMaterial({ color: 0x616161 });
+                    const base = new THREE.Mesh(baseGeometry, baseMaterial);
+                    base.position.y = 0.1;
+                    base.castShadow = true;
+                    group.add(base);
+                    
+                    const bodyGeometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+                    const bodyMaterial = new THREE.MeshStandardMaterial({ 
+                        color: index % 2 === 0 ? 0xFF5722 : 0xE91E63,
+                        emissive: index % 2 === 0 ? 0x331100 : 0x330011,
+                        emissiveIntensity: 0.3
+                    });
+                    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+                    body.position.y = 0.95;
+                    body.castShadow = true;
+                    group.add(body);
+                    
+                    const flagGeometry = new THREE.CylinderGeometry(0.05, 0.05, 2, 4);
+                    const flagMaterial = new THREE.MeshStandardMaterial({ color: 0xFFFFFF });
+                    const flag = new THREE.Mesh(flagGeometry, flagMaterial);
+                    flag.position.set(0, 2, 0);
+                    group.add(flag);
+                    
+                    const flagTopGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+                    const flagTopMaterial = new THREE.MeshStandardMaterial({ color: 0xFFD700 });
+                    const flagTop = new THREE.Mesh(flagTopGeometry, flagTopMaterial);
+                    flagTop.position.set(0, 3.15, 0);
+                    group.add(flagTop);
+                    
+                    group.userData = { 
+                        id: index, 
+                        health: 100,
+                        points: (targetPositions.length - index) * 100
+                    };
+                    
+                    this.targets.push(group);
+                    this.scene.add(group);
+                });
+            }
+            
+            setupEventListeners() {
+                const angleSlider = document.getElementById('angle-slider');
+                const angleValue = document.getElementById('angle-value');
+                const powerSlider = document.getElementById('power-slider');
+                const powerValue = document.getElementById('power-value');
+                const fireButton = document.getElementById('fire-button');
+                
+                angleSlider.addEventListener('input', (e) => {
+                    this.angle = parseInt(e.target.value);
+                    angleValue.textContent = this.angle + '°';
+                    this.updateCannonAngle();
+                });
+                
+                powerSlider.addEventListener('input', (e) => {
+                    this.power = parseInt(e.target.value);
+                    powerValue.textContent = this.power + '%';
+                });
+                
+                fireButton.addEventListener('click', () => {
+                    this.fire();
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space' && !this.isFiring) {
+                        e.preventDefault();
+                        this.fire();
+                    }
+                });
+            }
+            
+            updateCannonAngle() {
+                if (this.cannon) {
+                    this.cannon.rotation.z = -this.angle * Math.PI / 180;
+                }
+            }
+            
+            fire() {
+                if (this.isFiring) return;
+                
+                this.isFiring = true;
+                document.getElementById('game-status').textContent = '发射中...';
+                this.addMessage(`发射! 角度: ${this.angle}°, 力度: ${this.power}%`, 'success');
+                
+                const velocity = this.power / 100 * 2;
+                const angleRad = this.angle * Math.PI / 180;
+                
+                const projectileGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+                const projectileMaterial = new THREE.MeshStandardMaterial({ 
+                    color: 0xFFD700,
+                    emissive: 0x331100,
+                    emissiveIntensity: 0.5
+                });
+                this.projectile = new THREE.Mesh(projectileGeometry, projectileMaterial);
+                this.projectile.position.copy(this.cannon.position);
+                this.projectile.position.x += Math.cos(-this.cannon.rotation.z) * 2.5;
+                this.projectile.position.y += Math.sin(-this.cannon.rotation.z) * 2.5;
+                this.projectile.castShadow = true;
+                this.scene.add(this.projectile);
+                
+                this.projectileVelocity.set(
+                    Math.cos(-this.cannon.rotation.z) * velocity,
+                    Math.sin(-this.cannon.rotation.z) * velocity,
+                    0
+                );
+                
+                this.animateProjectile();
+            }
+            
+            animateProjectile() {
+                if (!this.projectile) return;
+                
+                const update = () => {
+                    if (!this.projectile) return;
+                    
+                    this.projectileVelocity.add(this.gravity);
+                    this.projectile.position.add(this.projectileVelocity);
+                    this.projectile.rotation.x += 0.1;
+                    this.projectile.rotation.y += 0.1;
+                    
+                    if (this.projectile.position.y <= 0.3) {
+                        this.projectileHitGround();
+                        return;
+                    }
+                    
+                    for (const target of this.targets) {
+                        if (target.visible && this.checkCollision(this.projectile, target)) {
+                            this.projectileHitTarget(target);
+                            return;
+                        }
+                    }
+                    
+                    requestAnimationFrame(update);
+                };
+                
+                update();
+            }
+            
+            checkCollision(projectile, target) {
+                const distance = projectile.position.distanceTo(target.position);
+                return distance < 2;
+            }
+            
+            projectileHitGround() {
+                this.createExplosion(this.projectile.position, 0x8B4513);
+                this.scene.remove(this.projectile);
+                this.projectile = null;
+                
+                this.isFiring = false;
+                this.turn++;
+                document.getElementById('turn-count').textContent = this.turn;
+                document.getElementById('game-status').textContent = '准备就绪';
+                this.addMessage('炮弹落地', 'warning');
+                
+                if (this.turn > 10) {
+                    this.endGame();
+                }
+            }
+            
+            projectileHitTarget(target) {
+                this.createExplosion(target.position, 0xFF0000);
+                
+                target.userData.health -= 50;
+                this.score += target.userData.points;
+                this.hitCount++;
+                
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('hit-count').textContent = this.hitCount;
+                this.addMessage(`命中目标! +${target.userData.points}分`, 'success');
+                
+                if (target.userData.health <= 0) {
+                    target.visible = false;
+                    this.addMessage('目标被摧毁!', 'success');
+                    
+                    if (this.targets.every(t => !t.visible)) {
+                        this.endGame(true);
+                    }
+                }
+                
+                this.scene.remove(this.projectile);
+                this.projectile = null;
+                
+                this.isFiring = false;
+                this.turn++;
+                document.getElementById('turn-count').textContent = this.turn;
+                document.getElementById('game-status').textContent = '准备就绪';
+            }
+            
+            createExplosion(position, color) {
+                const explosionGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+                const explosionMaterial = new THREE.MeshStandardMaterial({ 
+                    color: color,
+                    emissive: color,
+                    emissiveIntensity: 1,
+                    transparent: true,
+                    opacity: 1
+                });
+                const explosion = new THREE.Mesh(explosionGeometry, explosionMaterial);
+                explosion.position.copy(position);
+                explosion.position.y += 1;
+                this.scene.add(explosion);
+                
+                const scale = 0;
+                const maxScale = 3;
+                
+                const animate = () => {
+                    scale += 0.2;
+                    explosion.scale.set(scale, scale, scale);
+                    explosion.material.opacity = 1 - scale / maxScale;
+                    
+                    if (scale < maxScale) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        this.scene.remove(explosion);
+                    }
+                };
+                
+                animate();
+            }
+            
+            addMessage(text, type = 'info') {
+                const log = document.getElementById('message-log');
+                const item = document.createElement('div');
+                item.className = `message-item ${type}`;
+                item.textContent = text;
+                log.appendChild(item);
+                log.scrollTop = log.scrollHeight;
+            }
+            
+            endGame(victory = false) {
+                document.getElementById('game-status').textContent = victory ? '🎉 胜利!' : '游戏结束';
+                
+                if (victory) {
+                    this.addMessage('恭喜! 所有目标已被摧毁!', 'success');
+                    this.addMessage(`最终得分: ${this.score}`, 'success');
+                } else {
+                    this.addMessage('回合用尽', 'error');
+                    this.addMessage(`最终得分: ${this.score}`, 'warning');
+                }
+                
+                setTimeout(() => {
+                    if (confirm('再来一局?')) {
+                        this.resetGame();
+                    }
+                }, 2000);
+            }
+            
+            resetGame() {
+                this.score = 0;
+                this.turn = 1;
+                this.hitCount = 0;
+                
+                document.getElementById('score').textContent = this.score;
+                document.getElementById('turn-count').textContent = this.turn;
+                document.getElementById('hit-count').textContent = this.hitCount;
+                document.getElementById('game-status').textContent = '准备就绪';
+                
+                this.targets.forEach(target => {
+                    target.visible = true;
+                    target.userData.health = 100;
+                });
+                
+                this.addMessage('游戏已重置', 'info');
+            }
+            
+            onWindowResize() {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            
+            animate() {
+                requestAnimationFrame(this.animate.bind(this));
+                
+                this.targets.forEach(target => {
+                    if (target.visible) {
+                        target.rotation.y += 0.01;
+                    }
+                });
+                
+                this.explosions.forEach(explosion => {
+                    explosion.life -= 0.02;
+                    if (explosion.life <= 0) {
+                        this.scene.remove(explosion.mesh);
+                        this.explosions = this.explosions.filter(e => e !== explosion);
+                    }
+                });
+                
+                this.renderer.render(this.scene, this.camera);
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            new Game();
+        });
+    </script>
+</body>
+</html>

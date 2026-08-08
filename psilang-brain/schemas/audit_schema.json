@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://psilang.laap.io/schemas/audit.json",
+  "title": "PsiLang 认知声明审计报告",
+  "description": "第三方审计工具可消费的出生证明报告。包含印记、记忆来源分布、证据等级、事实通道统计。",
+  "version": "1.0.0",
+
+  "definitions": {
+    "creator_info": {
+      "type": "object",
+      "description": "创造者印记信息",
+      "properties": {
+        "name": { "type": "string", "description": "创造者名称" },
+        "imprint": { "type": "string", "description": "印记声明" },
+        "date": { "type": "string", "format": "date" }
+      }
+    },
+    "birth_certificate": {
+      "type": "object",
+      "description": "出生证明（数字生命身份声明）",
+      "properties": {
+        "has_creator_imprint": { "type": "boolean" },
+        "identity_declared": { "type": "boolean", "description": "是否声明了身份（concept）" },
+        "memory_writes": { "type": "integer", "description": "记忆写入总数" },
+        "evidence_grade_distribution": {
+          "type": "object",
+          "description": "证据等级分布（R6 契约）",
+          "properties": {
+            "creator (1.0)": { "type": "integer" },
+            "world (0.9)": { "type": "integer" },
+            "memory (衰减)": { "type": "integer" },
+            "verify (需提升)": { "type": "integer" },
+            "llm (≤0.5)": { "type": "integer" },
+            "缺失": { "type": "integer" }
+          }
+        }
+      },
+      "required": ["has_creator_imprint", "memory_writes"]
+    },
+    "fact_channel": {
+      "type": "object",
+      "description": "事实通道统计",
+      "properties": {
+        "world": { "type": "integer" },
+        "axiom": { "type": "integer" },
+        "verify": { "type": "integer" },
+        "memory": { "type": "integer" },
+        "none": { "type": "integer" }
+      }
+    },
+    "memory_distribution": {
+      "type": "object",
+      "description": "记忆来源分布",
+      "properties": {
+        "creator": { "type": "integer" },
+        "world": { "type": "integer" },
+        "memory": { "type": "integer" },
+        "verify": { "type": "integer" },
+        "llm": { "type": "integer" }
+      }
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0" },
+    "command": { "type": "string", "const": "psilang audit" },
+    "file": { "type": "string" },
+    "creator": { "$ref": "#/definitions/creator_info" },
+    "birth_certificate": { "$ref": "#/definitions/birth_certificate" },
+    "facts": {
+      "type": "object",
+      "properties": {
+        "total": { "type": "integer" },
+        "by_channel": { "$ref": "#/definitions/fact_channel" },
+        "detail": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "properties": {
+        "total": { "type": "integer" },
+        "by_source": { "$ref": "#/definitions/memory_distribution" },
+        "by_kind": { "type": "object" }
+      }
+    },
+    "stats": { "type": "object" },
+    "auditable": { "type": "boolean", "const": true }
+  },
+  "required": ["schema_version", "creator", "birth_certificate", "auditable"]
+}

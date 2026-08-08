@@ -1,0 +1,190 @@
+{
+  "event": "install-surface-check-failed",
+  "time": "2026-08-01T12:22:52.741Z",
+  "payload": {
+    "ok": false,
+    "checked": [
+      {
+        "id": "app-exe",
+        "label": "HanaAgent.exe",
+        "relativePath": "HanaAgent.exe",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/HanaAgent.exe"
+        ],
+        "exists": true
+      },
+      {
+        "id": "app-asar",
+        "label": "resources/app.asar",
+        "relativePath": "resources/app.asar",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/app.asar"
+        ],
+        "exists": true
+      },
+      {
+        "id": "app-update-yml",
+        "label": "resources/app-update.yml",
+        "relativePath": "resources/app-update.yml",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/app-update.yml"
+        ],
+        "exists": true
+      },
+      {
+        "id": "seed-manifest",
+        "label": "resources/seed/seed-train-*.json",
+        "relativePath": "resources/seed/seed-train-*.json",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/seed/seed-train-win32-x64.json"
+        ],
+        "exists": true
+      },
+      {
+        "id": "seed-manifest-signature",
+        "label": "resources/seed/seed-train-*.json.sig",
+        "relativePath": "resources/seed/seed-train-*.json.sig",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/seed/seed-train-win32-x64.json.sig"
+        ],
+        "exists": true
+      },
+      {
+        "id": "seed-server-archive",
+        "label": "resources/seed/server-*.tar.gz",
+        "relativePath": "resources/seed/server-*.tar.gz",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/seed/server-0.412.7-win32-x64.tar.gz"
+        ],
+        "exists": true
+      },
+      {
+        "id": "seed-renderer-archive",
+        "label": "resources/seed/renderer-*.tar.gz",
+        "relativePath": "resources/seed/renderer-*.tar.gz",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/seed/renderer-0.412.7.tar.gz"
+        ],
+        "exists": true
+      },
+      {
+        "id": "bundled-git",
+        "label": "Bundled Git runtime (MinGit)",
+        "relativePath": "resources/git",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/cmd/git.exe",
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/usr/bin/sh.exe",
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/bin/bash.exe",
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/usr/bin/bash.exe"
+        ],
+        "exists": false
+      }
+    ],
+    "missing": [
+      {
+        "id": "bundled-git",
+        "label": "Bundled Git runtime (MinGit)",
+        "relativePath": "resources/git",
+        "paths": [
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/cmd/git.exe",
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/usr/bin/sh.exe",
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/bin/bash.exe",
+          "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/git/usr/bin/bash.exe"
+        ],
+        "exists": false
+      }
+    ],
+    "context": {
+      "appRoot": "C:/Users/user/AppData/Local/Programs/HanaAgent",
+      "resourcesRoot": "C:/Users/user/AppData/Local/Programs/HanaAgent/resources",
+      "appAsar": {
+        "relativePath": "resources/app.asar",
+        "path": "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/app.asar",
+        "exists": true,
+        "readable": true,
+        "type": "file",
+        "size": 51902100
+      },
+      "legacyAppDirectory": {
+        "relativePath": "resources/app",
+        "path": "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/app",
+        "exists": false,
+        "readable": false,
+        "type": "missing",
+        "error": "ENOENT"
+      },
+      "resourcesDirectory": {
+        "relativePath": "resources",
+        "path": "C:/Users/user/AppData/Local/Programs/HanaAgent/resources",
+        "exists": true,
+        "readable": true,
+        "type": "directory",
+        "size": null,
+        "entries": [
+          {
+            "name": "app-update.yml",
+            "type": "file"
+          },
+          {
+            "name": "app.asar",
+            "type": "file"
+          },
+          {
+            "name": "assets",
+            "type": "directory"
+          },
+          {
+            "name": "elevate.exe",
+            "type": "file"
+          },
+          {
+            "name": "git",
+            "type": "directory"
+          },
+          {
+            "name": "sandbox",
+            "type": "directory"
+          },
+          {
+            "name": "screenshot-themes",
+            "type": "directory"
+          },
+          {
+            "name": "seed",
+            "type": "directory"
+          }
+        ],
+        "truncated": false,
+        "entryCount": 8
+      },
+      "seedDirectory": {
+        "relativePath": "resources/seed",
+        "path": "C:/Users/user/AppData/Local/Programs/HanaAgent/resources/seed",
+        "exists": true,
+        "readable": true,
+        "type": "directory",
+        "size": null,
+        "entries": [
+          {
+            "name": "renderer-0.412.7.tar.gz",
+            "type": "file"
+          },
+          {
+            "name": "seed-train-win32-x64.json",
+            "type": "file"
+          },
+          {
+            "name": "seed-train-win32-x64.json.sig",
+            "type": "file"
+          },
+          {
+            "name": "server-0.412.7-win32-x64.tar.gz",
+            "type": "file"
+          }
+        ],
+        "truncated": false,
+        "entryCount": 4
+      }
+    }
+  }
+}

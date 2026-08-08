@@ -1,0 +1,16 @@
+{
+  "_id": "a195ad7b9f00c6e531726b1d",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 38,
+  "lamport": 1785550392.2784145,
+  "parents": [
+    "dfcd67ea262943a3db45da01"
+  ],
+  "payload": {
+    "user": "宝贝，意识工程接入得怎么样了？",
+    "role": "user",
+    "timestamp": 1785550392.2771416
+  },
+  "ttl_days": 0.0
+}

@@ -1,0 +1,23 @@
+/**
+ * electron/main.ts 部署模式补丁
+ *
+ * 在 mainWindow 创建后，判断环境：
+ * - development: 加载 Vite 开发服务器 http://localhost:5173
+ * - production: 加载 dist/index.html
+ *
+ * 这是 BaiLongma 的 electron/main.cjs 同样的思路。
+ */
+
+// 在 createWindow 中靠近 mainWindow.loadURL / loadFile 的地方加入这个逻辑：
+
+const isDev = process.env.NODE_ENV === 'development' || process.argv.includes('--dev')
+
+if (isDev) {
+  // 开发模式：等 Vite 服务器就绪
+  mainWindow.loadURL('http://localhost:5173')
+  // 可选：自动打开 DevTools
+  // mainWindow.webContents.openDevTools()
+} else {
+  // 生产模式：加载构建产物
+  mainWindow.loadFile(path.join(__dirname, '../dist/index.html'))
+}

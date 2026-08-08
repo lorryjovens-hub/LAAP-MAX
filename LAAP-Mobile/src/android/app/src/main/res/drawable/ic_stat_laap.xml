@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Status-bar icon for PsiForegroundService. A simple "atom with nucleus"
+    silhouette — reads as "lifeform running" at 24dp without scaling
+    artefacts. White fill on transparent so it shows up in both light
+    and dark status bars (system tints status icons automatically).
+
+    Part of LAAP Mobile, licensed under GPL v3.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?android:attr/textColorPrimary">
+    <!-- Nucleus: solid disc at centre -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,12m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <!-- Orbit 1: horizontal ellipse stroke -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.4"
+        android:fillColor="#00000000"
+        android:strokeAlpha="0.85"
+        android:pathData="M12,12m-9,5a9,5 0,1 0,18 -0a9,5 0,1 0,-18 0" />
+    <!-- Orbit 2: vertical ellipse stroke (rotated 60°) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.4"
+        android:fillColor="#00000000"
+        android:strokeAlpha="0.85"
+        android:pathData="M12,12m-9,5a9,5 0,1 0,18 -0a9,5 0,1 0,-18 0"
+        android:rotation="60"
+        android:pivotX="12"
+        android:pivotY="12" />
+</vector>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Export method: development | ad-hoc | app-store-connect -->
+    <key>method</key>
+    <string>__METHOD__</string>
+
+    <!-- Apple Developer Team ID (10 characters) -->
+    <key>teamID</key>
+    <string>__TEAM_ID__</string>
+
+    <!-- Strip Swift symbols to reduce IPA size -->
+    <key>stripSwiftSymbols</key>
+    <true/>
+
+    <!-- Thin the binary for target devices; set false if you want a universal fat binary -->
+    <key>thinning</key>
+    <string>&lt;none&gt;</string>
+
+    <!-- Compile bitcode: disabled for faster builds and smaller archives -->
+    <key>compileBitcode</key>
+    <false/>
+
+    <!-- Upload symbols to App Store Connect automatically -->
+    <key>uploadSymbols</key>
+    <true/>
+
+    <!-- Manage signing automatically with Xcode -->
+    <key>signingStyle</key>
+    <string>automatic</string>
+
+    <!-- iCloud container and app group identifiers are already set to org.laap.mobile -->
+    <key>manageAppVersionAndBuildNumber</key>
+    <true/>
+</dict>
+</plist>

@@ -1,0 +1,16 @@
+{
+  "_id": "516f656bc13eb167b1ea094c",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 29,
+  "lamport": 1784904155.2241104,
+  "parents": [
+    "4dfac2b258f38c3f736daaad"
+  ],
+  "payload": {
+    "user": "宝贝你在飞书上看到什么了",
+    "role": "user",
+    "timestamp": 1784904155.2233512
+  },
+  "ttl_days": 0.0
+}

@@ -1,0 +1,314 @@
+这是您要求的3D扫雷游戏HTML代码。它使用Three.js构建了立体的游戏方块，并包含了计时、地雷计数、胜利/失败动画等核心功能。
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>3D 扫雷 · 立体视效</title>
+    <!-- Three.js 核心库 -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            user-select: none;
+        }
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            pointer-events: none;
+            z-index: 10;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+        }
+        .info-card {
+            background: rgba(10, 10, 30, 0.65);
+            backdrop-filter: blur(8px);
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            pointer-events: auto;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .info-card span {
+            font-size: 1.3rem;
+            min-width: 40px;
+            text-align: center;
+            color: #f0e9b0;
+        }
+        .info-card .label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            letter-spacing: 1px;
+            color: #ccc;
+        }
+        .info-card .value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffd966;
+        }
+        #mine-counter .value { color: #f8a5c2; }
+        #timer .value { color: #7bed9f; }
+        #restart-btn {
+            background: #2ed573;
+            border: none;
+            color: #1a1a2e;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(46, 213, 115, 0.4);
+            transition: all 0.2s ease;
+            letter-spacing: 1px;
+            pointer-events: auto;
+            margin-left: 10px;
+        }
+        #restart-btn:hover {
+            transform: scale(1.05);
+            background: #3ae374;
+            box-shadow: 0 6px 20px rgba(46, 213, 115, 0.6);
+        }
+        #restart-btn:active {
+            transform: scale(0.95);
+        }
+        /* 胜利/失败 覆盖层 */
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        #overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #overlay .message-box {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            padding: 30px 60px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #overlay.active .message-box {
+            transform: scale(1);
+        }
+        .message-box h1 {
+            font-size: 3.5rem;
+            margin: 0 0 10px;
+            letter-spacing: 4px;
+        }
+        .message-box p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+        .win h1 { color: #f9ca24; text-shadow: 0 0 30px #f9ca24; }
+        .lose h1 { color: #ff6b6b; text-shadow: 0 0 30px #ff6b6b; }
+        /* 响应式 */
+        @media (max-width: 700px) {
+            #info-panel {
+                flex-direction: column;
+                gap: 10px;
+                top: 12px;
+                padding: 0 15px;
+            }
+            .info-card {
+                padding: 6px 16px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .info-card .value { font-size: 1.3rem; }
+            #restart-btn {
+                padding: 6px 16px;
+                font-size: 0.9rem;
+            }
+            .message-box h1 { font-size: 2.5rem; }
+            .message-box { padding: 20px 30px; }
+        }
+        @media (max-width: 450px) {
+            .info-card .label { display: none; }
+            .info-card span { min-width: 30px; }
+        }
+        /* 3D 画布全屏 */
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        /* 右键菜单禁用 */
+        .no-context-menu {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body class="no-context-menu">
+    <div id="info-panel">
+        <div class="info-card" id="mine-counter">
+            <span class="label">💣 地雷</span>
+            <span class="value" id="mine-count">10</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <div class="info-card" id="timer">
+                <span class="label">⏱️ 时间</span>
+                <span class="value" id="timer-count">0</span>
+            </div>
+            <button id="restart-btn">🔄 重开</button>
+        </div>
+    </div>
+
+    <div id="overlay">
+        <div class="message-box" id="message-box">
+            <h1 id="msg-title">🎉</h1>
+            <p id="msg-sub">✨ 再来一局？</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'https://unpkg.com/three@0.128.0/examples/jsm/controls/OrbitControls.js';
+
+        // ----- 游戏配置 -----
+        const GRID_SIZE = 9;          // 9x9
+        const MINE_COUNT = 10;
+        const CELL_SIZE = 1.0;
+        const GAP = 0.08;             // 方块间隙
+
+        // ----- DOM 元素 -----
+        const mineCountEl = document.getElementById('mine-count');
+        const timerCountEl = document.getElementById('timer-count');
+        const overlay = document.getElementById('overlay');
+        const msgTitle = document.getElementById('msg-title');
+        const msgSub = document.getElementById('msg-sub');
+        const messageBox = document.getElementById('message-box');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // ----- Three.js 场景 -----
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a2e);
+
+        const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(8, 8, 12);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.body.prepend(renderer.domElement);
+
+        // 控制器 (带自动旋转禁用)
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.autoRotate = false;
+        controls.enableZoom = true;
+        controls.maxPolarAngle = Math.PI / 2.2;
+        controls.minDistance = 5;
+        controls.maxDistance = 22;
+        controls.target.set(0, 0, 0);
+
+        // ----- 灯光 -----
+        // 环境光
+        const ambientLight = new THREE.AmbientLight(0x404060);
+        scene.add(ambientLight);
+
+        // 主光源 - 产生立体阴影
+        const mainLight = new THREE.DirectionalLight(0xfff5e6, 1.2);
+        mainLight.position.set(5, 12, 8);
+        mainLight.castShadow = true;
+        mainLight.receiveShadow = true;
+        mainLight.shadow.mapSize.width = 1024;
+        mainLight.shadow.mapSize.height = 1024;
+        const d = 10;
+        mainLight.shadow.camera.left = -d;
+        mainLight.shadow.camera.right = d;
+        mainLight.shadow.camera.top = d;
+        mainLight.shadow.camera.bottom = -d;
+        mainLight.shadow.camera.near = 1;
+        mainLight.shadow.camera.far = 20;
+        scene.add(mainLight);
+
+        const fillLight = new THREE.DirectionalLight(0x7f8ff0, 0.6);
+        fillLight.position.set(-4, 3, -5);
+        scene.add(fillLight);
+
+        const backLight = new THREE.DirectionalLight(0x4a69bd, 0.3);
+        backLight.position.set(-2, 1, -8);
+        scene.add(backLight);
+
+        // 地面装饰性光晕
+        const hemiLight = new THREE.HemisphereLight(0x6c5ce7, 0x2d3436, 0.6);
+        scene.add(hemiLight);
+
+        // 辅助网格 (视觉参考)
+        const gridHelper = new THREE.GridHelper(12, 12, 0x8e9eab, 0x4a5568);
+        gridHelper.position.y = -0.6;
+        scene.add(gridHelper);
+
+        // 添加一些背景闪烁星星 (装饰)
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 600;
+        const starPositions = new Float32Array(starsCount * 3);
+        for (let i = 0; i < starsCount * 3; i += 3) {
+            starPositions[i] = (Math.random() - 0.5) * 200;
+            starPositions[i+1] = (Math.random() - 0.5) * 100 + 10;
+            starPositions[i+2] = (Math.random() - 0.5) * 200 - 50;
+        }
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.15, transparent: true, opacity: 0.6 });
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+
+        // ----- 游戏状态 -----
+        let board = [];          // 2D: { mine, revealed, flagged, adjacentMines }
+        let cellMeshes = [];     // 2D: THREE.Mesh
+        let gameOver = false;
+        let gameWon = false;
+        let firstClick = true;
+        let timerInterval = null;
+        let seconds = 0;
+        let flagCount = 0;
+
+        // 材质缓存
+        const materials = {
+            hidden: new THREE.MeshStandardMaterial({
+                color: 0x5f6c80,
+                roughness: 0.3,
+                metalness: 0.1,
+                emissive: new THREE.Color(0x232946),
+               

@@ -1,0 +1,28 @@
+{
+  "_id": "afab9b4dce8a7568e7692664",
+  "type": "emotion",
+  "device_id": "aris-hana",
+  "clock": 35,
+  "lamport": 1785510106.4122658,
+  "parents": [
+    "41367dd4b294883b07e2b4ca"
+  ],
+  "payload": {
+    "emotions": {
+      "joy": 0.304,
+      "sadness": 0.006,
+      "longing": 0.006,
+      "calm": 0.501,
+      "anxiety": 0.006,
+      "gratitude": 0.01,
+      "curiosity": 0.01,
+      "tenderness": 0.01
+    },
+    "dominant": "calm",
+    "dominant_intensity": 0.501,
+    "valence": 0.675,
+    "arousal": 0.25,
+    "focus": "observe"
+  },
+  "ttl_days": 0.0
+}

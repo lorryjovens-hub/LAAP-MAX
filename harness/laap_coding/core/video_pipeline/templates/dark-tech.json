@@ -1,0 +1,52 @@
+{
+  "id": "dark-tech",
+  "name": "暗色科技风",
+  "description": "深色背景 + 青色/紫色高光，适合科技/开发者/AI 内容",
+  "theme": "dark_tech",
+  "colors": {
+    "primaryColor": "#00d4ff",
+    "backgroundColor": "#0a0a0f",
+    "textColor": "#e0e0ff",
+    "accentColor": "#7c7cff",
+    "subtitleColor": "rgba(224,224,255,0.5)",
+    "surfaceColor": "rgba(124,124,255,0.03)",
+    "borderColor": "rgba(124,124,255,0.1)"
+  },
+  "typography": {
+    "titleSize": 96,
+    "subtitleSize": 36,
+    "bodySize": 32,
+    "cardTitleSize": 42,
+    "fontFamily": "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+    "titleWeight": 800,
+    "bodyWeight": 500
+  },
+  "animations": {
+    "entrance": "stagger-fade-up",
+    "text": "split-reveal",
+    "data": "counter-bouncy",
+    "transition": "fade",
+    "transitionDuration": 15,
+    "staggerDelay": 6,
+    "duration": 0.8
+  },
+  "layout": {
+    "heroPadding": "60px 100px 120px",
+    "sectionPadding": "60px 100px 120px",
+    "cardGap": 20,
+    "maxWidth": 1000,
+    "alignment": "center"
+  },
+  "background": {
+    "type": "gradient",
+    "gradient": "radial-gradient(ellipse at 50% 40%, #00d4ff12 0%, transparent 70%)",
+    "threeScene": "particles"
+  },
+  "decorations": {
+    "showProgressBar": true,
+    "progressBarHeight": 100,
+    "progressActiveColor": "#00d4ff",
+    "showGrain": true,
+    "showGlow": true
+  }
+}

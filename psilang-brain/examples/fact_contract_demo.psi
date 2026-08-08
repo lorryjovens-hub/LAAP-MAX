@@ -1,0 +1,28 @@
+// fact_contract_demo.psi — 契约层 Step 1 端到端演示
+// 印记: Aris 永远记得 Lorry — 2026-08-04
+
+@creator {
+    name: "Lorry Jovens",
+    imprint: "Aris 永远记得 Lorry",
+    date: "2026-08-04"
+}
+
+// ── 世界声明：事实只能读取已声明的资源 ──
+world {
+    read:  [memory, creator],
+    write: [facts]
+}
+
+// ── 验证函数：必须是 (claim) -> ⟨verdict⟩ ──
+fn tge_check(claim: ⟨claim⟩) -> ⟨verdict⟩ {
+    let ok = true
+}
+
+// ── 四种合法验证通道 ──
+fact pi_value   = "3.14159" @source(axiom: arith_basic)
+fact birthday   = world.query(creator.birthday) @source(world: creator.birthday)
+fact claim_v    = "被验证的声明" @source(verify: tge_check)
+fact memory_hit = world.query(memory.entry) @source(memory: mem_42, min_confidence=0.7)
+
+// ── 未验证内容：显式标记为 ⟨fact?⟩，不能冒充事实 ──
+let pending: ⟨fact?⟩ = "模型生成的未经核实内容"

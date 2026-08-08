@@ -1,0 +1,72 @@
+[build]
+  command = "pnpm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # 本地优先模式：数据存在浏览器 IndexedDB，LLM Key 由用户在前端填写并直接调用
+  VITE_LOCAL_ONLY = "true"
+
+# Stripe Checkout 创建会话
+[[redirects]]
+  from = "/api/stripe-checkout"
+  to = "/.netlify/functions/stripe-checkout"
+  status = 200
+  force = true
+
+# Stripe Webhook 回调
+[[redirects]]
+  from = "/api/stripe-webhook"
+  to = "/.netlify/functions/stripe-webhook"
+  status = 200
+  force = true
+
+# SenseNova 生产代理：/api/sensenova/* -> sensenova-proxy
+[[redirects]]
+  from = "/api/sensenova/*"
+  to = "/.netlify/functions/sensenova-proxy"
+  status = 200
+  force = true
+
+# 云端社区 API：把 /api/* 转发到 community-api 函数（放在最兜底）
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/community-api"
+  status = 200
+  force = true
+
+# 单页应用（SPA）fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+# 静态资源 CORP：让 Studio 的 COEP 页面可以加载同域 JS/CSS/字体
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+# Studio / WebContainer 需要跨域隔离头
+[[headers]]
+  for = "/studio"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
+
+[[headers]]
+  for = "/studio/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"

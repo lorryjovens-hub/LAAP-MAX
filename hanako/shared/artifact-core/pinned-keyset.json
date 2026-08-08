@@ -1,0 +1,10 @@
+[
+  {
+    "keyId": "2026a",
+    "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEABxlmYzrnEDdrKL7lW+KQsvO5omvy8Wyuj1G3YIs7eFo=\n-----END PUBLIC KEY-----\n"
+  },
+  {
+    "keyId": "local-2025",
+    "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAut4yjeNHKOXLh/sZDz9o1tgZWbPKcepRn2jcSwUSt4E=\n-----END PUBLIC KEY-----\n"
+  }
+]

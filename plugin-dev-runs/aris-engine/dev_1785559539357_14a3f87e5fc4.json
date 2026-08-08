@@ -1,0 +1,12 @@
+{
+  "devRunId": "dev_1785559539357_14a3f87e5fc4",
+  "pluginId": "aris-engine",
+  "sourcePath": "D:\\LAAP\\plugin-dev-sources\\aris-engine",
+  "targetDir": "D:\\LAAP\\plugins-dev\\aris-engine",
+  "status": "restricted",
+  "version": "2.0.0",
+  "allowFullAccess": false,
+  "startedAt": "2026-08-01T04:45:39.357Z",
+  "completedAt": "2026-08-01T04:45:40.550Z",
+  "error": null
+}

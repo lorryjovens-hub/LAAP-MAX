@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-07-20T14:13:16.837363+00:00",
+  "python_version": "3.11.15 (main, Apr  7 2026, 20:47:24) [MSC v.1944 64 bit (AMD64)]",
+  "suites": [
+    "laap/triphase_bridge/tests",
+    "tests/unit/test_body_tools.py",
+    "tests/test_stability.py",
+    "tests/test_cognitive_engine.py",
+    "tests/test_affective_dynamics.py",
+    "tests/unit/test_capabilities_cli.py"
+  ],
+  "summary": {
+    "total": 93,
+    "passed": 93,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 4.238,
+    "tests_per_second": 21.94
+  },
+  "slowest_tests": []
+}

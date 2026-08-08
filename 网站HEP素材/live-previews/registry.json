@@ -1,0 +1,901 @@
+{
+  "previews": [
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/saas_hero.html"
+    },
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/saas_landing_page.html"
+    },
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/saas_saas_page.html"
+    },
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/saas_portfolio.html"
+    },
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/saas_agency.html"
+    },
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/saas_ecommerce.html"
+    },
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/saas_technology.html"
+    },
+    {
+      "style": "saas",
+      "style_name": "SaaS",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/saas_blog.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/modern_dark_hero.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/modern_dark_landing_page.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/modern_dark_saas_page.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/modern_dark_portfolio.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/modern_dark_agency.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/modern_dark_ecommerce.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/modern_dark_technology.html"
+    },
+    {
+      "style": "modern_dark",
+      "style_name": "Modern Dark",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/modern_dark_blog.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/cyberpunk_hero.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/cyberpunk_landing_page.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/cyberpunk_saas_page.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/cyberpunk_portfolio.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/cyberpunk_agency.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/cyberpunk_ecommerce.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/cyberpunk_technology.html"
+    },
+    {
+      "style": "cyberpunk",
+      "style_name": "Cyberpunk",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/cyberpunk_blog.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/luxury_hero.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/luxury_landing_page.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/luxury_saas_page.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/luxury_portfolio.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/luxury_agency.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/luxury_ecommerce.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/luxury_technology.html"
+    },
+    {
+      "style": "luxury",
+      "style_name": "Luxury",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/luxury_blog.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/web3_hero.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/web3_landing_page.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/web3_saas_page.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/web3_portfolio.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/web3_agency.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/web3_ecommerce.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/web3_technology.html"
+    },
+    {
+      "style": "web3",
+      "style_name": "Web3",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/web3_blog.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/kinetic_hero.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/kinetic_landing_page.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/kinetic_saas_page.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/kinetic_portfolio.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/kinetic_agency.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/kinetic_ecommerce.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/kinetic_technology.html"
+    },
+    {
+      "style": "kinetic",
+      "style_name": "Kinetic",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/kinetic_blog.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/minimal_dark_hero.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/minimal_dark_landing_page.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/minimal_dark_saas_page.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/minimal_dark_portfolio.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/minimal_dark_agency.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/minimal_dark_ecommerce.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/minimal_dark_technology.html"
+    },
+    {
+      "style": "minimal_dark",
+      "style_name": "Minimal Dark",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/minimal_dark_blog.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/professional_hero.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/professional_landing_page.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/professional_saas_page.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/professional_portfolio.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/professional_agency.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/professional_ecommerce.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/professional_technology.html"
+    },
+    {
+      "style": "professional",
+      "style_name": "Professional",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/professional_blog.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/terminal_hero.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/terminal_landing_page.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/terminal_saas_page.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/terminal_portfolio.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/terminal_agency.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/terminal_ecommerce.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/terminal_technology.html"
+    },
+    {
+      "style": "terminal",
+      "style_name": "Terminal",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/terminal_blog.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/flat_design_hero.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/flat_design_landing_page.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/flat_design_saas_page.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/flat_design_portfolio.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/flat_design_agency.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/flat_design_ecommerce.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/flat_design_technology.html"
+    },
+    {
+      "style": "flat_design",
+      "style_name": "Flat Design",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/flat_design_blog.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/vaporwave_hero.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/vaporwave_landing_page.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/vaporwave_saas_page.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/vaporwave_portfolio.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/vaporwave_agency.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/vaporwave_ecommerce.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/vaporwave_technology.html"
+    },
+    {
+      "style": "vaporwave",
+      "style_name": "Vaporwave",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/vaporwave_blog.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/botanical_hero.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/botanical_landing_page.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/botanical_saas_page.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/botanical_portfolio.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/botanical_agency.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/botanical_ecommerce.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/botanical_technology.html"
+    },
+    {
+      "style": "botanical",
+      "style_name": "Botanical",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/botanical_blog.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/industrial_hero.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/industrial_landing_page.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/industrial_saas_page.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/industrial_portfolio.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/industrial_agency.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/industrial_ecommerce.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/industrial_technology.html"
+    },
+    {
+      "style": "industrial",
+      "style_name": "Industrial",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/industrial_blog.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/playful_hero.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/playful_landing_page.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/playful_saas_page.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/playful_portfolio.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/playful_agency.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/playful_ecommerce.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/playful_technology.html"
+    },
+    {
+      "style": "playful",
+      "style_name": "Playful",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/playful_blog.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/academia_hero.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/academia_landing_page.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/academia_saas_page.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/academia_portfolio.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/academia_agency.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/academia_ecommerce.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/academia_technology.html"
+    },
+    {
+      "style": "academia",
+      "style_name": "Academia",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/academia_blog.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "hero",
+      "type_name": "Hero Section",
+      "path": "/live-previews/organic_hero.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "landing_page",
+      "type_name": "Landing Page",
+      "path": "/live-previews/organic_landing_page.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "saas_page",
+      "type_name": "SaaS Website",
+      "path": "/live-previews/organic_saas_page.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "portfolio",
+      "type_name": "Portfolio",
+      "path": "/live-previews/organic_portfolio.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "agency",
+      "type_name": "Agency",
+      "path": "/live-previews/organic_agency.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "ecommerce",
+      "type_name": "E-commerce",
+      "path": "/live-previews/organic_ecommerce.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "technology",
+      "type_name": "Technology",
+      "path": "/live-previews/organic_technology.html"
+    },
+    {
+      "style": "organic",
+      "style_name": "Organic",
+      "type": "blog",
+      "type_name": "Blog",
+      "path": "/live-previews/organic_blog.html"
+    }
+  ],
+  "total": 128
+}

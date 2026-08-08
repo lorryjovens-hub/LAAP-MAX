@@ -1,0 +1,21 @@
+{
+  "name": "laap-client",
+  "private": true,
+  "version": "0.1.0",
+  "description": "LAAP 意识驱动桌面客户端",
+  "author": "LAAP <laap@example.com>",
+  "type": "module",
+  "main": "dist-electron/main/main.cjs",
+  "dependencies": {
+    "@gsap/react": "^2.1.0",
+    "gsap": "^3.12.5",
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
+  }
+}

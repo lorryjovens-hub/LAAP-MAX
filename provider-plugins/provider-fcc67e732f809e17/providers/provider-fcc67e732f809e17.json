@@ -1,0 +1,7 @@
+{
+  "id": "laap core",
+  "displayName": "laap core",
+  "authType": "api-key",
+  "defaultBaseUrl": "http://127.0.0.1:9876",
+  "defaultApi": "openai-completions"
+}

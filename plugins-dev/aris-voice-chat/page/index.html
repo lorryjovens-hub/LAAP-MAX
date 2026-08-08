@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aris 语音通话</title>
+<style>
+  :root {
+    --bg: #0f0f15; --card: #17171f; --border: #26263a; --accent: #6c5ce7; --accent2: #00cec9;
+    --text: #e6e6f0; --muted: #8b8ba0; --success: #00b894; --danger: #e17055; --warn: #fdcb6e;
+    --font: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+    --mono: 'JetBrains Mono','Fira Code',Consolas,monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font); background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+  .app { max-width:760px; margin:0 auto; padding:20px 20px 40px; }
+
+  /* 头部 */
+  .header { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+  .header h1 { font-size:18px; font-weight:600; letter-spacing:.3px; }
+  .header .status-pill { margin-left:auto; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--muted); transition:all .3s; }
+  .dot.online { background:var(--success); box-shadow:0 0 8px var(--success); animation:pulse 2s ease-in-out infinite; }
+  .dot.offline { background:var(--danger); }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+  .btn { padding:8px 16px; border-radius:8px; border:1px solid var(--border); background:var(--card); color:var(--text); font-size:13px; cursor:pointer; transition:all .2s; }
+  .btn:hover { border-color:var(--accent); }
+  .btn:disabled { opacity:.4; cursor:not-allowed; }
+  .btn-primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .btn-danger { background:transparent; border-color:var(--danger); color:var(--danger); }
+  .btn-danger:hover:not(:disabled) { background:rgba(225,112,85,.12); }
+
+  /* 通话球 */
+  .callwrap { display:flex; flex-direction:column; align-items:center; gap:18px; padding:44px 0 30px; }
+  .orb { width:120px; height:120px; border-radius:50%; cursor:pointer; position:relative;
+    background:radial-gradient(circle at 35% 30%, #8b7bf0, #6c5ce7 60%, #4834d4);
+    box-shadow:0 0 40px rgba(108,92,231,.35), inset 0 0 30px rgba(255,255,255,.08);
+    border:none; transition:all .25s; display:flex; align-items:center; justify-content:center; }
+  .orb:hover { transform:scale(1.04); box-shadow:0 0 60px rgba(108,92,231,.55), inset 0 0 30px rgba(255,255,255,.1); }
+  .orb .mic { color:#fff; filter:drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
+  .orb.listening { background:radial-gradient(circle at 35% 30%, #00cec9, #00a8a0 60%, #008080); box-shadow:0 0 60px rgba(0,206,201,.5); }
+  .orb.ai-speaking { background:radial-gradient(circle at 35% 30%, #ff9f43, #e17055 60%, #b33939); box-shadow:0 0 60px rgba(255,159,67,.5); }
+  .orb.processing { background:radial-gradient(circle at 35% 30%, #fdcb6e, #e17055 60%, #6c5ce7); box-shadow:0 0 60px rgba(253,203,110,.5); }
+  .orb.connecting { animation:orbspin 1.2s linear infinite; }
+  @keyframes orbspin { to { transform:rotate(360deg); } }
+  .orb-caption { font-size:14px; color:var(--muted); min-height:20px; }
+  .orb-caption.live { color:var(--text); font-weight:500; }
+
+  /* 波形 */
+  .waveform { width:100%; height:56px; margin-top:6px; }
+  .waveform canvas { width:100%; height:100%; display:block; }
+
+  /* 对话记录 */
+  .chat { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+  .msg { max-width:82%; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.6; animation:msgIn .25s ease; }
+  @keyframes msgIn { from { opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .msg.user { align-self:flex-end; background:var(--accent); color:#fff; border-bottom-right-radius:4px; }
+  .msg.assistant { align-self:flex-start; background:var(--card); border:1px solid var(--border); border-bottom-left-radius:4px; }
+  .msg .role { font-size:10px; opacity:.6; text-transform:uppercase; letter-spacing:.6px; margin-bottom:3px; }
+  .msg.partial { opacity:.7; }
+  .msg.sys { align-self:center; background:transparent; color:var(--muted); font-size:12px; padding:4px 10px; }
+
+  /* 连接面板 */
+  .panel { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-top:20px; overflow:hidden; }
+  .panel-head { display:flex; align-items:center; gap:8px; padding:12px 16px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); border-bottom:1px solid var(--border); cursor:pointer; }
+  .panel-head .arrow { transition:transform .2s; margin-left:auto; }
+  .panel-head.open .arrow { transform:rotate(90deg); }
+  .panel-body { padding:16px; display:none; }
+  .panel-head.open + .panel-body { display:block; }
+  .field { margin-bottom:12px; }
+  .field label { display:block; font-size:12px; color:var(--muted); margin-bottom:5px; }
+  .field input, .field select, .field textarea { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:9px 12px; border-radius:8px; font-size:13px; font-family:var(--font); outline:none; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--accent); }
+  .field textarea { min-height:70px; resize:vertical; }
+  .row { display:flex; gap:10px; }
+  .row .field { flex:1; }
+  .hint { font-size:11px; color:var(--muted); margin-top:4px; }
+
+  /* 日志 */
+  .logpanel { font-family:var(--mono); font-size:11px; line-height:1.7; color:var(--muted); max-height:160px; overflow-y:auto; background:var(--bg); border-radius:8px; padding:10px; }
+  .logpanel .t { color:#555; }
+  .logpanel .err { color:var(--danger); }
+  .logpanel .out { color:var(--accent2); }
+  .logpanel .sys { color:var(--warn); }
+
+  .actions { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+  .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--card); border:1px solid var(--accent); color:var(--text); padding:10px 18px; border-radius:10px; font-size:13px; box-shadow:0 8px 30px rgba(0,0,0,.4); opacity:0; transition:opacity .3s; pointer-events:none; z-index:99; }
+  .toast.show { opacity:1; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5">
+      <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><path d="M8 22h8"/>
+    </svg>
+    <h1>Aris 语音通话</h1>
+    <div class="status-pill"><span class="dot" id="statusDot"></span><span id="statusText">未连接</span></div>
+  </div>
+
+  <div class="callwrap">
+    <button class="orb" id="orb" aria-label="开始/停止通话">
+      <svg class="mic" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><path d="M8 22h8"/>
+      </svg>
+    </button>
+    <div class="orb-caption" id="orbCaption">点击开始通话</div>
+    <div class="waveform"><canvas id="wave"></canvas></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="startBtn">启动服务</button>
+    <button class="btn btn-danger" id="stopSvcBtn" disabled>停止服务</button>
+    <button class="btn" id="clearBtn">清空对话</button>
+  </div>
+
+  <div class="chat" id="chat"></div>
+
+  <div class="panel" id="settingsPanel">
+    <div class="panel-head" id="settingsHead">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>服务与语音设置</span>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="field"><label>STT 后端</label><select id="cfgStt"><option value="faster-whisper" selected>faster-whisper</option><option value="parakeet-tdt">parakeet-tdt</option><option value="whisper">whisper</option><option value="paraformer">paraformer</option></select></div>
+        <div class="field"><label>TTS 后端</label><select id="cfgTts"><option value="qwen3" selected>qwen3</option><option value="kokoro">kokoro</option><option value="pocket">pocket</option><option value="chattts">chattts</option></select></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>LLM 后端</label><select id="cfgLlm"><option value="responses-api" selected>responses-api</option><option value="chat-completions">chat-completions</option><option value="transformers">transformers</option></select></div>
+        <div class="field"><label>对话语言</label><select id="cfgLang"><option value="zh" selected>中文</option><option value="en">English</option><option value="auto">自动</option></select></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>LLM 模型</label><input id="cfgModel" value="deepseek-chat" placeholder="deepseek-chat / gpt-4o-mini / Qwen3-4B"></div>
+        <div class="field"><label>语音</label><input id="cfgVoice" value="Aiden" placeholder="Aiden / af_bella"></div>
+      </div>
+      <div class="field"><label>LLM API Base URL</label><input id="cfgBaseUrl" placeholder="如 https://api.deepseek.com/v1（留空用默认）"></div>
+      <div class="field"><label>LLM API Key</label><input id="cfgApiKey" type="password" placeholder="OpenAI 兼容 API 密钥"></div>
+      <div class="field"><label>系统提示词</label><textarea id="cfgInstructions">You are a friendly voice assistant named Aris. Keep replies short, warm, and spoken. Avoid long monologues. Reply in the same language the user speaks.</textarea></div>
+      <button class="btn btn-primary" id="applyBtn">应用并重启服务</button>
+      <div class="hint">修改后需重启服务生效。首次启动会下载模型，视网速可能需要几分钟。</div>
+    </div>
+  </div>
+
+  <div class="panel" id="logPanel">
+    <div class="panel-head" id="logHead"><span>服务日志</span><span class="arrow">▶</span></div>
+    <div class="panel-body"><div class="logpanel" id="logBox">等待启动...</div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BASE = '/api/plugins/aris-voice-chat';
+const $ = (id) => document.getElementById(id);
+const orb = $('orb'), orbCaption = $('orbCaption'), chat = $('chat');
+let ws = null, audioCtx = null, workletNode = null, micStream = null;
+let s2sRunning = false, calling = false, currentState = 'idle';
+let asstPartial = '', userBubble = null;
+
+// ── Toast ──
+let toastTimer = 0;
+function toast(msg) { $('toast').textContent = msg; $('toast').classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(()=>$('toast').classList.remove('show'), 2600); }
+
+// ── 状态更新 ──
+function setState(s, caption) {
+  currentState = s;
+  orb.className = 'orb';
+  if (s==='listening') orb.classList.add('listening');
+  else if (s==='ai-speaking') orb.classList.add('ai-speaking');
+  else if (s==='processing') orb.classList.add('processing');
+  else if (s==='connecting') { orb.classList.add('connecting','listening'); }
+  if (caption) { orbCaption.textContent = caption; orbCaption.classList.add('live'); }
+  else { orbCaption.textContent = s==='idle' ? '点击开始通话' : ''; orbCaption.classList.remove('live'); }
+}
+
+// ── 波形 ──
+const canvas = $('wave'), cctx = canvas.getContext('2d');
+let analyser = null, rafId = 0;
+function drawWave() {
+  rafId = requestAnimationFrame(drawWave);
+  const w = canvas.width = canvas.clientWidth * devicePixelRatio;
+  const h = canvas.height = canvas.clientHeight * devicePixelRatio;
+  cctx.clearRect(0,0,w,h); cctx.strokeStyle = '#6c5ce7'; cctx.lineWidth = 2; cctx.beginPath();
+  if (analyser) {
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteTimeDomainData(data);
+    const step = Math.floor(data.length / 90);
+    for (let i=0;i<90;i++) { const v = (data[i*step]-128)/128; const x=i/89*w; const y=h/2+(v*h*.8); i?cctx.lineTo(x,y):cctx.moveTo(x,y); }
+  } else { cctx.moveTo(0,h/2); cctx.lineTo(w,h/2); }
+  cctx.stroke();
+}
+drawWave();
+
+// ── 对话区 ──
+function sysMsg(t) { chat.insertAdjacentHTML('beforeend', `<div class="msg sys">${t}</div>`); chat.scrollTop = chat.scrollHeight; }
+function addMsg(role, text, partial) {
+  if (role==='user') {
+    if (userBubble && !partial) { userBubble.remove(); userBubble=null; }
+    if (userBubble && partial) { userBubble.querySelector('.body').textContent = text; }
+    else { userBubble = document.createElement('div'); userBubble.className='msg user'+(partial?' partial':''); userBubble.innerHTML=`<div class="role">你</div><div class="body"></div>`; userBubble.querySelector('.body').textContent=text; chat.appendChild(userBubble); }
+  } else {
+    let el = chat.querySelector('.msg.assistant:last-child');
+    if (!el || el.dataset.done) { el=document.createElement('div'); el.className='msg assistant'; el.dataset.done='false'; el.innerHTML=`<div class="role">Aris</div><div class="body"></div>`; chat.appendChild(el); }
+    el.querySelector('.body').textContent = text;
+  }
+  chat.scrollTop = chat.scrollHeight;
+}
+function doneAsst() { const el = chat.querySelector('.msg.assistant:last-child'); if (el) el.dataset.done='true'; }
+
+// ── 服务状态轮询 ──
+async function refreshStatus() {
+  try {
+    const r = await fetch(`${BASE}/api/status`); const d = await r.json();
+    s2sRunning = d.running;
+    $('statusDot').className = 'dot ' + (s2sRunning?'online':'offline');
+    $('statusText').textContent = s2sRunning ? `服务运行中 (:${d.port})` : '服务未启动';
+    $('startBtn').disabled = s2sRunning;
+    $('stopSvcBtn').disabled = !s2sRunning || calling;
+    if (s2sRunning && !calling) orbCaption.textContent = '点击开始通话';
+  } catch {}
+}
+async function refreshLog() {
+  if (!$('logHead').classList.contains('open')) return;
+  try { const r = await fetch(`${BASE}/api/logs`); const d = await r.json(); const box=$('logBox');
+    box.innerHTML = d.log.map(l=>`<div><span class="t">[${l.ts.slice(11,19)}]</span> <span class="${l.tag==='err'?'err':l.tag==='sys'?'sys':'out'}">${escapeHtml(l.line)}</span></div>`).join('') || '暂无日志';
+    box.scrollTop = box.scrollHeight;
+  } catch {}
+}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+// ── 启动/停止服务 ──
+async function startService() {
+  const cfg = {
+    s2sPort: 8765,
+    sttBackend: $('cfgStt').value,
+    ttsBackend: $('cfgTts').value,
+    llmBackend: $('cfgLlm').value,
+    modelName: $('cfgModel').value.trim(),
+    language: $('cfgLang').value,
+    voice: $('cfgVoice').value.trim(),
+    responsesApiBaseUrl: $('cfgBaseUrl').value.trim(),
+    responsesApiApiKey: $('cfgApiKey').value.trim()
+  };
+  $('startBtn').disabled = true; toast('正在启动服务（首次会下载模型）...');
+  const r = await fetch(`${BASE}/api/start`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(cfg) });
+  const d = await r.json();
+  if (d.ok) { toast('服务启动指令已发送'); await refreshStatus(); }
+  else toast('启动失败: ' + (d.error||'未知'));
+}
+async function stopService() { await fetch(`${BASE}/api/stop`,{method:'POST'}); toast('服务已停止'); await refreshStatus(); }
+
+// ── 开始/停止通话 ──
+async function startCall() {
+  if (!s2sRunning) { toast('请先启动服务'); return; }
+  try {
+    micStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation:true, noiseSuppression:true, autoGainControl:true }, video:false });
+  } catch(e) { toast('麦克风权限被拒'); return; }
+  calling = true; $('stopSvcBtn').disabled = true;
+  sysMsg('通话已接通');
+  setState('connecting', '连接中...');
+  try {
+    await connectWs();
+    setupAudio();
+    await sendSessionUpdate();
+    setState('listening', '我在听...');
+  } catch(e) { setState('error',''); toast('连接失败: '+e.message); endCall(); }
+}
+async function endCall() {
+  calling = false; $('stopSvcBtn').disabled = !s2sRunning;
+  if (workletNode) { try{workletNode.disconnect();}catch{} workletNode=null; }
+  if (micStream) micStream.getTracks().forEach(t=>t.stop());
+  if (ws && ws.readyState===1) ws.close();
+  ws=null;
+  analyser=null;
+  setState('idle'); sysMsg('通话已结束');
+  await refreshStatus();
+}
+
+// ── WebSocket 连接 ──
+function connectWs() {
+  return new Promise((resolve,reject)=>{
+    ws = new WebSocket(`ws://127.0.0.1:8765/v1/realtime`);
+    ws.binaryType = 'arraybuffer';
+    ws.onopen = () => resolve();
+    ws.onerror = () => reject(new Error('无法连接 S2S 服务'));
+    ws.onmessage = (ev) => handleWsMessage(ev);
+  });
+}
+function send(obj) { if (ws && ws.readyState===1) ws.send(JSON.stringify(obj)); }
+
+async function sendSessionUpdate() {
+  send({
+    type:'session.update', session:{
+      type:'realtime',
+      instructions: $('cfgInstructions').value.trim(),
+      audio:{ input:{ turn_detection:{ type:'server_vad', interrupt_response:true } } }
+    }
+  });
+}
+
+function handleWsMessage(ev) {
+  const data = (typeof ev.data==='string') ? JSON.parse(ev.data) : ev.data;
+  switch(data.type) {
+    case 'session.created': break;
+    case 'response.output_audio.delta': {
+      const byteStr = atob(data.delta);
+      const bytes = new Uint8Array(byteStr.length);
+      for(let i=0;i<byteStr.length;i++) bytes[i]=byteStr.charCodeAt(i);
+      playPcm16(bytes.buffer);
+      setState('ai-speaking','');
+      break;
+    }
+    case 'response.output_audio_transcript.delta':
+      asstPartial = (asstPartial||'') + (data.delta||'');
+      addMsg('assistant', asstPartial, true);
+      break;
+    case 'response.output_audio_transcript.done':
+      asstPartial=''; doneAsst();
+      break;
+    case 'conversation.item.input_audio_transcription.completed':
+      if (data.transcript) addMsg('user', data.transcript, false);
+      break;
+    case 'conversation.item.input_audio_transcription.delta':
+      if (data.delta) addMsg('user', data.delta, true);
+      break;
+    case 'input_audio_buffer.speech_started':
+      setState('listening','我在听...');
+      break;
+    case 'input_audio_buffer.speech_stopped':
+      setState('processing','思考中...');
+      break;
+    case 'response.created':
+      setState('processing','思考中...');
+      break;
+    case 'response.done':
+      doneAsst(); asstPartial='';
+      setState('listening','我在听...');
+      break;
+    case 'error':
+      console.error('S2S error', data);
+      break;
+  }
+}
+
+// ── 音频采集 & 播放 ──
+const SAMPLE_RATE = 16000, CHUNK_MS = 40, CHUNK_SAMPLES = SAMPLE_RATE*CHUNK_MS/1000;
+
+function base64FromArrayBuffer(buf) {
+  let binary=''; const bytes=new Uint8Array(buf);
+  const chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk) binary += String.fromCharCode.apply(null, bytes.subarray(i, i+chunk));
+  return btoa(binary);
+}
+
+async function setupAudio() {
+  audioCtx = new AudioContext({ sampleRate: SAMPLE_RATE });
+  await audioCtx.resume();
+  analyser = audioCtx.createAnalyser(); analyser.fftSize=256;
+  audioCtx.createMediaStreamSource(micStream).connect(analyser);
+  await audioCtx.audioWorklet.addModule(URL.createObjectURL(new Blob([WORKLET], {type:'application/javascript'})));
+  workletNode = new AudioWorkletNode(audioCtx, 's2s-capture', { processorOptions:{ chunkSize: CHUNK_SAMPLES } });
+  audioCtx.createMediaStreamSource(micStream).connect(workletNode);
+  workletNode.port.onmessage = (e) => { if(ws && ws.readyState===1) send({type:'input_audio_buffer.append', audio: e.data}); };
+}
+
+// PCM16 播放队列
+const playQueue = [];
+let playCtx = null, playSrc = null, playOffset = 0;
+function playPcm16(arrayBuffer) {
+  if (!playCtx) playCtx = new AudioContext({ sampleRate: 16000 });
+  playCtx.resume();
+  playQueue.push(arrayBuffer);
+  if (!playSrc) pumpPlayback();
+}
+function pumpPlayback() {
+  if (!playQueue.length) { playSrc=null; return; }
+  const buf = playQueue.shift();
+  const audioBuf = playCtx.createBuffer(1, buf.byteLength/2, 16000);
+  const ch = audioBuf.getChannelData(0);
+  const int16 = new Int16Array(buf);
+  for (let i=0;i<int16.length;i++) ch[i] = int16[i]/32768;
+  playSrc = playCtx.createBufferSource(); playSrc.buffer = audioBuf; playSrc.connect(playCtx.destination);
+  playSrc.onended = pumpPlayback;
+  playSrc.start();
+}
+
+const WORKLET = `
+class S2sCapture extends AudioWorkletProcessor {
+  constructor(options){ super(); this.chunk=options.processorOptions.chunkSize||640; this.buffer=[]; }
+  process(inputs){
+    const input = inputs[0];
+    if(!input || !input[0]) return true;
+    const ch = input[0];
+    for(let i=0;i<ch.length;i++){ this.buffer.push(ch[i]); if(this.buffer.length>=this.chunk){ this.flush(); } }
+    return true;
+  }
+  flush(){
+    const samples = new Int16Array(this.buffer.length);
+    for(let i=0;i<this.buffer.length;i++){ let s=this.buffer[i]*32767; samples[i]=Math.max(-32768,Math.min(32767,s)); }
+    this.port.postMessage(base64From(new Uint8Array(samples.buffer)));
+    this.buffer=[];
+  }
+}
+function base64From(bytes){ let b=''; const c=0x8000; for(let i=0;i<bytes.length;i+=c) b+=String.fromCharCode.apply(null,bytes.subarray(i,i+c)); return btoa(b); }
+registerProcessor('s2s-capture', S2sCapture);
+`;
+
+// ── 事件绑定 ──
+orb.addEventListener('click', () => calling ? endCall() : startCall());
+$('startBtn').addEventListener('click', startService);
+$('stopSvcBtn').addEventListener('click', stopService);
+$('clearBtn').addEventListener('click', ()=>{ chat.innerHTML=''; });
+$('settingsHead').addEventListener('click', ()=>$('settingsPanel').classList.toggle('open'));
+$('logHead').addEventListener('click', ()=>$('logPanel').classList.toggle('open'));
+$('applyBtn').addEventListener('click', async ()=>{ await stopService(); setTimeout(startService, 800); });
+
+// 从已存配置预填
+async function loadConfig() {
+  try { const r=await fetch(`${BASE}/api/status`); const d=await r.json(); if(d.config){
+    $('cfgStt').value=d.config.sttBackend; $('cfgTts').value=d.config.ttsBackend;
+    $('cfgLlm').value=d.config.llmBackend; $('cfgLang').value=d.config.language;
+    $('cfgModel').value=d.config.modelName; $('cfgVoice').value=d.config.voice;
+    $('cfgBaseUrl').value=d.config.responsesApiBaseUrl||''; $('cfgApiKey').value='';
+  }} catch{}
+}
+
+refreshStatus();
+loadConfig();
+setInterval(refreshStatus, 4000);
+setInterval(refreshLog, 3000);
+</script>
+</body>
+</html>

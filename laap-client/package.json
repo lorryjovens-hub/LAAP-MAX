@@ -1,0 +1,48 @@
+{
+  "name": "laap-client",
+  "private": true,
+  "version": "0.1.0",
+  "productName": "LAAP Client",
+  "description": "LAAP 意识驱动桌面客户端",
+  "author": "LAAP <laap@example.com>",
+  "type": "module",
+  "main": "dist-electron/main/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "electron:dev": "cross-env NODE_ENV=development electron .",
+    "build": "vite build --mode main && vite build --mode preload && vite build",
+    "build:win": "pnpm run build && electron-builder --win --x64",
+    "test": "cross-env NODE_ENV=development vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.0",
+    "gsap": "^3.12.5",
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.0",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.5.10",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "cross-env": "^7.0.3",
+    "electron": "31.7.7",
+    "electron-builder": "^25.0.0",
+    "jsdom": "^24.1.0",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3",
+    "vitest": "^2.0.3"
+  }
+}

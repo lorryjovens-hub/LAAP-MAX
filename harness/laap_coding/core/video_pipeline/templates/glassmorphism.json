@@ -1,0 +1,52 @@
+{
+  "id": "glassmorphism",
+  "name": "玻璃拟态风",
+  "description": "深色背景 + 玻璃质感卡片，适合 AI/未来感/创意内容",
+  "theme": "glassmorphism",
+  "colors": {
+    "primaryColor": "#9d8cff",
+    "backgroundColor": "#0a0a1a",
+    "textColor": "#ffffff",
+    "accentColor": "#ffffff",
+    "subtitleColor": "rgba(255,255,255,0.5)",
+    "surfaceColor": "rgba(255,255,255,0.05)",
+    "borderColor": "rgba(255,255,255,0.08)"
+  },
+  "typography": {
+    "titleSize": 92,
+    "subtitleSize": 32,
+    "bodySize": 28,
+    "cardTitleSize": 38,
+    "fontFamily": "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+    "titleWeight": 600,
+    "bodyWeight": 400
+  },
+  "animations": {
+    "entrance": "scale-stagger",
+    "text": "glow-in",
+    "data": "counter-bouncy",
+    "transition": "wipe",
+    "transitionDuration": 20,
+    "staggerDelay": 10,
+    "duration": 1.0
+  },
+  "layout": {
+    "heroPadding": "80px 80px 140px",
+    "sectionPadding": "80px 80px 140px",
+    "cardGap": 16,
+    "maxWidth": 1100,
+    "alignment": "center"
+  },
+  "background": {
+    "type": "gradient",
+    "gradient": "radial-gradient(ellipse at 50% 30%, #9d8cff15 0%, transparent 60%)",
+    "threeScene": "orb"
+  },
+  "decorations": {
+    "showProgressBar": true,
+    "progressBarHeight": 100,
+    "progressActiveColor": "#9d8cff",
+    "showGrain": true,
+    "showGlow": true
+  }
+}

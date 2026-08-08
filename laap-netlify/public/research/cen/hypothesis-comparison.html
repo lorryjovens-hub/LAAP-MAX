@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEN · 五大假设对比可视化</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#07060e;
+  color:#e0d8f0;
+  font-family:"Noto Serif SC","Source Han Serif SC",Georgia,serif;
+  overflow:hidden;
+  height:100vh;width:100vw;
+}
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:12px 24px 8px;
+  background:linear-gradient(180deg,rgba(7,6,14,0.9) 50%,transparent);
+  pointer-events:none;text-align:center;
+}
+.header h1{
+  font-size:1.05em;font-weight:600;letter-spacing:3px;
+  color:#c4b5fd;
+}
+.header .sub{
+  font-size:0.65em;color:#5c4a7a;margin-top:1px;
+  letter-spacing:3px;
+}
+#canvas-container{
+  position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1;
+}
+.info-panel{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  z-index:100;max-width:720px;width:92%;
+  background:rgba(12,10,24,0.8);backdrop-filter:blur(16px);
+  border:1px solid rgba(139,92,246,0.1);border-radius:14px;
+  padding:10px 18px;font-size:0.74em;line-height:1.5;
+  text-align:center;color:#a89cc0;
+}
+.info-panel strong{color:#c4b5fd}
+.info-panel .tag-l{color:#fb923c}
+.info-panel .tag-r{color:#22d3ee}
+.tag-wrap{display:flex;justify-content:center;gap:24px;margin-top:4px;font-size:0.85em}
+.tag-wrap span{padding:2px 12px;border-radius:10px}
+.tag-l{background:rgba(251,146,60,0.12);color:#fb923c;border:1px solid rgba(251,146,60,0.2)}
+.tag-r{background:rgba(34,211,238,0.12);color:#22d3ee;border:1px solid rgba(34,211,238,0.2)}
+@media(max-width:640px){
+  .header h1{font-size:0.85em}
+  .info-panel{font-size:0.64em;padding:8px 12px}
+  .tag-wrap{gap:10px;font-size:0.7em}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>五大原创假设 ⟷ CEN 因果纠缠网络 · 概念对齐</h1>
+  <div class="sub">拖拽旋转 · 滚轮缩放 · 暖色 = 五大假设 · 冷色 = CEN</div>
+</div>
+<div id="canvas-container"></div>
+
+<div class="info-panel" id="infoPanel">
+  <div>两条路径从不同起点追问同一个问题——时空从何而来？每一层级的水平连线表示概念对应关系。</div>
+  <div class="tag-wrap">
+    <span class="tag-l">● 五大假设 · 运动本体论</span>
+    <span class="tag-r">● CEN · 信息本体论</span>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+// ─── Setup ──────────────────────────────────────────
+const container = document.getElementById('canvas-container');
+const W = container.clientWidth, H = container.clientHeight;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x07060e, 0.015);
+
+const camera = new THREE.PerspectiveCamera(40, W/H, 0.1, 80);
+camera.position.set(10, 5, 12);
+
+const renderer = new THREE.WebGLRenderer({
+  antialias: true, alpha: true, powerPreference: "high-performance"
+});
+renderer.setSize(W, H);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+container.appendChild(renderer.domElement);
+
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(W, H);
+labelRenderer.domElement.style.position = 'fixed';
+labelRenderer.domElement.style.top = '0';
+labelRenderer.domElement.style.left = '0';
+labelRenderer.domElement.style.pointerEvents = 'none';
+labelRenderer.domElement.style.zIndex = '2';
+container.appendChild(labelRenderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.5;
+controls.minDistance = 5;
+controls.maxDistance = 30;
+controls.target.set(0, 0.5, 0);
+
+// ─── Lights ─────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0x1a1a3e, 0.3));
+const dl = new THREE.DirectionalLight(0x8b5cf6, 1.2);
+dl.position.set(4, 10, 6); scene.add(dl);
+const dl2 = new THREE.DirectionalLight(0xf97316, 0.5);
+dl2.position.set(-4, -2, 6); scene.add(dl2);
+const rl = new THREE.DirectionalLight(0x22d3ee, 0.3);
+rl.position.set(-3, 5, -8); scene.add(rl);
+
+// ─── Stars ──────────────────────────────────────────
+const starGeo = new THREE.BufferGeometry();
+const sp = new Float32Array(4000);
+for (let i = 0; i < 4000; i++) {
+  const r = 30 + Math.random() * 80;
+  const t = Math.random() * Math.PI * 2;
+  const p = Math.acos(2*Math.random()-1);
+  sp[i*3]=r*Math.sin(p)*Math.cos(t);
+  sp[i*3+1]=r*Math.sin(p)*Math.sin(t);
+  sp[i*3+2]=r*Math.cos(p);
+}
+starGeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
+scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({
+  color: 0x6666aa, size: 0.05, transparent: true, opacity: 0.4,
+  blending: THREE.AdditiveBlending
+})));
+
+// ─── Data ───────────────────────────────────────────
+const leftData = [
+  { label: '量子引力', sub: '时空量子单元 · 质能共振', color: '#f97316', y: -1.8 },
+  { label: '时间回溯', sub: '局部逆熵循环 · 运动锁定', color: '#eab308', y: -0.7 },
+  { label: '黑洞奇点', sub: '压缩重构接口 · 拓扑编码', color: '#a855f7', y: 0.4 },
+  { label: '生命起源', sub: '黄金质能区间 · 自组织锁定', color: '#ec4899', y: 1.5 },
+  { label: '真空基态', sub: '基态振动场 · 虚粒子激发', color: '#6366f1', y: 2.6 },
+];
+const rightData = [
+  { label: '因果网络', sub: '信息本体 · 全息约束 S=A/4G', color: '#06b6d4', y: -1.8 },
+  { label: '自由能路径', sub: 'FEP 最小化 · 路径竞争', color: '#22d3ee', y: -0.7 },
+  { label: '微态保护', sub: '等价类 · 拓扑保护 e^{-A/l_P²}', color: '#8b5cf6', y: 0.4 },
+  { label: '临界涌现', sub: '因果网络渗流 · 相变阈值', color: '#d946ef', y: 1.5 },
+  { label: '宇宙学 Λ', sub: '全息残差张力 · Λ ~ N^{-2}', color: '#3b82f6', y: 2.6 },
+];
+const X_OFF = 3.8;
+
+// ─── Build scene ────────────────────────────────────
+const root = new THREE.Group();
+scene.add(root);
+
+// Connections between pairs
+const flowParticles = [];
+
+leftData.forEach((_, idx) => {
+  const ly = leftData[idx].y;
+  const ry = rightData[idx].y;
+
+  // Curve
+  const start = new THREE.Vector3(-X_OFF, ly, 0);
+  const end = new THREE.Vector3(X_OFF, ry, 0);
+  const mid = new THREE.Vector3(0, (ly + ry) / 2, (Math.random() - 0.5) * 0.4);
+  const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
+  const pts = curve.getPoints(20);
+
+  // Glow line
+  const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+  const lineMat = new THREE.LineBasicMaterial({
+    color: new THREE.Color(leftData[idx].color).lerp(new THREE.Color(rightData[idx].color), 0.5),
+    transparent: true,
+    opacity: 0.12 + idx * 0.03,
+  });
+  root.add(new THREE.Line(lineGeo, lineMat));
+
+  // Second line (mirror Z)
+  const pts2 = pts.map(p => new THREE.Vector3(p.x, p.y, -p.z));
+  const lineGeo2 = new THREE.BufferGeometry().setFromPoints(pts2);
+  root.add(new THREE.Line(lineGeo2, lineMat.clone()));
+
+  // Flow particles along curve
+  for (let p = 0; p < 8; p++) {
+    const geo = new THREE.SphereGeometry(0.04, 6, 6);
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(leftData[idx].color).lerp(new THREE.Color(rightData[idx].color), 0.5 + Math.random() * 0.3),
+      emissive: new THREE.Color(rightData[idx].color),
+      emissiveIntensity: 0.6,
+      transparent: true,
+      opacity: 0.5 + Math.random() * 0.3,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.userData = {
+      curve, t: p / 8 + Math.random() * 0.1,
+      speed: 0.003 + Math.random() * 0.002,
+      zOff: (Math.random() - 0.5) * 0.15,
+      idx,
+    };
+    const pos = curve.getPoint(mesh.userData.t % 1);
+    mesh.position.copy(pos);
+    mesh.position.z += mesh.userData.zOff;
+    root.add(mesh);
+    flowParticles.push(mesh);
+  }
+});
+
+// ─── Create node function ───────────────────────────
+function createNode(x, y, data, isLeft) {
+  const group = new THREE.Group();
+
+  // Core sphere
+  const color = new THREE.Color(data.color);
+  const geo = new THREE.SphereGeometry(0.55, 24, 24);
+  const mat = new THREE.MeshPhysicalMaterial({
+    color,
+    emissive: color,
+    emissiveIntensity: 0.4,
+    metalness: 0.2,
+    roughness: 0.3,
+    transparent: true,
+    opacity: 0.92,
+  });
+  const core = new THREE.Mesh(geo, mat);
+  core.position.y = 0;
+  group.add(core);
+
+  // Inner glow
+  const innerGeo = new THREE.SphereGeometry(0.7, 16, 16);
+  const innerMat = new THREE.MeshBasicMaterial({
+    color,
+    transparent: true,
+    opacity: 0.08,
+    side: THREE.BackSide,
+  });
+  const inner = new THREE.Mesh(innerGeo, innerMat);
+  group.add(inner);
+
+  // Orbiting ring
+  const ringGeo = new THREE.TorusGeometry(0.85, 0.02, 8, 32);
+  const ringMat = new THREE.MeshPhysicalMaterial({
+    color,
+    emissive: color,
+    emissiveIntensity: 0.6,
+    transparent: true,
+    opacity: 0.5,
+    metalness: 0.6,
+    roughness: 0.1,
+  });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.rotation.x = Math.PI / 3;
+  ring.rotation.z = 0.5;
+  group.add(ring);
+
+  const ring2 = ring.clone();
+  ring2.material = ringMat.clone();
+  ring2.material.opacity = 0.2;
+  ring2.scale.set(1.3, 1.3, 1.3);
+  ring2.rotation.x = -Math.PI / 4;
+  ring2.rotation.z = 1.2;
+  group.add(ring2);
+
+  // Orbiting particles
+  const orbCount = 30;
+  const orbPos = new Float32Array(orbCount * 3);
+  const orbData = [];
+  for (let i = 0; i < orbCount; i++) {
+    const angle = (i / orbCount) * Math.PI * 2;
+    const r = 1.0 + Math.random() * 0.2;
+    orbPos[i*3] = r * Math.cos(angle);
+    orbPos[i*3+1] = r * Math.sin(angle) * 0.3;
+    orbPos[i*3+2] = (Math.random() - 0.5) * 0.1;
+    orbData.push({ angle, r, speed: 0.5 + Math.random() * 0.5, phase: Math.random() * Math.PI * 2 });
+  }
+  const oGeo = new THREE.BufferGeometry();
+  oGeo.setAttribute('position', new THREE.BufferAttribute(orbPos, 3));
+  const oMat = new THREE.PointsMaterial({
+    color,
+    size: 0.04,
+    transparent: true,
+    opacity: 0.5,
+    blending: THREE.AdditiveBlending,
+  });
+  const orbPts = new THREE.Points(oGeo, oMat);
+  group.add(orbPts);
+
+  group.position.set(x, y, 0);
+  group.userData = { core, ring, ring2, orbPts, orbData, isLeft };
+
+  // CSS2D label
+  const div = document.createElement('div');
+  div.textContent = data.label;
+  div.style.color = data.color;
+  div.style.fontSize = '16px';
+  div.style.fontWeight = 'bold';
+  div.style.fontFamily = '"Noto Serif SC", Georgia, serif';
+  div.style.textShadow = `0 0 16px ${data.color}44, 0 2px 8px rgba(0,0,0,0.8)`;
+  div.style.letterSpacing = '2px';
+  div.style.background = 'rgba(7,6,14,0.5)';
+  div.style.padding = '2px 12px';
+  div.style.borderRadius = '12px';
+  div.style.backdropFilter = 'blur(4px)';
+  div.style.border = `1px solid ${data.color}33`;
+  const label = new CSS2DObject(div);
+  label.position.set(0, isLeft ? -0.9 : -0.9, 0);
+  group.add(label);
+
+  // Sub label
+  const subDiv = document.createElement('div');
+  subDiv.textContent = data.sub;
+  subDiv.style.color = '#8a7aaa';
+  subDiv.style.fontSize = '10px';
+  subDiv.style.fontFamily = '"Noto Serif SC", Georgia, serif';
+  subDiv.style.textShadow = '0 0 8px rgba(0,0,0,0.8)';
+  subDiv.style.opacity = '0.7';
+  subDiv.style.letterSpacing = '1px';
+  subDiv.style.maxWidth = '160px';
+  subDiv.style.textAlign = 'center';
+  subDiv.style.lineHeight = '1.3';
+  const subLabel = new CSS2DObject(subDiv);
+  subLabel.position.set(0, isLeft ? -1.3 : -1.3, 0);
+  group.add(subLabel);
+
+  return group;
+}
+
+// ─── Create all nodes ───────────────────────────────
+const leftNodes = [];
+const rightNodes = [];
+
+leftData.forEach((d, i) => {
+  const n = createNode(-X_OFF, d.y, d, true);
+  root.add(n);
+  leftNodes.push(n);
+});
+rightData.forEach((d, i) => {
+  const n = createNode(X_OFF, d.y, d, false);
+  root.add(n);
+  rightNodes.push(n);
+});
+
+// ─── Base platform ──────────────────────────────────
+// Left pillar label
+const baseDivL = document.createElement('div');
+baseDivL.textContent = '运动本体论';
+baseDivL.style.color = '#fb923c';
+baseDivL.style.fontSize = '14px';
+baseDivL.style.fontWeight = 'bold';
+baseDivL.style.fontFamily = '"Noto Serif SC", Georgia, serif';
+baseDivL.style.textShadow = '0 0 20px rgba(251,146,60,0.3), 0 2px 8px rgba(0,0,0,0.8)';
+baseDivL.style.letterSpacing = '4px';
+baseDivL.style.background = 'rgba(7,6,14,0.6)';
+baseDivL.style.padding = '4px 14px';
+baseDivL.style.borderRadius = '8px';
+baseDivL.style.border = '1px solid rgba(251,146,60,0.2)';
+const baseLabelL = new CSS2DObject(baseDivL);
+baseLabelL.position.set(-X_OFF, -2.4, 0);
+root.add(baseLabelL);
+
+// Right pillar label
+const baseDivR = document.createElement('div');
+baseDivR.textContent = '信息本体论';
+baseDivR.style.color = '#22d3ee';
+baseDivR.style.fontSize = '14px';
+baseDivR.style.fontWeight = 'bold';
+baseDivR.style.fontFamily = '"Noto Serif SC", Georgia, serif';
+baseDivR.style.textShadow = '0 0 20px rgba(34,211,238,0.3), 0 2px 8px rgba(0,0,0,0.8)';
+baseDivR.style.letterSpacing = '4px';
+baseDivR.style.background = 'rgba(7,6,14,0.6)';
+baseDivR.style.padding = '4px 14px';
+baseDivR.style.borderRadius = '8px';
+baseDivR.style.border = '1px solid rgba(34,211,238,0.2)';
+const baseLabelR = new CSS2DObject(baseDivR);
+baseLabelR.position.set(X_OFF, -2.4, 0);
+root.add(baseLabelR);
+
+// Shared foundation
+const foundDiv = document.createElement('div');
+foundDiv.textContent = '✦ 时空不是预设的 · 它是涌现的 ✦';
+foundDiv.style.color = '#c4b5fd';
+foundDiv.style.fontSize = '12px';
+foundDiv.style.fontWeight = 'normal';
+foundDiv.style.fontFamily = '"Noto Serif SC", Georgia, serif';
+foundDiv.style.textShadow = '0 0 24px rgba(139,92,246,0.4), 0 2px 8px rgba(0,0,0,0.8)';
+foundDiv.style.letterSpacing = '4px';
+foundDiv.style.background = 'rgba(7,6,14,0.5)';
+foundDiv.style.padding = '4px 16px';
+foundDiv.style.borderRadius = '16px';
+foundDiv.style.border = '1px solid rgba(139,92,246,0.15)';
+foundDiv.style.backdropFilter = 'blur(4px)';
+const foundLabel = new CSS2DObject(foundDiv);
+foundLabel.position.set(0, -3.3, 0);
+root.add(foundLabel);
+
+// Apex - unification
+const apexDiv = document.createElement('div');
+apexDiv.textContent = '大统一';
+apexDiv.style.color = '#e0d8f0';
+apexDiv.style.fontSize = '18px';
+apexDiv.style.fontWeight = 'bold';
+apexDiv.style.fontFamily = '"Noto Serif SC", Georgia, serif';
+apexDiv.style.textShadow = '0 0 30px rgba(139,92,246,0.5), 0 2px 8px rgba(0,0,0,0.8)';
+apexDiv.style.letterSpacing = '8px';
+apexDiv.style.background = 'rgba(7,6,14,0.6)';
+apexDiv.style.padding = '4px 18px';
+apexDiv.style.borderRadius = '20px';
+apexDiv.style.border = '1px solid rgba(139,92,246,0.2)';
+apexDiv.style.backdropFilter = 'blur(4px)';
+const apexLabel = new CSS2DObject(apexDiv);
+apexLabel.position.set(0, 3.6, 0);
+root.add(apexLabel);
+
+// Apex glow sphere
+const apexGeo = new THREE.SphereGeometry(0.25, 16, 16);
+const apexMat = new THREE.MeshPhysicalMaterial({
+  color: 0xc4b5fd,
+  emissive: 0x8b5cf6,
+  emissiveIntensity: 1.0,
+  transparent: true,
+  opacity: 0.7,
+});
+const apexGlow = new THREE.Mesh(apexGeo, apexMat);
+apexGlow.position.set(0, 3.2, 0);
+root.add(apexGlow);
+
+// Foundation glow circle
+const fGeo = new THREE.RingGeometry(3.5, 4.0, 48);
+const fMat = new THREE.MeshBasicMaterial({
+  color: 0x8b5cf6,
+  transparent: true,
+  opacity: 0.06,
+  side: THREE.DoubleSide,
+});
+const fRing = new THREE.Mesh(fGeo, fMat);
+fRing.rotation.x = -Math.PI / 2;
+fRing.position.set(0, -3.0, 0);
+root.add(fRing);
+
+// Vertical glow columns
+for (let side = -1; side <= 1; side += 2) {
+  const colPts = [];
+  for (let y = -2.5; y <= 3.0; y += 0.1) {
+    const wobble = 0.03 * Math.sin(y * 2);
+    colPts.push(new THREE.Vector3(side * (X_OFF + wobble), y, wobble * 0.5));
+  }
+  const colGeo = new THREE.BufferGeometry().setFromPoints(colPts);
+  const colMat = new THREE.LineBasicMaterial({
+    color: side === -1 ? 0xf97316 : 0x06b6d4,
+    transparent: true,
+    opacity: 0.05,
+  });
+  root.add(new THREE.Line(colGeo, colMat));
+}
+
+// ─── Resize ─────────────────────────────────────────
+window.addEventListener('resize', () => {
+  const w = container.clientWidth, h = container.clientHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+  labelRenderer.setSize(w, h);
+});
+
+// ─── Animation ──────────────────────────────────────
+let time = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+  time += 0.008;
+
+  // Animate node rings and particles
+  const allNodes = [...leftNodes, ...rightNodes];
+  allNodes.forEach((node, ni) => {
+    const ud = node.userData;
+    if (ud.ring) {
+      ud.ring.rotation.z += 0.008;
+      ud.ring.rotation.x += 0.004;
+      ud.ring2.rotation.z -= 0.005;
+      ud.ring2.rotation.y += 0.003;
+    }
+    if (ud.orbPts && ud.orbData) {
+      const pos = ud.orbPts.geometry.attributes.position.array;
+      for (let i = 0; i < ud.orbData.length; i++) {
+        const od = ud.orbData[i];
+        od.angle += od.speed * 0.01;
+        const wobble = 0.03 * Math.sin(time * od.speed + od.phase);
+        pos[i*3] = (od.r + wobble) * Math.cos(od.angle);
+        pos[i*3+1] = (od.r + wobble) * Math.sin(od.angle) * 0.3;
+        pos[i*3+2] = wobble * 2;
+      }
+      ud.orbPts.geometry.attributes.position.needsUpdate = true;
+    }
+    // Core pulse
+    if (ud.core) {
+      const base = ni < leftData.length ? 0.3 : 0.3;
+      ud.core.material.emissiveIntensity = base + 0.2 * Math.sin(time * 0.6 + ni * 0.7);
+    }
+  });
+
+  // Animate flow particles
+  flowParticles.forEach(fp => {
+    fp.userData.t += fp.userData.speed;
+    if (fp.userData.t > 1) fp.userData.t -= 1;
+    const pos = fp.userData.curve.getPoint(fp.userData.t);
+    fp.position.copy(pos);
+    fp.position.z += fp.userData.zOff;
+    // Size pulse
+    const s = 0.8 + 0.4 * Math.sin(time * 2 + fp.userData.idx);
+    fp.scale.set(s, s, s);
+  });
+
+  // Apex pulse
+  apexGlow.material.emissiveIntensity = 0.8 + 0.4 * Math.sin(time * 0.7);
+
+  controls.update();
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+}
+
+animate();
+</script>
+</body>
+</html>

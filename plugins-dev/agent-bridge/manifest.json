@@ -1,0 +1,22 @@
+{
+  "manifestVersion": 1,
+  "id": "agent-bridge",
+  "name": "Agent Bridge",
+  "version": "0.1.0",
+  "description": "跨Agent通信桥 — 让主session和subagent之间通过共享消息存储收发消息，绕过channel/session工具的子agent限制",
+  "minAppVersion": "0.171.3",
+  "trust": "full-access",
+  "contributes": {
+    "configuration": {
+      "properties": {
+        "bridgeDataDir": {
+          "type": "string",
+          "title": "桥接数据目录",
+          "description": "消息存储文件路径。留空则使用插件dataDir",
+          "default": "",
+          "ui": { "control": "text" }
+        }
+      }
+    }
+  }
+}

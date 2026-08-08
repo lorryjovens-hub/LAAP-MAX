@@ -1,0 +1,45 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="laap-gradient" x1="32" y1="32" x2="224" y2="224" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c7cff"/>
+      <stop offset="100%" stop-color="#00F5D4"/>
+    </linearGradient>
+    <linearGradient id="laap-glow" x1="128" y1="32" x2="128" y2="224" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c7cff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#00F5D4" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="laap-logo-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- 外圈柔光 -->
+  <circle cx="128" cy="128" r="96" fill="url(#laap-glow)" opacity="0.6"/>
+
+  <!-- 主体：Ψ / 三叉波形象征 -->
+  <path
+    d="M80 208 V96 C80 72 96 56 128 56 C160 56 176 72 176 96 V208"
+    stroke="url(#laap-gradient)"
+    stroke-width="22"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+    filter="url(#laap-logo-glow)"
+  />
+  <path
+    d="M104 132 H152"
+    stroke="url(#laap-gradient)"
+    stroke-width="22"
+    stroke-linecap="round"
+  />
+  <path
+    d="M128 132 L128 208"
+    stroke="url(#laap-gradient)"
+    stroke-width="22"
+    stroke-linecap="round"
+  />
+
+  <!-- 中心节点 -->
+  <circle cx="128" cy="132" r="13" fill="#050608"/>
+</svg>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEN · 黑洞与弦论统一图景</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #06060e;
+  color: #e0d8f0;
+  font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px 32px 10px;
+  background: linear-gradient(180deg, rgba(6,6,14,0.92) 50%, transparent);
+  pointer-events: none;
+  text-align: center;
+}
+.header h1 {
+  font-size: 1.2em; font-weight: 600; letter-spacing: 3px;
+  color: #c4b5fd;
+}
+.header .sub {
+  font-size: 0.7em; color: #5c4a7a; margin-top: 2px; letter-spacing: 4px;
+}
+#canvas-container {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1;
+}
+.tabs {
+  position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);
+  z-index: 100; display: flex; gap: 4px;
+  background: rgba(12,10,24,0.85); backdrop-filter: blur(14px);
+  padding: 5px; border-radius: 26px;
+  border: 1px solid rgba(139,92,246,0.15);
+}
+.tab-btn {
+  background: transparent; border: none; color: #5c4a7a;
+  padding: 7px 22px; border-radius: 20px; font-size: 0.78em;
+  font-family: inherit; cursor: pointer; transition: all 0.3s;
+  letter-spacing: 1.5px; white-space: nowrap;
+}
+.tab-btn:hover { color: #a89cc0; }
+.tab-btn.active {
+  background: rgba(139,92,246,0.2); color: #e0d8f0;
+  box-shadow: 0 0 18px rgba(139,92,246,0.1);
+}
+.info-panel {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  z-index: 100; max-width: 700px; width: 92%;
+  background: rgba(12,10,24,0.8); backdrop-filter: blur(14px);
+  border: 1px solid rgba(139,92,246,0.1); border-radius: 14px;
+  padding: 12px 20px; font-size: 0.78em; line-height: 1.55;
+  text-align: center; color: #a89cc0; transition: opacity 0.4s;
+}
+.info-panel strong { color: #c4b5fd; }
+.info-panel em { color: #f472b6; font-style: italic; }
+.formula-overlay {
+  position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+  z-index: 100; background: rgba(12,10,24,0.65); backdrop-filter: blur(8px);
+  border: 1px solid rgba(139,92,246,0.08); border-radius: 10px;
+  padding: 6px 16px; font-size: 0.72em; color: #8a7aaa;
+  opacity: 0; transition: opacity 0.6s; pointer-events: none;
+  text-align: center; max-width: 88%; white-space: nowrap;
+  overflow-x: auto;
+}
+.formula-overlay.visible { opacity: 1; }
+@media (max-width: 640px) {
+  .header h1 { font-size: 0.95em; }
+  .tab-btn { padding: 5px 12px; font-size: 0.65em; }
+  .info-panel { font-size: 0.68em; padding: 8px 14px; bottom: 26px; }
+  .tabs { bottom: 100px; }
+  .formula-overlay { font-size: 0.6em; top: 62px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CEN 因果纠缠网络 · 黑洞与弦论统一图景</h1>
+  <div class="sub">拖拽旋转 · 滚轮缩放 · 标签切换</div>
+</div>
+<div id="canvas-container"></div>
+<div class="formula-overlay" id="formulaDisplay"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-scene="0">CEN 黑洞 · 网络凝聚态</button>
+  <button class="tab-btn" data-scene="1">弦论 · 因果拓扑激发</button>
+</div>
+
+<div class="info-panel" id="infoPanel">
+  在 CEN 框架中，<strong>黑洞</strong>不是弯曲时空中的奇点——而是因果网络的<strong>凝聚态</strong>。
+  视界是<em>信息论相边界</em>，内外因果连接密度发生突变。内部是高 b₁ 的稠密环路网，
+  外部是稀疏的宇宙因果网络。
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ─── Setup ──────────────────────────────────────────
+const container = document.getElementById('canvas-container');
+const W = container.clientWidth, H = container.clientHeight;
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x06060e, 0.012);
+
+const camera = new THREE.PerspectiveCamera(45, W/H, 0.1, 100);
+camera.position.set(6, 4, 8);
+
+const renderer = new THREE.WebGLRenderer({
+  antialias: true, alpha: true, powerPreference: "high-performance"
+});
+renderer.setSize(W, H);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+container.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.6;
+controls.minDistance = 3;
+controls.maxDistance = 30;
+controls.target.set(0, 0, 0);
+
+// ─── Lights ─────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0x1a1a3e, 0.3));
+const dl = new THREE.DirectionalLight(0x8b5cf6, 1.0);
+dl.position.set(5, 10, 7); scene.add(dl);
+const fl = new THREE.DirectionalLight(0x4a3a8a, 0.4);
+fl.position.set(-4, -2, -5); scene.add(fl);
+const rl = new THREE.DirectionalLight(0xf472b6, 0.3);
+rl.position.set(-6, 3, -8); scene.add(rl);
+
+// ─── Stars ──────────────────────────────────────────
+const starGeo = new THREE.BufferGeometry();
+const sp = new Float32Array(4000);
+for (let i = 0; i < 4000; i++) {
+  const r = 30 + Math.random() * 80;
+  const t = Math.random() * Math.PI * 2;
+  const p = Math.acos(2*Math.random()-1);
+  sp[i*3]=r*Math.sin(p)*Math.cos(t);
+  sp[i*3+1]=r*Math.sin(p)*Math.sin(t);
+  sp[i*3+2]=r*Math.cos(p);
+}
+starGeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
+const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({
+  color: 0x6666aa, size: 0.06, transparent: true, opacity: 0.5,
+  blending: THREE.AdditiveBlending
+}));
+scene.add(stars);
+
+// ─── Root ───────────────────────────────────────────
+const sceneRoot = new THREE.Group();
+scene.add(sceneRoot);
+
+// ─── Shared helpers ─────────────────────────────────
+const infoTexts = [
+  '在 CEN 框架中，<strong>黑洞</strong>不是弯曲时空中的奇点——而是因果网络的<strong>凝聚态</strong>。视界是<em>信息论相边界</em>，内外因果连接密度发生突变。内部（紫红）是高 b₁ 的稠密环路网，是微态简并的主要来源；蓝色中层是过渡区；外部（青）是稀疏的宇宙因果网络。金色球壳是<em>全息饱和面</em>，$S = A/4G$。发光的出射粒子流 = 因果连接溶解——霍金辐射的网络本质。',
+  '在 CEN 框架中，<strong>弦</strong>不是基本实体——它们是因果网络中的<em>一维拓扑激发</em>。<strong>闭合弦</strong>（粉色振动环）= 因果连接在环形路径上的凝聚；<strong>开放弦</strong>（紫色线段）= 端点锚定在 D-brane 上。半透明的<strong>D-brane</strong> 平面（金色边缘）= 因果连接密度突变的二维膜。右侧的<em>螺旋结构</em> = 紧化维度的几何——因果连接在特定方向上的周期性折叠。'
+];
+const formulas = [
+  'S_{BH} = \\frac{A}{4G\\hbar} \\quad \\Omega(A) \\approx \\exp\\left(\\frac{A}{4\\ell_P^2}\\right) \\quad \\mathcal{L}(\\omega) = \\sum \\frac{\\Gamma}{\\Delta\\omega^2 + \\Gamma^2}',
+  '\\text{闭合弦: } X^\\mu(\\tau,\\sigma) \\quad \\text{紧化: } X^5 \\sim X^5 + 2\\pi R \\quad \\text{D-brane: } \\partial X_\\perp = 0 \\quad S_{\\text{ent}} = \\frac{A_\\perp}{4G}'
+];
+
+// ─── Scene 1: CEN Black Hole ────────────────────────
+function buildBlackHole(group) {
+  const nodes = [];
+  const NUM = 500;
+  const R_HORIZON = 3.2;
+
+  // 1. Nodes with radial density decay
+  for (let i = 0; i < NUM; i++) {
+    // Exponential radial distribution: dense core, sparse outside
+    const r = Math.pow(Math.random(), 0.5) * R_HORIZON * 1.15;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const x = r * Math.sin(phi) * Math.cos(theta);
+    const y = r * Math.sin(phi) * Math.sin(theta);
+    const z = r * Math.cos(phi);
+
+    const t = r / (R_HORIZON * 1.15);
+    let color, size, emissiveIntensity;
+    if (t < 0.35) {
+      // Core: deep purple-pink, high density
+      color = new THREE.Color().setHSL(0.78, 0.8, 0.45);
+      size = 0.2 - t * 0.1;
+      emissiveIntensity = 0.6 - t * 0.3;
+    } else if (t < 0.7) {
+      // Mid: blue-purple
+      color = new THREE.Color().setHSL(0.7, 0.6, 0.4);
+      size = 0.14 - t * 0.05;
+      emissiveIntensity = 0.3;
+    } else {
+      // Outer: cyan
+      color = new THREE.Color().setHSL(0.55, 0.6, 0.4);
+      size = 0.08;
+      emissiveIntensity = 0.15;
+    }
+
+    const geo = new THREE.SphereGeometry(Math.max(size, 0.04), 10, 10);
+    const mat = new THREE.MeshPhysicalMaterial({
+      color, emissive: color, emissiveIntensity,
+      metalness: 0.1, roughness: 0.5,
+      transparent: true, opacity: 0.9 - t * 0.2,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(x, y, z);
+    mesh.userData = { r, t, idx: i };
+    group.add(mesh);
+    nodes.push(mesh);
+  }
+
+  // 2. Edges
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const ni = nodes[i], nj = nodes[j];
+      const dist = ni.position.distanceTo(nj.position);
+      const avgT = (ni.userData.t + nj.userData.t) / 2;
+
+      // Connection probability: decays with both distance and radius
+      const maxDist = 1.2 - avgT * 0.4;
+      if (dist > maxDist) continue;
+
+      const baseProb = avgT < 0.35 ? 0.5 : avgT < 0.7 ? 0.2 : 0.05;
+      if (Math.random() > baseProb * (1 - dist / maxDist)) continue;
+
+      // Curve path
+      const mid = new THREE.Vector3().copy(ni.position).add(nj.position).multiplyScalar(0.5);
+      const perp = new THREE.Vector3(
+        (Math.random() - 0.5) * 0.3,
+        (Math.random() - 0.5) * 0.3,
+        (Math.random() - 0.5) * 0.3
+      );
+      mid.add(perp);
+      const curve = new THREE.QuadraticBezierCurve3(
+        ni.position.clone(), mid, nj.position.clone()
+      );
+      const pts = curve.getPoints(10);
+      const geo = new THREE.BufferGeometry().setFromPoints(pts);
+      const hue = 0.75 - avgT * 0.25;
+      const mat = new THREE.LineBasicMaterial({
+        color: new THREE.Color().setHSL(hue, 0.5, 0.3 + 0.2 * (1 - avgT)),
+        transparent: true,
+        opacity: (0.3 - avgT * 0.2) * (1 - dist / maxDist * 0.5),
+      });
+      const line = new THREE.Line(geo, mat);
+      group.add(line);
+    }
+  }
+
+  // 3. Highlight cycles in core region
+  const coreNodes = nodes.filter(n => n.userData.r < 1.2);
+  for (let c = 0; c < 8; c++) {
+    const indices = [];
+    const numInCycle = 4 + Math.floor(Math.random() * 4);
+    for (let k = 0; k < numInCycle; k++) {
+      const idx = Math.floor(Math.random() * coreNodes.length);
+      indices.push(coreNodes[idx]);
+    }
+    if (indices.length < 3) continue;
+    const pts = indices.map(n => n.position.clone());
+    pts.push(pts[0].clone());
+    const curve = new THREE.CatmullRomCurve3(pts, true);
+    const cpts = curve.getPoints(24);
+    const geo = new THREE.BufferGeometry().setFromPoints(cpts);
+    const mat = new THREE.LineBasicMaterial({
+      color: 0xf472b6,
+      transparent: true,
+      opacity: 0.4 + Math.random() * 0.3,
+      linewidth: 1,
+    });
+    const line = new THREE.Line(geo, mat);
+    group.add(line);
+
+    // Glow ring around cycle
+    const glowMat = new THREE.LineBasicMaterial({
+      color: 0xf472b6,
+      transparent: true,
+      opacity: 0.08,
+    });
+    const glowLine = new THREE.Line(geo.clone(), glowMat);
+    glowLine.scale.set(1.2, 1.2, 1.2);
+    group.add(glowLine);
+  }
+
+  // 4. Horizon sphere - information phase boundary
+  const horizonGeo = new THREE.SphereGeometry(R_HORIZON, 48, 48);
+  const horizonMat = new THREE.MeshPhysicalMaterial({
+    color: 0xfbbf24,
+    emissive: 0xf59e0b,
+    emissiveIntensity: 0.08,
+    transparent: true,
+    opacity: 0.08,
+    metalness: 0.6,
+    roughness: 0.2,
+    side: THREE.DoubleSide,
+  });
+  const horizonMesh = new THREE.Mesh(horizonGeo, horizonMat);
+  group.add(horizonMesh);
+
+  // Horizon wireframe - golden grid
+  const wireGeo = new THREE.SphereGeometry(R_HORIZON * 1.002, 24, 18);
+  const wireMat = new THREE.MeshBasicMaterial({
+    color: 0xfbbf24,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.06,
+  });
+  const horizonWire = new THREE.Mesh(wireGeo, wireMat);
+  group.add(horizonWire);
+
+  // Horizon glowing ring (equatorial)
+  const ringGeo = new THREE.TorusGeometry(R_HORIZON * 1.01, 0.03, 8, 60);
+  const ringMat = new THREE.MeshPhysicalMaterial({
+    color: 0xfbbf24,
+    emissive: 0xf59e0b,
+    emissiveIntensity: 0.8,
+    transparent: true,
+    opacity: 0.6,
+    metalness: 0.9,
+    roughness: 0.1,
+  });
+  const equator = new THREE.Mesh(ringGeo, ringMat);
+  equator.rotation.x = Math.PI / 2;
+  group.add(equator);
+
+  const ring2 = equator.clone();
+  ring2.rotation.x = Math.PI / 3;
+  ring2.rotation.z = 0.8;
+  ring2.material = ringMat.clone();
+  ring2.material.opacity = 0.3;
+  ring2.scale.set(0.9, 0.9, 0.9);
+  group.add(ring2);
+
+  // 5. Horizon surface flow particles (holographic encoding)
+  const flowCount = 300;
+  const flowPos = new Float32Array(flowCount * 3);
+  const flowData = [];
+  for (let i = 0; i < flowCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = R_HORIZON + (Math.random() - 0.5) * 0.15;
+    flowPos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+    flowPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+    flowPos[i*3+2] = r * Math.cos(phi);
+    flowData.push({ theta, phi, r, speed: 0.2 + Math.random() * 0.3 });
+  }
+  const fGeo = new THREE.BufferGeometry();
+  fGeo.setAttribute('position', new THREE.BufferAttribute(flowPos, 3));
+  const fMat = new THREE.PointsMaterial({
+    color: 0xfbbf24,
+    size: 0.06,
+    transparent: true,
+    opacity: 0.5,
+    blending: THREE.AdditiveBlending,
+  });
+  const flowPts = new THREE.Points(fGeo, fMat);
+  group.add(flowPts);
+
+  // 6. Hawking radiation - particles flowing outward
+  const radCount = 200;
+  const radPos = new Float32Array(radCount * 3);
+  const radData = [];
+  for (let i = 0; i < radCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    radPos[i*3] = R_HORIZON * Math.sin(phi) * Math.cos(theta);
+    radPos[i*3+1] = R_HORIZON * Math.sin(phi) * Math.sin(theta);
+    radPos[i*3+2] = R_HORIZON * Math.cos(phi);
+    radData.push({
+      theta, phi,
+      v: 0.3 + Math.random() * 0.5,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+  const rGeo = new THREE.BufferGeometry();
+  rGeo.setAttribute('position', new THREE.BufferAttribute(radPos, 3));
+  const rMat = new THREE.PointsMaterial({
+    color: 0x22d3ee,
+    size: 0.05,
+    transparent: true,
+    opacity: 0.4,
+    blending: THREE.AdditiveBlending,
+  });
+  const radPts = new THREE.Points(rGeo, rMat);
+  group.add(radPts);
+
+  return { nodes, horizonMesh, horizonWire, equator, ring2, flowPts, flowData, radPts, radData, R_HORIZON };
+}
+
+// ─── Scene 2: String Theory ─────────────────────────
+function buildStringTheory(group) {
+  const R = 4;
+
+  // 0. 3D lattice background
+  const latticeSize = 3.5;
+  const step = 0.7;
+  const latticePts = [];
+  for (let x = -latticeSize; x <= latticeSize; x += step) {
+    for (let y = -latticeSize; y <= latticeSize; y += step) {
+      for (let z = -latticeSize; z <= latticeSize; z += step) {
+        const r = Math.sqrt(x*x + y*y + z*z);
+        if (r > latticeSize + 0.1) continue;
+        latticePts.push(x, y, z);
+      }
+    }
+  }
+  const lGeo = new THREE.BufferGeometry();
+  lGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(latticePts), 3));
+  const lMat = new THREE.PointsMaterial({
+    color: 0x4a3a8a,
+    size: 0.04,
+    transparent: true,
+    opacity: 0.25,
+    blending: THREE.AdditiveBlending,
+  });
+  group.add(new THREE.Points(lGeo, lMat));
+
+  // Lattice connections (thin lines)
+  for (let x = -latticeSize; x <= latticeSize - 0.1; x += step) {
+    for (let y = -latticeSize; y <= latticeSize; y += step) {
+      for (let z = -latticeSize; z <= latticeSize; z += step) {
+        const r1 = Math.sqrt(x*x + y*y + z*z);
+        if (r1 > latticeSize) continue;
+        const r2 = Math.sqrt((x+step)*(x+step) + y*y + z*z);
+        if (r2 > latticeSize) continue;
+        const pts = [new THREE.Vector3(x, y, z), new THREE.Vector3(x+step, y, z)];
+        const geo = new THREE.BufferGeometry().setFromPoints(pts);
+        const mat = new THREE.LineBasicMaterial({
+          color: 0x3a2a6a,
+          transparent: true,
+          opacity: 0.08,
+        });
+        group.add(new THREE.Line(geo, mat));
+      }
+    }
+  }
+
+  // 1. Closed strings (vibrating loops)
+  const closedStrings = [];
+  for (let s = 0; s < 6; s++) {
+    const cx = (Math.random() - 0.5) * 2;
+    const cy = (Math.random() - 0.5) * 2;
+    const cz = (Math.random() - 0.5) * 2;
+    const rStr = 0.5 + Math.random() * 0.3;
+    const tiltX = Math.random() * Math.PI;
+    const tiltZ = Math.random() * Math.PI * 2;
+    const mode = Math.floor(Math.random() * 3) + 1; // vibration mode
+    const amp = 0.08 + Math.random() * 0.06;
+
+    const pts = [];
+    const N = 30;
+    for (let i = 0; i <= N; i++) {
+      const t = (i / N) * Math.PI * 2;
+      // Base circle
+      let x = rStr * Math.cos(t);
+      let y = rStr * Math.sin(t);
+      let z = 0;
+      // Vibration
+      const vib = amp * Math.sin(mode * t);
+      x += vib * Math.cos(t * 2);
+      y += vib * Math.sin(t * 1.5);
+      z += vib * Math.sin(t * mode * 0.7);
+      // Rotate
+      const cosX = Math.cos(tiltX), sinX = Math.sin(tiltX);
+      const cosZ = Math.cos(tiltZ), sinZ = Math.sin(tiltZ);
+      const x1 = x * cosZ - y * sinZ;
+      const y1 = x * sinZ + y * cosZ;
+      const z1 = z;
+      const x2 = x1;
+      const y2 = y1 * cosX - z1 * sinX;
+      const z2 = y1 * sinX + z1 * cosX;
+      pts.push(new THREE.Vector3(x2 + cx, y2 + cy, z2 + cz));
+    }
+
+    const curve = new THREE.CatmullRomCurve3(pts, true);
+    const cpts = curve.getPoints(40);
+    const geo = new THREE.BufferGeometry().setFromPoints(cpts);
+    const mat = new THREE.LineBasicMaterial({
+      color: new THREE.Color().setHSL(0.9, 0.8, 0.6),
+      transparent: true,
+      opacity: 0.7,
+    });
+    const line = new THREE.Line(geo, mat);
+    group.add(line);
+
+    // Glow
+    const gMat = new THREE.LineBasicMaterial({
+      color: 0xf472b6,
+      transparent: true,
+      opacity: 0.1,
+    });
+    const glow = new THREE.Line(geo.clone(), gMat);
+    glow.scale.set(1.3, 1.3, 1.3);
+    group.add(glow);
+
+    closedStrings.push({
+      line, glow,
+      center: new THREE.Vector3(cx, cy, cz),
+      rStr, tiltX, tiltZ, mode, amp, N,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  // 2. D-branes (membranes)
+  const branePositions = [
+    { pos: [-1.8, -1.5, 0], normal: [1, 0.3, 0], size: 1.2 },
+    { pos: [2.0, 1.2, 0.5], normal: [-0.5, 1, 0.2], size: 1.0 },
+  ];
+
+  branePositions.forEach((bp, idx) => {
+    const w = bp.size, h = bp.size * 0.7;
+    const geo = new THREE.PlaneGeometry(w, h, 12, 12);
+    geo.rotateX(Math.PI / 2);
+    
+    // Warp it slightly for visual interest
+    const posAttr = geo.attributes.position;
+    for (let i = 0; i < posAttr.count; i++) {
+      const x = posAttr.getX(i);
+      const y = posAttr.getY(i);
+      const z = 0.08 * Math.sin(x * 3) * Math.cos(y * 2.5);
+      posAttr.setZ(i, z);
+    }
+    posAttr.needsUpdate = true;
+    geo.computeVertexNormals();
+
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: idx === 0 ? 0x6366f1 : 0x8b5cf6,
+      transparent: true,
+      opacity: 0.15,
+      metalness: 0.3,
+      roughness: 0.4,
+      side: THREE.DoubleSide,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+
+    // Orient
+    const n = new THREE.Vector3(bp.normal[0], bp.normal[1], bp.normal[2]).normalize();
+    const up = new THREE.Vector3(0, 1, 0);
+    const q = new THREE.Quaternion().setFromUnitVectors(up, n);
+    mesh.quaternion.copy(q);
+    mesh.position.set(bp.pos[0], bp.pos[1], bp.pos[2]);
+    group.add(mesh);
+
+    // Brane edge glow
+    const edgePts = [];
+    const res = 24;
+    for (let i = 0; i <= res; i++) {
+      const t = (i / res) * Math.PI * 2;
+      const ex = w/2 * Math.cos(t);
+      const ey = h/2 * Math.sin(t);
+      const ez = 0.08 * Math.sin(ex * 3) * Math.cos(ey * 2.5);
+      const p = new THREE.Vector3(ex, ey, ez);
+      p.applyQuaternion(q);
+      p.x += bp.pos[0];
+      p.y += bp.pos[1];
+      p.z += bp.pos[2];
+      edgePts.push(p);
+    }
+    const eGeo = new THREE.BufferGeometry().setFromPoints(edgePts);
+    const eMat = new THREE.LineBasicMaterial({
+      color: idx === 0 ? 0x818cf8 : 0xa78bfa,
+      transparent: true,
+      opacity: 0.6,
+    });
+    group.add(new THREE.Line(eGeo, eMat));
+
+    // Brane label
+    const canvas = document.createElement('canvas');
+    canvas.width = 128; canvas.height = 48;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 128, 48);
+    ctx.font = '18px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#818cf8';
+    ctx.fillText('D' + (idx + 1) + '-brane', 64, 34);
+    const tex = new THREE.CanvasTexture(canvas);
+    const sMat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
+    const sp = new THREE.Sprite(sMat);
+    sp.position.set(bp.pos[0], bp.pos[1] + 1.2, bp.pos[2]);
+    sp.scale.set(1.8, 0.6, 1);
+    group.add(sp);
+  });
+
+  // 3. Open strings connecting D-branes
+  for (let i = 0; i < 8; i++) {
+    const start = new THREE.Vector3(
+      -1.8 + (Math.random() - 0.5) * 1.0,
+      -1.5 + (Math.random() - 0.5) * 0.8,
+      (Math.random() - 0.5) * 0.8
+    );
+    const end = new THREE.Vector3(
+      2.0 + (Math.random() - 0.5) * 0.8,
+      1.2 + (Math.random() - 0.5) * 0.7,
+      0.5 + (Math.random() - 0.5) * 0.7
+    );
+    
+    const mid = new THREE.Vector3().copy(start).add(end).multiplyScalar(0.5);
+    mid.x += (Math.random() - 0.5) * 0.6;
+    mid.y += (Math.random() - 0.5) * 0.6;
+    mid.z += (Math.random() - 0.5) * 0.6;
+
+    const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
+    const pts = curve.getPoints(16);
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({
+      color: new THREE.Color().setHSL(0.75, 0.7, 0.5),
+      transparent: true,
+      opacity: 0.3 + Math.random() * 0.2,
+    });
+    const line = new THREE.Line(geo, mat);
+    group.add(line);
+  }
+
+  // 4. Compactified dimension - spiral/helix structure
+  const helixGroup = new THREE.Group();
+  const helixPts = [];
+  const H = 30;
+  for (let i = 0; i <= H * 5; i++) {
+    const t = i * 0.1;
+    const r = 0.3;
+    const x = r * Math.cos(t * Math.PI * 2);
+    const z = r * Math.sin(t * Math.PI * 2);
+    const y = (i / H - 2.5) * 0.6;
+    helixPts.push(new THREE.Vector3(x + 3.2, y - 0.5, 0));
+  }
+  const hGeo = new THREE.BufferGeometry().setFromPoints(helixPts);
+  const hMat = new THREE.LineBasicMaterial({
+    color: 0x22d3ee,
+    transparent: true,
+    opacity: 0.5,
+  });
+  helixGroup.add(new THREE.Line(hGeo, hMat));
+
+  // Compactification circles along helix
+  for (let i = 0; i < 8; i++) {
+    const t = i / 8;
+    const y = (t - 0.5) * 3;
+    const cGeo = new THREE.TorusGeometry(0.35, 0.02, 8, 20);
+    const cMat = new THREE.MeshBasicMaterial({
+      color: 0x22d3ee,
+      transparent: true,
+      opacity: 0.15,
+    });
+    const cMesh = new THREE.Mesh(cGeo, cMat);
+    cMesh.position.set(3.2, y - 0.5, 0);
+    helixGroup.add(cMesh);
+  }
+
+  // Label for compactification
+  const canvas = document.createElement('canvas');
+  canvas.width = 192; canvas.height = 48;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 192, 48);
+  ctx.font = '16px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#22d3ee';
+  ctx.fillText('紧化维度 X⁵ ~ X⁵ + 2πR', 96, 34);
+  const tex = new THREE.CanvasTexture(canvas);
+  const sMat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
+  const label = new THREE.Sprite(sMat);
+  label.position.set(4.2, 1.8, 0);
+  label.scale.set(2.8, 0.7, 1);
+  group.add(label);
+
+  group.add(helixGroup);
+
+  return { closedStrings, helixGroup };
+}
+
+// ─── Scene management ───────────────────────────────
+let currentIdx = 0;
+let sceneData = null;
+const infoEl = document.getElementById('infoPanel');
+const formulaEl = document.getElementById('formulaDisplay');
+
+function clearScene() {
+  while (sceneRoot.children.length > 0) {
+    const c = sceneRoot.children[0];
+    if (c.geometry) c.geometry.dispose();
+    if (c.material) c.material.dispose();
+    sceneRoot.remove(c);
+  }
+}
+
+function buildScene(idx) {
+  clearScene();
+  controls.autoRotate = true;
+  switch (idx) {
+    case 0:
+      sceneData = buildBlackHole(sceneRoot);
+      infoEl.innerHTML = infoTexts[0];
+      formulaEl.textContent = formulas[0];
+      formulaEl.classList.add('visible');
+      controls.autoRotateSpeed = 0.6;
+      break;
+    case 1:
+      sceneData = buildStringTheory(sceneRoot);
+      infoEl.innerHTML = infoTexts[1];
+      formulaEl.textContent = formulas[1];
+      formulaEl.classList.add('visible');
+      controls.autoRotateSpeed = 0.5;
+      camera.position.set(6, 4, 7);
+      break;
+  }
+}
+
+// ─── Tab switching ──────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentIdx = parseInt(btn.dataset.scene);
+    buildScene(currentIdx);
+  });
+});
+
+// ─── Resize ─────────────────────────────────────────
+window.addEventListener('resize', () => {
+  const w = container.clientWidth, h = container.clientHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+});
+
+// ─── Animation ──────────────────────────────────────
+let time = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+  time += 0.008;
+
+  if (currentIdx === 0 && sceneData) {
+    const d = sceneData;
+    // Horizon pulse
+    if (d.horizonMesh) {
+      d.horizonMesh.material.emissiveIntensity = 0.06 + 0.04 * Math.sin(time * 0.6);
+      d.horizonWire.material.opacity = 0.05 + 0.03 * Math.sin(time * 0.4 + 1);
+    }
+    // Equator ring rotation
+    if (d.equator) {
+      d.equator.rotation.z += 0.003;
+      d.ring2.rotation.y += 0.002;
+    }
+    // Flow particles on surface
+    if (d.flowPts && d.flowData) {
+      const pos = d.flowPts.geometry.attributes.position.array;
+      for (let i = 0; i < d.flowData.length; i++) {
+        const fd = d.flowData[i];
+        fd.theta += fd.speed * 0.01;
+        const r = fd.r + 0.03 * Math.sin(time * 0.5 + i);
+        const phi = fd.phi + 0.005 * Math.sin(time * 0.3 + i * 0.1);
+        pos[i*3] = r * Math.sin(phi) * Math.cos(fd.theta);
+        pos[i*3+1] = r * Math.sin(phi) * Math.sin(fd.theta);
+        pos[i*3+2] = r * Math.cos(phi);
+      }
+      d.flowPts.geometry.attributes.position.needsUpdate = true;
+    }
+    // Hawking radiation
+    if (d.radPts && d.radData) {
+      const pos = d.radPts.geometry.attributes.position.array;
+      const R = d.R_HORIZON;
+      for (let i = 0; i < d.radData.length; i++) {
+        const rd = d.radData[i];
+        rd.theta += rd.v * 0.005;
+        rd.phi += 0.002 * Math.sin(rd.phase + time);
+        const r = R + (time * 0.2 + i * 0.01) % 4;
+        pos[i*3] = r * Math.sin(rd.phi) * Math.cos(rd.theta);
+        pos[i*3+1] = r * Math.sin(rd.phi) * Math.sin(rd.theta);
+        pos[i*3+2] = r * Math.cos(rd.phi);
+      }
+      d.radPts.geometry.attributes.position.needsUpdate = true;
+      d.radPts.material.opacity = 0.2 + 0.15 * Math.sin(time * 0.5);
+    }
+    // Core node pulse
+    if (d.nodes) {
+      d.nodes.forEach(n => {
+        if (n.userData.t < 0.35 && n.material.emissiveIntensity) {
+          n.material.emissiveIntensity = 0.5 + 0.2 * Math.sin(time * 0.7 + n.position.x * 2);
+        }
+      });
+    }
+  }
+
+  if (currentIdx === 1 && sceneData && sceneData.closedStrings) {
+    sceneData.closedStrings.forEach((cs, idx) => {
+      const phase = time * 0.5 + cs.phase;
+      const vibAmp = 0.04 + 0.03 * Math.sin(phase * 0.7);
+      const pts = [];
+      for (let i = 0; i <= cs.N; i++) {
+        const t = (i / cs.N) * Math.PI * 2;
+        let x = cs.rStr * Math.cos(t);
+        let y = cs.rStr * Math.sin(t);
+        let z = 0;
+        // Time-varying vibration
+        const v = vibAmp * Math.sin(cs.mode * t + phase);
+        x += v * Math.cos(t * 2 + phase * 0.3);
+        y += v * Math.sin(t * 1.5 + phase * 0.5);
+        z += v * Math.sin(t * cs.mode * 0.7 + phase);
+        // Rotate
+        const cosX = Math.cos(cs.tiltX), sinX = Math.sin(cs.tiltX);
+        const cosZ = Math.cos(cs.tiltZ), sinZ = Math.sin(cs.tiltZ);
+        const x1 = x * cosZ - y * sinZ;
+        const y1 = x * sinZ + y * cosZ;
+        const z1 = z;
+        const x2 = x1;
+        const y2 = y1 * cosX - z1 * sinX;
+        const z2 = y1 * sinX + z1 * cosX;
+        pts.push(new THREE.Vector3(
+          x2 + cs.center.x, y2 + cs.center.y, z2 + cs.center.z
+        ));
+      }
+      const curve = new THREE.CatmullRomCurve3(pts, true);
+      const cpts = curve.getPoints(40);
+      cs.line.geometry.dispose();
+      cs.line.geometry = new THREE.BufferGeometry().setFromPoints(cpts);
+      // Pulse glow
+      cs.glow.material.opacity = 0.08 + 0.06 * Math.sin(phase * 0.5);
+    });
+  }
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// ─── Start ──────────────────────────────────────────
+buildScene(0);
+animate();
+</script>
+</body>
+</html>

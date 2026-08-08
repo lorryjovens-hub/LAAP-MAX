@@ -1,0 +1,6 @@
+{
+  "id": "laap-core",
+  "type": "provider-plugin",
+  "schemaVersion": 1,
+  "provider": "laap-core"
+}

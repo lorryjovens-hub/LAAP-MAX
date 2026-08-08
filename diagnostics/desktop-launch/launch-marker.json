@@ -1,0 +1,13 @@
+{
+  "event": "launch-marker",
+  "time": "2026-08-08T07:28:17.224Z",
+  "payload": {
+    "status": "main-loaded",
+    "pid": 16652,
+    "platform": "win32",
+    "arch": "x64",
+    "execPath": "C:\\Users\\user\\AppData\\Local\\Programs\\HanaAgent\\HanaAgent.exe",
+    "resourcesPath": "C:\\Users\\user\\AppData\\Local\\Programs\\HanaAgent\\resources",
+    "hanakoHome": "D:\\LAAP"
+  }
+}

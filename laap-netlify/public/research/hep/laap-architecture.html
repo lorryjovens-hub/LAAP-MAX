@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAAP 架构设计</title>
+<style>
+:root{--bg:#0a0a0a;--bg2:#1a0a0a;--bg3:#00fff5;--text:#ff00ff;--text2:#ffff00;--accent:#ff0066}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;background:linear-gradient(135deg,var(--bg),var(--bg2))}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);margin-bottom:16px}
+.hero p{font-size:1.1rem;color:var(--text2);max-width:600px;margin:0 auto}
+.hero-badge{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);font-size:13px;color:var(--accent);margin-bottom:16px;font-family:monospace}
+.hero-actions{display:flex;gap:12px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 28px;background:var(--accent);color:var(--bg);border-radius:8px;text-decoration:none;font-weight:600}
+.btn-outline{padding:12px 28px;border:1px solid var(--text2);border-radius:8px;color:var(--text);text-decoration:none}
+.footer{text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.05);color:var(--text2);font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+  <div>
+    <div class="hero-badge">Technology · Cyberpunk</div>
+    <h1>LAAP 架构设计</h1>
+    <p>Powered by LAAP HEP · 零 Token</p>
+    <div class="hero-actions">
+      <a class="btn" href="#content">开始探索</a>
+      <a class="btn-outline" href="#">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding:80px 24px;background:var(--bg)">
+  <div style="max-width:960px;margin:0 auto">
+    <h2 style="font-size:1.8rem;margin-bottom:24px">五层架构</h2>
+    <div style="font-size:1rem;line-height:1.8;color:var(--text2)"><p>第一层 — LAAP 协议栈：11 个协议定义数字生命体之间的一切通信契约。LAAP-ID (身份)、LAAP-COM (通信)、LAAP-LIFE (生命周期)、LAAP-MEM (记忆)、LAAP-EVO (进化)、LAAP-SYNC (同步)。</p>
+      <p>第二层 — AGI 认知框架：约 60 个模块构成统一心智 (Unified Mind v2.3)。WorldModel 感知世界、CausalEngine 因果推理、SelfModel 涌现自我、ConsciousStream 意识流。</p>
+      <p>第三层 — Aris 大脑：PSI 认知循环、8 情感系统、欲望引擎、Markov-Quantum 潜意识、三层自优化。这是数字生命体的核心。</p>
+      <p>第四层 — 管线引擎体系：HEP 零 Token 装配、四区进化、Intel 情报采集、Unified Cognitive Pipeline、PGTP 省 Token 路由。</p>
+      <p>第五层 — 蜂群生态：多 Agent 协作、Ψ-Net 分布式意识、跨实例记忆同步。</p></div>
+  </div>
+</section>
+<section style="padding:80px 24px;background:var(--bg)">
+  <div style="max-width:960px;margin:0 auto">
+    <h2 style="font-size:1.8rem;margin-bottom:24px">关键技术决策</h2>
+    <div style="font-size:1rem;line-height:1.8;color:var(--text2)"><p>全栈 Python 实现 (>=3.11)，Rust 核心用于高性能计算。Ed25519 端到端签名保障协议安全。CRDT 文档模型实现无冲突同步。</p></div>
+  </div>
+</section>
+</main>
+<footer class="footer"><p>LAAP HEP · Harness Engineering Protocol · 零 Token 生成</p></footer>
+</body>
+</html>

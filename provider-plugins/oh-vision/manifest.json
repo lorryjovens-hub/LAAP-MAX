@@ -1,0 +1,6 @@
+{
+  "id": "oh-vision",
+  "type": "provider-plugin",
+  "schemaVersion": 1,
+  "provider": "oh-vision"
+}

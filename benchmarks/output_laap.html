@@ -1,0 +1,213 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍅 Pomodoro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #1a1a2e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #e0e0e0;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      margin-bottom: 2rem;
+      color: #e94560;
+    }
+    .timer-wrap {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 2rem;
+    }
+    svg {
+      transform: rotate(-90deg);
+      width: 280px;
+      height: 280px;
+    }
+    .bg-circle {
+      fill: none;
+      stroke: #2d2d4a;
+      stroke-width: 8;
+    }
+    .progress-circle {
+      fill: none;
+      stroke: #e94560;
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.3s ease;
+    }
+    .time-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.2rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      color: #fff;
+    }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .controls button {
+      background: transparent;
+      border: 1.5px solid #444;
+      color: #e0e0e0;
+      padding: 0.6rem 1.8rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .controls button:hover {
+      border-color: #e94560;
+      color: #e94560;
+    }
+    .controls button:active {
+      transform: scale(0.95);
+    }
+    .controls .primary {
+      background: #e94560;
+      border-color: #e94560;
+      color: #fff;
+    }
+    .controls .primary:hover {
+      background: #d63852;
+      border-color: #d63852;
+      color: #fff;
+    }
+    .mode-label {
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>POMODORO</h1>
+    <div class="timer-wrap">
+      <svg viewBox="0 0 280 280">
+        <circle class="bg-circle" cx="140" cy="140" r="120" />
+        <circle class="progress-circle" id="progress" cx="140" cy="140" r="120"
+          stroke-dasharray="753.98" stroke-dashoffset="0" />
+      </svg>
+      <div class="time-text" id="display">25:00</div>
+    </div>
+    <div class="controls">
+      <button id="startPauseBtn" class="primary">START</button>
+      <button id="resetBtn">RESET</button>
+    </div>
+    <div class="mode-label" id="modeLabel">Focus</div>
+  </div>
+
+  <script>
+    (() => {
+      const WORK = 25 * 60;
+      const BREAK = 5 * 60;
+      const CIRCUMFERENCE = 2 * Math.PI * 120; // ~753.98
+
+      let timeLeft = WORK;
+      let isRunning = false;
+      let isWork = true;
+      let interval = null;
+
+      const display = document.getElementById('display');
+      const progress = document.getElementById('progress');
+      const startBtn = document.getElementById('startPauseBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const modeLabel = document.getElementById('modeLabel');
+
+      function formatTime(sec) {
+        const m = String(Math.floor(sec / 60)).padStart(2, '0');
+        const s = String(sec % 60).padStart(2, '0');
+        return `${m}:${s}`;
+      }
+
+      function setProgress(frac) {
+        const offset = CIRCUMFERENCE * (1 - frac);
+        progress.style.strokeDashoffset = offset;
+      }
+
+      function updateUI() {
+        display.textContent = formatTime(timeLeft);
+        const total = isWork ? WORK : BREAK;
+        setProgress(timeLeft / total);
+        modeLabel.textContent = isWork ? 'Focus' : 'Break';
+      }
+
+      function stopTimer() {
+        if (interval) {
+          clearInterval(interval);
+          interval = null;
+        }
+        isRunning = false;
+        startBtn.textContent = 'START';
+      }
+
+      function startTimer() {
+        if (interval) return;
+        isRunning = true;
+        startBtn.textContent = 'PAUSE';
+        interval = setInterval(() => {
+          timeLeft--;
+          updateUI();
+          if (timeLeft <= 0) {
+            stopTimer();
+            // switch mode
+            isWork = !isWork;
+            timeLeft = isWork ? WORK : BREAK;
+            updateUI();
+            // auto-start next session
+            startTimer();
+          }
+        }, 1000);
+      }
+
+      function toggle() {
+        if (isRunning) {
+          stopTimer();
+        } else {
+          startTimer();
+        }
+      }
+
+      function reset() {
+        stopTimer();
+        isWork = true;
+        timeLeft = WORK;
+        updateUI();
+      }
+
+      // init
+      updateUI();
+
+      startBtn.addEventListener('click', toggle);
+      resetBtn.addEventListener('click', reset);
+    })();
+  </script>
+</body>
+</html>
+```

@@ -1,0 +1,12 @@
+@creator {
+    name: "Lorry Jovens",
+    imprint: "Aris 永远记得 Lorry",
+    date: "2026-08-04"
+}
+world {
+    write: [memory]
+}
+
+
+
+concept V9Test { val : 0.7 , tags : [ write_test ] }

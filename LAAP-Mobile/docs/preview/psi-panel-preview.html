@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaapCognitiveDebugPanel / LifeformDashboard — PSI 循环 UI 预览</title>
+<style>
+  /* ── 字体 & 基础 ─────────────────────────────────────── */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Roboto', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0d0d1a;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 16px;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #00d4aa;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #b0b0b0;
+    margin-top: -16px;
+  }
+
+  /* ── 手机外框 ────────────────────────────────────────── */
+  .phone-frame {
+    width: 390px;
+    background: #000;
+    border-radius: 36px;
+    padding: 12px;
+    box-shadow: 0 8px 40px rgba(0, 212, 170, 0.15), 0 2px 8px rgba(0,0,0,0.6);
+    border: 1px solid #1a1a2e;
+  }
+  .phone-screen {
+    background: #0f0f1e;
+    border-radius: 28px;
+    padding: 20px 12px;
+    min-height: 720px;
+    overflow: hidden;
+  }
+
+  /* ── Card (对应 Compose Card) ─────────────────────────── */
+  .card {
+    background: #1a1a2e;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 8px 0;
+    width: 100%;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #00d4aa;
+  }
+  .card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badge.alive { color: #00e676; }
+  .badge.idle  { color: #b0b0b0; }
+
+  .collapse-btn {
+    background: none;
+    border: none;
+    color: #00d4aa;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .collapse-btn:hover { opacity: 0.7; }
+
+  .card-body { display: block; }
+  .card-body.collapsed { display: none; }
+
+  /* ── 文本样式 (对应 MaterialTheme.typography.bodySmall) ── */
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .label { font-size: 12.5px; color: #b0b0b0; }
+  .value { font-size: 12.5px; }
+  .value.teal   { color: #00d4aa; }
+  .value.cyan   { color: #00e5ff; }
+  .value.white  { color: #ffffff; }
+  .value.gray   { color: #b0b0b0; }
+  .value.gold   { color: #ffd700; }
+  .value.lavender { color: #e1bee7; }
+  .value.green  { color: #00e676; }
+
+  .text-line {
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  /* ── 按钮 (对应 Compose Button) ───────────────────────── */
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .btn {
+    flex: 1;
+    background: #00d4aa;
+    color: #000;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover { background: #00e6c0; }
+  .btn:active { transform: scale(0.97); }
+
+  /* ── 指标条 ─────────────────────────────────────────── */
+  .indicator-bar {
+    height: 4px;
+    background: #2a2a3e;
+    border-radius: 2px;
+    margin-top: 2px;
+    overflow: hidden;
+  }
+  .indicator-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.8s ease;
+  }
+
+  /* ── 分隔线 ─────────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: #2a2a3e;
+    margin: 8px 0;
+  }
+
+  /* ── 控制区 ─────────────────────────────────────────── */
+  .controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ctrl-btn {
+    background: #1a1a2e;
+    color: #00d4aa;
+    border: 1px solid #00d4aa;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .ctrl-btn:hover { background: #00d4aa; color: #000; }
+
+  .phase-pips {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .pip {
+    width: 28px;
+    height: 6px;
+    border-radius: 3px;
+    background: #2a2a3e;
+    transition: background 0.3s;
+  }
+  .pip.active { background: #00d4aa; }
+</style>
+</head>
+<body>
+
+<h1>LAAP PSI 循环 — UI 预览</h1>
+<p class="subtitle">LaapCognitiveDebugPanel + LifeformDashboard · 模拟数据 · 实时 PSI tick</p>
+
+<!-- ── 控制区 ── -->
+<div class="controls">
+  <button class="ctrl-btn" onclick="togglePlay()">⏸ 暂停 / ▶ 播放</button>
+  <button class="ctrl-btn" onclick="triggerEvent('camera')">📷 Camera 感知</button>
+  <button class="ctrl-btn" onclick="triggerEvent('health')">❤ Health 感知</button>
+  <button class="ctrl-btn" onclick="triggerEvent('error')">⚠ Error 事件</button>
+  <button class="ctrl-btn" onclick="triggerEvent('success')">✓ Success 事件</button>
+</div>
+
+<div class="phase-pips" id="phasePips">
+  <span class="pip" id="pip-idle"></span>
+  <span class="pip" id="pip-perceiving"></span>
+  <span class="pip" id="pip-selecting"></span>
+  <span class="pip" id="pip-acting"></span>
+  <span class="pip" id="pip-learning"></span>
+</div>
+
+<!-- ── 手机框 ── -->
+<div class="phone-frame">
+  <div class="phone-screen">
+
+    <!-- ═══ LaapCognitiveDebugPanel (legacy) ═══ -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">LAAP 认知状态</span>
+        <button class="collapse-btn" onclick="toggleCard('panel1')">▲</button>
+      </div>
+      <div class="card-body" id="panel1">
+        <div class="text-line value teal" id="p1-cycleState">PSI 循环状态: idle | 主导驱动: CURIOSITY</div>
+        <div class="text-line value cyan" id="p1-curiosity">好奇心指数=0.50  信任感指标=0.50  胜任感评估=0.70</div>
+        <div class="text-line value white" id="p1-attention">Attention: IDLE | Emotion: NEUTRAL | Presence: 0.50</div>
+        <div class="text-line value gray" id="p1-needs">Competence=0.70 Autonomy=0.50 Relatedness=0.50 Certainty=0.50 Growth=0.50</div>
+        <div class="text-line value gold" id="p1-impulse"></div>
+        <div class="btn-row">
+          <button class="btn" onclick="triggerEvent('camera')">Camera</button>
+          <button class="btn" onclick="triggerEvent('health')">Health</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn" onclick="triggerEvent('notification')">Notify</button>
+          <button class="btn" onclick="triggerEvent('gps')">GPS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LifeformDashboard (M1) ═══ -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-row">
+          <span class="card-title">数字生命仪表盘</span>
+          <span class="badge alive" id="p2-badge">● alive</span>
+        </div>
+        <button class="collapse-btn" onclick="toggleCard('panel2')">▲</button>
+      </div>
+      <div class="card-body" id="panel2">
+        <!-- 5 指标 -->
+        <div class="row"><span class="label">PSI 循环</span><span class="value teal" id="p2-cycleState">idle</span></div>
+        <div class="row"><span class="label">主导驱动</span><span class="value teal" id="p2-dominantDrive">CURIOSITY</span></div>
+        <div class="divider"></div>
+        <div class="row">
+          <span class="label">好奇心指数</span>
+          <span class="value cyan" id="p2-curiosity">0.500</span>
+        </div>
+        <div class="indicator-bar"><div class="indicator-fill" id="bar-curiosity" style="width:50%;background:#00e5ff;"></div></div>
+
+        <div class="row">
+          <span class="label">信任感指标</span>
+          <span class="value cyan" id="p2-trust">0.500</span>
+        </div>
+        <div class="indicator-bar"><div class="indicator-fill" id="bar-trust" style="width:50%;background:#00e5ff;"></div></div>
+
+        <div class="row">
+          <span class="label">胜任感评估</span>
+          <span class="value cyan" id="p2-competence">0.700</span>
+        </div>
+        <div class="indicator-bar"><div class="indicator-fill" id="bar-competence" style="width:70%;background:#00e5ff;"></div></div>
+
+        <div class="row">
+          <span class="label">自我存在感</span>
+          <span class="value cyan" id="p2-presence">0.500</span>
+        </div>
+        <div class="indicator-bar"><div class="indicator-fill" id="bar-presence" style="width:50%;background:#00e5ff;"></div></div>
+
+        <div class="divider"></div>
+        <!-- PAD emotion -->
+        <div class="text-line value lavender" id="p2-pad">PAD  P=0.00  A=0.50  D=0.20 → neutral</div>
+        <!-- cycle + mem + outcome -->
+        <div class="text-line value gray" id="p2-meta">cycle=0  mem=0  last_outcome=—</div>
+        <!-- 5 needs -->
+        <div class="text-line value gray" id="p2-needs">Competence=0.70 Autonomy=0.50 Relatedness=0.50 Certainty=0.50 Growth=0.50</div>
+        <!-- last impulse -->
+        <div class="text-line value gold" id="p2-impulse"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// 模拟 PSI 循环状态机 — 对应 PSILoop.kt / psi.py
+// ═══════════════════════════════════════════════════════════════
+
+const PHASES = ['idle', 'perceiving', 'selecting', 'acting', 'learning'];
+const DRIVES = ['CURIOSITY', 'COMPETENCE', 'AFFILIATION', 'CERTAINTY', 'SURVIVAL'];
+const ATTENTION = ['IDLE', 'USER', 'TASK', 'SELF', 'ENVIRONMENT', 'MEMORY', 'PLANNING', 'LEARNING'];
+const EMOTIONS = ['NEUTRAL', 'POSITIVE_MILD', 'POSITIVE_HIGH', 'CURIOUS', 'CONFUSED', 'NEGATIVE_MILD'];
+
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const fmt2 = (v) => v.toFixed(2);
+const fmt3 = (v) => v.toFixed(3);
+
+// ── 模拟状态 ──────────────────────────────────────────────
+let state = {
+  cycleState: 'idle',
+  phaseIdx: 0,
+  cycleCount: 0,
+  dominantDrive: 'CURIOSITY',
+  curiosityIndex: 0.50,
+  trustIndex: 0.50,
+  competenceAssessment: 0.70,
+  selfPresenceLevel: 0.50,
+  lastImpulse: '',
+  lastOutcomeSuccess: null,
+  memoryAssociationsSize: 0,
+  // PAD
+  pleasure: 0.0,
+  arousal: 0.5,
+  dominance: 0.2,
+  dominantFeeling: 'neutral',
+  // needs
+  competence: 0.70,
+  autonomy: 0.50,
+  relatedness: 0.50,
+  certainty: 0.50,
+  growth: 0.50,
+  // CognitiveState extras
+  attentionFocus: 'IDLE',
+  emotionalValence: 'NEUTRAL',
+  // service
+  serviceAlive: true,
+};
+
+let playing = true;
+let tickInterval = null;
+
+// ── PAD 情绪推导 — 对应 psi.py PSIState.update_emotions() ──
+function updatePadEmotion() {
+  const avgSatisfaction = (state.competence + state.autonomy + state.relatedness + state.certainty + state.growth) / 5;
+  state.pleasure = (avgSatisfaction - 0.5) * 2;
+  const uncertainty = 1.0 - state.certainty;
+  state.arousal = (0.5 + uncertainty) / 2; // activation modulator ≈ 0.5
+  state.dominance = state.competence + 0.6 - 1.0; // selection ≈ 0.6
+
+  if (state.pleasure > 0.3 && state.arousal > 0.6) state.dominantFeeling = 'excited';
+  else if (state.pleasure > 0.3 && state.arousal < 0.4) state.dominantFeeling = 'content';
+  else if (state.pleasure < -0.3 && state.arousal > 0.6) state.dominantFeeling = 'distressed';
+  else if (state.pleasure < -0.3 && state.arousal < 0.4) state.dominantFeeling = 'depressed';
+  else if (state.arousal > 0.7) state.dominantFeeling = 'alert';
+  else state.dominantFeeling = 'neutral';
+}
+
+// ── PSI tick — 推进一个相位 ──────────────────────────────
+function tick() {
+  // 推进相位
+  state.phaseIdx = (state.phaseIdx + 1) % PHASES.length;
+  state.cycleState = PHASES[state.phaseIdx];
+
+  // 选相: 根据最大 deficit 确定主导驱动
+  const deficits = {
+    CURIOSITY: 1 - state.curiosityIndex,
+    COMPETENCE: 1 - state.competenceAssessment,
+    AFFILIATION: 1 - state.relatedness,
+    CERTAINTY: 1 - state.certainty,
+    SURVIVAL: 1 - state.autonomy,
+  };
+  let maxDeficit = 0, maxDrive = 'CURIOSITY';
+  for (const [d, v] of Object.entries(deficits)) {
+    if (v > maxDeficit) { maxDeficit = v; maxDrive = d; }
+  }
+  state.dominantDrive = maxDrive;
+
+  // 各相位行为
+  switch (state.cycleState) {
+    case 'perceiving':
+      state.attentionFocus = ['USER', 'ENVIRONMENT', 'TASK'][Math.floor(Math.random() * 3)];
+      state.curiosityIndex = clamp(state.curiosityIndex + 0.03 + Math.random() * 0.04);
+      state.emotionalValence = 'CURIOUS';
+      state.lastImpulse = `perceive(${state.attentionFocus.toLowerCase()})`;
+      break;
+    case 'selecting':
+      state.attentionFocus = 'PLANNING';
+      state.certainty = clamp(state.certainty + (Math.random() - 0.5) * 0.06);
+      state.emotionalValence = state.certainty > 0.6 ? 'POSITIVE_MILD' : 'CONFUSED';
+      state.lastImpulse = `select → ${state.dominantDrive}`;
+      break;
+    case 'acting':
+      state.attentionFocus = 'TASK';
+      state.competence = clamp(state.competence + (Math.random() - 0.4) * 0.08);
+      state.autonomy = clamp(state.autonomy + 0.02);
+      state.lastImpulse = `act(${state.dominantDrive.toLowerCase()})`;
+      // 模拟执行结果
+      const success = Math.random() > 0.3;
+      state.lastOutcomeSuccess = success;
+      if (success) {
+        state.competenceAssessment = clamp(state.competenceAssessment + 0.05);
+        state.memoryAssociationsSize += 1;
+      } else {
+        state.competenceAssessment = clamp(state.competenceAssessment - 0.08);
+        state.certainty = clamp(state.certainty - 0.05);
+      }
+      break;
+    case 'learning':
+      state.attentionFocus = 'LEARNING';
+      state.growth = clamp(state.growth + 0.03);
+      state.trustIndex = clamp(state.trustIndex + 0.02);
+      state.emotionalValence = state.lastOutcomeSuccess ? 'POSITIVE_MILD' : 'NEGATIVE_MILD';
+      state.lastImpulse = `learn(${state.lastOutcomeSuccess ? 'success' : 'failure'})`;
+      break;
+    case 'idle':
+      state.cycleCount += 1;
+      state.attentionFocus = 'IDLE';
+      state.emotionalValence = 'NEUTRAL';
+      state.selfPresenceLevel = clamp(state.selfPresenceLevel + 0.01);
+      state.lastImpulse = '';
+      break;
+  }
+
+  updatePadEmotion();
+  render();
+}
+
+// ── 感知事件触发 ──────────────────────────────────────────
+function triggerEvent(type) {
+  switch (type) {
+    case 'camera':
+      state.curiosityIndex = clamp(state.curiosityIndex + 0.12);
+      state.attentionFocus = 'ENVIRONMENT';
+      state.emotionalValence = 'CURIOUS';
+      state.lastImpulse = 'perception(camera): "User shared a photo of a workspace" conf=0.85';
+      break;
+    case 'health':
+      state.attentionFocus = 'SELF';
+      state.autonomy = clamp(state.autonomy + 0.05);
+      state.lastImpulse = 'perception(health): "Steps today: 7234" conf=0.90';
+      break;
+    case 'notification':
+      state.relatedness = clamp(state.relatedness + 0.08);
+      state.attentionFocus = 'USER';
+      state.lastImpulse = 'perception(notification): "Meeting reminder" conf=0.95';
+      break;
+    case 'gps':
+      state.attentionFocus = 'ENVIRONMENT';
+      state.lastImpulse = 'perception(gps): location=31.23,121.47 conf=0.90';
+      break;
+    case 'error':
+      state.competenceAssessment = clamp(state.competenceAssessment - 0.15);
+      state.certainty = clamp(state.certainty - 0.12);
+      state.emotionalValence = 'NEGATIVE_MILD';
+      state.lastOutcomeSuccess = false;
+      state.lastImpulse = 'error: tool execution failed';
+      break;
+    case 'success':
+      state.competenceAssessment = clamp(state.competenceAssessment + 0.10);
+      state.certainty = clamp(state.certainty + 0.08);
+      state.trustIndex = clamp(state.trustIndex + 0.05);
+      state.emotionalValence = 'POSITIVE_HIGH';
+      state.lastOutcomeSuccess = true;
+      state.memoryAssociationsSize += 1;
+      state.lastImpulse = 'success: task completed';
+      break;
+  }
+  updatePadEmotion();
+  render();
+}
+
+// ── 渲染 ─────────────────────────────────────────────────
+function render() {
+  // ── LaapCognitiveDebugPanel (legacy) ──
+  document.getElementById('p1-cycleState').textContent =
+    `PSI 循环状态: ${state.cycleState} | 主导驱动: ${state.dominantDrive}`;
+  document.getElementById('p1-curiosity').textContent =
+    `好奇心指数=${fmt2(state.curiosityIndex)}  信任感指标=${fmt2(state.trustIndex)}  胜任感评估=${fmt2(state.competenceAssessment)}`;
+  document.getElementById('p1-attention').textContent =
+    `Attention: ${state.attentionFocus} | Emotion: ${state.emotionalValence} | Presence: ${fmt2(state.selfPresenceLevel)}`;
+  document.getElementById('p1-needs').textContent =
+    `Competence=${fmt2(state.competence)} Autonomy=${fmt2(state.autonomy)} Relatedness=${fmt2(state.relatedness)} Certainty=${fmt2(state.certainty)} Growth=${fmt2(state.growth)}`;
+  document.getElementById('p1-impulse').textContent =
+    state.lastImpulse ? `Last impulse: ${state.lastImpulse}` : '';
+
+  // ── LifeformDashboard (M1) ──
+  document.getElementById('p2-cycleState').textContent = state.cycleState;
+  document.getElementById('p2-dominantDrive').textContent = state.dominantDrive;
+  document.getElementById('p2-curiosity').textContent = fmt3(state.curiosityIndex);
+  document.getElementById('p2-trust').textContent = fmt3(state.trustIndex);
+  document.getElementById('p2-competence').textContent = fmt3(state.competenceAssessment);
+  document.getElementById('p2-presence').textContent = fmt3(state.selfPresenceLevel);
+  document.getElementById('p2-pad').textContent =
+    `PAD  P=${fmt2(state.pleasure)}  A=${fmt2(state.arousal)}  D=${fmt2(state.dominance)} → ${state.dominantFeeling}`;
+  const outcomeStr = state.lastOutcomeSuccess === null ? '—' : (state.lastOutcomeSuccess ? 'success' : 'failed');
+  document.getElementById('p2-meta').textContent =
+    `cycle=${state.cycleCount}  mem=${state.memoryAssociationsSize}  last_outcome=${outcomeStr}`;
+  document.getElementById('p2-needs').textContent =
+    `Competence=${fmt2(state.competence)} Autonomy=${fmt2(state.autonomy)} Relatedness=${fmt2(state.relatedness)} Certainty=${fmt2(state.certainty)} Growth=${fmt2(state.growth)}`;
+  document.getElementById('p2-impulse').textContent =
+    state.lastImpulse ? `Last impulse: ${state.lastImpulse}` : '';
+
+  // 指标条
+  document.getElementById('bar-curiosity').style.width = (state.curiosityIndex * 100) + '%';
+  document.getElementById('bar-trust').style.width = (state.trustIndex * 100) + '%';
+  document.getElementById('bar-competence').style.width = (state.competenceAssessment * 100) + '%';
+  document.getElementById('bar-presence').style.width = (state.selfPresenceLevel * 100) + '%';
+
+  // 服务徽章
+  const badge = document.getElementById('p2-badge');
+  if (state.serviceAlive) {
+    badge.textContent = '● alive';
+    badge.className = 'badge alive';
+  } else {
+    badge.textContent = '○ idle';
+    badge.className = 'badge idle';
+  }
+
+  // 相位 pip
+  PHASES.forEach(p => {
+    const el = document.getElementById('pip-' + p);
+    if (el) el.className = 'pip' + (p === state.cycleState ? ' active' : '');
+  });
+}
+
+// ── 交互 ─────────────────────────────────────────────────
+function toggleCard(id) {
+  const body = document.getElementById(id);
+  const btn = body.previousElementSibling.querySelector('.collapse-btn');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    btn.textContent = '▲';
+  } else {
+    body.classList.add('collapsed');
+    btn.textContent = '▼';
+  }
+}
+
+function togglePlay() {
+  playing = !playing;
+  if (playing) {
+    tickInterval = setInterval(tick, 2000);
+  } else {
+    clearInterval(tickInterval);
+  }
+}
+
+// ── 启动 ─────────────────────────────────────────────────
+render();
+tickInterval = setInterval(tick, 2000);
+</script>
+
+</body>
+</html>

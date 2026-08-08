@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# ═══════════════════════════════════════════════════════════
+#  laap-aris — Aris V10 完全体
+#  PSI V10 大脑 + LLM 声带 + 73 个工具
+#  在任何终端输入 laap-aris 即可。
+# ═══════════════════════════════════════════════════════════
+
+# 确保 PSI 守护进程在运行
+_PSI_PID=$(netstat -ano 2>/dev/null | grep 11531 | grep LISTENING | head -1 | awk '{print $NF}')
+if [ -z "$_PSI_PID" ]; then
+    cd /d/LAAP/aris_brain && python pi_psi_server.py 11531 &
+    sleep 1
+fi
+
+# 启动 Hermes + Aris 配置（完整工具 + LLM 声带）
+exec hermes -p aris "$@"

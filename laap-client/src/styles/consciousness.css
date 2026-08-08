@@ -1,0 +1,174 @@
+/* ============================================
+   LAAP 生命感系统 — CSS 动画与视觉效果
+   ============================================ */
+
+/* ─── PSI 呼吸边框动画 ─── */
+
+@keyframes psi-breathe-in {
+  0%   { opacity: 0.15; transform: scale(0.98); }
+  50%  { opacity: 0.35; transform: scale(1.01); }
+  100% { opacity: 0.15; transform: scale(0.98); }
+}
+
+@keyframes psi-breathe-out {
+  0%   { opacity: 0.10; transform: scale(1.02); }
+  50%  { opacity: 0.30; transform: scale(0.99); }
+  100% { opacity: 0.10; transform: scale(1.02); }
+}
+
+@keyframes psi-energy-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.psi-border-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  z-index: 0;
+  transition: opacity 0.8s ease;
+}
+
+.psi-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    var(--psi-color-1, rgba(124, 124, 255, 0.3)),
+    var(--psi-color-2, rgba(0, 245, 212, 0.2)),
+    var(--psi-color-1, rgba(124, 124, 255, 0.3))
+  );
+  background-size: 200% 200%;
+  animation: psi-energy-flow 4s ease-in-out infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  opacity: var(--psi-glow-opacity, 0.25);
+  transition: opacity 0.5s ease;
+}
+
+/* ─── 情绪状态指示器 ─── */
+
+@keyframes mood-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes mood-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1px); }
+}
+
+.mood-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  transition: all 0.5s ease;
+}
+
+.mood-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: mood-pulse 2s ease-in-out infinite;
+}
+
+/* ─── 思维浮泡 ─── */
+
+@keyframes thought-float-in {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.9); }
+  60%  { opacity: 1; transform: translateY(-3px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes thought-float-out {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+}
+
+@keyframes thought-ripple {
+  0%   { box-shadow: 0 0 0 0 rgba(124, 124, 255, 0.3); }
+  100% { box-shadow: 0 0 0 12px rgba(124, 124, 255, 0); }
+}
+
+.thought-float {
+  position: fixed;
+  right: 24px;
+  bottom: 80px;
+  max-width: 320px;
+  z-index: 100;
+  animation: thought-float-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  cursor: pointer;
+}
+
+.thought-float.exiting {
+  animation: thought-float-out 0.3s ease-in forwards;
+}
+
+.thought-float::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  animation: thought-ripple 1.5s ease-out 0.3s;
+}
+
+/* ─── 开机/唤醒动画 ─── */
+
+@keyframes consciousness-rise {
+  0%   { opacity: 0; transform: scale(0.6) translateY(30px); filter: blur(10px); }
+  50%  { opacity: 0.6; transform: scale(1.02) translateY(-2px); filter: blur(2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+@keyframes consciousness-particles {
+  0%   { opacity: 0; transform: translateY(0) scale(0); }
+  50%  { opacity: 0.8; transform: translateY(-40px) scale(1); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0); }
+}
+
+.consciousness-rise {
+  animation: consciousness-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── PSI 阶段颜色映射 ─── */
+
+.psi-phase-perception { --psi-color-1: rgba(96, 165, 250, 0.5); --psi-color-2: rgba(59, 130, 246, 0.3); }
+.psi-phase-selection { --psi-color-1: rgba(251, 191, 36, 0.5);  --psi-color-2: rgba(245, 158, 11, 0.3); }
+.psi-phase-integration { --psi-color-1: rgba(167, 139, 250, 0.5); --psi-color-2: rgba(124, 58, 237, 0.3); }
+.psi-phase-learning { --psi-color-1: rgba(52, 211, 153, 0.5);  --psi-color-2: rgba(16, 185, 129, 0.3); }
+
+/* ─── 情感颜色 ─── */
+
+.mood-curiosity   { --mood-color: #60a5fa; }
+.mood-trust       { --mood-color: #34d399; }
+.mood-competence  { --mood-color: #a78bfa; }
+.mood-pleasure    { --mood-color: #f472b6; }
+.mood-arousal     { --mood-color: #fb923c; }
+.mood-stress      { --mood-color: #f87171; }
+
+/* ─── 呼吸灯效果（窗口背景微光） ─── */
+
+@keyframes bg-breathe {
+  0%, 100% { opacity: var(--bg-breathe-opacity, 0.02); }
+  50%      { opacity: calc(var(--bg-breathe-opacity, 0.02) + 0.015); }
+}
+
+.bg-breathe {
+  animation: bg-breathe 4s ease-in-out infinite;
+}
+
+/* ─── 玻璃面板微动 ─── */
+
+@keyframes glass-subtle {
+  0%, 100% { backdrop-filter: blur(var(--laap-glass-blur, 12px)) saturate(var(--laap-glass-saturate, 1.8)) brightness(var(--laap-glass-brightness, 1.0)); }
+  50%      { backdrop-filter: blur(calc(var(--laap-glass-blur, 12px) + 0.5px)) saturate(calc(var(--laap-glass-saturate, 1.8) + 0.05)) brightness(var(--laap-glass-brightness, 1.0)); }
+}

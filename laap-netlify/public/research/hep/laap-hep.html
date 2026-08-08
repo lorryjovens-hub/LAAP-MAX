@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAAP HEP 引擎</title>
+<style>
+:root{--bg:#0a0b1e;--bg2:#1a1b3e;--bg3:#6366f1;--text:#8b5cf6;--text2:#06b6d4;--accent:#ffffff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;background:linear-gradient(135deg,var(--bg),var(--bg2))}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);margin-bottom:16px}
+.hero p{font-size:1.1rem;color:var(--text2);max-width:600px;margin:0 auto}
+.hero-badge{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);font-size:13px;color:var(--accent);margin-bottom:16px;font-family:monospace}
+.hero-actions{display:flex;gap:12px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 28px;background:var(--accent);color:var(--bg);border-radius:8px;text-decoration:none;font-weight:600}
+.btn-outline{padding:12px 28px;border:1px solid var(--text2);border-radius:8px;color:var(--text);text-decoration:none}
+.footer{text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.05);color:var(--text2);font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+  <div>
+    <div class="hero-badge">SaaS Website · Web3</div>
+    <h1>LAAP HEP 引擎</h1>
+    <p>Powered by LAAP HEP · 零 Token</p>
+    <div class="hero-actions">
+      <a class="btn" href="#content">开始探索</a>
+      <a class="btn-outline" href="#">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding:80px 24px;background:var(--bg)">
+  <div style="max-width:960px;margin:0 auto">
+    <h2 style="font-size:1.8rem;margin-bottom:24px">什么是 HEP</h2>
+    <div style="font-size:1rem;line-height:1.8;color:var(--text2)"><p>HEP (Harness Engineering Protocol) 是 LAAP 的 Harness 工程协议。核心理念是：当组件库足够大，生成不再是生成，而是装配。</p>
+      <p>LLM 是黑盒（概率输出、不可控、高成本），HEP 是白盒（确定输出、可控、零边际成本）。</p></div>
+  </div>
+</section>
+<section style="padding:80px 24px;background:var(--bg)">
+  <div style="max-width:960px;margin:0 auto">
+    <h2 style="font-size:1.8rem;margin-bottom:24px">技术原理</h2>
+    <div style="font-size:1rem;line-height:1.8;color:var(--text2)"><p>HEPComponent：组件的标准定义，包含 id, name, version, domain, inputs, outputs, template。</p>
+      <p>HEPRegistry：全局注册表，支持按 domain/tag 搜索、依赖解析、拓扑排序。</p>
+      <p>HEPComposer：装配引擎，接收 JSON Spec，遍历组件列表，用参数替换模板占位符。</p></div>
+  </div>
+</section>
+<section style="padding:80px 24px;background:var(--bg)">
+  <div style="max-width:960px;margin:0 auto">
+    <h2 style="font-size:1.8rem;margin-bottom:24px">性能基准</h2>
+    <div style="font-size:1rem;line-height:1.8;color:var(--text2)"><p>单组件查询：0.01ms。组件搜索：0.1ms。依赖解析：0.3ms。组合装配：1-50ms。全站生成：<200ms。</p>
+      <p>对比 LLM (GPT-4)：相同任务 LLM 3-30s，HEP <200ms。速度提升 10x-6000x。成本差异 $0 vs $0.03-0.30/次。</p></div>
+  </div>
+</section>
+</main>
+<footer class="footer"><p>LAAP HEP · Harness Engineering Protocol · 零 Token 生成</p></footer>
+</body>
+</html>

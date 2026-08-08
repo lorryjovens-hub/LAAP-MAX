@@ -1,0 +1,12 @@
+{
+  "devRunId": "dev_1785189844935_b5604c59dae0",
+  "pluginId": "agent-bridge",
+  "sourcePath": "C:\\Users\\user\\Desktop\\OH-WorkSpace\\agent-bridge",
+  "targetDir": "D:\\LAAP\\plugins-dev\\agent-bridge",
+  "status": "loaded",
+  "version": "0.1.0",
+  "allowFullAccess": true,
+  "startedAt": "2026-07-27T22:04:04.935Z",
+  "completedAt": "2026-07-27T22:04:05.802Z",
+  "error": null
+}

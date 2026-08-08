@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEP 风格矩阵 — 6 × 9 = 54 种页面</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f5f7; --surface: #fff; --text: #1d1d1f; --text-secondary: #6b7280; --border: #e5e7eb;
+  --radius: 16px; --radius-sm: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04); --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+  --font: 'Inter', -apple-system, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: rgba(99,102,241,0.2); }
+svg { flex-shrink: 0; }
+
+/* ── Header ── */
+header {
+  text-align: center; padding: 60px 24px 40px;
+  background: linear-gradient(180deg, #fff, var(--bg));
+  border-bottom: 1px solid var(--border);
+}
+header h1 { font-size: 36px; font-weight: 900; letter-spacing: -2px; margin-bottom: 8px; }
+header h1 span { background: linear-gradient(135deg, #6366f1, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+header p { color: var(--text-secondary); font-size: 15px; }
+
+/* ── Container ── */
+.container { max-width: 1280px; margin: 0 auto; padding: 40px 24px; }
+
+/* ── Section Title ── */
+.sec-title {
+  font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sec-title .count { font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--border); padding: 2px 10px; border-radius: 100px; }
+
+/* ── Style Cards Grid ── */
+.style-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 60px; }
+.style-card {
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  border: 2px solid transparent; transition: all 0.3s;
+  box-shadow: var(--shadow);
+}
+.style-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.style-card.selected { border-color: #6366f1; box-shadow: 0 0 0 4px rgba(99,102,241,0.15), var(--shadow-md); }
+.style-preview {
+  height: 100px; position: relative; overflow: hidden; padding: 20px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.style-preview .dots { display: flex; gap: 4px; }
+.style-preview .dot { width: 8px; height: 8px; border-radius: 50%; }
+.style-preview .bar { height: 4px; border-radius: 4px; width: 60%; }
+.style-preview .circle { width: 20px; height: 20px; border-radius: 50%; align-self: flex-end; }
+.style-meta { padding: 14px 16px; background: #fff; }
+.style-meta h3 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.style-meta p { font-size: 12px; color: var(--text-secondary); }
+.style-meta .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.style-meta .tags span { padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 500; background: #f3f4f6; color: #6b7280; }
+.style-palette { display: flex; gap: 4px; margin-top: 8px; }
+.style-palette span { width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.06); }
+
+/* ── Page Type Cards ── */
+.type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 60px; }
+.type-card {
+  padding: 20px; background: #fff; border-radius: var(--radius-sm);
+  border: 2px solid transparent; cursor: pointer;
+  transition: all 0.3s; box-shadow: var(--shadow);
+}
+.type-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.type-card.selected { border-color: #6366f1; background: rgba(99,102,241,0.02); }
+.type-icon { margin-bottom: 8px; color: #6366f1; }
+.type-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.type-card p { font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; }
+.type-sections { display: flex; gap: 4px; flex-wrap: wrap; }
+.type-sections span {
+  font-size: 10px; padding: 2px 8px; border-radius: 100px;
+  background: #f3f4f6; color: #6b7280; font-weight: 500;
+}
+
+/* ── Matrix Grid ── */
+.matrix-section { margin-bottom: 60px; }
+.matrix-header {
+  display: grid; grid-template-columns: 100px repeat(6, 1fr); gap: 6px; margin-bottom: 6px;
+  position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 8px 0;
+}
+.matrix-header > div { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-align: center; padding: 8px; }
+.matrix-row { display: grid; grid-template-columns: 100px repeat(6, 1fr); gap: 6px; margin-bottom: 6px; }
+.matrix-label {
+  font-size: 12px; font-weight: 600; display: flex; align-items: center; padding: 0 8px;
+  color: var(--text); gap: 6px;
+}
+.matrix-label .swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.matrix-cell {
+  padding: 12px 8px; border-radius: 8px; text-align: center; cursor: pointer;
+  font-size: 11px; font-weight: 500; transition: all 0.3s; border: 2px solid transparent;
+  position: relative; overflow: hidden;
+}
+.matrix-cell:hover { transform: translateY(-2px); }
+.matrix-cell .cell-icon { margin-bottom: 4px; }
+.matrix-cell .cell-icon svg { display: block; margin: 0 auto; }
+.matrix-cell .cell-label { font-size: 10px; opacity: 0.8; }
+.matrix-cell.selected { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
+
+/* ── Selection Panel ── */
+.selection-panel {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.9); backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid var(--border); padding: 20px 24px;
+  transform: translateY(100px); opacity: 0; transition: all 0.4s;
+  z-index: 100;
+}
+.selection-panel.active { transform: translateY(0); opacity: 1; }
+.selection-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.selection-info { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.selection-badge {
+  padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 600;
+}
+.selection-badge.style-badge { color: #fff; }
+.selection-badge.type-badge { background: #f3f4f6; color: #374151; }
+.selection-preview-text { font-size: 14px; font-weight: 500; color: var(--text); }
+.selection-actions { display: flex; gap: 8px; }
+.btn-gen {
+  padding: 12px 28px; border-radius: 10px; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 600; transition: all 0.3s;
+  background: #1d1d1f; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-gen:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.btn-copy {
+  padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border);
+  cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.3s;
+  background: #fff; color: var(--text); display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-copy:hover { border-color: #6366f1; color: #6366f1; }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 40px 24px 100px; font-size: 12px; color: var(--text-secondary); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .style-grid { grid-template-columns: repeat(2, 1fr); }
+  .type-grid { grid-template-columns: 1fr; }
+  .matrix-header, .matrix-row { grid-template-columns: 70px repeat(3, 1fr); }
+  .matrix-header > div:nth-child(n+5), .matrix-row .matrix-cell:nth-child(n+5) { display: none; }
+  header h1 { font-size: 26px; }
+  .selection-panel { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>HEP <span>风格矩阵</span></h1>
+  <p>6 种页面类型 x 9 套设计预设 = 54 种组合 · 点击选择，一键生成</p>
+</header>
+
+<div class="container">
+
+  <!-- Styles -->
+  <div class="sec-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    风格预设 <span class="count">9</span>
+  </div>
+  <div class="style-grid" id="styleGrid"></div>
+
+  <!-- Page Types -->
+  <div class="sec-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+    页面类型 <span class="count">6</span>
+  </div>
+  <div class="type-grid" id="typeGrid"></div>
+
+  <!-- Matrix -->
+  <div class="sec-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    组合矩阵 <span class="count">54</span>
+  </div>
+  <div class="matrix-section">
+    <div class="matrix-header">
+      <div></div>
+      <div>SaaS</div>
+      <div>Landing</div>
+      <div>Dashboard</div>
+      <div>Portfolio</div>
+      <div>Document</div>
+      <div>Startup</div>
+    </div>
+    <div id="matrixBody"></div>
+  </div>
+
+</div>
+
+<!-- Selection Panel -->
+<div class="selection-panel" id="panel">
+  <div class="selection-inner">
+    <div class="selection-info">
+      <div class="selection-badge style-badge" id="panelStyleBadge">未选择</div>
+      <div class="selection-badge type-badge" id="panelTypeBadge">未选择</div>
+      <div class="selection-preview-text" id="panelPreview">点击上方卡片选择风格和页面类型</div>
+    </div>
+    <div class="selection-actions">
+      <button class="btn-copy" onclick="copySpec()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        复制 Spec
+      </button>
+      <button class="btn-gen" onclick="copySpecAndHint()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        生成页面
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer>HEP — Harness Engineering Protocol · 点击任意组合，告诉我风格和类型，我 2ms 出页</footer>
+
+<script>
+// Lucide SVG icons for each page type
+const TYPE_ICONS = {
+  saas: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>`,
+  landing: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+  dashboard: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>`,
+  portfolio: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>`,
+  documentation: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+  startup: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+};
+
+const STYLES = [
+  { id: "apple_dark",      name: "Apple 深色",     tags: ["premium","dark","minimal"],      bg: "#000",      accent: "#7c7cff", text: "#f5f5f7", desc: "苹果旗舰风格" },
+  { id: "apple_light",     name: "Apple 浅色",     tags: ["premium","light","clean"],       bg: "#fff",      accent: "#7c7cff", text: "#1d1d1f", desc: "苹果简约白" },
+  { id: "dark_tech",       name: "暗夜科技",       tags: ["cyber","dark","tech"],           bg: "#0a0a0f",   accent: "#00d4ff", text: "#e0e0ff", desc: "科技感深色" },
+  { id: "warm_earth",      name: "暖土",           tags: ["warm","organic","serif"],        bg: "#1a1410",   accent: "#e8a87c", text: "#f0e0d0", desc: "温暖有机质感" },
+  { id: "glassmorphism",   name: "玻璃拟态",       tags: ["glass","frosted","modern"],      bg: "#0a0a12",   accent: "#7c7cff", text: "#f0f0ff", desc: "毛玻璃效果" },
+  { id: "retro_terminal",  name: "复古终端",       tags: ["retro","terminal","green"],      bg: "#0d1a0d",   accent: "#00ff41", text: "#ccffcc", desc: "CRT 终端风格" },
+  { id: "minimal_white",   name: "极简白",         tags: ["clean","light","minimal"],       bg: "#f5f5f7",   accent: "#1d1d1f", text: "#1d1d1f", desc: "纯粹极简" },
+  { id: "sunset",          name: "日落",           tags: ["warm","gradient","colorful"],    bg: "#1a0f14",   accent: "#f97316", text: "#fde68a", desc: "暖色渐变" },
+  { id: "ocean",           name: "深海",           tags: ["blue","deep","calm"],            bg: "#0a0f1a",   accent: "#06b6d4", text: "#e0f2fe", desc: "深海静谧" },
+];
+
+const TYPES = [
+  { id: "saas",           name: "SaaS 产品页",  desc: "云服务 / 订阅 / 平台",        sections: ["hero","stats","features","pricing","cta"] },
+  { id: "landing",        name: "产品落地页",  desc: "推广 / 宣传 / 产品展示",       sections: ["hero","features","testimonials","cta"] },
+  { id: "dashboard",      name: "数据仪表盘",  desc: "管理后台 / 数据面板 / 控制台", sections: ["hero","stats","grid","cta"] },
+  { id: "portfolio",      name: "作品集",      desc: "个人主页 / 简历 / 展示",       sections: ["hero","stats","grid"] },
+  { id: "documentation",  name: "文档站",      desc: "开发文档 / 帮助 / 手册",       sections: ["hero","grid","cta"] },
+  { id: "startup",        name: "创业产品页",  desc: "创业项目 / 新品发布",          sections: ["hero","features","cta"] },
+];
+
+let selectedStyle = null;
+let selectedType = null;
+
+function renderStyles() {
+  const grid = document.getElementById('styleGrid');
+  grid.innerHTML = STYLES.map(s => {
+    const dark = isDark(s.bg);
+    return `<div class="style-card" data-id="${s.id}" onclick="selectStyle('${s.id}')">
+      <div class="style-preview" style="background:${s.bg}">
+        <div class="dots">
+          <div class="dot" style="background:${s.accent}"></div>
+          <div class="dot" style="background:${s.text};opacity:0.3"></div>
+          <div class="dot" style="background:${s.text};opacity:0.15"></div>
+        </div>
+        <div class="bar" style="background:${s.accent};opacity:0.6"></div>
+        <div class="circle" style="background:${s.accent}"></div>
+      </div>
+      <div class="style-meta">
+        <h3>${s.name}</h3>
+        <p>${s.desc}</p>
+        <div class="style-palette">
+          <span style="background:${s.bg};border-color:${dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}"></span>
+          <span style="background:${s.accent}"></span>
+          <span style="background:${s.text}"></span>
+        </div>
+        <div class="tags">${s.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderTypes() {
+  const grid = document.getElementById('typeGrid');
+  grid.innerHTML = TYPES.map(t => `<div class="type-card" data-id="${t.id}" onclick="selectType('${t.id}')">
+    <div class="type-icon">${TYPE_ICONS[t.id]}</div>
+    <h3>${t.name}</h3>
+    <p>${t.desc}</p>
+    <div class="type-sections">${t.sections.map(s => `<span>${s}</span>`).join('')}</div>
+  </div>`).join('');
+}
+
+function renderMatrix() {
+  const body = document.getElementById('matrixBody');
+  body.innerHTML = STYLES.map(s => {
+    const dark = isDark(s.bg);
+    const hover = dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.04)';
+    return `<div class="matrix-row">
+      <div class="matrix-label">
+        <span class="swatch" style="background:${s.accent}"></span>
+        <span style="font-size:11px">${s.name}</span>
+      </div>
+      ${TYPES.map(t => {
+        const key = `${s.id}-${t.id}`;
+        return `<div class="matrix-cell" data-key="${key}"
+          style="background:${s.bg};color:${dark ? '#fff' : '#1d1d1f'}"
+          onmouseover="this.style.background='${hover}'"
+          onmouseout="this.style.background='${s.bg}'"
+          onclick="selectCombo('${s.id}','${t.id}')">
+          <div class="cell-icon">${TYPE_ICONS[t.id]}</div>
+          <div class="cell-label" style="color:${dark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.5)'}">${t.sections.length} sections</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+}
+
+function isDark(bg) {
+  const h = bg.replace('#','');
+  const r = parseInt(h.substr(0,2),16), g = parseInt(h.substr(2,2),16), b = parseInt(h.substr(4,2),16);
+  return r*0.299 + g*0.587 + b*0.114 < 128;
+}
+
+function selectStyle(id) {
+  document.querySelectorAll('.style-card').forEach(c => c.classList.toggle('selected', c.dataset.id === id));
+  selectedStyle = STYLES.find(s => s.id === id);
+  updatePanel();
+}
+
+function selectType(id) {
+  document.querySelectorAll('.type-card').forEach(c => c.classList.toggle('selected', c.dataset.id === id));
+  selectedType = TYPES.find(t => t.id === id);
+  updatePanel();
+}
+
+function selectCombo(sid, tid) {
+  selectStyle(sid); selectType(tid);
+  document.querySelectorAll('.matrix-cell').forEach(c => c.classList.toggle('selected', c.dataset.key === `${sid}-${tid}`));
+}
+
+function updatePanel() {
+  const panel = document.getElementById('panel');
+  if (selectedStyle && selectedType) {
+    panel.classList.add('active');
+    const sb = document.getElementById('panelStyleBadge');
+    sb.textContent = selectedStyle.name;
+    sb.style.background = selectedStyle.accent;
+    sb.style.color = '#fff';
+    document.getElementById('panelTypeBadge').innerHTML = TYPE_ICONS[selectedType.id] + ' ' + selectedType.name;
+    document.getElementById('panelPreview').textContent = `${selectedStyle.name} x ${selectedType.name} - ${selectedType.sections.length} 个段落`;
+  }
+}
+
+function copySpecAndHint() {
+  if (!selectedStyle || !selectedType) return;
+  const spec = JSON.stringify({ title: `${selectedType.name} — ${selectedStyle.name}`, theme: selectedStyle.id, type: selectedType.id, sections: selectedType.sections }, null, 2);
+  navigator.clipboard.writeText(spec).then(() => {
+    const btn = document.querySelector('.btn-gen');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Spec 已复制';
+    setTimeout(() => {
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 生成页面';
+    }, 2000);
+  });
+}
+
+function copySpec() {
+  if (!selectedStyle || !selectedType) return;
+  const spec = JSON.stringify({ title: `${selectedType.name} — ${selectedStyle.name}`, theme: selectedStyle.id, type: selectedType.id, sections: selectedType.sections }, null, 2);
+  navigator.clipboard.writeText(spec).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 已复制';
+    setTimeout(() => {
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> 复制 Spec';
+    }, 2000);
+  });
+}
+
+renderStyles(); renderTypes(); renderMatrix();
+</script>
+</body>
+</html>

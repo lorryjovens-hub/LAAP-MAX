@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LAAP 社区</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">LAAP</span>
+    <span class="brand-sub">社区</span>
+  </div>
+  <nav>
+    <button id="nav-browse" class="nav-btn active">发现</button>
+    <button id="nav-publish" class="nav-btn">发布</button>
+    <a class="nav-btn link" href="/export">导出 APK</a>
+  </nav>
+</header>
+
+<main id="browse-view" class="view">
+  <section class="hero">
+    <h1>用户生成的应用 · 网站 · 游戏</h1>
+    <p>由 LAAP 数字生命生成的创意作品，点击即可品鉴游玩。</p>
+  </section>
+  <div id="app-grid" class="grid"></div>
+  <div id="app-detail" class="detail hidden"></div>
+</main>
+
+<main id="publish-view" class="view hidden">
+  <section class="card">
+    <h2>发布到 LAAP 社区</h2>
+    <p class="hint">上传已构建的 Web 应用（zip，需含 index.html），或提供一个外部网址。</p>
+    <form id="publish-form">
+      <label>应用名称
+        <input id="p-name" name="name" required placeholder="我的游戏" />
+      </label>
+      <label>类型
+        <select id="p-type" name="type">
+          <option value="web">网页应用</option>
+          <option value="site">网站</option>
+          <option value="game">游戏</option>
+        </select>
+      </label>
+      <label>作者
+        <input id="p-author" name="author" placeholder="昵称" />
+      </label>
+      <label>简介
+        <textarea id="p-desc" name="description" rows="3" placeholder="一句话介绍"></textarea>
+      </label>
+      <label class="file">
+        <span>上传 Web 应用 zip（含 index.html）</span>
+        <input id="p-file" name="file" type="file" accept=".zip" />
+      </label>
+      <label>或外部网址
+        <input id="p-url" name="url" placeholder="https://…（可选，二选一）" />
+      </label>
+      <button type="submit">发布</button>
+      <div id="publish-msg" class="msg"></div>
+    </form>
+  </section>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>

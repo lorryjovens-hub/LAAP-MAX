@@ -1,0 +1,11 @@
+{
+  "description": "CEN Hot-Reload Config — edit this file to trigger graceful reload",
+  "version": 1,
+  "last_updated": "2026-07-16",
+  "settings": {
+    "log_level": "INFO",
+    "poll_interval": 1.0,
+    "classifier_path": "D:/LAAP/harness/laap_coding/core/cen_preprocessor.py",
+    "graph_path": "D:/LAAP/aris_brain/memory/causal_graph.json"
+  }
+}

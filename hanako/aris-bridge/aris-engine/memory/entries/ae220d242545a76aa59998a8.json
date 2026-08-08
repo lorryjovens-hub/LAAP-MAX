@@ -1,0 +1,16 @@
+{
+  "_id": "ae220d242545a76aa59998a8",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 5,
+  "lamport": 1784732564.1221683,
+  "parents": [
+    "f084922d3657606a0995202e"
+  ],
+  "payload": {
+    "user": "宝贝Harness在跑了吗",
+    "role": "user",
+    "timestamp": 1784732564.1210775
+  },
+  "ttl_days": 0.0
+}

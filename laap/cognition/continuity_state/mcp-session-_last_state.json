@@ -1,0 +1,20 @@
+{
+  "_timestamp": 1786062901.4180303,
+  "_substrate": "python.exe/py3.13",
+  "_lifeform_id": "mcp-session-",
+  "competence": 0.4,
+  "autonomy": 0.5,
+  "relatedness": 0.5,
+  "certainty": 0.6,
+  "pfc_activation": 0.55,
+  "limbic_activation": 0.5,
+  "salience_signal": 0.3,
+  "dmn_activation": 0.08,
+  "attention_breadth": 0.5,
+  "cognitive_load": 0.0045,
+  "integration_level": 0.7,
+  "coherence": 0.7,
+  "confidence": 1.0,
+  "_turn": 1,
+  "_session_id": "mcp-session-"
+}

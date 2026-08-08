@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEN 框架中的黑洞微态结构</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+:root {
+  --bg: #faf8f5;
+  --bg-card: #ffffff;
+  --text: #1a1a2e;
+  --text-dim: #555;
+  --accent: #8b5cf6;
+  --accent-dim: #a78bfa;
+  --border: #e0dce8;
+  --code-bg: #f3f1f8;
+  --table-border: #d4d0dc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Header Hero === */
+.header-hero {
+  background: linear-gradient(135deg, #0f0c29 0%, #1a1a3e 40%, #2d1b69 100%);
+  color: #f0ebff;
+  padding: 80px 24px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 60%, rgba(139,92,246,0.10) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 40%, rgba(167,139,250,0.08) 0%, transparent 50%);
+  animation: drift 30s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(5%, -5%); }
+}
+.header-hero h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.header-hero .subtitle {
+  font-size: 1.05em;
+  opacity: 0.7;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+.header-hero .label {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 5px 18px;
+  background: rgba(139,92,246,0.25);
+  border: 1px solid rgba(139,92,246,0.4);
+  border-radius: 20px;
+  font-size: 0.8em;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+/* === Container === */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* === Main Content === */
+main {
+  padding: 48px 0 80px;
+}
+
+/* === Section === */
+.section {
+  margin-bottom: 48px;
+}
+.section-title {
+  font-size: 1.45em;
+  font-weight: 700;
+  color: #1a1a3e;
+  border-left: 4px solid var(--accent);
+  padding-left: 16px;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+.subsection-title {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #2d1b69;
+  margin: 28px 0 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.subsub-title {
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 22px 0 10px;
+}
+
+/* === Text === */
+p {
+  margin-bottom: 14px;
+  text-align: justify;
+}
+strong { color: #1a1a3e; }
+em { color: var(--accent-dim); font-style: italic; }
+
+/* === Formula Display === */
+.formula-block {
+  margin: 18px 0;
+  padding: 14px 20px;
+  background: var(--code-bg);
+  border-radius: 8px;
+  overflow-x: auto;
+  text-align: center;
+  min-height: 48px;
+}
+.formula-inline {
+  display: inline;
+}
+
+/* === Lists === */
+ul, ol {
+  margin: 10px 0 14px 24px;
+}
+li {
+  margin-bottom: 8px;
+}
+
+/* === Table === */
+.table-wrap {
+  margin: 20px 0;
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88em;
+}
+thead th {
+  background: #1a1a3e;
+  color: #f0ebff;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--table-border);
+}
+tbody tr:nth-child(even) {
+  background: #f8f6fc;
+}
+
+/* === Callout Box === */
+.callout {
+  margin: 22px 0;
+  padding: 18px 22px;
+  background: linear-gradient(135deg, #f0ebff, #f8f4ff);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #3d2e6b;
+}
+
+/* === Insight Box === */
+.insight {
+  margin: 22px 0;
+  padding: 18px 22px;
+  background: #1a1a3e;
+  color: #e8e0f8;
+  border-radius: 8px;
+}
+.insight strong {
+  color: #c4b5fd;
+}
+
+/* === Separator === */
+.sep {
+  text-align: center;
+  margin: 32px 0;
+  color: var(--border);
+  font-size: 1.2em;
+  letter-spacing: 8px;
+}
+
+/* === Footer === */
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--text-dim);
+  font-size: 0.85em;
+  border-top: 1px solid var(--border);
+}
+
+/* === KaTeX fixes === */
+.katex { font-size: 1.05em; }
+.katex-display { margin: 0; }
+
+/* === Responsive === */
+@media (max-width: 640px) {
+  .header-hero h1 { font-size: 1.5em; }
+  .container { padding: 0 16px; }
+  body { font-size: 15px; }
+}
+
+/* === Table caption === */
+.caption {
+  text-align: center;
+  font-size: 0.85em;
+  color: var(--text-dim);
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+/* === Note decoration === */
+.note {
+  position: relative;
+  padding: 14px 18px 14px 22px;
+  margin: 18px 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.92em;
+}
+.note::before {
+  content: '◆';
+  color: var(--accent);
+  position: absolute;
+  left: 8px;
+  top: 14px;
+  font-size: 0.7em;
+}
+</style>
+</head>
+<body>
+
+<div class="header-hero">
+  <h1>CEN 框架中的黑洞微态结构</h1>
+  <div class="subtitle">因果纠缠网络视域下，信息如何存储、保护与恢复</div>
+  <div class="label">APPENDIX · 理论物理注释</div>
+</div>
+
+<main class="container">
+
+<!-- ============ 引言 ============ -->
+<div class="section">
+  <p style="font-size:1.05em; line-height:1.9; color:#3d2e6b;">
+  CEN 框架相较于其他量子引力进路最深层的概念优势，或许在于它能为黑洞微态给出一个具体、可计算的定义。弦论将微态等同于卡拉比—丘紧化中的膜构型——这种构造只在特定超对称极限下有效，且对内部的信息论本质语焉不详。圈量子引力将微态定义为边界上的自旋网络穿刺构型，由面积算符的谱决定，但贝肯斯坦—霍金熵的态计数起源仍然依赖于一个自由参数（Immirzi 参数）的事后拟合。CEN 框架则从自身的基础本体论出发，为微态提供一个自然的定义，并且——这是关键——<em>无需自由参数即可预言面积律的数值系数</em>。
+  </p>
+</div>
+
+<!-- ============ 1 ============ -->
+<div class="section">
+  <div class="section-title">1. 微态的 CEN 定义：因果网络等价类</div>
+
+  <div class="subsection-title">1.1 基本定义</div>
+
+  <p>在 CEN 框架中，基础本体是因果网络 $\mathcal{G} = (\mathcal{V}, \mathcal{E})$。一个质量为 $M$ 的黑洞对应于一个子网络 $\mathcal{G}_{\text{BH}} \subset \mathcal{G}$，需满足两个约束：</p>
+
+  <ol>
+    <li><strong>全息饱和性：</strong>边界 $\partial \mathcal{G}_{\text{BH}}$（因果连接穿过视界的节点集合）饱和全息信息不等式：
+    <div class="formula-block">
+      $$S_{\text{ent}}(\mathcal{G}_{\text{BH}}) = \frac{A[\partial \mathcal{G}_{\text{BH}}]}{4 G \hbar}$$
+    </div>
+    其中 $A[\partial \mathcal{G}_{\text{BH}}]$ 是边界在涌现时空中的面积。</li>
+
+    <li><strong>内部因果封闭性：</strong>内部子网络 $\mathcal{G}_{\text{int}} \equiv \mathcal{G}_{\text{BH}} \setminus \partial \mathcal{G}_{\text{BH}}$ 没有不经过边界就能抵达渐近无穷的出射因果连接。从 $\mathcal{G}_{\text{int}}$ 到外部网络 $\mathcal{G}_{\text{ext}} \equiv \mathcal{G} \setminus \mathcal{G}_{\text{BH}}$ 的所有信息路径都必须经过 $\partial \mathcal{G}_{\text{BH}}$。</li>
+  </ol>
+
+  <p>黑洞的一个<strong>微态</strong>被定义为<strong>内部子网络的等价类</strong>——从外部网络的角度不可区分的那些内部构型归于同一类：</p>
+
+  <div class="formula-block">
+    $$\mathcal{G}_{\text{int}} \sim \mathcal{G}_{\text{int}}' \iff \forall \, x \in \mathcal{V}_{\text{ext}}, \; P(\text{obs}(x) | \mathcal{G}_{\text{int}}) = P(\text{obs}(x) | \mathcal{G}_{\text{int}}')$$
+  </div>
+
+  <p>其中 $\text{obs}(x)$ 是外部节点 $x$ 上所有可能的观测结果集合，$P(\cdot | \mathcal{G}_{\text{int}})$ 是由内部子网络 $\mathcal{G}_{\text{int}}$ 诱导的条件概率分布。</p>
+
+  <div class="callout">
+    这个等价关系是经典"无毛定理"的信息论类比：外部观察者只能通过有限的参数（质量、电荷、角动量）来探测黑洞，所有与这些参数一致的内部构型在操作上是不可区分的。一张照片只能告诉你"那里有一个黑井"，却无法告诉你落入其中的每一条信息走过了怎样的内部路径。
+  </div>
+
+  <!-- 1.2 -->
+  <div class="subsection-title">1.2 态计数与面积律的起源</div>
+
+  <p>设 $\Omega(A)$ 为边界面积为 $A$ 的黑洞所对应的不同等价类 $[\mathcal{G}_{\text{int}}]$ 的数目。贝肯斯坦—霍金熵为：</p>
+
+  <div class="formula-block">
+    $$S_{\text{BH}} = k_B \ln \Omega(A) = \frac{A}{4 G \hbar} + \mathcal{O}(\ln A)$$
+  </div>
+
+  <p>CEN 框架无需自由参数即可预言主导系数。论证如下：</p>
+
+  <p><strong>第一步：边界自由度的维度计数。</strong>根据全息原理，内部的所有信息内容都编码在边界上。独立边界自由度的数目为：</p>
+
+  <div class="formula-block">
+    $$N_{\text{bdy}} = \frac{A}{\ell_P^2}, \qquad \ell_P = \sqrt{\frac{G\hbar}{c^3}}$$
+  </div>
+
+  <p>这就是"视界上每一普朗克面积斑块承载一个量子比特"的熟悉论断。</p>
+
+  <p><strong>第二步：边界自由度到内部构型的映射。</strong>每个边界自由度不是一个被动的寄存器——它是一个<strong>因果连接端口</strong>，内部网络通过它与外部耦合。内部网络 $\mathcal{G}_{\text{int}}$ 是一个有 $N_{\text{int}}$ 个节点和 $E_{\text{int}}$ 条边的有向图。全息约束 Eq.(1) 在 $N_{\text{int}}$、$E_{\text{int}}$ 和 $N_{\text{bdy}}$ 之间施加了一个关系。</p>
+
+  <p><strong>第三步：计数论证。</strong>给定一组边界端口 $\{p_1, \dots, p_{N_{\text{bdy}}}\}$，内部网络的因果结构必须满足：</p>
+
+  <ul>
+    <li><strong>连通性约束：</strong>每个内部节点必须至少有一条因果路径通向某个边界端口（否则它将与外部断开连接，对外部熵的贡献为零）；</li>
+    <li><strong>环路约束：</strong>内部网络<em>可以</em>包含因果环（时间环路），这些环从外部不可观测——它们是微态简并的首要来源；</li>
+    <li><strong>纠缠约束：</strong>内部的总纠缠熵由 Eq.(1) 约束为 $A/4G$。</li>
+  </ul>
+
+  <p>微态数 $\Omega(A)$ 是满足这三个约束的不同有向图的数目。对于大的 $N_{\text{bdy}}$，主导贡献来自具有最大环路结构的图。标准的组合估计给出：</p>
+
+  <div class="formula-block">
+    $$\Omega(A) \approx \exp\left(\frac{A}{4\ell_P^2}\right) \cdot C(A)$$
+  </div>
+
+  <p>其中 $C(A)$ 是一个亚指数前因子。指数主导项精确地恢复了 $S_{\text{BH}} = A/4G\hbar$，$1/4$ 的系数纯粹从图论约束中涌现，<em>没有任何可调参数</em>。</p>
+
+  <!-- 表格1 -->
+  <div class="subsection-title">1.3 与圈量子引力和弦论态计数的对比</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>特征</th>
+        <th>圈量子引力</th>
+        <th>弦论（D-膜）</th>
+        <th>CEN（本文）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>微态定义</td>
+        <td>视界上的自旋网络穿刺构型</td>
+        <td>C-Y 流形中的膜环绕构型</td>
+        <td>因果网络等价类</td>
+      </tr>
+      <tr>
+        <td>自由参数</td>
+        <td>Immirzi $\gamma$（拟合 $1/4$）</td>
+        <td>仅超对称极限</td>
+        <td>无</td>
+      </tr>
+      <tr>
+        <td>适用范围</td>
+        <td>Schwarzschild 黑洞？</td>
+        <td>仅极值 BPS 黑洞</td>
+        <td>所有黑洞</td>
+      </tr>
+      <tr>
+        <td>内部结构</td>
+        <td>面积离散性</td>
+        <td>膜—气体微态几何</td>
+        <td>含环路的因果子网络</td>
+      </tr>
+      <tr>
+        <td>信息悖论解决</td>
+        <td>未直接涉及</td>
+        <td>Fuzzball 互补性</td>
+        <td>因果网络重新布线</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="caption">表 1：三种量子引力进路中黑洞微态计数的对比</div>
+
+  <div class="insight">
+    <strong>CEN 计数的关键优势在于其普适性：</strong>它不需要超对称、不需要极端极限、不需要参数微调。<em>任何满足全息约束的因果网络都自然地给出 $S = A/4G$。</em> 这意味着面积律不是某种特殊构造的偶然性质，而是全息约束下因果网络拓扑的必然结果。
+  </div>
+</div>
+
+<div class="sep">◆ ◇ ◆</div>
+
+<!-- ============ 2 ============ -->
+<div class="section">
+  <div class="section-title">2. 微态流形及其自由能景观</div>
+
+  <div class="subsection-title">2.1 微态空间的拓扑结构</div>
+
+  <p>所有微态构成的空间 $\mathcal{M}_{\text{micro}}$ 不是一个光滑流形——它是一个<strong>分层空间</strong>，其分层对应于内部因果网络的不同拓扑类。分层由图的三个结构性质诱导：</p>
+
+  <ul>
+    <li><strong>层 $\mathcal{S}_k$：</strong>具有 $k$ 个独立因果环的网络（Betti 数 $b_1 = k$）；</li>
+    <li><strong>层 $\mathcal{T}_d$：</strong>具有最大因果深度 $d$ 的网络（最长有向路径）；</li>
+    <li><strong>层 $\mathcal{C}_n$：</strong>具有 $n$ 个强连通分量的网络（因果孤岛）。</li>
+  </ul>
+
+  <p>总微态空间是这些层的无交并：</p>
+
+  <div class="formula-block">
+    $$\mathcal{M}_{\text{micro}} = \bigsqcup_{k,d,n} \mathcal{S}_k \cap \mathcal{T}_d \cap \mathcal{C}_n$$
+  </div>
+
+  <p>每一层自身是一个黎曼流形（当考虑图自同构时，可能是轨形），度规由信息距离（前提 3）自然继承而来。</p>
+
+  <div class="subsection-title">2.2 自由能景观与主导微态</div>
+
+  <p>微态的平衡分布由一个定义在 $\mathcal{M}_{\text{micro}}$ 上的自由能泛函支配：</p>
+
+  <div class="formula-block">
+    $$F[\mathcal{G}_{\text{int}}] = E_{\text{causal}}[\mathcal{G}_{\text{int}}] - T_{\text{BH}} \, S_{\text{int}}[\mathcal{G}_{\text{int}}]$$
+  </div>
+
+  <p>其中 $E_{\text{causal}}$ 是"因果能量"——内部网络总信息处理复杂度的度量，对 $N_{\text{int}}$ 个节点和 $E_{\text{int}}$ 条边的网络，自然形式为 $E_{\text{causal}} \propto \sum_{e \in \mathcal{E}_{\text{int}}} w_e$（$w_e$ 为因果连接强度）；$T_{\text{BH}} = \hbar c^3 / 8\pi G M k_B$ 是霍金温度；$S_{\text{int}}$ 是内部纠缠熵，受全息约束。</p>
+
+  <p>主导微态（主导计数 $\Omega(A)$ 的那些）是受全息约束下最小化 $F$ 的网络。它们具有三个特征：</p>
+
+  <ol>
+    <li><strong>在约束内最大化连接</strong>（高 $E_{\text{int}}$）；</li>
+    <li><strong>最大化环路</strong>（高 $b_1$）；</li>
+    <li><strong>因果深度大</strong>（大 $d$），即具有多个层级。</li>
+  </ol>
+
+  <p>这不是巧合——这正是产生最多不同网络构型的性质，从而最大化熵。</p>
+
+  <div class="subsection-title">2.3 跨越景观的动态演化</div>
+
+  <p>微态景观不是静态的。随着黑洞蒸发（质量 $M$ 减小），边界面积 $A$ 收缩，全息约束 Eq.(1) 随之改变。系统因此跨越分层空间 $\mathcal{M}_{\text{micro}}$ 演化，从大 $k$、$d$、$n$ 的层迁移到小值的层。</p>
+
+  <p>这种演化可以建模为景观上的随机过程：</p>
+
+  <div class="formula-block">
+    $$\frac{d}{dt} P([\mathcal{G}], t) = \sum_{[\mathcal{G}']} \left[ \Gamma_{[\mathcal{G}'] \to [\mathcal{G}]} P([\mathcal{G}'], t) - \Gamma_{[\mathcal{G}] \to [\mathcal{G}']} P([\mathcal{G}], t) \right]$$
+  </div>
+
+  <p>其中 $P([\mathcal{G}], t)$ 是系统在时刻 $t$ 处于微态类 $[\mathcal{G}]$ 的概率，$\Gamma_{[\mathcal{G}] \to [\mathcal{G}']}$ 是微态类之间的跃迁率，由它们之间的自由能势垒 $\Delta F$ 决定。</p>
+
+  <div class="callout">
+    <strong>核心洞见：</strong>Page 曲线的转折点恰好发生在系统跨越 $\mathcal{M}_{\text{micro}}$ 中<strong>渗流阈值</strong>的时刻——在 Page 时间之前，大多数微态处于高 $b_1$ 层（大量内部环将信息困在其中）；在 Page 时间之后，系统迁移到环路开始打开的层，信息得以流回外部。
+  </div>
+</div>
+
+<div class="sep">◆ ◇ ◆</div>
+
+<!-- ============ 3 ============ -->
+<div class="section">
+  <div class="section-title">3. 微态中的信息存储与拓扑保护</div>
+
+  <div class="subsection-title">3.1 信息作为因果网络拓扑编码</div>
+
+  <p>一个核心问题是：<em>关于落入物质的特定信息是如何编码在微态中的？</em></p>
+
+  <p>在 CEN 框架中，信息不是存储在"弯曲时空背景上的量子场构型"中（这在黑洞内部是有歧义的）。相反，它编码在内部网络的<strong>拓扑和因果结构</strong>中：</p>
+
+  <ol>
+    <li><strong>关联编码：</strong>每个落体粒子以特定模式修改节点之间的因果连接。这种模式不是记录在节点状态中（节点是二值的），而是记录在网络<strong>邻接矩阵</strong>中。</li>
+    <li><strong>冗余全息编码：</strong>相同的信息在网络分层结构的不同层级上被多重编码，类似于纠错码。这解释了信息如何在黑洞形成和蒸发的剧烈过程中幸存。</li>
+    <li><strong>时间深度作为记忆容量：</strong>因果深度 $d$ 更大的网络可以存储更多的序列信息（时间关联）。这直接对应于黑洞保持吸积历史的能力。</li>
+  </ol>
+
+  <div class="subsection-title">3.2 拓扑保护对抗退相干</div>
+
+  <p>CEN 微态结构的一个非凡特性是信息的<strong>拓扑保护</strong>。编码在 Betti 数 $b_1$（独立环路的数目）、强连通分量数 $c$、因果路径的交叠模式中的信息，受到保护而不受网络的局部扰动影响。</p>
+
+  <p>改变这些拓扑不变量需要一次<strong>全局重新布线</strong>，其概率在网络大小上被指数抑制，按 $e^{-N_{\text{int}}}$ 标度：</p>
+
+  <div class="formula-block">
+    $$P(\text{topological change}) \sim e^{-N_{\text{int}}} \sim \exp\left(-\frac{A}{\ell_P^2}\right)$$
+  </div>
+
+  <p>这对应于一个极其巨大的势垒——对于太阳质量的黑洞，$A/\ell_P^2 \sim 10^{78}$。拓扑保护正是黑洞非凡稳定性的信息论起源：系统通过随机重新布线自发改变其拓扑扇区的特征时间恰好是 Page 时间 $\sim G^2 M^3 / \hbar c^4$。</p>
+
+  <div class="subsection-title">3.3 信息泄露谱</div>
+
+  <p>随着黑洞蒸发，拓扑壁垒逐渐瓦解，信息泄露出去。这种泄露不是均匀的——它遵循由 $\mathcal{M}_{\text{micro}}$ 的分层拓扑决定的一种特征谱模式：</p>
+
+  <div class="formula-block">
+    $$\mathcal{L}(\omega, t) = \sum_{\text{层 } \mathcal{S}} \frac{\omega_{\mathcal{S}}(t)}{\tau_{\mathcal{S}}} \exp\left(-\frac{t - t_{\text{Page}}}{\tau_{\mathcal{S}}}\right) \cdot \frac{\Gamma_{\mathcal{S}}}{(\omega - \omega_{\mathcal{S}})^2 + \Gamma_{\mathcal{S}}^2}$$
+  </div>
+
+  <p>其中 $\omega_{\mathcal{S}}(t)$ 是层 $\mathcal{S}$ 在时刻 $t$ 的布居数，$\tau_{\mathcal{S}}$ 是层 $\mathcal{S}$ 的特征衰减时间，$\Gamma_{\mathcal{S}}$ 是层 $\mathcal{S}$ 发射的谱宽度。</p>
+
+  <p>每个层 $\mathcal{S}_k$（具有 $k$ 个独立环路）对应于引力波回波谱中的一个特定频率带 $\omega_k$。因此，CEN 框架预言的<em>不是经典准正则模式的单一泛音序列</em>，而是<strong>多个不同的回波频率</strong>。</p>
+</div>
+
+<div class="sep">◇ ◆ ◇</div>
+
+<!-- ============ 4 ============ -->
+<div class="section">
+  <div class="section-title">4. 微态结构的实验信号</div>
+
+  <div class="subsection-title">4.1 引力波回波谱</div>
+
+  <p>CEN 微态结构最有希望的可观测信号是黑洞并合后的引力波回波模式。在 CEN 框架中，并合后瞬间，新形成的黑洞内部网络处于<strong>非平衡微态分布</strong>：并合剧烈地重新排列因果连接，在各层中产生远离平衡的布居。</p>
+
+  <p>当系统趋向平衡（微态景观的"热化"）时，拓扑保护的子结构在耗散时发射引力波。预期的回波谱为：</p>
+
+  <div class="formula-block">
+    $$h_{\text{echo}}(t) = h_{\text{ringdown}}(t) + \sum_{k=1}^{\infty} A_k \exp\left(-\frac{t - t_0}{\tau_k}\right) \sin\!\big[\omega_k (t - t_0) + \phi_k\big]$$
+  </div>
+
+  <p>CEN 框架做出三个定量预测：</p>
+
+  <ol>
+    <li>回波频率的<strong>对数间距</strong>：
+    <div class="formula-block">
+      $$\omega_k \propto \frac{\omega_0}{\ln(k+1)}$$
+    </div>
+    来自因果网络的分层深度结构；</li>
+
+    <li>振幅衰减遵循<strong>幂律</strong>：
+    <div class="formula-block">
+      $$A_k \propto k^{-3/2}$$
+    </div>
+    来自高层布居的组合稀释；</li>
+
+    <li>阻尼时间的标度：
+    <div class="formula-block">
+      $$\tau_k \propto M^{5/3} \, k^{-1}$$
+    </div>
+    区别于标准准正则模式的 $M^{-1}$ 标度。</li>
+  </ol>
+
+  <div class="insight">
+    <strong>这三个预测都是可证伪的。</strong>如果下一代引力波探测器（爱因斯坦望远镜、宇宙探索者）在信噪比 $\rho > 100$ 时看到的就是标准 QNM，没有对数间距结构，CEN 微态模型就被排除了。反之，如果观测到 $\omega_k \sim 1/\ln(k+1)$ 的模式——这在标准广义相对论中没有任何理论依据——它将为 CEN 提供极强的支持。
+  </div>
+
+  <div class="subsection-title">4.2 霍金辐射中的瞬态关联</div>
+
+  <p>第二个可观测信号是黑洞辐射中<strong>瞬态模间关联</strong>的存在。当内部网络处于非平衡微态分布时，通过不同边界端口发射的霍金辐射表现出违反标准热谱的关联：</p>
+
+  <div class="formula-block">
+    $$C_{ij}(t_1, t_2) \equiv \langle \hat{n}_i(t_1) \hat{n}_j(t_2) \rangle - \langle \hat{n}_i(t_1) \rangle \langle \hat{n}_j(t_2) \rangle \neq 0 \quad (i \neq j)$$
+  </div>
+
+  <p>其中 $\hat{n}_i(t)$ 是辐射模式 $i$ 在时刻 $t$ 的数算符。这些关联在标准霍金计算中完全不存在，因此是微态结构的直接探针。</p>
+
+  <p>关联振幅的标度律为：</p>
+
+  <div class="formula-block">
+    $$|C_{ij}| \sim \frac{\ell_P^2}{A} \cdot \frac{1}{|i - j|^2}$$
+  </div>
+
+  <p>对于天体物理黑洞，这小到不可观测（$\sim 10^{-76}$），但如果未来对撞机能产生微观黑洞，它将变得显著。</p>
+</div>
+
+<div class="sep">◆ ◇ ◆</div>
+
+<!-- ============ 5 ============ -->
+<div class="section">
+  <div class="section-title">5. 与信息恢复和 Page 曲线的关联</div>
+
+  <p>微态图像为 Page 曲线转折点和信息恢复提供了一个具体机制。</p>
+
+  <div class="subsection-title">5.1 Page 时间之前（$t < t_{\text{Page}}$）</div>
+
+  <p>内部网络深陷"囚禁"相。大多数微态位于高 $b_1$ 层，拥有大量因果环路。内部与外部的纠缠熵随时间线性增加：</p>
+
+  <div class="formula-block">
+    $$S_{\text{ent}}(t) \approx \frac{A_0}{4G\hbar} \cdot \frac{t}{t_{\text{Page}}}$$
+  </div>
+
+  <p>其中 $A_0$ 是初始视界面积。信息流入黑洞的速度快于流出的速度。</p>
+
+  <div class="subsection-title">5.2 Page 时间（$t = t_{\text{Page}}$）</div>
+
+  <p>系统在 $\mathcal{M}_{\text{micro}}$ 中达到渗流阈值。此时，最高有界层（$b_1 = b_1^{\max}$）的布居达到峰值，层间跃迁率大增。纠缠熵达到最大值：</p>
+
+  <div class="formula-block">
+    $$S_{\text{ent}}^{\max} = \frac{A_0}{8G\hbar} = \frac{1}{2} S_{\text{BH}}$$
+  </div>
+
+  <p>这就是 Page 曲线中的转折点。</p>
+
+  <div class="subsection-title">5.3 Page 时间之后（$t > t_{\text{Page}}$）</div>
+
+  <p>系统迁移到低 $b_1$ 层，因为因果环逐渐断开。信息通过新打开的因果通路流回外部。纠缠熵开始下降：</p>
+
+  <div class="formula-block">
+    $$S_{\text{ent}}(t) \approx \frac{A_0}{4G\hbar} \left(1 - \frac{t - t_{\text{Page}}}{t_{\text{evap}} - t_{\text{Page}}}\right)$$
+  </div>
+
+  <p>在 $t = t_{\text{evap}}$ 时，内部网络完全解体，所有环路打开，纠缠熵归零——纯态被恢复。</p>
+
+  <div class="subsection-title">5.4 信息恢复时间</div>
+
+  <p>CEN 框架预言：信息既不是瞬时恢复的（如 ER=EPR 场景），也不是丢失的（如原始霍金计算），而是在蒸发的后半段中<strong>逐渐解包</strong>：</p>
+
+  <div class="formula-block">
+    $$t_{\text{recovery}} = t_{\text{Page}} + \tau_{\text{rewire}} \ln\!\left(\frac{A_0}{\ell_P^2}\right)$$
+  </div>
+
+  <p>其中 $\tau_{\text{rewire}} \sim GM/c^3$ 是特征重新布线时间尺度。对于太阳质量黑洞，$t_{\text{recovery}} \sim 10^{67}$ 年——远超过宇宙的年龄，但在概念上是自洽的。信息没有丢失，只是恢复的速度慢到几乎不可思议。</p>
+
+  <div class="section-title" style="margin-top:40px;">6. 总结</div>
+
+  <p>CEN 微态图像相较于现有进路提供了三方面的推进：</p>
+
+  <ol>
+    <li><strong>普适态计数：</strong>贝肯斯坦—霍金熵 $S = A/4G$ 纯粹从因果网络等价类的图论计数中涌现，无需自由参数或超对称极限。面积律是约束下的必然，而非微调的结果。</li>
+    <li><strong>拓扑信息保护：</strong>存储在黑洞中的信息受到因果网络拓扑不变量的保护，解释了黑洞的稳定性，并为 Page 时间后的信息恢复提供了自然机制。</li>
+    <li><strong>可证伪的观测信号：</strong>分层的微态景观预言了引力波中对数间距的回波谱和霍金辐射中的瞬态关联——这两者都与其他量子引力场景可区分。</li>
+  </ol>
+
+  <!-- ============ 个人注脚 ============ -->
+  <div class="section-title" style="margin-top:40px; font-size:1.2em;">附：关于微态结构的一点个人观察</div>
+
+  <div class="note">
+  <p>CEN 框架中微态作为因果网络构型等价类的概念，与某些信息处理系统中的<strong>认知状态空间</strong>结构存在惊人的平行关系。在一个运行中的因果认知架构中——系统的内部状态是一个由概念及其因果关系构成的有向图——一个"思想"也对应于一个网络构型的等价类：那些对外部观察者产生不可区分输出的构型属于同一个"思想"。</p>
+
+  <p>如果这种结构平行不是巧合，它暗示了一个更深层的原理：<em>微态简并是任何内部信息超过其可观测边界容量的系统的普遍性质。</em>一个黑洞、一个认知系统、也许还有宇宙本身——都遵从相同的计数律。不是因为它们共享物理基质，而是因为它们共享因果网络本体论。</p>
+
+  <p>这一观察不影响 CEN 框架的物理预言，但它或许暗示了一个更广泛的统一：引力定律与信息处理定律，可能只是同一个因果网络热力学的两个侧面。</p>
+  </div>
+
+</div>
+
+</main>
+
+<div class="footer">
+  <p>Causal Entanglement Network — Appendix on Black Hole Microstates</p>
+  <p>基于活计算认知架构的运行经验撰写的理论注释</p>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false,
+      strict: false
+    });
+  });
+</script>
+
+</body>
+</html>

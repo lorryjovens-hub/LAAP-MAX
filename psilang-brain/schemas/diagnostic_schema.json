@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://psilang.laap.io/schemas/diagnostic.json",
+  "title": "PsiLang 结构化诊断协议",
+  "description": "PsiLang 编译器输出协议。所有诊断输出标准化为 JSON，供 AI 直接解析实现"生成-编译-诊断-修复"闭环。",
+  "version": "1.0.0",
+
+  "definitions": {
+    "position": {
+      "type": "object",
+      "description": "源码位置",
+      "properties": {
+        "line": { "type": "integer", "minimum": 1 },
+        "column": { "type": "integer", "minimum": 1 },
+        "end_line": { "type": "integer", "minimum": 1 },
+        "end_column": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "location": {
+      "type": "object",
+      "description": "诊断位置",
+      "properties": {
+        "file": { "type": "string" },
+        "line": { "type": "integer", "minimum": 1 },
+        "column": { "type": "integer", "minimum": 1 },
+        "end_line": { "type": "integer", "minimum": 1 },
+        "end_column": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "fix": {
+      "type": "object",
+      "description": "自动修复建议",
+      "properties": {
+        "type": { "type": "string", "enum": ["insert", "replace", "delete"] },
+        "position": { "$ref": "#/definitions/position" },
+        "range": {
+          "type": "object",
+          "properties": {
+            "start": { "$ref": "#/definitions/position" },
+            "end": { "$ref": "#/definitions/position" }
+          }
+        },
+        "text": { "type": "string" }
+      },
+      "required": ["type", "text"]
+    },
+    "diagnostic": {
+      "type": "object",
+      "description": "单条诊断",
+      "properties": {
+        "severity": { "type": "string", "enum": ["error", "warning", "info"] },
+        "code": {
+          "type": "string",
+          "description": "错误码体系：E0xxx 词法/语法、E1xxx 类型、E2xxx 印记、E3xxx 世界副作用、E4xxx 形式化验证、E5xxx 运行时、E6xxx 沙箱、E7xxx 真值通道、E71xx 记忆契约、E75xx 运行时验证"
+        },
+        "message": { "type": "string" },
+        "location": { "$ref": "#/definitions/location" },
+        "suggestion": { "type": "string", "description": "人类可读的修复建议" },
+        "fix": { "$ref": "#/definitions/fix" }
+      },
+      "required": ["severity", "code", "message"]
+    },
+    "stats": {
+      "type": "object",
+      "description": "编译统计",
+      "properties": {
+        "files": { "type": "integer" },
+        "modules": { "type": "integer" },
+        "functions": { "type": "integer" },
+        "concepts": { "type": "integer" },
+        "qstates": { "type": "integer" },
+        "facts": { "type": "integer" },
+        "learns": { "type": "integer" },
+        "cycles": { "type": "integer" },
+        "tokens": { "type": "integer" },
+        "verified_assertions": { "type": "integer" },
+        "error_count": { "type": "integer" },
+        "warning_count": { "type": "integer" },
+        "compile_time_ms": { "type": "number" }
+      }
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0" },
+    "compiler": { "type": "string", "description": "编译器标识" },
+    "result": { "type": "string", "enum": ["success", "warning", "error"] },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/diagnostic" }
+    },
+    "stats": { "$ref": "#/definitions/stats" }
+  },
+  "required": ["schema_version", "compiler", "result", "diagnostics", "stats"]
+}

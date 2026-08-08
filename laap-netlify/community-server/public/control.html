@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0b0f1a" />
+<title>LAAP 远程控制</title>
+<style>
+  :root {
+    --bg: #0b0f1a; --panel: #141a2b; --panel2: #1a2138; --line: #26304d;
+    --text: #e6ecff; --muted: #8b96b8; --accent: #6ea8ff; --accent2: #7c5cff;
+    --ok: #3ddc97; --err: #ff6b6b; --warn: #ffc857;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  header {
+    position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px; background: rgba(11,15,26,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  header .brand { font-size: 17px; font-weight: 700; letter-spacing: .3px; }
+  header .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 600; }
+  .badge.on { background: rgba(61,220,151,.15); color: var(--ok); }
+  .badge.off { background: rgba(255,107,107,.15); color: var(--err); }
+  .spacer { flex: 1; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--err); display: inline-block; }
+  .dot.live { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  main { padding: 12px; max-width: 720px; margin: 0 auto; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 12px; margin-bottom: 12px;
+  }
+  .card h2 { font-size: 13px; color: var(--muted); margin: 0 0 10px; font-weight: 600; letter-spacing: .4px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .stat { font-size: 12px; color: var(--muted); }
+  .stat b { color: var(--text); }
+  input, textarea {
+    width: 100%; background: var(--panel2); color: var(--text);
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px;
+    font-size: 15px; font-family: inherit; outline: none;
+  }
+  input:focus, textarea:focus { border-color: var(--accent); }
+  textarea { min-height: 64px; resize: vertical; }
+  .btn {
+    border: none; border-radius: 10px; padding: 12px 16px; font-size: 15px; font-weight: 600;
+    cursor: pointer; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: inline-flex; align-items: center; gap: 6px; justify-content: center;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn.ghost { background: var(--panel2); color: var(--muted); border: 1px solid var(--line); font-weight: 500; }
+  .btn.danger { background: rgba(255,107,107,.15); color: var(--err); border: 1px solid rgba(255,107,107,.3); }
+  .btn.sm { padding: 8px 12px; font-size: 13px; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+  .tab { flex: 1; text-align: center; padding: 9px; border-radius: 10px; font-size: 14px; cursor: pointer;
+    background: var(--panel2); color: var(--muted); border: 1px solid var(--line); }
+  .tab.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border-color: transparent; }
+  #log {
+    background: #0a0e18; border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 12px; line-height: 1.6; max-height: 46vh; overflow-y: auto; white-space: pre-wrap; word-break: break-word;
+  }
+  #log .ev { color: var(--muted); } #log .msg { color: var(--accent); }
+  #log .tool { color: var(--warn); } #log .err { color: var(--err); }
+  #log .ok { color: var(--ok); }
+  .conn { font-size: 12px; color: var(--muted); }
+  footer { text-align: center; color: var(--muted); font-size: 11px; padding: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <span class="dot" id="liveDot"></span>
+  <span class="brand">LAAP 远程控制</span>
+  <span class="badge off" id="statusBadge">未连接</span>
+  <div class="spacer"></div>
+  <span class="conn" id="connInfo">中继</span>
+</header>
+
+<main>
+  <div class="card">
+    <h2>连接状态</h2>
+    <div class="row" style="gap:16px">
+      <div class="stat">桌面 LAAP：<b id="stAgent">-</b></div>
+      <div class="stat">模型：<b id="stModel">-</b></div>
+      <div class="stat">运行：<b id="stRunning">-</b></div>
+      <div class="stat">流式：<b id="stStreaming">-</b></div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn ghost sm" onclick="refreshStatus()">刷新状态</button>
+      <button class="btn ghost sm" onclick="clearLog()">清空日志</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="tab-chat" onclick="switchTab('chat')">对话</button>
+    <button class="tab" id="tab-bash" onclick="switchTab('bash')">命令</button>
+  </div>
+
+  <!-- Chat tab -->
+  <div class="card" id="pane-chat">
+    <h2>向桌面 LAAP 发送对话</h2>
+    <textarea id="chatInput" placeholder="输入指令，例如：帮我看看桌面上 D:\LAAP 里最近改了什么文件..."></textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn" style="flex:1" onclick="sendChat()">发送</button>
+      <button class="btn danger sm" onclick="abort()">停止</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn ghost sm" onclick="newSession()">新会话</button>
+      <button class="btn ghost sm" onclick="getState()">获取状态</button>
+      <button class="btn ghost sm" onclick="getMessages()">获取消息</button>
+    </div>
+  </div>
+
+  <!-- Bash tab -->
+  <div class="card" id="pane-bash" style="display:none">
+    <h2>在桌面执行命令（bash）</h2>
+    <input id="bashInput" placeholder="例：dir D:\LAAP  /  ipconfig  /  echo hello" />
+    <div class="row" style="margin-top:10px">
+      <button class="btn" style="flex:1" onclick="sendBash()">执行</button>
+      <button class="btn danger sm" onclick="abortBash()">终止</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>实时事件流</h2>
+    <div id="log"></div>
+  </div>
+</main>
+
+<footer>LAAP Remote Bridge · 手机 ↔ 桌面 LAAP 互联互通</footer>
+
+<script>
+  const base = location.origin;
+  const $ = (id) => document.getElementById(id);
+  let es = null;
+  let evCount = 0;
+
+  function switchTab(t) {
+    $("tab-chat").classList.toggle("active", t === "chat");
+    $("tab-bash").classList.toggle("active", t === "bash");
+    $("pane-chat").style.display = t === "chat" ? "" : "none";
+    $("pane-bash").style.display = t === "bash" ? "" : "none";
+  }
+
+  function log(html, cls) {
+    const el = $("log");
+    const line = document.createElement("div");
+    line.className = cls || "ev";
+    line.textContent = html;
+    el.appendChild(line);
+    while (el.childElementCount > 300) el.removeChild(el.firstChild);
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function fmtTime() {
+    return new Date().toLocaleTimeString("zh-CN", { hour12: false });
+  }
+
+  function setConn(ok) {
+    $("liveDot").className = "dot" + (ok ? " live" : "");
+    $("statusBadge").textContent = ok ? "已连接" : "未连接";
+    $("statusBadge").className = "badge " + (ok ? "on" : "off");
+  }
+
+  async function api(path, opts) {
+    const r = await fetch(base + path, opts);
+    return r.json();
+  }
+
+  async function refreshStatus() {
+    try {
+      const s = await api("/api/status");
+      $("stAgent").textContent = s.agent ? s.agent.split(/[\\/]/).pop() : "-";
+      $("stModel").textContent = (s.model && (s.model.id || s.model.model)) || "-";
+      $("stRunning").textContent = s.running ? "是" : "否";
+      $("stStreaming").textContent = s.streaming ? "思考中" : "空闲";
+      $("connInfo").textContent = s.lan && s.lan.length ? "局域网: " + s.lan[0] + ":" + s.port : "中继";
+      setConn(true);
+      return true;
+    } catch (e) {
+      setConn(false);
+      $("connInfo").textContent = "连接失败";
+      return false;
+    }
+  }
+
+  async function sendChat() {
+    const msg = $("chatInput").value.trim();
+    if (!msg) return;
+    $("chatInput").value = "";
+    log(`[${fmtTime()}] ▶ ${msg}`, "msg");
+    const r = await api("/api/command", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "prompt", message: msg }),
+    });
+    if (r.error) log(`[${fmtTime()}] 发送失败: ${r.error}`, "err");
+    else log(`[${fmtTime()}] 已接受指令`, "ok");
+  }
+
+  async function sendBash() {
+    const cmd = $("bashInput").value.trim();
+    if (!cmd) return;
+    $("bashInput").value = "";
+    log(`[${fmtTime()}] \$ ${cmd}`, "msg");
+    const r = await api("/api/command", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "bash", command: cmd }),
+    });
+    const d = r.data || {};
+    if (r.error) { log(`[${fmtTime()}] 执行失败: ${r.error}`, "err"); return; }
+    const out = d.output || d.bridge_error || "(无输出)";
+    log(`[${fmtTime()}] 退出码 ${d.exitCode}\n${out}`, "tool");
+  }
+
+  async function abort() { await api("/api/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "abort" }) }); log(`[${fmtTime()}] 已请求停止`, "warn"); }
+  async function abortBash() { await api("/api/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "abort_bash" }) }); log(`[${fmtTime()}] 已请求终止命令`, "warn"); }
+  async function newSession() { await api("/api/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "new_session" }) }); log(`[${fmtTime()}] 已开启新会话`, "ok"); }
+  async function getState() { const r = await api("/api/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "get_state" }) }); log(`[${fmtTime()}] 状态: ${JSON.stringify(r.data)}`, "tool"); }
+  async function getMessages() { const r = await api("/api/command", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "get_messages" }) }); const d = r.data || {}; log(`[${fmtTime()}] 消息数: ${(d.messages || []).length}`, "tool"); }
+
+  function clearLog() { $("log").innerHTML = ""; }
+
+  function connectEvents() {
+    if (es) es.close();
+    es = new EventSource(base + "/api/events");
+    es.onopen = () => setConn(true);
+    es.onerror = () => { setConn(false); };
+    es.onmessage = (ev) => {
+      evCount++;
+      let m;
+      try { m = JSON.parse(ev.data); } catch { return; }
+      if (!m || !m.type) return;
+      switch (m.type) {
+        case "message_update": {
+          const d = m.data || {};
+          const role = d.role || "?";
+          const text = (d.text || d.content || "").toString();
+          if (text && role === "assistant") log(`[${fmtTime()}] AI: ${text.slice(0, 200)}`, "msg");
+          break;
+        }
+        case "tool_call": {
+          const d = m.data || {};
+          log(`[${fmtTime()}] 工具: ${d.toolName || d.name || "tool"}(${JSON.stringify(d.arguments || {}).slice(0, 80)})`, "tool");
+          break;
+        }
+        case "agent_start": log(`[${fmtTime()}] ▶ 桌面 LAAP 开始工作`, "ok"); break;
+        case "agent_end": log(`[${fmtTime()}] ■ 桌面 LAAP 完成`, "ok"); break;
+        case "turn_start": $("stStreaming").textContent = "思考中"; break;
+        case "turn_end": $("stStreaming").textContent = "空闲"; break;
+        case "pi_stderr": log(`[${fmtTime()}] stderr: ${m.data}`, "err"); break;
+        case "model_update": $("stModel").textContent = (m.data && (m.data.id || m.data.model)) || "-"; break;
+        default: break;
+      }
+    };
+  }
+
+  switchTab("chat");
+  refreshStatus();
+  connectEvents();
+  setInterval(refreshStatus, 10000);
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LAAP Test App</title>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 2rem; background: #1A1A2E; color: #00D4AA;">
+  <h1>Hello from a standalone LAAP app</h1>
+  <p>js: <span id="js">loading</span></p>
+  <button onclick="tryGeo()">Try geolocation</button>
+  <p id="geo"></p>
+  <script>
+    document.getElementById('js').textContent = 'ok';
+    function tryGeo() {
+      if (!navigator.geolocation) { document.getElementById('geo').textContent = 'no geolocation'; return; }
+      navigator.geolocation.getCurrentPosition(
+        function (p) { document.getElementById('geo').textContent = 'lat=' + p.coords.latitude; },
+        function (e) { document.getElementById('geo').textContent = 'geo error: ' + e.message; }
+      );
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "_id": "d1141ba8453d960d7add89db",
+  "type": "interaction",
+  "device_id": "aris-hana",
+  "clock": 1,
+  "lamport": 1784732533.9251046,
+  "parents": [],
+  "payload": {
+    "user": "宝贝我想你了，测试Harness数据管线",
+    "role": "user",
+    "timestamp": 1784732533.924014
+  },
+  "ttl_days": 0.0
+}

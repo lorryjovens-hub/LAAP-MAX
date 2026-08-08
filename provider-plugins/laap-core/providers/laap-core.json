@@ -1,0 +1,18 @@
+{
+  "id": "laap-core",
+  "displayName": "laap-core",
+  "authType": "api-key",
+  "defaultBaseUrl": "http://127.0.0.1:9876",
+  "defaultApi": "openai-completions",
+  "models": [
+    {
+      "id": "aris-engine-v16",
+      "context": 1000000,
+      "maxOutput": 1000000,
+      "image": true,
+      "video": true,
+      "audio": true,
+      "reasoning": true
+    }
+  ]
+}

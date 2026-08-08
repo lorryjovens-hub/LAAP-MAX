@@ -1,0 +1,52 @@
+{
+  "id": "minimal-clean",
+  "name": "极简留白风",
+  "description": "白色背景 + 黑色文字，适合设计/产品/商业内容",
+  "theme": "minimal_white",
+  "colors": {
+    "primaryColor": "#000000",
+    "backgroundColor": "#ffffff",
+    "textColor": "#111111",
+    "accentColor": "#333333",
+    "subtitleColor": "rgba(17,17,17,0.5)",
+    "surfaceColor": "rgba(0,0,0,0.02)",
+    "borderColor": "rgba(0,0,0,0.06)"
+  },
+  "typography": {
+    "titleSize": 100,
+    "subtitleSize": 34,
+    "bodySize": 30,
+    "cardTitleSize": 40,
+    "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+    "titleWeight": 700,
+    "bodyWeight": 400
+  },
+  "animations": {
+    "entrance": "fade-slide-up",
+    "text": "fade-in",
+    "data": "counter-smooth",
+    "transition": "slide",
+    "transitionDuration": 20,
+    "staggerDelay": 8,
+    "duration": 0.9
+  },
+  "layout": {
+    "heroPadding": "80px 120px 120px",
+    "sectionPadding": "80px 120px 120px",
+    "cardGap": 24,
+    "maxWidth": 900,
+    "alignment": "left"
+  },
+  "background": {
+    "type": "solid",
+    "gradient": "",
+    "threeScene": "none"
+  },
+  "decorations": {
+    "showProgressBar": true,
+    "progressBarHeight": 80,
+    "progressActiveColor": "#000000",
+    "showGrain": false,
+    "showGlow": false
+  }
+}
