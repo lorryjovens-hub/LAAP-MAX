@@ -63,7 +63,24 @@ class SessionRecord:
 # ─── 数据库初始化 ───────────────────────────────────────────────
 
 def _get_connection() -> sqlite3.Connection:
-    """获取数据库连接（线程不安全，当前单线程使用）"""
+    """获取数据库连接（线程不安全，当前单线程使用）。
+
+    v2（2026-09-10）：改为走统一的加密连接逻辑 —— 旧版直接用标准
+    sqlite3 + 硬编码 DB_PATH，在 vault 启用 SQLCipher 后会报
+    "file is not a database"。现统一委托给 ``_open_vault_connection``，
+    确保 legacy 路径（MemoryVault / _init_db）与 per-agent 路径共享同一
+    套加密/迁移/密钥派生行为。
+
+    注意：用 globals() 延迟解析 _derive_vault_key / _open_vault_connection，
+    因为它们定义在文件后半部；而本函数可能在 import 期间（_init_db）
+    就被调用，那时它们尚未定义。
+    """
+    derive = globals().get("_derive_vault_key")
+    open_conn = globals().get("_open_vault_connection")
+    if derive is not None and open_conn is not None:
+        key_id, key_hex = derive("aris")
+        return open_conn(DB_PATH, key_hex)
+    # import 期早期调用（晚定义的函数尚未就绪）：回退标准 sqlite3。
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
@@ -136,7 +153,18 @@ class MemoryVault:
         self.db_path = db_path
         self._current_session_id: Optional[str] = None
         self._turn_counter: int = 0
-        _init_db()
+        # 注意（2026-09-10）：不在 __init__ 里立即 _init_db()。
+        # 模块底部有 `vault = MemoryVault()` 模块级实例化，会在 import
+        # 期间执行；而 _init_db → _get_connection → _derive_vault_key /
+        # _open_vault_connection 定义在文件后半部，那时尚未定义（NameError）。
+        # 改为惰性建表：真正访问时再初始化。
+        self._db_ready = False
+
+    def _ensure_db(self) -> None:
+        """惰性建表（幂等，仅首次执行）。"""
+        if not self._db_ready:
+            _init_db()
+            self._db_ready = True
 
     # ─── 会话管理 ───────────────────────────────────────────────
 
@@ -560,25 +588,51 @@ def _sanitize_agent_name(agent_name: str) -> str:
 
 
 def _derive_vault_key(agent_name: str, key_manager: Any = None) -> Tuple[str, str]:
-    """从 laap.security.crypto.keys.KeyManager 派生 vault 密钥。
+    """派生 vault 密钥（v2：确定性持久化，2026-09-10 修复）。
+
+    背景：旧版从 ``laap.security.crypto.keys.KeyManager`` 取密钥，但该
+    KeyManager 无持久化（``_keys`` 是纯内存字典）。这导致每次新进程都
+    生成全新密钥，加密库下次就再也读不回来（"自毁式加密"）。
+
+    新策略：密钥持久化到 vault 目录下的 ``.vault_keys/<key_id>.key``（
+    仅首次生成，之后复用），保证跨进程稳定。优先复用 KeyManager 的
+    持久化密钥（若未来修复），否则回退到本地密钥文件。
 
     Args:
         agent_name: Agent 名称
-        key_manager: 可选的 KeyManager 实例，None 时自动创建
+        key_manager: 可选的 KeyManager 实例（保留兼容，当前不再依赖）
 
     Returns:
-        (key_id, key_hex) — key_id 用于密钥检索，key_hex 是 64 字节十六进制密钥
+        (key_id, key_hex) — key_id 用于检索，key_hex 是 64 字符十六进制密钥
     """
-    if key_manager is None:
-        from laap.security.crypto.keys import KeyManager
-        key_manager = KeyManager()
     slug = _sanitize_agent_name(agent_name)
     key_id = f"vault-{slug}"
-    kp = key_manager.get(key_id)
-    if kp is None:
-        kp = key_manager.generate(key_id)
-    # private_key 已经是 SHA256 hex（64 字符），直接作为 SQLCipher 密钥
-    return key_id, kp.private_key
+
+    # 1) 优先尝试 KeyManager 的持久化实例属性（若未来支持）
+    if key_manager is not None:
+        try:
+            kp = key_manager.get(key_id)
+            if kp is not None and getattr(kp, "private_key", None):
+                return key_id, kp.private_key
+        except Exception:
+            pass  # KeyManager 不可靠，继续走本地密钥文件
+
+    # 2) 本地持久化密钥文件（确定性、跨进程稳定）
+    key_dir = Path(VAULT_DIR) / ".vault_keys"
+    key_dir.mkdir(parents=True, exist_ok=True)
+    key_file = key_dir / f"{slug}.key"
+    if key_file.exists():
+        key_hex = key_file.read_text(encoding="utf-8").strip()
+        if len(key_hex) == 64:
+            return key_id, key_hex
+    # 首次生成：256-bit 随机 → 64 字符 hex
+    key_hex = hashlib.sha256(os.urandom(32)).hexdigest()
+    key_file.write_text(key_hex, encoding="utf-8")
+    try:
+        os.chmod(key_file, 0o600)
+    except OSError:
+        pass
+    return key_id, key_hex
 
 
 def _is_plaintext_sqlite(db_path: str) -> bool:
