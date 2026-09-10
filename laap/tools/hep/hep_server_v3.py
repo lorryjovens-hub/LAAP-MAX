@@ -1,0 +1,131 @@
+"""LAAP HEP v3 — motionsites.ai 复刻版服务器"""
+import sys, os, json
+from pathlib import Path
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+
+HERE = Path(__file__).parent
+SITE_DIR = HERE / "hep_site"
+PORT = 8765
+
+sys.path.insert(0, str(Path(r"D:\LAAP\harness\laap_coding\core")))
+
+from hep_protocol import REGISTRY, HEPComponent, HEPComposer
+
+# HEP 风格 + 页面类型注册 (精简版)
+STYLES = [
+    {"id":"monochrome","name":"Monochrome","mode":"light","font":"serif","c":["#000000","#ffffff","#f5f5f5","#333333","#666666","#999999"]},
+    {"id":"modern_dark","name":"Modern Dark","mode":"dark","font":"sans","c":["#0a0a0a","#1a1a2e","#16213e","#e94560","#0f3460","#ffffff"]},
+    {"id":"cyberpunk","name":"Cyberpunk","mode":"dark","font":"sans","c":["#0a0a0a","#1a0a0a","#00fff5","#ff00ff","#ffff00","#ff0066"]},
+    {"id":"saas","name":"SaaS Blue","mode":"light","font":"sans","c":["#ffffff","#f8fafc","#e2e8f0","#1e3a5f","#3b82f6","#64748b"]},
+    {"id":"web3","name":"Web3","mode":"dark","font":"sans","c":["#0a0b1e","#1a1b3e","#6366f1","#8b5cf6","#06b6d4","#ffffff"]},
+    {"id":"luxury","name":"Luxury","mode":"light","font":"serif","c":["#1a1a1a","#2d2d2d","#c9a84c","#f5f0e8","#8b7355","#ffffff"]},
+    {"id":"terminal","name":"Terminal","mode":"dark","font":"mono","c":["#0d0d0d","#1a1a1a","#00ff41","#00cc33","#ffffff","#333333"]},
+    {"id":"kinetic","name":"Kinetic","mode":"dark","font":"sans","c":["#0a0a1a","#1a0a2e","#3a0ca3","#7209b7","#f72585","#ffffff"]},
+    {"id":"material","name":"Material","mode":"light","font":"sans","c":["#ffffff","#f5f5f5","#6200ee","#03dac6","#018786","#333333"]},
+    {"id":"bauhaus","name":"Bauhaus","mode":"light","font":"sans","c":["#E53935","#1E88E5","#FDD835","#212121","#ffffff","#f5f0e8"]},
+]
+
+# 注册所有风格
+for s in STYLES:
+    c = s["c"]
+    if not REGISTRY.get(f"style.{s['id']}"):
+        REGISTRY.register(HEPComponent(
+            id=f"style.{s['id']}", name=s["name"], version="3.0.0",
+            domain="ui", subdomain="theme", tags=["theme", s["mode"], s["font"], s["id"]],
+            inputs={"theme": {"type": "string"}}, outputs={"theme.css": "css"}, dependencies=[],
+            template=f":root{{--bg:{c[0]};--bg2:{c[1]};--bg3:{c[2]};--text:{c[3]};--text2:{c[4]};--accent:{c[5]}}}",
+        ))
+
+def generate(content, style, pagetype, title):
+    composer = HEPComposer(REGISTRY)
+    style_data = next((s for s in STYLES if s["id"] == style), STYLES[0])
+    c = style_data["c"]
+
+    lines = content.strip().split("\n")
+    title = title or "LAAP HEP"
+    sections = []
+    cur = {"heading": "", "body": ""}
+    for line in lines:
+        line = line.strip()
+        if not line: continue
+        if line.startswith("# "): title = line[2:].strip()
+        elif line.startswith("## "):
+            if cur["heading"]: sections.append(cur)
+            cur = {"heading": line[3:].strip(), "body": ""}
+        else:
+            cur["body"] += ("\n" if cur["body"] else "") + line
+    if cur["heading"] or cur["body"]: sections.append(cur)
+
+    theme = composer.compose({"components": [{"id": f"style.{style}", "params": {}}]})
+    theme_css = theme.get(f"style.{style}", "")
+
+    sec_html = "\n".join(
+        f'<section style="padding:80px 24px;background:var(--bg)"><div style="max-width:960px;margin:0 auto">'
+        f'<h2 style="font-size:1.8rem;margin-bottom:24px">{sec["heading"]}</h2>'
+        f'<div style="font-size:1rem;line-height:1.8;color:var(--text2)">'
+        + "\n".join(f"<p>{p}</p>" for p in sec["body"].split("\n") if p.strip()) +
+        f'</div></div></section>'
+        for sec in sections if sec["heading"]
+    )
+
+    return f'''<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{title}</title><style>
+{theme_css}
+*{{margin:0;padding:0;box-sizing:border-box}}
+body{{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}}
+.hero{{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;background:linear-gradient(135deg,var(--bg),var(--bg2))}}
+.hero h1{{font-size:clamp(2rem,5vw,3.5rem);margin-bottom:12px}}
+.hero p{{font-size:1.1rem;color:var(--text2);max-width:600px;margin:0 auto}}
+.hero-badge{{display:inline-block;padding:4px 14px;border-radius:100px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);font-size:11px;color:var(--accent);margin-bottom:16px;font-family:monospace;text-transform:uppercase;letter-spacing:1px}}
+.btn{{display:inline-block;padding:12px 28px;background:var(--accent);color:var(--bg);border-radius:8px;text-decoration:none;font-weight:600}}
+.footer{{text-align:center;padding:32px 24px;border-top:1px solid rgba(255,255,255,0.05);color:var(--text2);font-size:12px}}
+</style></head>
+<body><main>
+<section class="hero">
+<div><div class="hero-badge">{style_data["name"]} · Zero-Token</div>
+<h1>{title}</h1>
+<p>Generated by LAAP HEP · Harness Engineering Protocol</p>
+</div></section>
+{sec_html}
+</main>
+<footer class="footer"><p>LAAP HEP · Zero-Token Generation</p></footer>
+</body></html>'''
+
+class HEPHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(SITE_DIR), **kwargs)
+
+    def do_POST(self):
+        if self.path == "/api/generate":
+            length = int(self.headers.get("Content-Length", 0))
+            try:
+                data = json.loads(self.rfile.read(length).decode())
+                html = generate(
+                    data.get("content", ""),
+                    data.get("style", "saas"),
+                    data.get("pagetype", "landing_page"),
+                    data.get("title", ""),
+                )
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(html.encode("utf-8"))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header("Content-Type", "text/plain")
+                self.end_headers()
+                self.wfile.write(str(e).encode())
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
+HTTPServer(("0.0.0.0", PORT), HEPHandler).serve_forever()

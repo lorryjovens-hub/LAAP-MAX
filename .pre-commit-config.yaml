@@ -1,0 +1,33 @@
+repos:
+  - repo: local
+    hooks:
+      - id: laap-health
+        name: LAAP 工程体检（沉积/边界/入口）
+        entry: python -m laap.devtools.health
+        language: system
+        pass_filenames: false
+        always_run: true
+        verbose: true
+      - id: laap-runtime-smoke
+        name: LAAP 认知运行时自检
+        entry: python -m laap.runtime.smoke
+        language: system
+        pass_filenames: false
+        always_run: true
+        verbose: true
+  # 注：ruff / mypy 需要 pre-commit >= 2.9.2，当前环境 2.6.0 且 pip 镜像
+  # SSL 证书失败无法升级。暂注释，待环境网络修复后恢复。核心纪律由
+  # laap-health / laap-runtime-smoke 两个 local hook 强制执行。
+  # - repo: https://github.com/astral-sh/ruff-pre-commit
+  #   rev: v0.5.0
+  #   hooks:
+  #     - id: ruff
+  #       args: [--fix]
+  #     - id: ruff-format
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-added-large-files

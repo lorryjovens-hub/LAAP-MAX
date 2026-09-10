@@ -1,0 +1,30 @@
+{
+  "baseline_version": 2,
+  "established_at": "2026-09-10",
+  "norm": "ARIS_EVOLUTION_ENGINEERING_NORM.md (LAAP-GEN v1.0)",
+  "sediment": {
+    "root_level_files": 204,
+    "active_core": 46,
+    "residue_class_C": 0,
+    "unclassified": 158,
+    "archived_this_session": "archive_old_versions/sediment_2026_09_10/ (experiments + logs + misc)",
+    "note": "C 类残骸从 144 归零；根目录文件从 357 降到 204"
+  },
+  "boundary": {
+    "violations": 0,
+    "resolved": [
+      "laap/life_loop/__init__.py 与 __main__.py 的 MCP import 实为函数内 lazy import（合法适配），体检器已修正为只抓模块级 import",
+      "aris_engine/hep_*(7 文件) 为 HEP 网页生成工具族，已整体移至 laap/tools/hep/",
+      "response_guard.py 依赖 truth_grounding_mcp_tools 的 extract_claims 是纯逻辑函数，方向正确，非违规"
+    ]
+  },
+  "entry": {
+    "missing": 0
+  },
+  "pre_commit": {
+    "installed": true,
+    "version": "2.6.0",
+    "local_hooks": ["laap-health", "laap-runtime-smoke"],
+    "note": "ruff/mypy 需 pre-commit>=2.9.2，环境 pip 镜像 SSL 失败暂注释，待网络修复恢复"
+  }
+}
