@@ -542,8 +542,10 @@ test_world_models_integration.py
 laap-client-window-state.json
 
 # ========== 异常/损坏目录名 ==========
+# 只忽略真正的损坏目录（root 下叫 D 的目录），不要用宽泛的 D*/ 吞掉 devtools 等合法目录
+/D/
+/D#/
 "D\uff7a/"
-D*/
 
 # ========== 根目录运行时状态文件（更多） ==========
 .agent_knowledge_graph.json
@@ -555,4 +557,23 @@ D*/
 .laap_data/
 .security_baseline.json
 .zombie_tracker.json
-.pre-commit-config.yaml
+
+# ========== 嵌入式 git 仓库 ==========
+# 这些目录各自是独立 git 仓库（第三方上游 clone 或 LAAP 自己的仓库），
+# 不能作为普通目录被主仓纳入（会变成 gitlink/embedded repo 警告）。
+# 注意：laap-netlify 不在此列——它虽有 .git，但已被主仓跟踪 352 个文件，
+# 属于“双重版本控制”的历史遗留状态，贸然忽略会造成混乱，待专项处理。
+dsh-voice-ai-girlfriend/
+laap-metapi-upstream/
+laap-newapi-upstream/
+laap-official-work/
+LongMemEval/
+MemoryBear/
+N.E.K.O/
+pi-desktop/
+remotion-skills/
+video-podcast-maker/
+worktree-port-old/
+
+# 注意：.pre-commit-config.yaml 必须受版本控制（工程纪律 hook 的配置），
+# 已从忽略清单移除。
