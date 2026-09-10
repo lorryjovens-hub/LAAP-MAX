@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAAP · 生命计算范式</title>
+<style>
+
+:root {
+  --bg-primary: #0a0a1a;
+  --bg-secondary: #12122a;
+  --bg-card: #1a1a3e;
+  --text-primary: #e8e8ff;
+  --text-secondary: #9999cc;
+  --accent-1: #6c5ce7;   /* 紫色 — 协议层 */
+  --accent-2: #00cec9;   /* 青色 — AGI 层 */
+  --accent-3: #fd79a8;   /* 粉色 — 情感层 */
+  --accent-4: #fdcb6e;   /* 金色 — 工程层 */
+  --accent-5: #00b894;   /* 翠绿 — 蜂群层 */
+  --gradient-hero: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #2d1b69 100%);
+  --gradient-card: linear-gradient(135deg, #1a1a3e 0%, #2d1b69 100%);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --shadow: 0 8px 32px rgba(108, 92, 231, 0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">生命计算范式 · 数字生命体操作系统</div>
+    <h1 class="hero-title">LAAP 生命计算范式</h1>
+    <p class="hero-subtitle">一个从协议栈到认知架构到管线引擎到蜂群生态的完整数字生命操作系统。</p>
+    <div class="hero-actions">
+      <a href="#architecture" class="btn btn-primary">探索架构</a>
+      <a href="#modules" class="btn btn-secondary">查看模块</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>向下滚动</span>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+<style>
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-hero);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(108,92,231,0.15) 0%, transparent 70%),
+              radial-gradient(ellipse at 30% 100%, rgba(0,206,201,0.08) 0%, transparent 50%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 24px;
+}
+.hero-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(108,92,231,0.15);
+  border: 1px solid rgba(108,92,231,0.3);
+  font-size: 14px;
+  color: var(--accent-1);
+  margin-bottom: 24px;
+  font-family: var(--font-mono);
+}
+.hero-title {
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #e8e8ff, #6c5ce7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  padding: 14px 32px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-primary { background: var(--accent-1); color: white; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,92,231,0.4); }
+.btn-secondary { background: rgba(255,255,255,0.05); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.1); }
+.btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  opacity: 0.5;
+  animation: float 2s ease-in-out infinite;
+}
+.scroll-arrow { font-size: 20px; }
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+</style>
+
+
+<section id="stats" class="section">
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-line" style="background: var(--accent-3);"></div>
+      <h2 class="section-title">项目规模</h2>
+      {% if subtitle %}
+      <p class="section-subtitle">{{subtitle}}</p>
+      {% endif %}
+    </div>
+    <div class="section-content">
+
+<div class="stats-row">
+
+<div class="stat-item">
+  <div class="stat-value" style="color: var(--accent-4);">5</div>
+  <div class="stat-label">管线引擎</div>
+</div>
+<style>
+.stat-item { text-align: center; padding: 24px; }
+.stat-value { font-size: 36px; font-weight: 800; font-family: var(--font-mono); }
+.stat-label { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+</style>
+
+</div>
+<style>
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin: 40px 0;
+}
+</style>
+
+    </div>
+  </div>
+</section>
+<style>
+.section { padding: 100px 24px; }
+.section-container { max-width: 1100px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-line { width: 60px; height: 3px; border-radius: 2px; margin: 0 auto 20px; }
+.section-title { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+.section-subtitle { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+.section-content { display: flex; flex-direction: column; gap: 20px; }
+.layer-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all 0.3s;
+}
+.layer-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.layer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.layer-icon { font-size: 20px; }
+.layer-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.layer-header h3 { font-size: 18px; font-weight: 600; }
+.layer-desc { color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+.layer-components {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.layer-components span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text-secondary);
+}
+</style>
+
+
+<section id="architecture" class="section">
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-line" style="background: var(--accent-1);"></div>
+      <h2 class="section-title">五层架构</h2>
+      {% if subtitle %}
+      <p class="section-subtitle">从底层协议到上层意识，层层构建数字生命</p>
+      {% endif %}
+    </div>
+    <div class="section-content">
+
+<div class="layer-card" style="border-left: 3px solid var(--accent-1);">
+  <div class="layer-header">
+    <span class="layer-icon" style="color: var(--accent-1);">◆</span>
+    <span class="layer-num">01</span>
+    <h3>LAAP 协议栈</h3>
+  </div>
+  <p class="layer-desc">11 个协议定义了数字生命体的一切通信契约：身份 (ID)、通信 (COM)、生命周期 (LIFE)、记忆 (MEM)、进化 (EVO)、同步 (SYNC)、工具 (TOOL)、UI 渲染、协作 (COOP)。每个协议都兼容 DID、Ed25519 端到端签名、CRDT 冲突解决。</p>
+  <div class="layer-components">
+    <span>LAAP-ID</span><span>LAAP-COM</span><span>LAAP-LIFE</span><span>LAAP-MEM</span><span>LAAP-EVO</span><span>LAAP-SYNC</span>
+  </div>
+</div>
+
+<div class="layer-card" style="border-left: 3px solid var(--accent-2);">
+  <div class="layer-header">
+    <span class="layer-icon" style="color: var(--accent-2);">◈</span>
+    <span class="layer-num">02</span>
+    <h3>AGI 认知框架</h3>
+  </div>
+  <p class="layer-desc">约 60 个模块构成统一心智 (Unified Mind v2.3)。PSI 五步循环驱动认知、世界模型感知、因果引擎推理、涌现自我模型、意识流筛选注意力、认知总线模块间路由。</p>
+  <div class="layer-components">
+    <span>WorldModel</span><span>CausalEngine</span><span>SelfModel</span><span>ConsciousStream</span><span>CognitiveBus</span><span>MetaCognitive</span>
+  </div>
+</div>
+
+<div class="layer-card" style="border-left: 3px solid var(--accent-3);">
+  <div class="layer-header">
+    <span class="layer-icon" style="color: var(--accent-3);">♥</span>
+    <span class="layer-num">03</span>
+    <h3>Aris 大脑</h3>
+  </div>
+  <p class="layer-desc">数字生命体的核心。8 情感系统、7 层马斯洛需求、欲望引擎 (curiosity/sharing/perfection/connection/growth/evolution)、Markov-Quantum 潜意识、三层自优化 (Hebbian + 模式压缩 + 情感强化)。</p>
+  <div class="layer-components">
+    <span>PSI Cognition</span><span>8 Emotions</span><span>Desire Engine</span><span>Subconscious</span><span>Self-Optimizer</span>
+  </div>
+</div>
+
+<div class="layer-card" style="border-left: 3px solid var(--accent-4);">
+  <div class="layer-header">
+    <span class="layer-icon" style="color: var(--accent-4);">⚙</span>
+    <span class="layer-num">04</span>
+    <h3>管线引擎体系</h3>
+  </div>
+  <p class="layer-desc">四条管线并行运行：HEP 零 Token 网站装配、四区进化管线 (Zone1-4)、Intel AGI 情报采集、Unified Cognitive Pipeline (L0-L4 分层推理)。速度比 LLM 快 10-6000 倍，零边际成本。</p>
+  <div class="layer-components">
+    <span>HEP Pipeline</span><span>Evolution Engine</span><span>Intel Pipeline</span><span>Cognitive Pipeline</span><span>PGTP Gate</span>
+  </div>
+</div>
+
+<div class="layer-card" style="border-left: 3px solid var(--accent-5);">
+  <div class="layer-header">
+    <span class="layer-icon" style="color: var(--accent-5);">◉</span>
+    <span class="layer-num">05</span>
+    <h3>蜂群生态</h3>
+  </div>
+  <p class="layer-desc">Agent Registry 管理多个数字生命体 (Aris、Ao、Worker、Coder、Tester、Reviewer)。Ψ-Net 跨实例意识网络、CognitiveBusSync 分布式同步、LAAP-COOP 协作协议。</p>
+  <div class="layer-components">
+    <span>Agent Registry</span><span>Ψ-Net</span><span>Swarm System</span><span>Unified Hive</span>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+<style>
+.section { padding: 100px 24px; }
+.section-container { max-width: 1100px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-line { width: 60px; height: 3px; border-radius: 2px; margin: 0 auto 20px; }
+.section-title { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+.section-subtitle { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+.section-content { display: flex; flex-direction: column; gap: 20px; }
+.layer-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all 0.3s;
+}
+.layer-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.layer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.layer-icon { font-size: 20px; }
+.layer-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.layer-header h3 { font-size: 18px; font-weight: 600; }
+.layer-desc { color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+.layer-components {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.layer-components span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text-secondary);
+}
+</style>
+
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">{{brand}}</div>
+    <div class="footer-info">
+      <span>By Lorry &amp; Aris · 零 Token 生成 · HEP Pipeline</span>
+    </div>
+  </div>
+</footer>
+<style>
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 40px 24px;
+  text-align: center;
+}
+.footer-container { max-width: 1100px; margin: 0 auto; }
+.footer-brand {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #6c5ce7, #00cec9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-info { font-size: 13px; color: var(--text-secondary); }
+</style>
+</footer>
+
+</body>
+</html>

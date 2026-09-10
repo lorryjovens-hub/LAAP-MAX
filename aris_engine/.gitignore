@@ -1,0 +1,19 @@
+# aris_engine 的 .gitignore — 只跟踪认知引擎源码，排除运行时产物
+#
+# aris_engine 是 LAAP 的 L2 认知引擎层（递归/NTEN/对抗/PSI），
+# 顶层 49 个 .py 是真正的源码。以下几类都是运行时生成物，不进版本控制：
+#  - __pycache__      Python 字节码缓存
+#  - state/           运行时状态（引擎单例持久化的 json/jsonl）
+#  - memory/          运行时记忆（跨会话检索的状态）
+#  - hep_site/        HEP 网页生成的产物（已另行归入 laap/tools/hep/）
+
+__pycache__/
+*.pyc
+*.pyo
+
+state/
+memory/
+hep_site/
+
+# 保留源码、适配器、环境配置
+# jepa_adapters/ 与 environment_files/ 是认知引擎的源码/配置，一并跟踪
