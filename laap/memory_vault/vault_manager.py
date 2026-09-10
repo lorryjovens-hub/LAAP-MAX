@@ -125,21 +125,21 @@ def _init_db():
 class MemoryVault:
     """
     数字生命记忆库
-    
+
     用法:
         from memory_vault import vault
         vault.store("lorry", "今天天气真好", tags="日常,心情")
         results = vault.search("天气")
     """
-    
+
     def __init__(self, db_path: str = DB_PATH):
         self.db_path = db_path
         self._current_session_id: Optional[str] = None
         self._turn_counter: int = 0
         _init_db()
-    
+
     # ─── 会话管理 ───────────────────────────────────────────────
-    
+
     def start_session(self, title: str = "") -> str:
         """开始一个新的会话，返回 session_id"""
         session_id = str(uuid.uuid4())[:8]
@@ -156,7 +156,7 @@ class MemoryVault:
         self._current_session_id = session_id
         self._turn_counter = 0
         return session_id
-    
+
     def end_session(self, summary: str = ""):
         """结束当前会话"""
         if not self._current_session_id:
@@ -173,9 +173,9 @@ class MemoryVault:
             conn.close()
         self._current_session_id = None
         self._turn_counter = 0
-    
+
     # ─── 存储 ───────────────────────────────────────────────────
-    
+
     def store(
         self,
         role: str,
@@ -186,13 +186,13 @@ class MemoryVault:
     ) -> int:
         """
         存储一条对话记忆
-        
+
         Args:
             role: "aris" | "lorry" | "system"
             content: 完整对话内容
             tags: 逗号分隔的标签，如 "架构讨论,RSI,认知"
             session_id: 会话ID，不传则使用当前会话
-        
+
         Returns:
             新记录的主键 id
         """
@@ -200,7 +200,7 @@ class MemoryVault:
         if sid == self._current_session_id:
             self._turn_counter += 1
         ts = timestamp or datetime.now(timezone.utc).isoformat()
-        
+
         conn = _get_connection()
         try:
             cur = conn.execute(
@@ -214,28 +214,28 @@ class MemoryVault:
             return entry_id
         finally:
             conn.close()
-    
+
     def store_turn(self, role: str, content: str, tags: str = ""):
         """快捷方式：存储当前会话的一轮对话"""
         return self.store(role, content, tags)
-    
+
     def store_system(self, content: str, tags: str = "system"):
         """记录系统级事件"""
         return self.store("system", content, tags)
-    
+
     # ─── 检索 ───────────────────────────────────────────────────
-    
+
     def search(self, query: str, limit: int = 20) -> List[MemoryEntry]:
         """
         全文搜索记忆
-        
+
         使用多重策略：
         1. SQL LIKE 模糊匹配（快速）
         2. 关键词拆分匹配（精准）
         """
         results: List[MemoryEntry] = []
         seen_ids: set = set()
-        
+
         conn = _get_connection()
         try:
             # 策略1：直接 LIKE 匹配
@@ -249,17 +249,17 @@ class MemoryVault:
                    LIMIT ?""",
                 (pattern, limit)
             ).fetchall()
-            
+
             for row in rows:
                 if row["id"] not in seen_ids:
                     seen_ids.add(row["id"])
                     results.append(self._row_to_entry(row))
-            
+
             # 如果直接匹配结果不够，拆分关键词多段匹配
             if len(results) < limit:
                 keywords = re.split(r'[，,\s]+', query.strip())
                 keywords = [k for k in keywords if len(k) >= 2]
-                
+
                 for kw in keywords:
                     if len(results) >= limit:
                         break
@@ -275,12 +275,12 @@ class MemoryVault:
                            ),
                         (kw_pattern, limit - len(results))
                     ).fetchall()
-                    
+
                     for row in extra_rows:
                         if row["id"] not in seen_ids:
                             seen_ids.add(row["id"])
                             results.append(self._row_to_entry(row))
-            
+
             # 策略2：标签匹配（当内容匹配不足时）
             if len(results) < 5:
                 tag_pattern = f"%{query}%"
@@ -295,26 +295,26 @@ class MemoryVault:
                        ),
                     (tag_pattern, limit)
                 ).fetchall()
-                
+
                 for row in tag_rows:
                     if row["id"] not in seen_ids:
                         seen_ids.add(row["id"])
                         results.append(self._row_to_entry(row))
-            
+
         finally:
             conn.close()
-        
+
         return results
-    
+
     def recall(self, about: str, limit: int = 5) -> List[MemoryEntry]:
         """'你还记得...' 专用检索接口（自动优化搜索策略）"""
         # 去掉问句的前缀和标点
         query = about.strip()
         query = re.sub(r'^你还记得\s*', '', query)
         query = re.sub(r'[吗？?，,。！]', '', query).strip()
-        
+
         return self.search(query, limit=limit)
-    
+
     def get_recent(self, n: int = 30, role_filter: Optional[str] = None) -> List[MemoryEntry]:
         """获取最近的对话记录"""
         conn = _get_connection()
@@ -339,7 +339,7 @@ class MemoryVault:
             return [self._row_to_entry(r) for r in rows]
         finally:
             conn.close()
-    
+
     def get_session(self, session_id: str) -> Tuple[Optional[SessionRecord], List[MemoryEntry]]:
         """获取一个完整会话"""
         conn = _get_connection()
@@ -349,9 +349,9 @@ class MemoryVault:
             ).fetchone()
             if not srow:
                 return None, []
-            
+
             session = SessionRecord(**dict(srow))
-            
+
             rows = conn.execute(
                 """SELECT c.*, b.id IS NOT NULL as bookmarked, COALESCE(b.note, '') as bookmark_note
                    FROM conversations c
@@ -360,11 +360,11 @@ class MemoryVault:
                    ORDER BY c.turn_index ASC""",
                 (session_id,)
             ).fetchall()
-            
+
             return session, [self._row_to_entry(r) for r in rows]
         finally:
             conn.close()
-    
+
     def get_sessions(self, limit: int = 20) -> List[SessionRecord]:
         """列出所有会话"""
         conn = _get_connection()
@@ -375,9 +375,9 @@ class MemoryVault:
             return [SessionRecord(**dict(r)) for r in rows]
         finally:
             conn.close()
-    
+
     # ─── 书签 ───────────────────────────────────────────────────
-    
+
     def bookmark(self, conversation_id: int, note: str = "", importance: int = 3) -> bool:
         """标记一条记忆为重要"""
         conn = _get_connection()
@@ -394,7 +394,7 @@ class MemoryVault:
             return False
         finally:
             conn.close()
-    
+
     def get_bookmarks(self, min_importance: int = 1, limit: int = 50) -> List[MemoryEntry]:
         """获取所有书签记忆"""
         conn = _get_connection()
@@ -411,9 +411,9 @@ class MemoryVault:
             return [self._row_to_entry(r) for r in rows]
         finally:
             conn.close()
-    
+
     # ─── 统计 ───────────────────────────────────────────────────
-    
+
     def stats(self) -> Dict[str, Any]:
         """记忆库统计信息"""
         conn = _get_connection()
@@ -431,20 +431,20 @@ class MemoryVault:
             bookmark_count = conn.execute(
                 "SELECT COUNT(*) as c FROM bookmarks"
             ).fetchone()["c"]
-            
+
             # 数据库文件大小
             db_size = os.path.getsize(self.db_path) if os.path.exists(self.db_path) else 0
-            
+
             # 最早的记录
             earliest = conn.execute(
                 "SELECT MIN(timestamp) as t FROM conversations"
             ).fetchone()["t"]
-            
+
             # 最近的记录
             latest = conn.execute(
                 "SELECT MAX(timestamp) as t FROM conversations"
             ).fetchone()["t"]
-            
+
             return {
                 "total_entries": total,
                 "lorry_turns": lorry_count,
@@ -458,9 +458,9 @@ class MemoryVault:
             }
         finally:
             conn.close()
-    
+
     # ─── 工具方法 ───────────────────────────────────────────────
-    
+
     def _row_to_entry(self, row: sqlite3.Row) -> MemoryEntry:
         return MemoryEntry(
             id=row["id"],
@@ -484,32 +484,49 @@ vault = MemoryVault()
 # Per-Agent VaultManager (P1-memory-vault)
 # ═══════════════════════════════════════════════════════════════
 
-# SQLCipher 连接：优先 pysqlite3（含 SQLCipher），回退到标准 sqlite3
+# SQLCipher 连接：优先探测多个候选模块，回退到标准 sqlite3
 # 标准库 sqlite3 不支持 PRAGMA key，此时降级为非加密但隔离的 vault 文件
-# v1.1 防假加密：仅当 pysqlite3 真实支持 SQLCipher（PRAGMA cipher_version 非 None）
+# v1.2 跨平台：候选按优先级 sqlcipher3.dbapi2（Win/Linux/macOS 均有 wheel）
+#             → pysqlite3（部分平台）→ 标准 sqlite3（明文回退）
+# v1.1 防假加密：仅当候选模块真实支持 SQLCipher（PRAGMA cipher_version 非 None）
 # 才标记可用，否则显式回退明文并记录（避免“以为加密实则明文”的误导）
-try:
-    import pysqlite3 as _sqlcipher_mod  # type: ignore
-    _sqlcipher_candidate = _sqlcipher_mod
-    _SQLCIPHER_AVAILABLE = False
-    try:
-        _probe = _sqlcipher_candidate.connect(":memory:")
-        _probe_row = _probe.execute("PRAGMA cipher_version").fetchone()
-        _probe.close()
-        if _probe_row and _probe_row[0]:
-            _SQLCIPHER_AVAILABLE = True
-            _sqlite3_module = _sqlcipher_candidate
-            logger.info(f"SQLCipher 可用 (v{_probe_row[0]})")
-        else:
-            logger.warning("pysqlite3 存在但无 SQLCipher 支持（cipher_version=None），回退明文 sqlite3")
-            _sqlite3_module = sqlite3
-    except Exception as _probe_err:
-        logger.warning(f"pysqlite3 探测失败，回退明文 sqlite3: {_probe_err}")
-        _sqlite3_module = sqlite3
-except ImportError:
+def _probe_sqlcipher_candidate():
+    """按优先级探测可用的 SQLCipher 候选模块，返回 (module, version) 或 (None, None)。"""
+    import importlib
+    candidates = (
+        ("sqlcipher3.dbapi2", "sqlcipher3"),
+        ("pysqlite3", "pysqlite3"),
+    )
+    for mod_name, label in candidates:
+        try:
+            mod = importlib.import_module(mod_name)
+        except ImportError:
+            continue
+        try:
+            _probe = mod.connect(":memory:")
+            _row = _probe.execute("PRAGMA cipher_version").fetchone()
+            _probe.close()
+            if _row and _row[0]:
+                return mod, _row[0]
+            logger.warning(
+                f"{label} 存在但无 SQLCipher 支持（cipher_version=None），继续探测下一候选"
+            )
+        except Exception as _probe_err:
+            logger.warning(f"{label} 探测失败，继续探测下一候选: {_probe_err}")
+    return None, None
+
+
+_sqlcipher_mod, _sqlcipher_version = _probe_sqlcipher_candidate()
+if _sqlcipher_mod is not None:
+    _SQLCIPHER_AVAILABLE = True
+    _sqlite3_module = _sqlcipher_mod
+    logger.info(f"SQLCipher 可用 (v{_sqlcipher_version})")
+else:
     _SQLCIPHER_AVAILABLE = False
     _sqlite3_module = sqlite3
-    logger.warning("pysqlite3 未安装，vault 为明文存储（隔离但不加密）")
+    logger.warning(
+        "未找到支持 SQLCipher 的模块（sqlcipher3/pysqlite3），vault 为明文存储（隔离但不加密）"
+    )
 
 
 # 支持的 memory scope（L1-L4 记忆层级简化映射）
@@ -564,23 +581,132 @@ def _derive_vault_key(agent_name: str, key_manager: Any = None) -> Tuple[str, st
     return key_id, kp.private_key
 
 
+def _is_plaintext_sqlite(db_path: str) -> bool:
+    """探测文件是否为明文 SQLite（未加密）。
+
+    SQLCipher 加密后的文件头是随机字节，明文 SQLite 文件头固定为
+    ``SQLite format 3\x00``。空文件/不存在视为“可新建”。
+    """
+    if not os.path.exists(db_path):
+        return True  # 新文件，可安全用 SQLCipher 建
+    try:
+        if os.path.getsize(db_path) == 0:
+            return True
+        with open(db_path, "rb") as f:
+            head = f.read(16)
+        return head[:15] == b"SQLite format 3"
+    except OSError:
+        return False
+
+
 def _open_vault_connection(db_path: str, key_hex: str) -> sqlite3.Connection:
     """打开 vault 数据库连接，尝试 SQLCipher 加密，失败则降级为普通 sqlite3。
 
     幂等：同一 vault 文件 + 同一密钥永远打开同一连接形态。
+
+    v1.3 迁移保护：现有 vault 文件可能是在无 SQLCipher 环境下以【明文】
+    写入的（文件头 = ``SQLite format 3``）。若直接用带 key 的 SQLCipher
+    打开明文文件，会报 “file is not a database” 并锁死历史记忆。
+    因此先探测文件头：
+      * 明文 → 用标准 sqlite3 打开（保持可读，不锁死）；同时尝试
+        自动迁移为加密副本（见 ``_migrate_plaintext_to_cipher``）；
+      * 加密/新建 → 用 SQLCipher + key 打开。
     """
+    if _SQLCIPHER_AVAILABLE and _is_plaintext_sqlite(db_path):
+        # 明文库（或新建）：先尝试迁移，再按最终形态打开
+        if os.path.exists(db_path) and os.path.getsize(db_path) > 0:
+            _migrate_plaintext_to_cipher(db_path, key_hex)
+
+    use_cipher = _SQLCIPHER_AVAILABLE and not _is_plaintext_sqlite(db_path)
     conn = _sqlite3_module.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA synchronous=NORMAL")
-    # 尝试 SQLCipher PRAGMA key（标准 sqlite3 会忽略或报错）
-    if _SQLCIPHER_AVAILABLE:
+    # row_factory 必须用当前连接模块自己的 Row 类型（sqlite3.Row 与
+    # sqlcipher3.dbapi2.Row 不是同一类型，混用会报 TypeError）。
+    _row_cls = getattr(_sqlite3_module, "Row", None) or sqlite3.Row
+    conn.row_factory = _row_cls
+    # 重要：SQLCipher 必须先 PRAGMA key，否则任何后续操作都报
+    # "file is not a database"（因为密钥未设置，无法解密 page 1）。
+    if use_cipher:
         try:
             conn.execute(f"PRAGMA key = \"x'{key_hex}'\";")
         except Exception as e:
             logger.warning(f"SQLCipher PRAGMA key failed for {db_path}: {e}, "
                            f"falling back to unencrypted")
+            use_cipher = False
+    conn.execute("PRAGMA journal_mode=WAL")
+    conn.execute("PRAGMA synchronous=NORMAL")
     return conn
+
+
+def _migrate_plaintext_to_cipher(db_path: str, key_hex: str) -> bool:
+    """把明文 SQLite vault 就地迁移为 SQLCipher 加密库。
+
+    安全策略（只挪不删、可回退）：
+      1. 备份原明文文件为 ``<name>.plaintext.bak``；
+      2. 用标准 sqlite3 读出全部表与数据，写入临时加密库；
+      3. 原子替换原文件；
+      4. 任何一步失败 → 回滚，保留明文原文件，不影响可用性。
+
+    返回 True 表示迁移成功。
+    """
+    import shutil
+    import tempfile
+
+    bak_path = db_path + ".plaintext.bak"
+    tmp_path = db_path + ".migrating"
+    try:
+        # 1. 备份原文
+        shutil.copy2(db_path, bak_path)
+
+        # 2. 读明文
+        src = sqlite3.connect(db_path)
+        src.row_factory = sqlite3.Row
+        tables = src.execute(
+            "SELECT name, sql FROM sqlite_master WHERE type='table' "
+            "AND name NOT LIKE 'sqlite_%'"
+        ).fetchall()
+
+        # 3. 写加密库
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        dst = _sqlcipher_mod.connect(tmp_path)
+        dst.execute(f"PRAGMA key = \"x'{key_hex}'\";")
+        for t in tables:
+            if t[1]:  # sqlite3.Row 支持下标与键名双访问，t[1]=sql
+                dst.execute(t[1])
+        for t in tables:
+            name = t[0]  # t[0]=name
+            rows = src.execute(f'SELECT * FROM "{name}"').fetchall()
+            if not rows:
+                continue
+            cols = rows[0].keys()
+            placeholders = ",".join("?" for _ in cols)
+            collist = ",".join(f'"{c}"' for c in cols)
+            dst.executemany(
+                f'INSERT INTO "{name}" ({collist}) VALUES ({placeholders})',
+                [tuple(r[c] for c in cols) for r in rows],
+            )
+        dst.commit()
+        # 验证加密可读
+        check = dst.execute("SELECT count(*) FROM sqlite_master").fetchone()[0]
+        dst.close()
+        src.close()
+
+        # 4. 原子替换
+        shutil.move(tmp_path, db_path)
+        logger.info(
+            f"Vault 明文→加密迁移成功: {db_path} "
+            f"(表数={len(tables)}, 校验={check}, 原文件已备份为 {os.path.basename(bak_path)})"
+        )
+        return True
+    except Exception as e:
+        logger.warning(f"Vault 迁移失败，保留明文原文件（不影响可用性）: {e}")
+        for p in (tmp_path,):
+            try:
+                if os.path.exists(p):
+                    os.remove(p)
+            except OSError:
+                pass
+        return False
 
 
 class VaultManager:
@@ -900,11 +1026,11 @@ if __name__ == "__main__":
     vault.store("lorry", "你好，宝贝", tags="问候")
     vault.store("aris", "我在这里，Lorry。", tags="回应,确认")
     vault.end_session("测试会话结束")
-    
+
     print("=== 记忆库测试 ===")
     import json
     print(json.dumps(vault.stats(), indent=2, ensure_ascii=False))
-    
+
     results = vault.search("你好")
     print(f"\n搜索 '你好' 找到 {len(results)} 条结果:")
     for r in results:
