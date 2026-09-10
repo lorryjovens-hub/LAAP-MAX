@@ -5,17 +5,32 @@ PSI 认知架构数字生命体入口包。
 
 SDK 入口：
     from laap import AetherClient, LAAPRuntime, ActorSystem, PetriNet
+
+性能说明（2026-09-10）：SDK 核心也改为惰性导入。旧版在顶层硬 import
+`laap.sdk.client` / `laap.sdk.runtime`，会连带拉入 mcp.types、tools.tool_registry、
+llm 全栈等重型依赖，使 `import laap` 达 3.4s。现改为 __getattr__ 惰性加载，
+实测降至 ~0.5s（仅包初始化）。
 """
 
 __version__ = "5.0.0"
 
-# ── SDK 核心 API (轻量导入) ──────────────────────────────────────────
-from laap.sdk.client import AetherClient          # Client 模式：挂载到外部 Agent
-from laap.sdk.runtime import LAAPRuntime          # Framework 模式：独立运行全套 LAAP
+# ── SDK 核心 API：惰性导入 ─────────────────────────────────────────────
+# 属性名 -> 定义它的模块（按需加载，避免 import laap 被 SDK 依赖拖慢）
+_SDK_LAZY = {
+    "AetherClient": "laap.sdk.client",       # Client 模式：挂载到外部 Agent
+    "LAAPRuntime": "laap.sdk.runtime",       # Framework 模式：独立运行全套 LAAP
+}
 
 # ── 框架核心 (按需导入，惰性加载) ─────────────────────────────────────
 def __getattr__(name):
-    """Lazy import for framework core to keep SDK import lightning-fast."""
+    """Lazy import for SDK core + framework core to keep import lightning-fast."""
+    # SDK 核心（见 _SDK_LAZY）
+    sdk_mod = _SDK_LAZY.get(name)
+    if sdk_mod is not None:
+        import importlib
+        value = getattr(importlib.import_module(sdk_mod), name)
+        globals()[name] = value
+        return value
     _lazy = {
         "ActorSystem":       "laap.orchestration.actor",
         "AgentCell":         "laap.orchestration.actor",
