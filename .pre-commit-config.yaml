@@ -15,6 +15,27 @@ repos:
         pass_filenames: false
         always_run: true
         verbose: true
+      - id: laap-lcrp
+        name: LAAP 代码审查协议（LCRP：风险路由 + 五道门）
+        entry: python -m laap.devtools.review --files
+        language: system
+        pass_filenames: true
+        files: \.py$
+        verbose: true
+      - id: laap-syntax-gate
+        name: LAAP 全包语法门（py_compile 全扫）
+        entry: python -m laap.devtools.syntax_gate
+        language: system
+        pass_filenames: false
+        always_run: true
+        verbose: true
+      - id: laap-registration-gate
+        name: LAAP MCP 注册健康门（导入检查）
+        entry: python -m laap.devtools.registration_gate
+        language: system
+        pass_filenames: false
+        always_run: true
+        verbose: true
   # 注：ruff / mypy 需要 pre-commit >= 2.9.2，当前环境 2.6.0 且 pip 镜像
   # SSL 证书失败无法升级。暂注释，待环境网络修复后恢复。核心纪律由
   # laap-health / laap-runtime-smoke 两个 local hook 强制执行。
